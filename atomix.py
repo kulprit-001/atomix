@@ -1,5 +1,6 @@
 ##basically all elements are objects. if u can figure out how to use this kagigger it's pretty freakin handy. just create an element object and use it in various functions.
 ##e.g. >>>x=hA()  >>>e(x)  creates hydrogen atom and finds out it's electronic info. everything is handy for something...If i've miscounted something just double check it with the periodic table.
+##FOR some mysterious reason it adds an extra electron after 102 so for the last 10 elements just -1 to the values. If someone can work out why this is happening it would be great. Thank you.It seems to defy logic.
 import math
 log10=math.log10
 pi=math.pi
@@ -10305,7 +10306,7 @@ def e(object):
         e+=b
         s4+=1
         s3-=1
-        Ee-=2
+        Ee+=2
     if object.FIVEd==True:
         e+=b
     if object.fived==True:
