@@ -116,7 +116,7 @@ Ir=192.22
 Pt=195.08
 Au=196.9665
 Hg=200.59
-TI=204.3833
+Tl=204.3833
 Pb=D*82+(neu*44)
 Bi=D*83+(neu*43)
 Po=209
@@ -124,8 +124,12 @@ At=210
 Rn=D*86+(neu*50)
 Fr=223
 Ra=D*88+(neu*50)
+Gr=9.80665
+ang=0.0000000001
 Atoms=dict(amu=1.66053886 * 10**-27,e= 5.4857990946*10**-4,pro=1.007276466812,neu=1.00866491600,H=pro+e,D=H+neu,T=D+neu,He=(H*2)+(neu*2),Li=D*3,Be=D*4+neu,B=D*5,C=D*6,N=D*7,O=D*8,F=D*9+neu,Ne=D*10,Na=22.9898,Mg=24.3050,Al=26.9815,Si=28.0855,P=30.9738,S=32.066,Cl=D*17+neu,Ar=D*18,K=D*19+neu,Ca=40.078,Sc=44.9559,Ti=47.88,V=50.9415,Cr=51.9961,Mn=54.9380,Fe=D*26+(neu*4),Co=D*27+(neu*5),Ni=58.693,Cu=63.546,Zn=65.39,Ga=69.723,Ge=72.61,As=74.9216,Se=78.96,Br=79.904,Kr=83.80,Rb=85.4678,Sr=D*38+(neu*14),Y=88.9059,Zr=91.224,Nb=92.9064,Mo=95.94,Tc=98,Ru=101.07,Rh=102.9055,Pd=106.42,Ag=107.8682,Cd=112.411,In=114.82,Sn=118.710,Sb=121.757,Te=127.60,I=D*53+(neu*21),Xe=D*54+(neu*24),Cs=D*55+(neu*23),Ba=137.327,La=138.9055,Ce=140.115,Pr=140.9076,Nd=144.24,Pm=145,Sm=150.36,Eu=151.965,Gd=157.25,Tb=158.9253,Dy=162.50,Ho=164.9303,Er=167.26,Tm=168.9342,Yb=173.04,Ac=227,Th=D*90+(neu*52),Pa=231.0359,U=D*92+(neu*54),Np=D*93+(neu*51),Pu=D*94+(neu*56),Am=D*95+(neu*51),Cm=247,Bk=247,Cf=251,Es=252,Fm=257,Md=258,No=259,Lr=260,Rf=267,Db=268,Sg=271,Bh=272,Hs=270,Mt=276,Ds=281,Rg=280,Cn=285,Lu=174.967,Hf=178.49,Ta=180.9479,W=183.85,Re=186.207,Os=190.2,Ir=192.22,Pt=195.08,Au=196.9665,Hg=200.59,TI=204.3833,Pb=D*82+(neu*44),Bi=D*83+(neu*43),Po=209,At=210,Rn=D*86+(neu*50),Fr=223,Ra=D*88+(neu*50))
+Atomsr=dict(H=0.790*ang,Li=2.050*ang,Na=2.230*ang,K=2.770*ang,Rb=2.980*ang,Cs=3.340*ang,Be=1.400*ang,Mg=1.720*ang,Ca=2.230*ang,Sr=2.450*ang,Ba=2.780*ang,Sc=2.090*ang,Y=2.270*ang,La=2.740*ang,Ti=2.000*ang,Zr=2.160*ang,Hf=2.160*ang,V=1.920*ang,Nb=2.080*ang,Ta=2.090*ang,Ce=2.700*ang,Cr=1.850*ang,Mo=2.010*ang,W=2.020*ang,Pr=2.670*ang,Mn=1.790*ang,Tc=1.950*ang,Re=1.970*ang,Nd=2.640*ang,Fe=1.720*ang,Ru=1.890*ang,Os=1.970*ang,Pm=2.620*ang,Co=1.670*ang,Rh=1.830*ang,Ir=1.870*ang,Sm=2.590*ang,Ni=1.620*ang,Pd=1.790*ang,Pt=1.830*ang,Eu=2.560*ang,Cu=1.570*ang,Ag=1.750*ang,Au=1.790*ang,Gd=2.540*ang,Zn=1.530*ang,Cd=1.710*ang,Hg=1.760*ang,Tb=2.510*ang,B=1.170*ang,Al=1.820*ang,Ga=1.810*ang,In=2.000*ang,Tl=2.080*ang,Dy=2.490*ang,C=0.910*ang,Si=1.460*ang,Ge=1.520*ang,Sn=1.720*ang,Pb=1.810*ang,Ho=2.470*ang,N=0.750*ang,P=1.260*ang,As=1.330*ang,Sb=1.530*ang,Bi=1.630*ang,Er=2.450*ang,O=0.650*ang,S=1.090*ang,Se=1.220*ang,Te=1.420*ang,Po=1.530*ang,Tm=2.420*ang,F=0.570*ang,Cl=0.970*ang,Br=1.120*ang,I=1.320*ang,At=1.430*ang,Yb=2.400*ang,He=0.490*ang,Ne=0.510*ang,Ar=0.880*ang,Kr=1.030*ang,Xe=1.240*ang,Rn=1.340*ang,Lu=2.250*ang,Fr=0,Ra=0,Ac=0,Th=0,Pa=0,U=0,Np=0,Pu=0,Am=0,Cm=0,Bk=0,Cf=0,Es=0,Fm=0,Md=0,No=0,Lr=0,Rf=0, Db=0, Sg=0,Bh=0,Hs=0,Mt=0,Ds=0,Rg=0,Cn=0)
 class proton():
+    fnet=0
     r=  8.768*10**-16
     A=4*pi*r**2
     m=1.007276466812
@@ -144,6 +148,33 @@ class electron():
     v=(4/3)*pi*r**3
     p=2*pi*r
 class world():
+    def fg(self):
+        fg=self.mass()*Gr
+        return fg
+    def pmom(self):
+        pmom=self.mass()*self.velocity
+        return pmom
+    collision=0
+    fnet=0
+    velocity=0
+    time=0
+    direct=''
+    dXx=0
+    dxX=0
+    dYy=0
+    dyY=0
+    dZz=0
+    dzZ=0
+    dAa=0
+    daA=0
+    dBb=0
+    dbB=0
+    dCc=0
+    dcC=0
+    dDd=0
+    ddD=0
+    
+    
     def right(self):
         self.x['x']+=1
     def left(self):
@@ -156,6 +187,85 @@ class world():
         self.x['z']+=1
     def backward(self):
         self.x['z']-=1
+    def gAa(self):
+        self.x['y']+=1
+        self.x['x']-=1
+        self.x['z']+=1
+    def gaA(self):
+        self.x['y']-=1
+        self.x['x']+=1
+        self.x['z']-=1
+    def gBb(self):
+        self.x['y']+=1
+        self.x['x']+=1
+        self.x['z']+=1
+    def gbB(self):
+        self.x['y']-=1
+        self.x['x']-=1
+        self.x['z']-=1
+    def gCc(self):
+        self.x['y']-=1
+        self.x['x']+=1
+        self.x['z']+=1
+    def gcC(self):
+        self.x['y']+=1
+        self.x['x']-=1
+        self.x['z']-=1
+    def gDd(self):
+        self.x['y']-=1
+        self.x['x']-=1
+        self.x['z']+=1
+    def gdD(self):
+        self.x['y']+=1
+        self.x['x']+=1
+        self.x['z']-=1
+##switch
+    def Rright(self):
+        self.x['x']-=1
+    def Rleft(self):
+        self.x['x']+=1
+    def Rup(self):
+        self.x['y']-=1
+    def Rdown(self):
+        self.x['y']+=1
+    def Rforward(self):
+        self.x['z']-=1
+    def Rbackward(self):
+        self.x['z']+=1
+    def RgAa(self):
+        self.x['y']-=1
+        self.x['x']+=1
+        self.x['z']-=1
+    def RgaA(self):
+        self.x['y']+=1
+        self.x['x']-=1
+        self.x['z']+=1
+    def RgBb(self):
+        self.x['y']-=1
+        self.x['x']-=1
+        self.x['z']-=1
+    def RgbB(self):
+        self.x['y']+=1
+        self.x['x']+=1
+        self.x['z']+=1
+    def RgCc(self):
+        self.x['y']+=1
+        self.x['x']-=1
+        self.x['z']-=1
+    def RgcC(self):
+        self.x['y']-=1
+        self.x['x']+=1
+        self.x['z']+=1
+    def RgDd(self):
+        self.x['y']+=1
+        self.x['x']+=1
+        self.x['z']-=1
+    def RgdD(self):
+        self.x['y']-=1
+        self.x['x']-=1
+        self.x['z']+=1
+        
+            
     ONEs= False
     ones=False
     TWOs=False
@@ -276,6 +386,7 @@ class world():
     sevEnp=False
     EIGHTs=False
     eights=False
+    
     def eo(self):
         e=0
         Ee=0
@@ -847,6 +958,7 @@ class world():
         ve=V-v
         Es=Ct-v
         Be=(Co-B)+Ee
+        
         try:
             return Co
         except:
@@ -892,8 +1004,10 @@ class world():
             e+=b
         if self.twos==True:
             e+=b
+            Ee+=2#2s
         if self.TWOp==True:
             e+=b
+            Ee-=2#2sg
         if self.twop==True:
             e+=b
         if self.Twop==True:
@@ -910,8 +1024,10 @@ class world():
             e+=b
         if self.threes==True:
             e+=b
+            Ee+=2#3s
         if self.THREEp==True:
             e+=b
+            
         if self.threep==True:
             e+=b
         if self.Threep==True:
@@ -922,13 +1038,16 @@ class world():
             e+=b
         if self.thrEep==True:
             e+=b
+            Ee-=2#3sg
         if self.FOURs==True:
             e+=b
         if self.fours==True:
             e+=b
-            Ee+=2
+            Ee+=2#4s
         if self.THREEd==True:
             e+=b
+            
+            
         if self.threed==True:
             e+=b
         if self.Threed==True:
@@ -949,9 +1068,10 @@ class world():
             e+=b
             s3+=1
             s2-=1
-            Ee-=2
+            
         if self.FOURp==True:
             e+=b
+            Ee-=2#4sg
         if self.fourp==True:
             e+=b
         if self.Fourp==True:
@@ -962,13 +1082,15 @@ class world():
             e+=b
         if self.fouRp==True:
             e+=b
+            
         if self.FIVEs==True:
             e+=b
         if self.fives==True:
             e+=b
-            Ee+=2
+            Ee+=2#5s
         if self.FOURd==True:
             e+=b
+            
         if self.fourd==True:
             e+=b
         if self.Fourd==True:
@@ -987,8 +1109,10 @@ class world():
             e+=b
         if self.foURd==True:
             e+=b
+            
         if self.FIVEp==True:
             e+=b
+            Ee-=2#5sg
         if self.fivep==True:
             e+=b
         if self.Fivep==True:
@@ -1003,8 +1127,10 @@ class world():
             e+=b
         if self.sixs==True:
             e+=b
+            Ee+=2#6s
         if self.FOURf==True:
             e+=b
+            
         if self.fourf==True:
             e+=b
         if self.Fourf==True:
@@ -1033,7 +1159,7 @@ class world():
             e+=b
             s4+=1
             s3-=1
-            Ee+=2
+            
         if self.FIVEd==True:
             e+=b
         if self.fived==True:
@@ -1056,6 +1182,7 @@ class world():
             e+=b
         if self.SIXp==True:
             e+=b
+            Ee-=2#6sg
         if self.sixp==True:
             e+=b
         if self.Sixp==True:
@@ -1070,8 +1197,10 @@ class world():
             e+=b
         if self.sevens==True:
             e+=b
+            Ee+=2#7s
         if self.FIVEf==True:
             e+=b
+            
         if self.fivef==True:
             e+=b
         if self.Fivef==True:
@@ -1098,6 +1227,7 @@ class world():
             e+=b
         if self.fiVEF==True:
             e+=b
+            
         if self.SIXd==True:
             e+=b
         if self.sixd==True:
@@ -1120,6 +1250,7 @@ class world():
             e+=b
         if self.SEVENp==True:
             e+=b
+            Ee-=2#7sg
         if self.sevenp==True:
             e+=b
         if self.Sevenp==True:
@@ -1345,6 +1476,24 @@ class world():
             Ct=SEVEN
         elif shell==8:
             Ct=EIGHT
+        ##past shells
+        Psh=0
+        if shell==1:
+            Psh=0
+        elif shell==2:
+            Psh=ONE
+        elif shell==3:
+            Psh=TWO
+        elif shell==4:
+            Psh=THREE
+        elif shell==5:
+            Psh=FOUR
+        elif shell==6:
+            Psh=FIVE
+        elif shell==7:
+            Psh=SIX
+        elif shell==8:
+            Psh=SEVEN
         ##what is the next orbital
         nO=0
         if e in range(1,2):
@@ -1425,6 +1574,10 @@ class world():
         ve=V-v
         Es=Ct-v
         Be=(Co-B)+Ee
+        if Ee!=0:
+            B+=Ee
+        
+            
         try:
             return B
         except:
@@ -1436,10 +1589,13 @@ class world():
 class heA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('He')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=24.587387936
         self.ONEs= True
         self.ones=True
-    
+        self.weight=He
+        self.Mass=self.weight/Gr
     def mass(self):
         m=(H*2)+(neu*2)
         x=m/av
@@ -1448,6 +1604,8 @@ class heA(world):
 class neA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ne')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=21.564540
         self.ONEs= True
         self.ones=True
@@ -1459,6 +1617,8 @@ class neA(world):
         self.Twop=True
         self.twOp=True
         self.twoP=True
+        self.weight=Ne
+        self.Mass=self.weight/Gr
 
     
     def mass(self):
@@ -1468,6 +1628,8 @@ class neA(world):
 class arA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ar')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=15.7596112
         self.ONEs= True
         self.ones=True
@@ -1487,6 +1649,8 @@ class arA(world):
         self.tHreep=True
         self.thReep=True
         self.thrEep=True
+        self.weight=Ar
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=D*18
@@ -1496,8 +1660,12 @@ class arA(world):
 class hA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('H')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=13.598434005136
         self.ONEs= True
+        self.weight=H
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=pro+e
@@ -1507,10 +1675,14 @@ class hA(world):
 class liA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Li')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.391714761
         self.ONEs= True
         self.ones=True
         self.TWOs=True
+        self.weight=Li
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=D*3
@@ -1520,6 +1692,8 @@ class liA(world):
 class fA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('F')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=17.42282
         self.ONEs= True
         self.ones=True
@@ -1530,6 +1704,8 @@ class fA(world):
         self.tWop=True
         self.Twop=True
         self.twOp=True
+        self.weight=F
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=D*9+neu
@@ -1539,6 +1715,8 @@ class fA(world):
 class naA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Na')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.1390767
         self.ONEs= True
         self.ones=True
@@ -1551,6 +1729,8 @@ class naA(world):
         self.twOp=True
         self.twoP=True
         self.THREEs=True
+        self.weight=Na
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=D*11+neu
@@ -1560,6 +1740,8 @@ class naA(world):
 class kA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('K')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=4.34066354
         self.ONEs= True
         self.ones=True
@@ -1580,6 +1762,8 @@ class kA(world):
         self.thReep=True
         self.thrEep=True
         self.FOURs=True
+        self.weight=K
+        self.Mass=self.weight/Gr
     
     
     def mass(self):
@@ -1590,6 +1774,8 @@ class kA(world):
 class rbA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Rb')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=4.177128
         self.ONEs= True
         self.ones=True
@@ -1628,6 +1814,8 @@ class rbA(world):
         self.foUrp=True
         self.fouRp=True
         self.FIVEs=True
+        self.weight=Rb
+        self.Mass=self.weight/Gr
     
     
     def mass(self):
@@ -1638,6 +1826,8 @@ class rbA(world):
 class csA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Cs')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=3.893905548
         self.ONEs= True
         self.ones=True
@@ -1694,6 +1884,8 @@ class csA(world):
         self.fiVep=True
         self.fivEp=True
         self.SIXs=True
+        self.weight=Cs
+        self.Mass=self.weight/Gr
     
     
     def mass(self):
@@ -1704,6 +1896,8 @@ class csA(world):
 class frA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Fr')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=4.0727409
         self.ONEs= True
         self.ones=True
@@ -1792,6 +1986,8 @@ class frA(world):
         self.siXp=True
         self.sixP=True
         self.SEVENs=True
+        self.weight=Fr
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*39)+(T*48)
@@ -1801,11 +1997,15 @@ class frA(world):
 class beA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Be')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=9.322699
         self.ONEs= True
         self.ones=True
         self.TWOs=True
         self.twos=True
+        self.weight=Be
+        self.Mass=self.weight/Gr
 
     
     def mass(self):
@@ -1815,6 +2015,8 @@ class beA(world):
 class oA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('O')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=13.618054
         self.ONEs= True
         self.ones=True
@@ -1824,6 +2026,8 @@ class oA(world):
         self.twop=True
         self.tWop=True
         self.Twop=True
+        self.weight=O
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=D*8
@@ -1832,6 +2036,8 @@ class oA(world):
 class caA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ca')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.11315520
         self.ONEs= True
         self.ones=True
@@ -1853,6 +2059,8 @@ class caA(world):
         self.thrEep=True
         self.FOURs=True
         self.fours=True
+        self.weight=Ca
+        self.Mass=self.weight/Gr
 
     
     
@@ -1863,6 +2071,8 @@ class caA(world):
 class mgA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Mg')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.646235
         self.ONEs= True
         self.ones=True
@@ -1876,6 +2086,8 @@ class mgA(world):
         self.twoP=True
         self.THREEs=True
         self.threes=True
+        self.weight=Mg
+        self.Mass=self.weight/Gr
     
     
     
@@ -1886,6 +2098,8 @@ class mgA(world):
 class cuA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Cu')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.726380
         self.ONEs= True
         self.ones=True
@@ -1916,6 +2130,8 @@ class cuA(world):
         self.threEd=True
         self.threeD=True
         self.THreed=True
+        self.weight=Cu
+        self.Mass=self.weight/Gr
     
     
     
@@ -1927,6 +2143,8 @@ class cuA(world):
 class znA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Zn')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=9.3941990
         self.ONEs= True
         self.ones=True
@@ -1958,6 +2176,8 @@ class znA(world):
         self.threeD=True
         self.THreed=True
         self.tHReed=True
+        self.weight=Zn
+        self.Mass=self.weight/Gr
     
     
     def mass(self):
@@ -1968,6 +2188,8 @@ class znA(world):
 class krA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Kr')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=13.9996049
         self.ONEs= True
         self.ones=True
@@ -2005,6 +2227,8 @@ class krA(world):
         self.fOurp=True
         self.foUrp=True
         self.fouRp=True
+        self.weight=Kr
+        self.Mass=self.weight/Gr
     
     
     def mass(self):
@@ -2015,6 +2239,8 @@ class krA(world):
 class srA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Sr')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.69486720
         self.ONEs= True
         self.ones=True
@@ -2054,6 +2280,8 @@ class srA(world):
         self.fouRp=True
         self.FIVEs=True
         self.fives=True
+        self.weight=Sr
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*33)+(T*7)
@@ -2063,6 +2291,8 @@ class srA(world):
 class cdA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Cd')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=8.993822
         self.ONEs= True
         self.ones=True
@@ -2112,6 +2342,8 @@ class cdA(world):
         self.FOurd=True
         self.fOUrd=True
         self.foURd=True
+        self.weight=Cd
+        self.Mass=self.weight/Gr
     
     
     def mass(self):
@@ -2122,6 +2354,8 @@ class cdA(world):
 class baA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ba')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.211664
         self.ONEs= True
         self.ones=True
@@ -2179,6 +2413,8 @@ class baA(world):
         self.fivEp=True
         self.SIXs=True
         self.sixs=True
+        self.weight=Ba
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*56)+(T*8)
@@ -2188,6 +2424,8 @@ class baA(world):
 class raA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ra')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.278424
         self.ONEs= True
         self.ones=True
@@ -2277,6 +2515,8 @@ class raA(world):
         self.sixP=True
         self.SEVENs=True
         self.sevens=True
+        self.weight=Ra
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*94)+(T*12)
@@ -2286,12 +2526,16 @@ class raA(world):
 class bA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('B')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=8.2980190
         self.ONEs= True
         self.ones=True
         self.TWOs=True
         self.twos=True
         self.TWOp=True
+        self.weight=B
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*5)+(T*.25)
@@ -2301,6 +2545,8 @@ class bA(world):
 class nA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('N')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=14.53413
         self.ONEs= True
         self.ones=True
@@ -2309,6 +2555,8 @@ class nA(world):
         self.TWOp=True
         self.twop=True
         self.tWop=True
+        self.weight=N
+        self.Mass=self.weight/Gr
     
     def mass(self):
         x={'x':0,'y':0,'z':0}
@@ -2319,6 +2567,8 @@ class nA(world):
 class scA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Sc')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.56149
         self.ONEs= True
         self.ones=True
@@ -2341,6 +2591,21 @@ class scA(world):
         self.FOURs=True
         self.fours=True
         self.THREEd=True
+        self.threed=True
+        self.Threed=True
+        self.tHreed=True
+        self.thReed=True
+        self.thrEed=True
+        self.threEd=True
+        self.threeD=True
+        self.THreed=True
+        self.tHReed=True
+        self.FOURp=True
+        self.fourp=True
+        self.Fourp=True
+        self.fOurp=True
+        self.weight=Sc
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*16)+(T*4.2)
@@ -2350,6 +2615,8 @@ class scA(world):
 class alA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Al')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.985768
         self.ONEs= True
         self.ones=True
@@ -2364,6 +2631,8 @@ class alA(world):
         self.THREEs=True
         self.threes=True
         self.THREEp=True
+        self.weight=Al
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=26.9815
@@ -2373,6 +2642,8 @@ class alA(world):
 class gaA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ga')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.9993018
         self.ONEs= True
         self.ones=True
@@ -2405,6 +2676,8 @@ class gaA(world):
         self.THreed=True
         self.tHReed=True
         self.FOURp=True
+        self.weight=Ga
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=69.723
@@ -2414,6 +2687,8 @@ class gaA(world):
 class yA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Y')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.21726
         self.ONEs= True
         self.ones=True
@@ -2454,6 +2729,8 @@ class yA(world):
         self.FIVEs=True
         self.fives=True
         self.FOURd=True
+        self.weight=Y
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=88.9059
@@ -2463,6 +2740,8 @@ class yA(world):
 class agA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ag')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.576234
         self.ONEs= True
         self.ones=True
@@ -2511,6 +2790,8 @@ class agA(world):
         self.fourD=True
         self.FOurd=True
         self.fOUrd=True
+        self.weight=Ag
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=107.8682
@@ -2520,6 +2801,8 @@ class agA(world):
 class indA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('In')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.7863552
         self.ONEs= True
         self.ones=True
@@ -2570,6 +2853,8 @@ class indA(world):
         self.fOUrd=True
         self.foURd=True
         self.FIVEp=True
+        self.weight=In
+        self.Mass=self.weight/Gr 
     
     def mass(self):
         m=114.818
@@ -2579,6 +2864,8 @@ class indA(world):
 class laA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('La')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.5769
         self.ONEs= True
         self.ones=True
@@ -2637,6 +2924,8 @@ class laA(world):
         self.SIXs=True
         self.sixs=True
         self.FOURf=True
+        self.weight=La
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=138.906
@@ -2646,6 +2935,8 @@ class laA(world):
 class ndA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Nd')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.5250
         self.ONEs= True
         self.ones=True
@@ -2707,6 +2998,8 @@ class ndA(world):
         self.fourf=True
         self.Fourf=True
         self.fOurf=True
+        self.weight=Nd
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=144.24
@@ -2716,6 +3009,8 @@ class ndA(world):
 class pmA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Pm')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.582
         self.ONEs= True
         self.ones=True
@@ -2778,6 +3073,8 @@ class pmA(world):
         self.Fourf=True
         self.fOurf=True
         self.foUrf=True
+        self.weight=Pm
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*41)+(T*21)
@@ -2787,6 +3084,8 @@ class pmA(world):
 class smA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Sm')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.64371
         self.ONEs= True
         self.ones=True
@@ -2850,6 +3149,8 @@ class smA(world):
         self.fOurf=True
         self.foUrf=True
         self.fouRf=True
+        self.weight=Sm
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=150.36
@@ -2859,6 +3160,8 @@ class smA(world):
 class euA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Eu')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.670385
         self.ONEs= True
         self.ones=True
@@ -2923,6 +3226,8 @@ class euA(world):
         self.foUrf=True
         self.fouRf=True
         self.fourF=True
+        self.weight=Eu
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=151.965
@@ -2932,6 +3237,8 @@ class euA(world):
 class gdA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Gd')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.14980
         self.ONEs= True
         self.ones=True
@@ -2997,6 +3304,8 @@ class gdA(world):
         self.fouRf=True
         self.fourF=True
         self.FOurf=True
+        self.weight=Gd
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=157.25
@@ -3006,6 +3315,8 @@ class gdA(world):
 class dyA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Dy')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.93905
         self.ONEs= True
         self.ones=True
@@ -3073,6 +3384,8 @@ class dyA(world):
         self.FOurf=True
         self.fOUrf=True
         self.foURf=True
+        self.weight=Dy
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=162.50
@@ -3082,6 +3395,8 @@ class dyA(world):
 class hoA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ho')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.0215
         self.ONEs= True
         self.ones=True
@@ -3150,6 +3465,8 @@ class hoA(world):
         self.fOUrf=True
         self.foURf=True
         self.fouRF=True
+        self.weight=Ho
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=164.9303
@@ -3159,6 +3476,8 @@ class hoA(world):
 class erA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Er')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.1077
         self.ONEs= True
         self.ones=True
@@ -3228,6 +3547,8 @@ class erA(world):
         self.foURf=True
         self.fouRF=True
         self.FOUrf=True
+        self.weight=Er
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=167.26
@@ -3237,6 +3558,8 @@ class erA(world):
 class tmA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Tm')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.18431
         self.ONEs= True
         self.ones=True
@@ -3307,6 +3630,8 @@ class tmA(world):
         self.fouRF=True
         self.FOUrf=True
         self.fOURf=True
+        self.weight=Tm
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=168.9342
@@ -3316,6 +3641,8 @@ class tmA(world):
 class ybA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Yb')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.254159
         self.ONEs= True
         self.ones=True
@@ -3387,6 +3714,8 @@ class ybA(world):
         self.FOUrf=True
         self.fOURf=True
         self.foURF=True
+        self.weight=Yb
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=173.04
@@ -3396,6 +3725,8 @@ class ybA(world):
 class luA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Lu')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.425871
         self.ONEs= True
         self.ones=True
@@ -3468,15 +3799,19 @@ class luA(world):
         self.fOURf=True
         self.foURF=True
         self.FIVEd=True
+        self.weight=Lu
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=174.967
         x=m/av
         return x
     
-class tlA():
+class tlA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Tl')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.1082871
         self.ONEs= True
         self.ones=True
@@ -3559,6 +3894,8 @@ class tlA():
         self.fIVed=True
         self.fiVEd=True
         self.SIXp=True
+        self.weight=Tl
+        self.Mass=self.weight/Gr
     
     
     def mass(self):
@@ -3569,6 +3906,8 @@ class tlA():
 class tiA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ti')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.82812
         self.ONEs= True
         self.ones=True
@@ -3592,6 +3931,8 @@ class tiA(world):
         self.fours=True
         self.THREEd=True
         self.threed=True
+        self.weight=Ti
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=47.867(1)
@@ -3601,6 +3942,8 @@ class tiA(world):
 class acA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ac')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.380226
         self.ONEs= True
         self.ones=True
@@ -3691,6 +4034,8 @@ class acA(world):
         self.SEVENs=True
         self.sevens=True
         self.FIVEf=True
+        self.weight=Ac
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=227.028
@@ -3700,6 +4045,8 @@ class acA(world):
 class fmA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Fm')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.50
         self.ONEs= True
         self.ones=True
@@ -3801,6 +4148,8 @@ class fmA(world):
         self.fiVEf=True
         self.fivEF=True
         self.FIVef=True
+        self.weight=Fm
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*100)+(T*18.3)
@@ -3810,6 +4159,8 @@ class fmA(world):
 class mdA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Md')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.58
         self.ONEs= True
         self.ones=True
@@ -3912,6 +4263,8 @@ class mdA(world):
         self.fivEF=True
         self.FIVef=True
         self.fIVEf=True
+        self.weight=Md
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*101)+(T*18)
@@ -3921,6 +4274,8 @@ class mdA(world):
 class noA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('No')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.65
         self.ONEs= True
         self.ones=True
@@ -4024,6 +4379,8 @@ class noA(world):
         self.FIVef=True
         self.fIVEf=True
         self.fiVEF=True
+        self.weight=No
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*102)+(T*17.75)
@@ -4033,6 +4390,8 @@ class noA(world):
 class lrA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Lr')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=4.90
         self.ONEs= True
         self.ones=True
@@ -4137,6 +4496,8 @@ class lrA(world):
         self.fIVEf=True
         self.fiVEF=True
         self.SIXd=True
+        self.weight=Lr
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*103)+(T*17.3)
@@ -4146,6 +4507,8 @@ class lrA(world):
 class cA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('C')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=11.260296
         self.ONEs= True
         self.ones=True
@@ -4153,6 +4516,8 @@ class cA(world):
         self.twos=True
         self.TWOp=True
         self.twop=True
+        self.weight=C
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*6)-(T*0.029)
@@ -4162,6 +4527,8 @@ class cA(world):
 class siA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Si')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=8.151683
         self.ONEs= True
         self.ones=True
@@ -4177,6 +4544,8 @@ class siA(world):
         self.threes=True
         self.THREEp=True
         self.threep=True
+        self.weight=Si
+        self.Mass=self.weight/Gr
     
     
     def mass(self):
@@ -4187,6 +4556,8 @@ class siA(world):
 class mnA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Mn')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.434018
         self.ONEs= True
         self.ones=True
@@ -4213,6 +4584,8 @@ class mnA(world):
         self.Threed=True
         self.tHreed=True
         self.thReed=True
+        self.weight=Mn
+        self.Mass=self.weight/Gr
     
     
     def mass(self):
@@ -4223,6 +4596,8 @@ class mnA(world):
 class feA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Fe')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.9024678
         self.ONEs= True
         self.ones=True
@@ -4250,6 +4625,8 @@ class feA(world):
         self.tHreed=True
         self.thReed=True
         self.thrEed=True
+        self.weight=Fe
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*24)+(T*2.48)
@@ -4259,6 +4636,8 @@ class feA(world):
 class coA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Co')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.88101
         self.ONEs= True
         self.ones=True
@@ -4287,6 +4666,8 @@ class coA(world):
         self.thReed=True
         self.thrEed=True
         self.threEd=True
+        self.weight=Co
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=58.9332
@@ -4296,6 +4677,8 @@ class coA(world):
 class niA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ni')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.639877
         self.ONEs= True
         self.ones=True
@@ -4325,6 +4708,8 @@ class niA(world):
         self.thrEed=True
         self.threEd=True
         self.threeD=True
+        self.weight=Ni
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=58.693
@@ -4334,6 +4719,8 @@ class niA(world):
 class geA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ge')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.899435
         self.ONEs= True
         self.ones=True
@@ -4367,6 +4754,8 @@ class geA(world):
         self.tHReed=True
         self.FOURp=True
         self.fourp=True
+        self.weight=Ge
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=72.61
@@ -4376,6 +4765,8 @@ class geA(world):
 class zrA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Zr')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.63390
         self.ONEs= True
         self.ones=True
@@ -4417,6 +4808,8 @@ class zrA(world):
         self.fives=True
         self.FOURd=True
         self.fourd=True
+        self.weight=Zr
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=91.224
@@ -4426,6 +4819,8 @@ class zrA(world):
 class pdA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Pd')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=8.33686
         self.ONEs= True
         self.ones=True
@@ -4473,6 +4868,8 @@ class pdA(world):
         self.fouRd=True
         self.fourD=True
         self.FOurd=True
+        self.weight=Pd
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=106.42
@@ -4482,6 +4879,8 @@ class pdA(world):
 class snA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Sn')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.343917
         self.ONEs= True
         self.ones=True
@@ -4533,6 +4932,8 @@ class snA(world):
         self.foURd=True
         self.FIVEp=True
         self.fivep=True
+        self.weight=Sn
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=118.710
@@ -4542,6 +4943,8 @@ class snA(world):
 class ceA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ce')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.5386
         self.ONEs= True
         self.ones=True
@@ -4601,6 +5004,8 @@ class ceA(world):
         self.sixs=True
         self.FOURf=True
         self.fourf=True
+        self.weight=Ce
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=140.115
@@ -4610,6 +5015,8 @@ class ceA(world):
 class prA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Pr')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.473
         self.ONEs= True
         self.ones=True
@@ -4670,6 +5077,8 @@ class prA(world):
         self.FOURf=True
         self.fourf=True
         self.Fourf=True
+        self.weight=Pr
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=140.908
@@ -4679,6 +5088,8 @@ class prA(world):
 class tbA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Tb')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.8638
         self.ONEs= True
         self.ones=True
@@ -4745,6 +5156,8 @@ class tbA(world):
         self.fourF=True
         self.FOurf=True
         self.fOUrf=True
+        self.weight=Tb
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=158.925
@@ -4754,6 +5167,8 @@ class tbA(world):
 class hfA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Hf')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.825069
         self.ONEs= True
         self.ones=True
@@ -4827,6 +5242,8 @@ class hfA(world):
         self.foURF=True
         self.FIVEd=True
         self.fived=True
+        self.weight=Hf
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=178.49
@@ -4836,6 +5253,8 @@ class hfA(world):
 class hgA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Hg')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=10.437504
         self.ONEs= True
         self.ones=True
@@ -4917,6 +5336,8 @@ class hgA(world):
         self.FIved=True
         self.fIVed=True
         self.fiVEd=True
+        self.weight=Hg
+        self.Mass=self.weight/Gr
     
     
     def mass(self):
@@ -4927,6 +5348,8 @@ class hgA(world):
 class pbA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Pb')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.4166796
         self.ONEs= True
         self.ones=True
@@ -5010,6 +5433,8 @@ class pbA(world):
         self.fiVEd=True
         self.SIXp=True
         self.sixp=True
+        self.weight=Pb
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=207.2
@@ -5019,6 +5444,8 @@ class pbA(world):
 class thA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Th')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.3067
         self.ONEs= True
         self.ones=True
@@ -5110,6 +5537,8 @@ class thA(world):
         self.sevens=True
         self.FIVEf=True
         self.fivef=True
+        self.weight=Th
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=232.038
@@ -5119,6 +5548,8 @@ class thA(world):
 class amA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Am')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.9738
         self.ONEs= True
         self.ones=True
@@ -5215,6 +5646,8 @@ class amA(world):
         self.fiVef=True
         self.fivEf=True
         self.fiveF=True
+        self.weight=Am
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*76)+(T*29.95)
@@ -5224,6 +5657,8 @@ class amA(world):
 class cmA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Cm')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.9914
         self.ONEs= True
         self.ones=True
@@ -5321,6 +5756,8 @@ class cmA(world):
         self.fivEf=True
         self.fiveF=True
         self.FIvef=True
+        self.weight=Cm
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*79)+(T*28.99)
@@ -5330,6 +5767,8 @@ class cmA(world):
 class bkA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Bk')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.1978
         self.ONEs= True
         self.ones=True
@@ -5428,6 +5867,8 @@ class bkA(world):
         self.fiveF=True
         self.FIvef=True
         self.fIVef=True
+        self.weight=Bk
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*79)+(T*29)
@@ -5437,6 +5878,8 @@ class bkA(world):
 class cfA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Cf')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.2817
         self.ONEs= True
         self.ones=True
@@ -5536,6 +5979,8 @@ class cfA(world):
         self.FIvef=True
         self.fIVef=True
         self.fiVEf=True
+        self.weight=Cf
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*82)+(T*28.5)
@@ -5545,6 +5990,8 @@ class cfA(world):
 class esA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Es')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.3676
         self.ONEs= True
         self.ones=True
@@ -5645,6 +6092,8 @@ class esA(world):
         self.fIVef=True
         self.fiVEf=True
         self.fivEF=True
+        self.weight=Es
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*83)+(T*28)
@@ -5654,6 +6103,8 @@ class esA(world):
 class rfA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Rf')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.01
         self.ONEs= True
         self.ones=True
@@ -5759,6 +6210,8 @@ class rfA(world):
         self.fiVEF=True
         self.SIXd=True
         self.sixd=True
+        self.weight=Rf
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*89)+(T*27)
@@ -5768,6 +6221,8 @@ class rfA(world):
 class pA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('P')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=10.486686
         self.ONEs= True
         self.ones=True
@@ -5784,6 +6239,8 @@ class pA(world):
         self.THREEp=True
         self.threep=True
         self.Threep=True
+        self.weight=P
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=30.9738
@@ -5793,6 +6250,8 @@ class pA(world):
 class clA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Cl')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=12.96763
         self.ONEs= True
         self.ones=True
@@ -5811,6 +6270,8 @@ class clA(world):
         self.Threep=True
         self.tHreep=True
         self.thReep=True
+        self.weight=Cl
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=35.4527
@@ -5820,6 +6281,8 @@ class clA(world):
 class vA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('V')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.746187
         self.ONEs= True
         self.ones=True
@@ -5844,6 +6307,8 @@ class vA(world):
         self.THREEd=True
         self.threed=True
         self.Threed=True
+        self.weight=V
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=50.9415
@@ -5853,6 +6318,8 @@ class vA(world):
 class arsA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ar')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=9.7886
         self.ONEs= True
         self.ones=True
@@ -5887,6 +6354,8 @@ class arsA(world):
         self.FOURp=True
         self.fourp=True
         self.Fourp=True
+        self.weight=Ar
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=74.9216
@@ -5896,6 +6365,8 @@ class arsA(world):
 class brA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Br')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=11.81381
         self.ONEs= True
         self.ones=True
@@ -5932,6 +6403,8 @@ class brA(world):
         self.Fourp=True
         self.fOurp=True
         self.foUrp=True
+        self.weight=Br
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=79.904
@@ -5941,6 +6414,8 @@ class brA(world):
 class nbA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Nb')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.75885
         self.ONEs= True
         self.ones=True
@@ -5983,6 +6458,8 @@ class nbA(world):
         self.FOURd=True
         self.fourd=True
         self.Fourd=True
+        self.weight=Nb
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=92.9064
@@ -5992,6 +6469,8 @@ class nbA(world):
 class sbA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Sb')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=8.608389
         self.ONEs= True
         self.ones=True
@@ -6044,6 +6523,8 @@ class sbA(world):
         self.FIVEp=True
         self.fivep=True
         self.Fivep=True
+        self.weight=Sb
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=121.76
@@ -6053,6 +6534,8 @@ class sbA(world):
 class taA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ta')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.549571
         self.ONEs= True
         self.ones=True
@@ -6127,6 +6610,8 @@ class taA(world):
         self.FIVEd=True
         self.fived=True
         self.Fived=True
+        self.weight=Ta
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=180.948
@@ -6136,6 +6621,8 @@ class taA(world):
 class auA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Au')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=9.225553
         self.ONEs= True
         self.ones=True
@@ -6216,6 +6703,8 @@ class auA(world):
         self.fiveD=True
         self.FIved=True
         self.fIVed=True
+        self.weight=Au
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=196.967
@@ -6225,6 +6714,8 @@ class auA(world):
 class biA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Bi')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.285516
         self.ONEs= True
         self.ones=True
@@ -6309,6 +6800,8 @@ class biA(world):
         self.SIXp=True
         self.sixp=True
         self.Sixp=True
+        self.weight=Bi
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=208.980
@@ -6318,6 +6811,8 @@ class biA(world):
 class paA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Pa')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=5.89
         self.ONEs= True
         self.ones=True
@@ -6410,6 +6905,8 @@ class paA(world):
         self.FIVEf=True
         self.fivef=True
         self.Fivef=True
+        self.weight=Pa
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=231.036
@@ -6419,6 +6916,8 @@ class paA(world):
 class dbA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Db')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.8
         self.ONEs= True
         self.ones=True
@@ -6525,6 +7024,8 @@ class dbA(world):
         self.SIXd=True
         self.sixd=True
         self.Sixd=True
+        self.weight=Db
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*85)+(T*30)
@@ -6534,6 +7035,8 @@ class dbA(world):
 class sA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('S')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=10.36001
         self.ONEs= True
         self.ones=True
@@ -6551,6 +7054,8 @@ class sA(world):
         self.threep=True
         self.Threep=True
         self.tHreep=True
+        self.weight=S
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=32.066
@@ -6560,6 +7065,8 @@ class sA(world):
 class crA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Cr')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.76651 
         self.ONEs= True
         self.ones=True
@@ -6585,6 +7092,8 @@ class crA(world):
         self.threed=True
         self.Threed=True
         self.tHreed=True
+        self.weight=Cr
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=51.9961
@@ -6594,6 +7103,8 @@ class crA(world):
 class seA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Se')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=9.752392
         self.ONEs= True
         self.ones=True
@@ -6629,6 +7140,8 @@ class seA(world):
         self.fourp=True
         self.Fourp=True
         self.fOurp=True
+        self.weight=Se
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=78.96
@@ -6638,6 +7151,8 @@ class seA(world):
 class moA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Mo')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.09243
         self.ONEs= True
         self.ones=True
@@ -6681,6 +7196,8 @@ class moA(world):
         self.fourd=True
         self.Fourd=True
         self.fOurd=True
+        self.weight=Mo
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=95.94
@@ -6690,6 +7207,8 @@ class moA(world):
 class tcA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Tc')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.11938
         self.ONEs= True
         self.ones=True
@@ -6734,6 +7253,8 @@ class tcA(world):
         self.Fourd=True
         self.fOurd=True
         self.foUrd=True
+        self.weight=Tc
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*19)+(T*20)
@@ -6743,6 +7264,8 @@ class tcA(world):
 class ruA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ru')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.36050
         self.ONEs= True
         self.ones=True
@@ -6788,6 +7311,8 @@ class ruA(world):
         self.fOurd=True
         self.foUrd=True
         self.fouRd=True
+        self.weight=Ru
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=101.07
@@ -6797,6 +7322,8 @@ class ruA(world):
 class rhA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Rh')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.45890
         self.ONEs= True
         self.ones=True
@@ -6843,6 +7370,8 @@ class rhA(world):
         self.foUrd=True
         self.fouRd=True
         self.fourD=True
+        self.weight=Rh
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=102.906
@@ -6852,6 +7381,8 @@ class rhA(world):
 class teA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Te')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=9.00966
         self.ONEs= True
         self.ones=True
@@ -6905,6 +7436,8 @@ class teA(world):
         self.fivep=True
         self.Fivep=True
         self.fIvep=True
+        self.weight=Te
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=127.60
@@ -6913,6 +7446,8 @@ class teA(world):
 class xeA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Xe')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=12.1298431
         self.ONEs= True
         self.ones=True
@@ -6968,6 +7503,8 @@ class xeA(world):
         self.fIvep=True
         self.fiVep=True
         self.fivEp=True
+        self.weight=Xe
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=131.29
@@ -6977,6 +7514,8 @@ class xeA(world):
 class wA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('W')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.86403
         self.ONEs= True
         self.ones=True
@@ -7052,6 +7591,8 @@ class wA(world):
         self.fived=True
         self.Fived=True
         self.fIved=True
+        self.weight=W
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=183.84
@@ -7061,6 +7602,8 @@ class wA(world):
 class osA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Os')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=8.43823
         self.ONEs= True
         self.ones=True
@@ -7138,6 +7681,8 @@ class osA(world):
         self.fIved=True
         self.fiVed=True
         self.fivEd=True
+        self.weight=Os
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=190.23
@@ -7147,6 +7692,8 @@ class osA(world):
 class irA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ir')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=8.96702
         self.ONEs= True
         self.ones=True
@@ -7225,6 +7772,8 @@ class irA(world):
         self.fiVed=True
         self.fivEd=True
         self.fiveD=True
+        self.weight=Ir
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=192.22
@@ -7234,6 +7783,8 @@ class irA(world):
 class ptA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Pt')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=8.95883
         self.ONEs= True
         self.ones=True
@@ -7313,6 +7864,8 @@ class ptA(world):
         self.fivEd=True
         self.fiveD=True
         self.FIved=True
+        self.weight=Pt
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=195.08
@@ -7322,6 +7875,8 @@ class ptA(world):
 class poA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Po')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=8.414
         self.ONEs= True
         self.ones=True
@@ -7407,6 +7962,8 @@ class poA(world):
         self.sixp=True
         self.Sixp=True
         self.sIxp=True
+        self.weight=Po
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*65)+(T*26)
@@ -7416,6 +7973,8 @@ class poA(world):
 class rnA(world):
     def __init__(self):
         x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Rn')
+        self.volume=(4/3)*pi*self.radius**3
         iE=10.74850
         self.ONEs= True
         self.ones=True
@@ -7503,6 +8062,8 @@ class rnA(world):
         self.sIxp=True
         self.siXp=True
         self.sixP=True
+        self.weight=Rn
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*67)+(T*29)
@@ -7512,6 +8073,8 @@ class rnA(world):
 class uA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('U')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.19405
         self.ONEs= True
         self.ones=True
@@ -7605,6 +8168,8 @@ class uA(world):
         self.fivef=True
         self.Fivef=True
         self.fIvef=True
+        self.weight=U
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=238.029
@@ -7614,6 +8179,8 @@ class uA(world):
 class npA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Np')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.2655
         self.ONEs= True
         self.ones=True
@@ -7708,6 +8275,8 @@ class npA(world):
         self.Fivef=True
         self.fIvef=True
         self.fiVef=True
+        self.weight=Np
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=237.048
@@ -7717,6 +8286,8 @@ class npA(world):
 class puA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Pu')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=6.0258
         self.ONEs= True
         self.ones=True
@@ -7812,6 +8383,8 @@ class puA(world):
         self.fIvef=True
         self.fiVef=True
         self.fivEf=True
+        self.weight=Pu
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*91)+(T*20)
@@ -7821,6 +8394,8 @@ class puA(world):
 class sgA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Sg')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.8
         self.ONEs= True
         self.ones=True
@@ -7928,6 +8503,8 @@ class sgA(world):
         self.sixd=True
         self.Sixd=True
         self.sIxd=True
+        self.weight=Sg
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*102)+(T*20)
@@ -7937,6 +8514,8 @@ class sgA(world):
 class cnA(world):
     def __init__(self):
         x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Cn')
+        self.volume=(4/3)*pi*self.radius**3
         self.ONEs= True
         self.ones=True
         self.TWOs=True
@@ -8049,6 +8628,8 @@ class cnA(world):
         self.sIXd=True
         self.siXD=True
         self.SIXd=True
+        self.weight=Cn
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*110)+(T*21)
@@ -8058,6 +8639,8 @@ class cnA(world):
 class iA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('I')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=10.45126
         self.ONEs= True
         self.ones=True
@@ -8112,6 +8695,8 @@ class iA(world):
         self.Fivep=True
         self.fIvep=True
         self.fiVep=True
+        self.weight=I
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=126.904
@@ -8121,6 +8706,8 @@ class iA(world):
 class reA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Re')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.83352
         self.ONEs= True
         self.ones=True
@@ -8197,6 +8784,8 @@ class reA(world):
         self.Fived=True
         self.fIved=True
         self.fiVed=True
+        self.weight=Re
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=186.207
@@ -8206,6 +8795,8 @@ class reA(world):
 class atA(world):
     def __init__(self):
         x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('At')
+        self.volume=(4/3)*pi*self.radius**3
         iE=9.31751
         self.ONEs= True
         self.ones=True
@@ -8292,6 +8883,8 @@ class atA(world):
         self.Sixp=True
         self.sIxp=True
         self.siXp=True
+        self.weight=At
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*76)+(T*19)
@@ -8301,6 +8894,8 @@ class atA(world):
 class bhA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Bh')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.7
         self.ONEs= True
         self.ones=True
@@ -8409,6 +9004,8 @@ class bhA(world):
         self.Sixd=True
         self.sIxd=True
         self.siXd=True
+        self.weight=Bh
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*95)+(T*24)
@@ -8418,6 +9015,8 @@ class bhA(world):
 class hsA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Hs')
+        self.volume=(4/3)*pi*self.radius**3
         self.iE=7.6
         self.ONEs= True
         self.ones=True
@@ -8527,6 +9126,8 @@ class hsA(world):
         self.sIxd=True
         self.siXd=True
         self.sixD=True
+        self.weight=Hs
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*96)+(T*25)
@@ -8536,6 +9137,8 @@ class hsA(world):
 class mtA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Mt')
+        self.volume=(4/3)*pi*self.radius**3
         self.ONEs= True
         self.ones=True
         self.TWOs=True
@@ -8645,6 +9248,8 @@ class mtA(world):
         self.siXd=True
         self.sixD=True
         self.SIxd=True
+        self.weight=Mt
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*94)+(T*26)
@@ -8654,6 +9259,8 @@ class mtA(world):
 class dsA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Ds')
+        self.volume=(4/3)*pi*self.radius**3
         self.ONEs= True
         self.ones=True
         self.TWOs=True
@@ -8764,6 +9371,8 @@ class dsA(world):
         self.sixD=True
         self.SIxd=True
         self.sIXd=True
+        self.weight=Ds
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*94)+(T*27)
@@ -8773,6 +9382,8 @@ class dsA(world):
 class rgA(world):
     def __init__(self):
         self.x={'x':0,'y':0,'z':0}
+        self.radius=Atomsr.get('Rg')
+        self.volume=(4/3)*pi*self.radius**3
         self.ONEs= True
         self.ones=True
         self.TWOs=True
@@ -8884,6 +9495,8 @@ class rgA(world):
         self.SIxd=True
         self.sIXd=True
         self.siXD=True
+        self.weight=Rg
+        self.Mass=self.weight/Gr
     
     def mass(self):
         m=(D*93)+(T*28)
@@ -8895,34 +9508,3007 @@ class Mkule():
     e= 5.4857990946*10**-4
     pro=1.007276466812
     neu=1.00866491600
+    def __init__(self):
+        self.x={'x':0,'y':0,'z':0}
+        self.freebonds=0
+        self.fnet=0
+        self.number=0
+        self.amnt=0
+        self.weight=0
+        if self.amnt!=0:
+            self.weight+=((self.weight)*(self.amnt))
+        self.volume=0
+        self.state=0
+        self.A1=0
+        self.B1=0
+        self.C1=0
+        self.D1=0
+        self.E1=0
+        self.F1=0
+        self.G1=0
+        self.H1=0
+        self.I1=0
+        self.J1=0
+        self.K1=0
+        self.L1=0
+        self.M1=0
+        self.N1=0
+        self.O1=0
+        self.P1=0
+        self.Q1=0
+        self.R1=0
+        self.S1=0
+        self.T1=0
+        self.U1=0
+        self.V1=0
+        self.W1=0
+        self.X1=0
+        self.Y1=0
+        self.Z1=0
+
+        self.CoA1=0
+        self.CoB1=0
+        self.CoC1=0
+        self.CoD1=0
+        self.CoE1=0
+        self.CoF1=0
+        self.CoG1=0
+        self.CoH1=0
+        self.CoI1=0
+        self.CoJ1=0
+        self.CoK1=0
+        self.CoL1=0
+        self.CoM1=0
+        self.CoN1=0
+        self.CoO1=0
+        self.CoP1=0
+        self.CoQ1=0
+        self.CoR1=0
+        self.CoS1=0
+        self.CoT1=0
+        self.CoU1=0
+        self.CoV1=0
+        self.CoW1=0
+        self.CoX1=0
+        self.CoY1=0
+        self.CoZ1=0
+    def react(self):
+        if self.A1.collision==1:
+            bo=0
+            one=self.A1.e()
+            One=self.A1.eo()
+            oNe=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+                Four=self.B1.fnet
+                Five=self.B1.pmom
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+                Four=self.C1.fnet
+                Five=self.C1.pmom
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+                Four=self.D1.fnet
+                Five=self.D1.pmom
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+                Four=self.E1.fnet
+                Five=self.E1.pmom
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+                Four=self.F1.fnet
+                Five=self.F1.pmom
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+                Four=self.G1.fnet
+                Five=self.G1.pmom
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+                Four=self.H1.fnet
+                Five=self.H1.pmom
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+                Four=self.I1.fnet
+                Five=self.I1.pmom
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+                Four=self.J1.fnet
+                Five=self.J1.pmom
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+                Four=self.K1.fnet
+                Five=self.K1.pmom
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+                Four=self.L1.fnet
+                Five=self.L1.pmom
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+                Four=self.M1.fnet
+                Five=self.M1.pmom
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+                Four=self.N1.fnet
+                Five=self.N1.pmom
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+                Four=self.O1.fnet
+                Five=self.O1.pmom
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+                Four=self.P1.fnet
+                Five=self.P1.pmom
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+                Four=self.Q1.fnet
+                Five=self.Q1.pmom
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+                Four=self.R1.fnet
+                Five=self.R1.pmom
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+                Four=self.S1.fnet
+                Five=self.S1.pmom
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+                Four=self.T1.fnet
+                Five=self.T1.pmom
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+                Four=self.U1.fnet
+                Five=self.U1.pmom
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+                Four=self.V1.fnet
+                Five=self.V1.pmom
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+                Four=self.W1.fnet
+                Five=self.W1.pmom
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.A1.collision-=1
+                self.A1.x=Three
+            elif (one + two)/bo>1:
+                if self.A1.collision==1:
+                    self.collisions-=1
+                    if self.A1.fnet<Four:
+                        self.A1.pmom+=Five
+                        
+                    elif self.A1.fnet>Four:
+                        self.A1.pmom-=Five
+                    elif self.A1.fnet==Four:
+                        self.A1.fnet=0
+                        
+        if self.B1.collision==1:
+            bo=0
+            one=self.B1.e()
+            One=self.B1.eo()
+            oNe=self.B1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.B1.collision-=1
+            elif (one + two)/bo>1:
+                if self.B1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.C1.collision==1:
+            bo=0
+            one=self.C1.e()
+            One=self.C1.eo()
+            oNe=self.C1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.C1.collision-=1
+            elif (one + two)/bo>1:
+                if self.C1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.D1.collision==1:
+            bo=0
+            one=self.D1.e()
+            One=self.D1.eo()
+            oNe=self.D1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+                
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.D1.collision-=1
+            elif (one + two)/bo>1:
+                if self.D1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.E1.collision==1:
+            bo=0
+            one=self.E1.e()
+            One=self.E1.eo()
+            oNe=self.E1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+                
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+                
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.E1.collision-=1
+            elif (one + two)/bo>1:
+                if self.E1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.F1.collision==1:
+            bo=0
+            one=self.F1.e()
+            One=self.F1.eo()
+            oNe=self.F1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+                
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+                
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.F1.collision-=1
+            elif (one + two)/bo>1:
+                if self.F1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.G1.collision==1:
+            bo=0
+            one=self.G1.e()
+            One=self.G1.eo()
+            oNe=self.G1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+                
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+                
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.G1.collision-=1
+            elif (one + two)/bo>1:
+                if self.G1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.H1.collision==1:
+            bo=0
+            one=self.H1.e()
+            One=self.H1.eo()
+            oNe=self.H1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+                
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+                
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.H1.collision-=1
+            elif (one + two)/bo>1:
+                if self.H1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.I1.collision==1:
+            bo=0
+            one=self.I1.e()
+            One=self.I1.eo()
+            oNe=self.I1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+                
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+                
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.I1.collision-=1
+            elif (one + two)/bo>1:
+                if self.I1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.J1.collision==1:
+            bo=0
+            one=self.J1.e()
+            One=self.J1.eo()
+            oNe=self.J1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+                
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+                
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.J1.collision-=1
+            elif (one + two)/bo>1:
+                if self.J1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.K1.collision==1:
+            bo=0
+            one=self.K1.e()
+            One=self.K1.eo()
+            oNe=self.K1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+                
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+                
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.K1.collision-=1
+            elif (one + two)/bo>1:
+                if self.K1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.L1.collision==1:
+            bo=0
+            one=self.L1.e()
+            One=self.L1.eo()
+            oNe=self.L1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+                
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+                
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.L1.collision-=1
+            elif (one + two)/bo>1:
+                if self.L1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.M1.collision==1:
+            bo=0
+            one=self.M1.e()
+            One=self.M1.eo()
+            oNe=self.M1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+                
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.M1.collision-=1
+            elif (one + two)/bo>1:
+                if self.M1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.N1.collision==1:
+            bo=0
+            one=self.N1.e()
+            One=self.N1.eo()
+            oNe=self.N1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+                
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.N1.collision-=1
+            elif (one + two)/bo>1:
+                if self.N1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.O1.collision==1:
+            bo=0
+            one=self.O1.e()
+            One=self.O1.eo()
+            oNe=self.O1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+                
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.O1.collision-=1
+            elif (one + two)/bo>1:
+                if self.O1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.P1.collision==1:
+            bo=0
+            one=self.P1.e()
+            One=self.P1.eo()
+            oNe=self.P1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+                
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.P1.collision-=1
+            elif (one + two)/bo>1:
+                if self.P1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.Q1.collision==1:
+            bo=0
+            one=self.Q1.e()
+            One=self.Q1.eo()
+            oNe=self.Q1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+                
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.Q1.collision-=1
+            elif (one + two)/bo>1:
+                if self.Q1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.R1.collision==1:
+            bo=0
+            one=self.R1.e()
+            One=self.R1.eo()
+            oNe=self.R1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+                
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.R1.collision-=1
+            elif (one + two)/bo>1:
+                if self.R1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.S1.collision==1:
+            bo=0
+            one=self.S1.e()
+            One=self.S1.eo()
+            oNe=self.S1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+                
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.S1.collision-=1
+            elif (one + two)/bo>1:
+                if self.S1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.T1.collision==1:
+            bo=0
+            one=self.T1.e()
+            One=self.T1.eo()
+            oNe=self.T1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+                
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.T1.collision-=1
+            elif (one + two)/bo>1:
+                if self.T1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.U1.collision==1:
+            bo=0
+            one=self.U1.e()
+            One=self.U1.eo()
+            oNe=self.U1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+                
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.U1.collision-=1
+            elif (one + two)/bo>1:
+                if self.U1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.V1.collision==1:
+            bo=0
+            one=self.V1.e()
+            One=self.V1.eo()
+            oNe=self.V1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+                
+            if self.W1.collision==1:
+                two=self.W1.e()
+                Two=self.W1.eo()
+                Three=self.W1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.V1.collision-=1
+            elif (one + two)/bo>1:
+                if self.V1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+        if self.W1.collision==1:
+            bo=0
+            one=self.W1.e()
+            One=self.W1.eo()
+            oNe=self.W1.x
+            if self.A1.collision==1:
+                two=self.A1.e()
+                Two=self.A1.eo()
+                Three=self.A1.x
+            if self.B1.collision==1:
+                two=self.B1.e()
+                Two=self.B1.eo()
+                Three=self.B1.x
+            if self.C1.collision==1:
+                two=self.C1.e()
+                Two=self.C1.eo()
+                Three=self.C1.x
+            if self.D1.collision==1:
+                two=self.D1.e()
+                Two=self.D1.eo()
+                Three=self.D1.x
+            if self.E1.collision==1:
+                two=self.E1.e()
+                Two=self.E1.eo()
+                Three=self.E1.x
+            if self.F1.collision==1:
+                two=self.F1.e()
+                Two=self.F1.eo()
+                Three=self.F1.x
+            if self.G1.collision==1:
+                two=self.G1.e()
+                Two=self.G1.eo()
+                Three=self.G1.x
+            if self.H1.collision==1:
+                two=self.H1.e()
+                Two=self.H1.eo()
+                Three=self.H1.x
+            if self.I1.collision==1:
+                two=self.I1.e()
+                Two=self.I1.eo()
+                Three=self.I1.x
+            if self.J1.collision==1:
+                two=self.J1.e()
+                Two=self.J1.eo()
+                Three=self.J1.x
+            if self.K1.collision==1:
+                two=self.K1.e()
+                Two=self.K1.eo()
+                Three=self.K1.x
+            if self.L1.collision==1:
+                two=self.L1.e()
+                Two=self.L1.eo()
+                Three=self.L1.x
+            if self.M1.collision==1:
+                two=self.M1.e()
+                Two=self.M1.eo()
+                Three=self.M1.x
+            if self.N1.collision==1:
+                two=self.N1.e()
+                Two=self.N1.eo()
+                Three=self.N1.x
+            if self.O1.collision==1:
+                two=self.O1.e()
+                Two=self.O1.eo()
+                Three=self.O1.x
+            if self.P1.collision==1:
+                two=self.P1.e()
+                Two=self.P1.eo()
+                Three=self.P1.x
+            if self.Q1.collision==1:
+                two=self.Q1.e()
+                Two=self.Q1.eo()
+                Three=self.Q1.x
+            if self.R1.collision==1:
+                two=self.R1.e()
+                Two=self.R1.eo()
+                Three=self.R1.x
+            if self.S1.collision==1:
+                two=self.S1.e()
+                Two=self.S1.eo()
+                Three=self.S1.x
+            if self.T1.collision==1:
+                two=self.T1.e()
+                Two=self.T1.eo()
+                Three=self.T1.x
+            if self.U1.collision==1:
+                two=self.U1.e()
+                Two=self.U1.eo()
+                Three=self.U1.x
+            if self.V1.collision==1:
+                two=self.V1.e()
+                Two=self.V1.eo()
+                Three=self.V1.x
+            if One-Two==0:
+                bo+=One
+            elif One-Two>0:
+                bo+=One
+            elif One-Two<0:
+                bo+=Two
+            if (one + two)/bo<1:
+                self.W1.collision-=1
+            elif (one + two)/bo>1:
+                if self.W1.collision==1:
+                    self.collisions-=1
+                    if random.random()<0.5:
+                        oNe.update(x=oNe.get('x')+1)
+                        Three.update(x=Three.get('x')-1)
+                        oNe.update(y=oNe.get('y')+1)
+                        Three.update(y=Three.get('y')-1)
+                        oNe.update(z=oNe.get('z')+1)
+                        Three.update(z=Three.get('z')-1)
+                    elif random.random()>0.5:
+                        oNe.update(x=oNe.get('x')-1)
+                        Three.update(x=Three.get('x')+1)
+                        oNe.update(y=oNe.get('y')-1)
+                        Three.update(y=Three.get('y')+1)
+                        oNe.update(z=oNe.get('z')-1)
+                        Three.update(z=Three.get('z')+1)
+
+    def collisions(self):
+        if self.A1.x==self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.A1.collision+=1
+        if self.B1.x==self.A1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.B1.collision+=1
+        if self.C1.x==self.A1.x or self.B1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.C1.collision+=1
+        if self.D1.x==self.A1.x or self.B1.x or self.C1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.D1.collision+=1
+        if self.E1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.E1.collision+=1
+        if self.F1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.F1.collision+=1
+        if self.G1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.G1.collision+=1
+        if self.H1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.H1.collision+=1
+        if self.I1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.I1.collision+=1
+        if self.J1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.J1.collision+=1
+        if self.K1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.K1.collision+=1
+        if self.L1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.L1.collision+=1
+        if self.M1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.M1.collision+=1
+        if self.N1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.N1.collision+=1
+        if self.O1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.O1.collision+=1
+        if self.P1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.P1.collision+=1
+        if self.Q1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.Q1.collision+=1
+        if self.R1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.R1.collision+=1
+        if self.S1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.S1.collision+=1
+        if self.T1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.U1.x or self.V1.x or self.W1.x:
+            self.T1.collision+=1
+        if self.U1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.V1.x or self.W1.x:
+            self.U1.collision+=1
+        if self.V1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.W1.x:
+            self.V1.collision+=1
+        if self.W1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x:
+            self.W1.collision+=1
+#        
+                
+    def Vslf(self):
+        if self.A1!=0:
+            self.volume+=((self.A1.volume)*(self.CoA1))
+        if self.B1!=0:
+            self.volume+=((self.B1.volume)*(self.CoB1))
+        if self.C1!=0:
+            self.volume+=((self.C1.volume)*(self.CoC1))
+        if self.D1!=0:
+            self.volume+=((self.D1.volume)*(self.CoD1))
+        if self.E1!=0:
+            self.volume+=((self.E1.volume)*(self.CoE1))
+        if self.F1!=0:
+            self.volume+=((self.F1.volume)*(self.CoF1))
+        if self.G1!=0:
+            self.volume+=((self.G1.volume)*(self.CoG1))
+        if self.H1!=0:
+            self.volume+=((self.H1.volume)*(self.CoH1))
+        if self.I1!=0:
+            self.volume+=((self.I1.volume)*(self.CoI1))
+        if self.J1!=0:
+            self.volume+=((self.J1.volume)*(self.CoJ1))
+        if self.K1!=0:
+            self.volume+=((self.K1.volume)*(self.CoK1))
+        if self.L1!=0:
+            self.volume+=((self.L1.volume)*(self.CoL1))
+        if self.M1!=0:
+            self.volume+=((self.M1.volume)*(self.CoM1))
+        if self.N1!=0:
+            self.volume+=((self.N1.volume)*(self.CoN1))
+        if self.O1!=0:
+            self.volume+=((self.O1.volume)*(self.CoO1))
+        if self.P1!=0:
+            self.volume+=((self.P1.volume)*(self.CoP1))
+        if self.Q1!=0:
+            self.volume+=((self.Q1.volume)*(self.CoQ1))
+        if self.R1!=0:
+            self.volume+=((self.R1.volume)*(self.CoR1))
+        if self.S1!=0:
+            self.volume+=((self.S1.volume)*(self.CoS1))
+        if self.T1!=0:
+            self.volume+=((self.T1.volume)*(self.CoT1))
+        if self.U1!=0:
+            self.volume+=((self.U1.volume)*(self.CoU1))
+        if self.V1!=0:
+            self.volume+=((self.V1.volume)*(self.CoV1))
+        if self.W1!=0:
+            self.volume+=((self.W1.volume)*(self.CoW1))
+            
+    def mslf(self):
+        if self.number==1:
+            m=self.A1.mass()
+        if self.number==2:
+            m=self.A1.mass()+self.B1.mass()
+        if self.number==3:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()
+        if self.number==4:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()
+        if self.number==5:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()
+        if self.number==6:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()
+        if self.number==7:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()
+        if self.number==8:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()
+        if self.number==9:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()
+        if self.number==10:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()
+        if self.number==11:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()
+        if self.number==12:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()
+        if self.number==13:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()
+        if self.number==14:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()
+        if self.number==15:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()+self.O1.mass()
+        if self.number==16:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()+self.O1.mass()+self.P1.mass()
+        if self.number==17:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()+self.O1.mass()+self.P1.mass()+self.Q1.mass()
+        if self.number==18:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()+self.O1.mass()+self.P1.mass()+self.Q1.mass()+self.R1.mass()
+        if self.number==19:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()+self.O1.mass()+self.P1.mass()+self.Q1.mass()+self.R1.mass()+self.S1.mass()
+        if self.number==20:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()+self.O1.mass()+self.P1.mass()+self.Q1.mass()+self.R1.mass()+self.S1.mass()+self.T1.mass()
+        if self.number==21:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()+self.O1.mass()+self.P1.mass()+self.Q1.mass()+self.R1.mass()+self.S1.mass()+self.T1.mass()+self.U1.mass()
+        if self.number==22:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()+self.O1.mass()+self.P1.mass()+self.Q1.mass()+self.R1.mass()+self.S1.mass()+self.T1.mass()+self.U1.mass()+self.V1.mass()
+        if self.number==23:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()+self.O1.mass()+self.P1.mass()+self.Q1.mass()+self.R1.mass()+self.S1.mass()+self.T1.mass()+self.U1.mass()+self.V1.mass()+self.W1.mass()
+        if self.number==24:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()+self.O1.mass()+self.P1.mass()+self.Q1.mass()+self.R1.mass()+self.S1.mass()+self.T1.mass()+self.U1.mass()+self.V1.mass()+self.W1.mass()+self.X1.mass()
+        if self.number==25:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()+self.O1.mass()+self.P1.mass()+self.Q1.mass()+self.R1.mass()+self.S1.mass()+self.T1.mass()+self.U1.mass()+self.V1.mass()+self.W1.mass()+self.X1.mass()+self.Y1.mass()
+        if self.number==26:
+            m=self.A1.mass()+self.B1.mass()+self.C1.mass()+self.D1.mass()+self.E1.mass()+self.F1.mass()+self.G1.mass()+self.H1.mass()+self.I1.mass()+self.J1.mass()+self.K1.mass()+self.L1.mass()+self.M1.mass()+self.N1.mass()+self.O1.mass()+self.P1.mass()+self.Q1.mass()+self.R1.mass()+self.S1.mass()+self.T1.mass()+self.U1.mass()+self.V1.mass()+self.W1.mass()+self.X1.mass()+self.Y1.mass()+self.Z1.mass()
+        return(m)
     
-    number=0
-    A1=0
-    B1=0
-    C1=0
-    D1=0
-    E1=0
-    F1=0
-    G1=0
-    H1=0
-    I1=0
-    J1=0
-    K1=0
-    L1=0
-    M1=0
-    N1=0
-    O1=0
-    P1=0
-    Q1=0
-    R1=0
-    S1=0
-    T1=0
-    U1=0
-    V1=0
-    W1=0
-    X1=0
-    Y1=0
-    Z1=0
+        
+    
+            
     def set(self):
         e= 5.4857990946*10**-4
         pro=1.007276466812
@@ -9044,29 +12630,17 @@ class Mkule():
         if self.number==1:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
-            BB=float(Atoms.get(input('which element? 2')))
-            b=float(input('coefficient of B?'))
-            CC=float(Atoms.get(input('which element? 3')))
-            c=float(input('coefficient of C?'))
-            weight=(a*A)+(b*BB)+(c*CC)
+            self.CoA1+=a
+            weight=(a*A)
+            self.weight+=weight
+            
             if A==pro:
                 self.A1=proton()
             elif A==neu:
                 self.A1=neutron()
             elif A==e:
                 self.A1=electron()
-            if BB==pro:
-                self.B1=proton()
-            elif BB==neu:
-                self.B1=neutron()
-            elif BB==e:
-                self.B1=electron()
-            if CC==pro:
-                self.C1=proton()
-            elif CC==neu:
-                self.C1=neutron()
-            elif CC==e:
-                self.C1=electron()
+            
             ##
             if A==H:
                 self.A1=hA()
@@ -9296,9 +12870,12 @@ class Mkule():
         if self.number==2:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? 2')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             weight=(a*A)+(b*BB)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -9753,11 +13330,15 @@ class Mkule():
         if self.number==3:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? 2')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? 3')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             weight=(a*A)+(b*BB)+(c*CC)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -10435,13 +14016,18 @@ class Mkule():
         if self.number==4:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? 2')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? 3')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? 4')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -11344,15 +14930,21 @@ class Mkule():
         if self.number==5:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? 2')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? 3')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? 4')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? 5')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -12480,17 +16072,24 @@ class Mkule():
         if self.number==6:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -13843,19 +17442,27 @@ class Mkule():
         elif self.number==7:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -15433,21 +19040,30 @@ class Mkule():
         if self.number==8:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             HH=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)+(h*HH)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -17250,23 +20866,33 @@ class Mkule():
         if self.number==9:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             HH=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             II=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)+(h*HH)+(i*II)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -19294,25 +22920,36 @@ class Mkule():
         if self.number==10:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             B=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             C=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             D=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             F=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             H=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             I=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             weight=(a*A)+(b*B)+(c*C)+(d*D)+(e*E)+(f*F)+(g*G)+(h*H)+(i*I)+(j*J)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -21565,27 +25202,39 @@ class Mkule():
         if self.number==11:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             B=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             C=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             D=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             F=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             H=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             I=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             KK=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             weight=(a*A)+(b*B)+(c*C)+(d*D)+(e*E)+(f*F)+(g*G)+(h*H)+(i*I)+(j*J)+(k*KK)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -24063,29 +27712,42 @@ class Mkule():
         if self.number==12:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             B=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             C=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             D=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             F=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             H=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             I=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             K=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             L=float(Atoms.get(input('which element? etc.')))
             l=float(input('coefficient of L?'))
+            self.CoL1+=l
             weight=(a*A)+(b*B)+(c*C)+(d*D)+(e*E)+(f*F)+(g*G)+(h*H)+(i*I)+(j*J)+(k*K)+(l*L)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -26788,31 +30450,45 @@ class Mkule():
         if self.number==13:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             B=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             C=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             D=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             F=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             H=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             I=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             K=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             L=float(Atoms.get(input('which element? etc.')))
             l=float(input('coefficient of L?'))
+            self.CoL1+=l
             M=float(Atoms.get(input('which element? etc.')))
             m=float(input('coefficient of M?'))
+            self.CoM1+=m
             weight=(a*A)+(b*B)+(c*C)+(d*D)+(e*E)+(f*F)+(g*G)+(h*H)+(i*I)+(j*J)+(k*K)+(l*L)+(m*M)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -29740,33 +33416,48 @@ class Mkule():
         if self.number==14:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             HH=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             II=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             KK=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             L=float(Atoms.get(input('which element? etc.')))
             l=float(input('coefficient of L?'))
+            self.CoL1+=l
             M=float(Atoms.get(input('which element? etc.')))
             m=float(input('coefficient of M?'))
+            self.CoM1+=m
             NN=float(Atoms.get(input('which element? etc.')))
             n=float(input('coefficient of N?'))
+            self.CoN1+=n
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)+(h*HH)+(i*II)+(j*J)+(k*KK)+(l*L)+(m*M)+(n*NN)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -32919,35 +36610,51 @@ class Mkule():
         if self.number==15:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             HH=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             II=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             KK=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             L=float(Atoms.get(input('which element? etc.')))
             l=float(input('coefficient of L?'))
+            self.CoL1+=l
             M=float(Atoms.get(input('which element? etc.')))
             m=float(input('coefficient of M?'))
+            self.CoM1+=m
             NN=float(Atoms.get(input('which element? etc.')))
             n=float(input('coefficient of N?'))
+            self.CoN1+=n
             OO=float(Atoms.get(input('which element? etc.')))
             o=float(input('coefficient of O?'))
+            self.CoO1+=o
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)+(h*HH)+(i*II)+(j*J)+(k*KK)+(l*L)+(m*M)+(n*NN)+(o*OO)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -36325,37 +40032,54 @@ class Mkule():
         if self.number==16:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             HH=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             II=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             KK=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             L=float(Atoms.get(input('which element? etc.')))
             l=float(input('coefficient of L?'))
+            self.CoL1+=l
             M=float(Atoms.get(input('which element? etc.')))
             m=float(input('coefficient of M?'))
+            self.CoM1+=m
             NN=float(Atoms.get(input('which element? etc.')))
             n=float(input('coefficient of N?'))
+            self.CoN1+=n
             OO=float(Atoms.get(input('which element? etc.')))
             o=float(input('coefficient of O?'))
+            self.CoO1+=o
             PP=float(Atoms.get(input('which element? etc.')))
             p=float(input('coefficient of P?'))
+            self.CoP1+=p
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)+(h*HH)+(i*II)+(j*J)+(k*KK)+(l*L)+(m*M)+(n*NN)+(o*OO)+(p*PP)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -39958,39 +43682,57 @@ class Mkule():
         if self.number==17:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             HH=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             II=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             KK=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             L=float(Atoms.get(input('which element? etc.')))
             l=float(input('coefficient of L?'))
+            self.CoL1+=l
             M=float(Atoms.get(input('which element? etc.')))
             m=float(input('coefficient of M?'))
+            self.CoM1+=m
             NN=float(Atoms.get(input('which element? etc.')))
             n=float(input('coefficient of N?'))
+            self.CoN1+=n
             OO=float(Atoms.get(input('which element? etc.')))
             o=float(input('coefficient of O?'))
+            self.CoO1+=o
             PP=float(Atoms.get(input('which element? etc.')))
             p=float(input('coefficient of P?'))
+            self.CoP1+=p
             Q=float(Atoms.get(input('which element? etc.')))
             q=float(input('coefficient of Q?'))
+            self.CoQ1+=q
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)+(h*HH)+(i*II)+(j*J)+(k*KK)+(l*L)+(m*M)+(n*NN)+(o*OO)+(p*PP)+(q*Q)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -43818,41 +47560,60 @@ class Mkule():
         if self.number==18:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             HH=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             II=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             KK=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             L=float(Atoms.get(input('which element? etc.')))
             l=float(input('coefficient of L?'))
+            self.CoL1+=l
             M=float(Atoms.get(input('which element? etc.')))
             m=float(input('coefficient of M?'))
+            self.CoM1+=m
             NN=float(Atoms.get(input('which element? etc.')))
             n=float(input('coefficient of N?'))
+            self.CoN1+=n
             OO=float(Atoms.get(input('which element? etc.')))
             o=float(input('coefficient of O?'))
+            self.CoO1+=o
             PP=float(Atoms.get(input('which element? etc.')))
             p=float(input('coefficient of P?'))
+            self.CoP1+=p
             Q=float(Atoms.get(input('which element? etc.')))
             q=float(input('coefficient of Q?'))
+            self.CoQ1+=q
             R=float(Atoms.get(input('which element? etc.')))
             r=float(input('coefficient of R?'))
+            self.CoR1+=r
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)+(h*HH)+(i*II)+(j*J)+(k*KK)+(l*L)+(m*M)+(n*NN)+(o*OO)+(p*PP)+(q*Q)+(r*R)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -47905,43 +51666,63 @@ class Mkule():
         if self.number==19:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             HH=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             II=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             KK=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             L=float(Atoms.get(input('which element? etc.')))
             l=float(input('coefficient of L?'))
+            self.CoL1+=l
             M=float(Atoms.get(input('which element? etc.')))
             m=float(input('coefficient of M?'))
+            self.CoM1+=m
             NN=float(Atoms.get(input('which element? etc.')))
             n=float(input('coefficient of N?'))
+            self.CoN1+=n
             OO=float(Atoms.get(input('which element? etc.')))
             o=float(input('coefficient of O?'))
+            self.CoO1+=o
             PP=float(Atoms.get(input('which element? etc.')))
             p=float(input('coefficient of P?'))
+            self.CoP1+=p
             Q=float(Atoms.get(input('which element? etc.')))
             q=float(input('coefficient of Q?'))
+            self.CoQ1+=q
             R=float(Atoms.get(input('which element? etc.')))
             r=float(input('coefficient of R?'))
+            self.CoR1+=r
             SS=float(Atoms.get(input('which element? etc.')))
             s=float(input('coefficient of S?'))
+            self.CoS1+=s
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)+(h*HH)+(i*II)+(j*J)+(k*KK)+(l*L)+(m*M)+(n*NN)+(o*OO)+(p*PP)+(q*Q)+(r*R)+(s*SS)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -52219,45 +56000,66 @@ class Mkule():
         if self.number==20:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             HH=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             II=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             KK=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             L=float(Atoms.get(input('which element? etc.')))
             l=float(input('coefficient of L?'))
+            self.CoL1+=l
             M=float(Atoms.get(input('which element? etc.')))
             m=float(input('coefficient of M?'))
+            self.CoM1+=m
             NN=float(Atoms.get(input('which element? etc.')))
             n=float(input('coefficient of N?'))
+            self.CoN1+=n
             OO=float(Atoms.get(input('which element? etc.')))
             o=float(input('coefficient of O?'))
+            self.CoO1+=o
             PP=float(Atoms.get(input('which element? etc.')))
             p=float(input('coefficient of P?'))
+            self.CoP1+=p
             Q=float(Atoms.get(input('which element? etc.')))
             q=float(input('coefficient of Q?'))
+            self.CoQ1+=q
             R=float(Atoms.get(input('which element? etc.')))
             r=float(input('coefficient of R?'))
+            self.CoR1+=r
             SS=float(Atoms.get(input('which element? etc.')))
             s=float(input('coefficient of S?'))
+            self.CoS1+=s
             TT=float(Atoms.get(input('which element? etc.')))
             t=float(input('coefficient of T?'))
+            self.CoT1+=t
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)+(h*HH)+(i*II)+(j*J)+(k*KK)+(l*L)+(m*M)+(n*NN)+(o*OO)+(p*PP)+(q*Q)+(r*R)+(s*SS)+(t*TT)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -56760,47 +60562,69 @@ class Mkule():
         if self.number==21:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             HH=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             II=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             KK=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             L=float(Atoms.get(input('which element? etc.')))
             l=float(input('coefficient of L?'))
+            self.CoL1+=l
             M=float(Atoms.get(input('which element? etc.')))
             m=float(input('coefficient of M?'))
+            self.CoM1+=m
             NN=float(Atoms.get(input('which element? etc.')))
             n=float(input('coefficient of N?'))
+            self.CoN1+=n
             OO=float(Atoms.get(input('which element? etc.')))
             o=float(input('coefficient of O?'))
+            self.CoO1+=o
             PP=float(Atoms.get(input('which element? etc.')))
             p=float(input('coefficient of P?'))
+            self.CoP1+=p
             Q=float(Atoms.get(input('which element? etc.')))
             q=float(input('coefficient of Q?'))
+            self.CoQ1+=q
             R=float(Atoms.get(input('which element? etc.')))
             r=float(input('coefficient of R?'))
+            self.CoR1+=r
             SS=float(Atoms.get(input('which element? etc.')))
             s=float(input('coefficient of S?'))
+            self.CoS1+=s
             TT=float(Atoms.get(input('which element? etc.')))
             t=float(input('coefficient of T?'))
+            self.CoT1+=t
             UU=float(Atoms.get(input('which element? etc.')))
             u=float(input('coefficient of U?'))
+            self.CoU1+=u
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)+(h*HH)+(i*II)+(j*J)+(k*KK)+(l*L)+(m*M)+(n*NN)+(o*OO)+(p*PP)+(q*Q)+(r*R)+(s*SS)+(t*TT)+(u*UU)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -61528,49 +65352,72 @@ class Mkule():
         if self.number==22:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             HH=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             II=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             KK=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             L=float(Atoms.get(input('which element? etc.')))
             l=float(input('coefficient of L?'))
+            self.CoL1+=l
             M=float(Atoms.get(input('which element? etc.')))
             m=float(input('coefficient of M?'))
+            self.CoM1+=m
             NN=float(Atoms.get(input('which element? etc.')))
             n=float(input('coefficient of N?'))
+            self.CoN1+=n
             OO=float(Atoms.get(input('which element? etc.')))
             o=float(input('coefficient of O?'))
+            self.CoO1+=o
             PP=float(Atoms.get(input('which element? etc.')))
             p=float(input('coefficient of P?'))
+            self.CoP1+=p
             Q=float(Atoms.get(input('which element? etc.')))
             q=float(input('coefficient of Q?'))
+            self.CoQ1+=q
             R=float(Atoms.get(input('which element? etc.')))
             r=float(input('coefficient of R?'))
+            self.CoR1+=r
             SS=float(Atoms.get(input('which element? etc.')))
             s=float(input('coefficient of S?'))
+            self.CoS1+=s
             TT=float(Atoms.get(input('which element? etc.')))
             t=float(input('coefficient of T?'))
+            self.CoT1+=t
             UU=float(Atoms.get(input('which element? etc.')))
             u=float(input('coefficient of U?'))
+            self.CoU1+=u
             VV=float(Atoms.get(input('which element? etc.')))
             v=float(input('coefficient of V?'))
+            self.CoV1+=v
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)+(h*HH)+(i*II)+(j*J)+(k*KK)+(l*L)+(m*M)+(n*NN)+(o*OO)+(p*PP)+(q*Q)+(r*R)+(s*SS)+(t*TT)+(u*UU)+(v*VV)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -66523,51 +70370,75 @@ class Mkule():
         if self.number==23:
             A=float(Atoms.get(input('which element? 1')))
             a=float(input('coefficient of A?'))
+            self.CoA1+=a
             BB=float(Atoms.get(input('which element? etc.')))
             b=float(input('coefficient of B?'))
+            self.CoB1+=b
             CC=float(Atoms.get(input('which element? etc.')))
             c=float(input('coefficient of C?'))
+            self.CoC1+=c
             DD=float(Atoms.get(input('which element? etc.')))
             d=float(input('coefficient of D?'))
+            self.CoD1+=d
             E=float(Atoms.get(input('which element? etc.')))
             e=float(input('coefficient of E?'))
+            self.CoE1+=e
             FF=float(Atoms.get(input('which element? etc.')))
             f=float(input('coefficient of F?'))
+            self.CoF1+=f
             G=float(Atoms.get(input('which element? etc.')))
             g=float(input('coefficient of G?'))
+            self.CoG1+=g
             HH=float(Atoms.get(input('which element? etc.')))
             h=float(input('coefficient of H?'))
+            self.CoH1+=h
             II=float(Atoms.get(input('which element? etc.')))
             i=float(input('coefficient of I?'))
+            self.CoI1+=i
             J=float(Atoms.get(input('which element? etc.')))
             j=float(input('coefficient of J?'))
+            self.CoJ1+=j
             KK=float(Atoms.get(input('which element? etc.')))
             k=float(input('coefficient of K?'))
+            self.CoK1+=k
             L=float(Atoms.get(input('which element? etc.')))
             l=float(input('coefficient of L?'))
+            self.CoL1+=l
             M=float(Atoms.get(input('which element? etc.')))
             m=float(input('coefficient of M?'))
+            self.CoM1+=m
             NN=float(Atoms.get(input('which element? etc.')))
             n=float(input('coefficient of N?'))
+            self.CoN1+=n
             OO=float(Atoms.get(input('which element? etc.')))
             o=float(input('coefficient of O?'))
+            self.CoO1+=o
             PP=float(Atoms.get(input('which element? etc.')))
             p=float(input('coefficient of P?'))
+            self.CoP1+=p
             Q=float(Atoms.get(input('which element? etc.')))
             q=float(input('coefficient of Q?'))
+            self.CoQ1+=q
             R=float(Atoms.get(input('which element? etc.')))
             r=float(input('coefficient of R?'))
+            self.CoR1+=r
             SS=float(Atoms.get(input('which element? etc.')))
             s=float(input('coefficient of S?'))
+            self.CoS1+=s
             TT=float(Atoms.get(input('which element? etc.')))
             t=float(input('coefficient of T?'))
+            self.CoT1+=t
             UU=float(Atoms.get(input('which element? etc.')))
             u=float(input('coefficient of U?'))
+            self.CoU1+=u
             VV=float(Atoms.get(input('which element? etc.')))
             v=float(input('coefficient of V?'))
+            self.CoV1+=v
             WW=float(Atoms.get(input('which element? etc.')))
             w=float(input('coefficient of W?'))
+            self.CoW1+=w
             weight=(a*A)+(b*BB)+(c*CC)+(d*DD)+(e*E)+(f*FF)+(g*G)+(h*HH)+(i*II)+(j*J)+(k*KK)+(l*L)+(m*M)+(n*NN)+(o*OO)+(p*PP)+(q*Q)+(r*R)+(s*SS)+(t*TT)+(u*UU)+(v*VV)+(w*WW)
+            self.weight+=weight
             if A==H:
                 self.A1=hA()
             elif A==He:
@@ -71742,6 +75613,8 @@ class Mkule():
                 self.W1=frA()
             elif WW==Ra:
                 self.W1=raA()
+        
+        self.Vslf()
 ##electons
     def E(self):
         if self.B1 !=0:
@@ -72516,3 +76389,9549 @@ class Mkule():
                 return nil
     
 
+##Box Reaction
+class Box():
+    
+    def __init__(self):
+        self.sz=int(input('how big?'))
+        self.ox=int(input('x?'))
+        self.oy=int(input('y?'))
+        self.oz=int(input('z?'))
+
+        self.x=self.ox+self.sz
+        self.X=self.ox-self.sz
+        self.y=self.oy+self.sz
+        self.Y=self.oy-self.sz
+        self.z=self.oz+self.sz
+        self.Z=self.oz-self.sz
+
+        self.volume=(self.x-self.X)*(self.y-self.Y)*(self.z-self.Z)
+        self.mv=0
+        self.emptyspace=0
+        self.tm=0
+        self.collisions=0
+        
+        
+        
+        
+
+        self.M0=0
+        self.M1=0
+        self.M2=0
+        self.M3=0
+        self.M4=0
+        self.M5=0
+        self.M6=0
+        self.M7=0
+        self.M8=0
+        self.M9=0
+        self.M10=0
+        self.M11=0
+        self.M12=0
+        self.M13=0
+        self.M14=0
+        self.M15=0
+        self.M16=0
+        self.M17=0
+        self.M18=0
+        self.M19=0
+        self.M20=0
+        self.M21=0
+        self.M22=0
+        self.M23=0
+        self.M24=0
+        self.M25=0
+        self.M26=0
+        self.M27=0
+        self.M28=0
+        self.M29=0
+        self.M30=0
+        self.M31=0
+        self.M32=0
+        self.M33=0
+        self.M34=0
+        self.M35=0
+        self.M36=0
+        self.M37=0
+        self.M38=0
+        self.M39=0
+        self.M40=0
+        self.M41=0
+        self.M42=0
+        self.M43=0
+        self.M44=0
+        self.M45=0
+        self.M46=0
+        self.M47=0
+        self.M48=0
+        self.M49=0
+        self.M50=0
+        self.M51=0
+        self.M52=0
+        self.M53=0
+        self.M54=0
+        self.M55=0
+        self.M56=0
+        self.M57=0
+        self.M58=0
+        self.M59=0
+        self.M60=0
+        self.M61=0
+        self.M62=0
+        self.M63=0
+        self.M64=0
+        self.M65=0
+        self.M66=0
+        self.M67=0
+        self.M68=0
+        self.M69=0
+        self.M70=0
+        self.M71=0
+        self.M72=0
+        self.M73=0
+        self.M74=0
+        self.M75=0
+        self.M76=0
+        self.M77=0
+        self.M78=0
+        self.M79=0
+        self.M80=0
+        self.M81=0
+        self.M82=0
+        self.M83=0
+        self.M84=0
+        self.M85=0
+        self.M86=0
+        self.M87=0
+        self.M88=0
+        self.M89=0
+        self.M90=0
+        self.M91=0
+        self.M92=0
+        self.M93=0
+        self.M94=0
+        self.M95=0
+        self.M96=0
+        self.M97=0
+        self.M98=0
+        self.M99=0
+        self.M100=0
+        self.M101=0
+        self.M102=0
+        self.M103=0
+        self.M104=0
+        self.M105=0
+        self.M106=0
+        self.M107=0
+        self.M108=0
+        self.M109=0
+        self.M110=0
+        self.M111=0
+        self.M112=0
+        self.M113=0
+        self.M114=0
+        self.M115=0
+        self.M116=0
+        self.M117=0
+        self.M118=0
+        self.M119=0
+        self.M120=0
+        self.M121=0
+        self.M122=0
+        self.M123=0
+        self.M124=0
+        self.M125=0
+        self.M126=0
+        self.M127=0
+        self.M128=0
+        self.M129=0
+        self.M130=0
+        self.M131=0
+        self.M132=0
+        self.M133=0
+        self.M134=0
+        self.M135=0
+        self.M136=0
+        self.M137=0
+        self.M138=0
+        self.M139=0
+        self.M140=0
+        self.M141=0
+        self.M142=0
+        self.M143=0
+        self.M144=0
+        self.M145=0
+        self.M146=0
+        self.M147=0
+        self.M148=0
+        self.M149=0
+        self.M150=0
+        self.M151=0
+        self.M152=0
+        self.M153=0
+        self.M154=0
+        self.M155=0
+        self.M156=0
+        self.M157=0
+        self.M158=0
+        self.M159=0
+        self.M160=0
+        self.M161=0
+        self.M162=0
+        self.M163=0
+        self.M164=0
+        self.M165=0
+        self.M166=0
+        self.M167=0
+        self.M168=0
+        self.M169=0
+        self.M170=0
+        self.M171=0
+        self.M172=0
+        self.M173=0
+        self.M174=0
+        self.M175=0
+        self.M176=0
+        self.M177=0
+        self.M178=0
+        self.M179=0
+        self.M180=0
+        self.M181=0
+        self.M182=0
+        self.M183=0
+        self.M184=0
+        self.M185=0
+        self.M186=0
+        self.M187=0
+        self.M188=0
+        self.M189=0
+        self.M190=0
+        self.M191=0
+        self.M192=0
+        self.M193=0
+        self.M194=0
+        self.M195=0
+        self.M196=0
+        self.M197=0
+        self.M198=0
+        self.M199=0
+        self.M200=0
+        self.M201=0
+        self.M202=0
+        self.M203=0
+        self.M204=0
+        self.M205=0
+        self.M206=0
+        self.M207=0
+        self.M208=0
+        self.M209=0
+        self.M210=0
+        self.M211=0
+        self.M212=0
+        self.M213=0
+        self.M214=0
+        self.M215=0
+        self.M216=0
+        self.M217=0
+        self.M218=0
+        self.M219=0
+        self.M220=0
+        self.M221=0
+        self.M222=0
+        self.M223=0
+        self.M224=0
+        self.M225=0
+        self.M226=0
+        self.M227=0
+        self.M228=0
+        self.M229=0
+        self.M230=0
+        self.M231=0
+        self.M232=0
+        self.M233=0
+        self.M234=0
+        self.M235=0
+        self.M236=0
+        self.M237=0
+        self.M238=0
+        self.M239=0
+        self.M240=0
+        self.M241=0
+        self.M242=0
+        self.M243=0
+        self.M244=0
+        self.M245=0
+        self.M246=0
+        self.M247=0
+        self.M248=0
+        self.M249=0
+        self.M250=0
+        self.M251=0
+        self.M252=0
+        self.M253=0
+        self.M254=0
+        self.M255=0
+        self.M256=0
+        self.M257=0
+        self.M258=0
+        self.M259=0
+        self.M260=0
+        self.M261=0
+        self.M262=0
+        self.M263=0
+        self.M264=0
+        self.M265=0
+        self.M266=0
+        self.M267=0
+        self.M268=0
+        self.M269=0
+        self.M270=0
+        self.M271=0
+        self.M272=0
+        self.M273=0
+        self.M274=0
+        self.M275=0
+        self.M276=0
+        self.M277=0
+        self.M278=0
+        self.M279=0
+        self.M280=0
+        self.M281=0
+        self.M282=0
+        self.M283=0
+        self.M284=0
+        self.M285=0
+        self.M286=0
+        self.M287=0
+        self.M288=0
+        self.M289=0
+        self.M290=0
+        self.M291=0
+        self.M292=0
+        self.M293=0
+        self.M294=0
+        self.M295=0
+        self.M296=0
+        self.M297=0
+        self.M298=0
+        self.M299=0
+        self.M300=0
+        self.M301=0
+        self.M302=0
+        self.M303=0
+        self.M304=0
+        self.M305=0
+        self.M306=0
+        self.M307=0
+        self.M308=0
+        self.M309=0
+        self.M310=0
+        self.M311=0
+        self.M312=0
+        self.M313=0
+        self.M314=0
+        self.M315=0
+        self.M316=0
+        self.M317=0
+        self.M318=0
+        self.M319=0
+        self.M320=0
+        self.M321=0
+        self.M322=0
+        self.M323=0
+        self.M324=0
+        self.M325=0
+        self.M326=0
+        self.M327=0
+        self.M328=0
+        self.M329=0
+        self.M330=0
+        self.M331=0
+        self.M332=0
+        self.M333=0
+        self.M334=0
+        self.M335=0
+        self.M336=0
+        self.M337=0
+        self.M338=0
+        self.M339=0
+        self.M340=0
+        self.M341=0
+        self.M342=0
+        self.M343=0
+        self.M344=0
+        self.M345=0
+        self.M346=0
+        self.M347=0
+        self.M348=0
+        self.M349=0
+        self.M350=0
+        self.M351=0
+        self.M352=0
+        self.M353=0
+        self.M354=0
+        self.M355=0
+        self.M356=0
+        self.M357=0
+        self.M358=0
+        self.M359=0
+        self.M360=0
+        self.M361=0
+        self.M362=0
+        self.M363=0
+        self.M364=0
+        self.M365=0
+        self.M366=0
+        self.M367=0
+        self.M368=0
+        self.M369=0
+        self.M370=0
+        self.M371=0
+        self.M372=0
+        self.M373=0
+        self.M374=0
+        self.M375=0
+        self.M376=0
+        self.M377=0
+        self.M378=0
+        self.M379=0
+        self.M380=0
+        self.M381=0
+        self.M382=0
+        self.M383=0
+        self.M384=0
+        self.M385=0
+        self.M386=0
+        self.M387=0
+        self.M388=0
+        self.M389=0
+        self.M390=0
+        self.M391=0
+        self.M392=0
+        self.M393=0
+        self.M394=0
+        self.M395=0
+        self.M396=0
+        self.M397=0
+        self.M398=0
+        self.M399=0
+        self.M400=0
+        self.M401=0
+        self.M402=0
+        self.M403=0
+        self.M404=0
+        self.M405=0
+        self.M406=0
+        self.M407=0
+        self.M408=0
+        self.M409=0
+        self.M410=0
+        self.M411=0
+        self.M412=0
+        self.M413=0
+        self.M414=0
+        self.M415=0
+        self.M416=0
+        self.M417=0
+        self.M418=0
+        self.M419=0
+        self.M420=0
+        self.M421=0
+        self.M422=0
+        self.M423=0
+        self.M424=0
+        self.M425=0
+        self.M426=0
+        self.M427=0
+        self.M428=0
+        self.M429=0
+        self.M430=0
+        self.M431=0
+        self.M432=0
+        self.M433=0
+        self.M434=0
+        self.M435=0
+        self.M436=0
+        self.M437=0
+        self.M438=0
+        self.M439=0
+        self.M440=0
+        self.M441=0
+        self.M442=0
+        self.M443=0
+        self.M444=0
+        self.M445=0
+        self.M446=0
+        self.M447=0
+        self.M448=0
+        self.M449=0
+        self.M450=0
+        self.M451=0
+        self.M452=0
+        self.M453=0
+        self.M454=0
+        self.M455=0
+        self.M456=0
+        self.M457=0
+        self.M458=0
+        self.M459=0
+        self.M460=0
+        self.M461=0
+        self.M462=0
+        self.M463=0
+        self.M464=0
+        self.M465=0
+        self.M466=0
+        self.M467=0
+        self.M468=0
+        self.M469=0
+        self.M470=0
+        self.M471=0
+        self.M472=0
+        self.M473=0
+        self.M474=0
+        self.M475=0
+        self.M476=0
+        self.M477=0
+        self.M478=0
+        self.M479=0
+        self.M480=0
+        self.M481=0
+        self.M482=0
+        self.M483=0
+        self.M484=0
+        self.M485=0
+        self.M486=0
+        self.M487=0
+        self.M488=0
+        self.M489=0
+        self.M490=0
+        self.M491=0
+        self.M492=0
+        self.M493=0
+        self.M494=0
+        self.M495=0
+        self.M496=0
+        self.M497=0
+        self.M498=0
+        self.M499=0
+        self.M500=0
+        self.M501=0
+        self.M502=0
+        self.M503=0
+        self.M504=0
+        self.M505=0
+        self.M506=0
+        self.M507=0
+        self.M508=0
+        self.M509=0
+        self.M510=0
+        self.M511=0
+        self.M512=0
+        self.M513=0
+        self.M514=0
+        self.M515=0
+        self.M516=0
+        self.M517=0
+        self.M518=0
+        self.M519=0
+        self.M520=0
+        self.M521=0
+        self.M522=0
+        self.M523=0
+        self.M524=0
+        self.M525=0
+        self.M526=0
+        self.M527=0
+        self.M528=0
+        self.M529=0
+        self.M530=0
+        self.M531=0
+        self.M532=0
+        self.M533=0
+        self.M534=0
+        self.M535=0
+        self.M536=0
+        self.M537=0
+        self.M538=0
+        self.M539=0
+        self.M540=0
+        self.M541=0
+        self.M542=0
+        self.M543=0
+        self.M544=0
+        self.M545=0
+        self.M546=0
+        self.M547=0
+        self.M548=0
+        self.M549=0
+        self.M550=0
+        self.M551=0
+        self.M552=0
+        self.M553=0
+        self.M554=0
+        self.M555=0
+        self.M556=0
+        self.M557=0
+        self.M558=0
+        self.M559=0
+        self.M560=0
+        self.M561=0
+        self.M562=0
+        self.M563=0
+        self.M564=0
+        self.M565=0
+        self.M566=0
+        self.M567=0
+        self.M568=0
+        self.M569=0
+        self.M570=0
+        self.M571=0
+        self.M572=0
+        self.M573=0
+        self.M574=0
+        self.M575=0
+        self.M576=0
+        self.M577=0
+        self.M578=0
+        self.M579=0
+        self.M580=0
+        self.M581=0
+        self.M582=0
+        self.M583=0
+        self.M584=0
+        self.M585=0
+        self.M586=0
+        self.M587=0
+        self.M588=0
+        self.M589=0
+        self.M590=0
+        self.M591=0
+        self.M592=0
+        self.M593=0
+        self.M594=0
+        self.M595=0
+        self.M596=0
+        self.M597=0
+        self.M598=0
+        self.M599=0
+        self.M600=0
+        self.M601=0
+        self.M602=0
+        self.M603=0
+        self.M604=0
+        self.M605=0
+        self.M606=0
+        self.M607=0
+        self.M608=0
+        self.M609=0
+        self.M610=0
+        self.M611=0
+        self.M612=0
+        self.M613=0
+        self.M614=0
+        self.M615=0
+        self.M616=0
+        self.M617=0
+        self.M618=0
+        self.M619=0
+        self.M620=0
+        self.M621=0
+        self.M622=0
+        self.M623=0
+        self.M624=0
+        self.M625=0
+        self.M626=0
+        self.M627=0
+        self.M628=0
+        self.M629=0
+        self.M630=0
+        self.M631=0
+        self.M632=0
+        self.M633=0
+        self.M634=0
+        self.M635=0
+        self.M636=0
+        self.M637=0
+        self.M638=0
+        self.M639=0
+        self.M640=0
+        self.M641=0
+        self.M642=0
+        self.M643=0
+        self.M644=0
+        self.M645=0
+        self.M646=0
+        self.M647=0
+        self.M648=0
+        self.M649=0
+        self.M650=0
+        self.M651=0
+        self.M652=0
+        self.M653=0
+        self.M654=0
+        self.M655=0
+        self.M656=0
+        self.M657=0
+        self.M658=0
+        self.M659=0
+        self.M660=0
+        self.M661=0
+        self.M662=0
+        self.M663=0
+        self.M664=0
+        self.M665=0
+        self.M666=0
+        self.M667=0
+        self.M668=0
+        self.M669=0
+        self.M670=0
+        self.M671=0
+        self.M672=0
+        self.M673=0
+        self.M674=0
+        self.M675=0
+        self.M676=0
+        self.M677=0
+        self.M678=0
+        self.M679=0
+        self.M680=0
+        self.M681=0
+        self.M682=0
+        self.M683=0
+        self.M684=0
+        self.M685=0
+        self.M686=0
+        self.M687=0
+        self.M688=0
+        self.M689=0
+        self.M690=0
+        self.M691=0
+        self.M692=0
+        self.M693=0
+        self.M694=0
+        self.M695=0
+        self.M696=0
+        self.M697=0
+        self.M698=0
+        self.M699=0
+        self.M700=0
+        self.M701=0
+        self.M702=0
+        self.M703=0
+        self.M704=0
+        self.M705=0
+        self.M706=0
+        self.M707=0
+        self.M708=0
+        self.M709=0
+        self.M710=0
+        self.M711=0
+        self.M712=0
+        self.M713=0
+        self.M714=0
+        self.M715=0
+        self.M716=0
+        self.M717=0
+        self.M718=0
+        self.M719=0
+        self.M720=0
+        self.M721=0
+        self.M722=0
+        self.M723=0
+        self.M724=0
+        self.M725=0
+        self.M726=0
+        self.M727=0
+        self.M728=0
+        self.M729=0
+        self.M730=0
+        self.M731=0
+        self.M732=0
+        self.M733=0
+        self.M734=0
+        self.M735=0
+        self.M736=0
+        self.M737=0
+        self.M738=0
+        self.M739=0
+        self.M740=0
+        self.M741=0
+        self.M742=0
+        self.M743=0
+        self.M744=0
+        self.M745=0
+        self.M746=0
+        self.M747=0
+        self.M748=0
+        self.M749=0
+        self.M750=0
+        self.M751=0
+        self.M752=0
+        self.M753=0
+        self.M754=0
+        self.M755=0
+        self.M756=0
+        self.M757=0
+        self.M758=0
+        self.M759=0
+        self.M760=0
+        self.M761=0
+        self.M762=0
+        self.M763=0
+        self.M764=0
+        self.M765=0
+        self.M766=0
+        self.M767=0
+        self.M768=0
+        self.M769=0
+        self.M770=0
+        self.M771=0
+        self.M772=0
+        self.M773=0
+        self.M774=0
+        self.M775=0
+        self.M776=0
+        self.M777=0
+        self.M778=0
+        self.M779=0
+        self.M780=0
+        self.M781=0
+        self.M782=0
+        self.M783=0
+        self.M784=0
+        self.M785=0
+        self.M786=0
+        self.M787=0
+        self.M788=0
+        self.M789=0
+        self.M790=0
+        self.M791=0
+        self.M792=0
+        self.M793=0
+        self.M794=0
+        self.M795=0
+        self.M796=0
+        self.M797=0
+        self.M798=0
+        self.M799=0
+        self.M800=0
+        self.M801=0
+        self.M802=0
+        self.M803=0
+        self.M804=0
+        self.M805=0
+        self.M806=0
+        self.M807=0
+        self.M808=0
+        self.M809=0
+        self.M810=0
+        self.M811=0
+        self.M812=0
+        self.M813=0
+        self.M814=0
+        self.M815=0
+        self.M816=0
+        self.M817=0
+        self.M818=0
+        self.M819=0
+        self.M820=0
+        self.M821=0
+        self.M822=0
+        self.M823=0
+        self.M824=0
+        self.M825=0
+        self.M826=0
+        self.M827=0
+        self.M828=0
+        self.M829=0
+        self.M830=0
+        self.M831=0
+        self.M832=0
+        self.M833=0
+        self.M834=0
+        self.M835=0
+        self.M836=0
+        self.M837=0
+        self.M838=0
+        self.M839=0
+        self.M840=0
+        self.M841=0
+        self.M842=0
+        self.M843=0
+        self.M844=0
+        self.M845=0
+        self.M846=0
+        self.M847=0
+        self.M848=0
+        self.M849=0
+        self.M850=0
+        self.M851=0
+        self.M852=0
+        self.M853=0
+        self.M854=0
+        self.M855=0
+        self.M856=0
+        self.M857=0
+        self.M858=0
+        self.M859=0
+        self.M860=0
+        self.M861=0
+        self.M862=0
+        self.M863=0
+        self.M864=0
+        self.M865=0
+        self.M866=0
+        self.M867=0
+        self.M868=0
+        self.M869=0
+        self.M870=0
+        self.M871=0
+        self.M872=0
+        self.M873=0
+        self.M874=0
+        self.M875=0
+        self.M876=0
+        self.M877=0
+        self.M878=0
+        self.M879=0
+        self.M880=0
+        self.M881=0
+        self.M882=0
+        self.M883=0
+        self.M884=0
+        self.M885=0
+        self.M886=0
+        self.M887=0
+        self.M888=0
+        self.M889=0
+        self.M890=0
+        self.M891=0
+        self.M892=0
+        self.M893=0
+        self.M894=0
+        self.M895=0
+        self.M896=0
+        self.M897=0
+        self.M898=0
+        self.M899=0
+        self.M900=0
+        self.M901=0
+        self.M902=0
+        self.M903=0
+        self.M904=0
+        self.M905=0
+        self.M906=0
+        self.M907=0
+        self.M908=0
+        self.M909=0
+        self.M910=0
+        self.M911=0
+        self.M912=0
+        self.M913=0
+        self.M914=0
+        self.M915=0
+        self.M916=0
+        self.M917=0
+        self.M918=0
+        self.M919=0
+        self.M920=0
+        self.M921=0
+        self.M922=0
+        self.M923=0
+        self.M924=0
+        self.M925=0
+        self.M926=0
+        self.M927=0
+        self.M928=0
+        self.M929=0
+        self.M930=0
+        self.M931=0
+        self.M932=0
+        self.M933=0
+        self.M934=0
+        self.M935=0
+        self.M936=0
+        self.M937=0
+        self.M938=0
+        self.M939=0
+        self.M940=0
+        self.M941=0
+        self.M942=0
+        self.M943=0
+        self.M944=0
+        self.M945=0
+        self.M946=0
+        self.M947=0
+        self.M948=0
+        self.M949=0
+        self.M950=0
+        self.M951=0
+        self.M952=0
+        self.M953=0
+        self.M954=0
+        self.M955=0
+        self.M956=0
+        self.M957=0
+        self.M958=0
+        self.M959=0
+        self.M960=0
+        self.M961=0
+        self.M962=0
+        self.M963=0
+        self.M964=0
+        self.M965=0
+        self.M966=0
+        self.M967=0
+        self.M968=0
+        self.M969=0
+        self.M970=0
+        self.M971=0
+        self.M972=0
+        self.M973=0
+        self.M974=0
+        self.M975=0
+        self.M976=0
+        self.M977=0
+        self.M978=0
+        self.M979=0
+        self.M980=0
+        self.M981=0
+        self.M982=0
+        self.M983=0
+        self.M984=0
+        self.M985=0
+        self.M986=0
+        self.M987=0
+        self.M988=0
+        self.M989=0
+        self.M990=0
+        self.M991=0
+        self.M992=0
+        self.M993=0
+        self.M994=0
+        self.M995=0
+        self.M996=0
+        self.M997=0
+        self.M998=0
+        self.M999=0
+        self.M1000=0
+        self.species=0
+        self.procucts=[]
+        self.reactants=[]
+    def collisions(self):
+        import random
+        ##1
+        if self.M1!=0:
+            if self.M0.x==self.M1.x:
+                self.collisions+=1
+                if random.random()<0.5:
+                    self.M0.x.update(x=self.M0.x.get('x')+1)
+                    self.M1.x.update(x=self.M1.x.get('x')-1)
+                    self.M0.x.update(y=self.M0.x.get('y')+1)
+                    self.M1.x.update(y=self.M1.x.get('y')-1)
+                    self.M0.x.update(z=self.M0.x.get('z')+1)
+                    self.M1.x.update(z=self.M1.x.get('z')-1)
+                elif random.random()>0.5:
+                    self.M0.x.update(x=self.M0.x.get('x')-1)
+                    self.M1.x.update(x=self.M1.x.get('x')+1)
+                    self.M0.x.update(y=self.M0.x.get('y')-1)
+                    self.M1.x.update(y=self.M1.x.get('y')+1)
+                    self.M0.x.update(z=self.M0.x.get('z')-1)
+                    self.M1.x.update(z=self.M1.x.get('z')+1)
+                        
+##2
+                    ##
+            
+                
+    def Es(self):
+        self.emptyspace+=self.volume-(self.mv*av)
+            
+    def fill(self):
+        x=int(input('how many different molecules?'))
+        self.species+=x
+        if x > 0 :
+            self.M0 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M0.amnt+=amnt
+        if x > 1 :
+            self.M1 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M1.amnt+=amnt
+        if x > 2 :
+            self.M2 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M2.amnt+=amnt
+        if x > 3 :
+            self.M3 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M3.amnt+=amnt
+        if x > 4 :
+            self.M4 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M4.amnt+=amnt
+        if x > 5 :
+            self.M5 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M5.amnt+=amnt
+        if x > 6 :
+            self.M6 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M6.amnt+=amnt
+        if x > 7 :
+            self.M7 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M7.amnt+=amnt
+        if x > 8 :
+            self.M8 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M8.amnt+=amnt
+        if x > 9 :
+            self.M9 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M9.amnt+=amnt
+        if x > 10 :
+            self.M10 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M10.amnt+=amnt
+        if x > 11 :
+            self.M11 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M11.amnt+=amnt
+        if x > 12 :
+            self.M12 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M12.amnt+=amnt
+        if x > 13 :
+            self.M13 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M13.amnt+=amnt
+        if x > 14 :
+            self.M14 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M14.amnt+=amnt
+        if x > 15 :
+            self.M15 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M15.amnt+=amnt
+        if x > 16 :
+            self.M16 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M16.amnt+=amnt
+        if x > 17 :
+            self.M17 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M17.amnt+=amnt
+        if x > 18 :
+            self.M18 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M18.amnt+=amnt
+        if x > 19 :
+            self.M19 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M19.amnt+=amnt
+        if x > 20 :
+            self.M20 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M20.amnt+=amnt
+        if x > 21 :
+            self.M21 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M21.amnt+=amnt
+        if x > 22 :
+            self.M22 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M22.amnt+=amnt
+        if x > 23 :
+            self.M23 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M23.amnt+=amnt
+        if x > 24 :
+            self.M24 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M24.amnt+=amnt
+        if x > 25 :
+            self.M25 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M25.amnt+=amnt
+        if x > 26 :
+            self.M26 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M26.amnt+=amnt
+        if x > 27 :
+            self.M27 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M27.amnt+=amnt
+        if x > 28 :
+            self.M28 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M28.amnt+=amnt
+        if x > 29 :
+            self.M29 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M29.amnt+=amnt
+        if x > 30 :
+            self.M30 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M30.amnt+=amnt
+        if x > 31 :
+            self.M31 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M31.amnt+=amnt
+        if x > 32 :
+            self.M32 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M32.amnt+=amnt
+        if x > 33 :
+            self.M33 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M33.amnt+=amnt
+        if x > 34 :
+            self.M34 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M34.amnt+=amnt
+        if x > 35 :
+            self.M35 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M35.amnt+=amnt
+        if x > 36 :
+            self.M36 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M36.amnt+=amnt
+        if x > 37 :
+            self.M37 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M37.amnt+=amnt
+        if x > 38 :
+            self.M38 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M38.amnt+=amnt
+        if x > 39 :
+            self.M39 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M39.amnt+=amnt
+        if x > 40 :
+            self.M40 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M40.amnt+=amnt
+        if x > 41 :
+            self.M41 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M41.amnt+=amnt
+        if x > 42 :
+            self.M42 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M42.amnt+=amnt
+        if x > 43 :
+            self.M43 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M43.amnt+=amnt
+        if x > 44 :
+            self.M44 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M44.amnt+=amnt
+        if x > 45 :
+            self.M45 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M45.amnt+=amnt
+        if x > 46 :
+            self.M46 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M46.amnt+=amnt
+        if x > 47 :
+            self.M47 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M47.amnt+=amnt
+        if x > 48 :
+            self.M48 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M48.amnt+=amnt
+        if x > 49 :
+            self.M49 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M49.amnt+=amnt
+        if x > 50 :
+            self.M50 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M50.amnt+=amnt
+        if x > 51 :
+            self.M51 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M51.amnt+=amnt
+        if x > 52 :
+            self.M52 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M52.amnt+=amnt
+        if x > 53 :
+            self.M53 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M53.amnt+=amnt
+        if x > 54 :
+            self.M54 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M54.amnt+=amnt
+        if x > 55 :
+            self.M55 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M55.amnt+=amnt
+        if x > 56 :
+            self.M56 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M56.amnt+=amnt
+        if x > 57 :
+            self.M57 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M57.amnt+=amnt
+        if x > 58 :
+            self.M58 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M58.amnt+=amnt
+        if x > 59 :
+            self.M59 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M59.amnt+=amnt
+        if x > 60 :
+            self.M60 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M60.amnt+=amnt
+        if x > 61 :
+            self.M61 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M61.amnt+=amnt
+        if x > 62 :
+            self.M62 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M62.amnt+=amnt
+        if x > 63 :
+            self.M63 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M63.amnt+=amnt
+        if x > 64 :
+            self.M64 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M64.amnt+=amnt
+        if x > 65 :
+            self.M65 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M65.amnt+=amnt
+        if x > 66 :
+            self.M66 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M66.amnt+=amnt
+        if x > 67 :
+            self.M67 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M67.amnt+=amnt
+        if x > 68 :
+            self.M68 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M68.amnt+=amnt
+        if x > 69 :
+            self.M69 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M69.amnt+=amnt
+        if x > 70 :
+            self.M70 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M70.amnt+=amnt
+        if x > 71 :
+            self.M71 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M71.amnt+=amnt
+        if x > 72 :
+            self.M72 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M72.amnt+=amnt
+        if x > 73 :
+            self.M73 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M73.amnt+=amnt
+        if x > 74 :
+            self.M74 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M74.amnt+=amnt
+        if x > 75 :
+            self.M75 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M75.amnt+=amnt
+        if x > 76 :
+            self.M76 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M76.amnt+=amnt
+        if x > 77 :
+            self.M77 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M77.amnt+=amnt
+        if x > 78 :
+            self.M78 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M78.amnt+=amnt
+        if x > 79 :
+            self.M79 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M79.amnt+=amnt
+        if x > 80 :
+            self.M80 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M80.amnt+=amnt
+        if x > 81 :
+            self.M81 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M81.amnt+=amnt
+        if x > 82 :
+            self.M82 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M82.amnt+=amnt
+        if x > 83 :
+            self.M83 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M83.amnt+=amnt
+        if x > 84 :
+            self.M84 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M84.amnt+=amnt
+        if x > 85 :
+            self.M85 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M85.amnt+=amnt
+        if x > 86 :
+            self.M86 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M86.amnt+=amnt
+        if x > 87 :
+            self.M87 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M87.amnt+=amnt
+        if x > 88 :
+            self.M88 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M88.amnt+=amnt
+        if x > 89 :
+            self.M89 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M89.amnt+=amnt
+        if x > 90 :
+            self.M90 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M90.amnt+=amnt
+        if x > 91 :
+            self.M91 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M91.amnt+=amnt
+        if x > 92 :
+            self.M92 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M92.amnt+=amnt
+        if x > 93 :
+            self.M93 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M93.amnt+=amnt
+        if x > 94 :
+            self.M94 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M94.amnt+=amnt
+        if x > 95 :
+            self.M95 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M95.amnt+=amnt
+        if x > 96 :
+            self.M96 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M96.amnt+=amnt
+        if x > 97 :
+            self.M97 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M97.amnt+=amnt
+        if x > 98 :
+            self.M98 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M98.amnt+=amnt
+        if x > 99 :
+            self.M99 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M99.amnt+=amnt
+        if x > 100 :
+            self.M100 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M100.amnt+=amnt
+        if x > 101 :
+            self.M101 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M101.amnt+=amnt
+        if x > 102 :
+            self.M102 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M102.amnt+=amnt
+        if x > 103 :
+            self.M103 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M103.amnt+=amnt
+        if x > 104 :
+            self.M104 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M104.amnt+=amnt
+        if x > 105 :
+            self.M105 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M105.amnt+=amnt
+        if x > 106 :
+            self.M106 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M106.amnt+=amnt
+        if x > 107 :
+            self.M107 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M107.amnt+=amnt
+        if x > 108 :
+            self.M108 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M108.amnt+=amnt
+        if x > 109 :
+            self.M109 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M109.amnt+=amnt
+        if x > 110 :
+            self.M110 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M110.amnt+=amnt
+        if x > 111 :
+            self.M111 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M111.amnt+=amnt
+        if x > 112 :
+            self.M112 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M112.amnt+=amnt
+        if x > 113 :
+            self.M113 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M113.amnt+=amnt
+        if x > 114 :
+            self.M114 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M114.amnt+=amnt
+        if x > 115 :
+            self.M115 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M115.amnt+=amnt
+        if x > 116 :
+            self.M116 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M116.amnt+=amnt
+        if x > 117 :
+            self.M117 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M117.amnt+=amnt
+        if x > 118 :
+            self.M118 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M118.amnt+=amnt
+        if x > 119 :
+            self.M119 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M119.amnt+=amnt
+        if x > 120 :
+            self.M120 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M120.amnt+=amnt
+        if x > 121 :
+            self.M121 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M121.amnt+=amnt
+        if x > 122 :
+            self.M122 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M122.amnt+=amnt
+        if x > 123 :
+            self.M123 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M123.amnt+=amnt
+        if x > 124 :
+            self.M124 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M124.amnt+=amnt
+        if x > 125 :
+            self.M125 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M125.amnt+=amnt
+        if x > 126 :
+            self.M126 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M126.amnt+=amnt
+        if x > 127 :
+            self.M127 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M127.amnt+=amnt
+        if x > 128 :
+            self.M128 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M128.amnt+=amnt
+        if x > 129 :
+            self.M129 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M129.amnt+=amnt
+        if x > 130 :
+            self.M130 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M130.amnt+=amnt
+        if x > 131 :
+            self.M131 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M131.amnt+=amnt
+        if x > 132 :
+            self.M132 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M132.amnt+=amnt
+        if x > 133 :
+            self.M133 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M133.amnt+=amnt
+        if x > 134 :
+            self.M134 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M134.amnt+=amnt
+        if x > 135 :
+            self.M135 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M135.amnt+=amnt
+        if x > 136 :
+            self.M136 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M136.amnt+=amnt
+        if x > 137 :
+            self.M137 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M137.amnt+=amnt
+        if x > 138 :
+            self.M138 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M138.amnt+=amnt
+        if x > 139 :
+            self.M139 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M139.amnt+=amnt
+        if x > 140 :
+            self.M140 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M140.amnt+=amnt
+        if x > 141 :
+            self.M141 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M141.amnt+=amnt
+        if x > 142 :
+            self.M142 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M142.amnt+=amnt
+        if x > 143 :
+            self.M143 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M143.amnt+=amnt
+        if x > 144 :
+            self.M144 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M144.amnt+=amnt
+        if x > 145 :
+            self.M145 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M145.amnt+=amnt
+        if x > 146 :
+            self.M146 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M146.amnt+=amnt
+        if x > 147 :
+            self.M147 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M147.amnt+=amnt
+        if x > 148 :
+            self.M148 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M148.amnt+=amnt
+        if x > 149 :
+            self.M149 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M149.amnt+=amnt
+        if x > 150 :
+            self.M150 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M150.amnt+=amnt
+        if x > 151 :
+            self.M151 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M151.amnt+=amnt
+        if x > 152 :
+            self.M152 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M152.amnt+=amnt
+        if x > 153 :
+            self.M153 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M153.amnt+=amnt
+        if x > 154 :
+            self.M154 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M154.amnt+=amnt
+        if x > 155 :
+            self.M155 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M155.amnt+=amnt
+        if x > 156 :
+            self.M156 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M156.amnt+=amnt
+        if x > 157 :
+            self.M157 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M157.amnt+=amnt
+        if x > 158 :
+            self.M158 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M158.amnt+=amnt
+        if x > 159 :
+            self.M159 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M159.amnt+=amnt
+        if x > 160 :
+            self.M160 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M160.amnt+=amnt
+        if x > 161 :
+            self.M161 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M161.amnt+=amnt
+        if x > 162 :
+            self.M162 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M162.amnt+=amnt
+        if x > 163 :
+            self.M163 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M163.amnt+=amnt
+        if x > 164 :
+            self.M164 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M164.amnt+=amnt
+        if x > 165 :
+            self.M165 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M165.amnt+=amnt
+        if x > 166 :
+            self.M166 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M166.amnt+=amnt
+        if x > 167 :
+            self.M167 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M167.amnt+=amnt
+        if x > 168 :
+            self.M168 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M168.amnt+=amnt
+        if x > 169 :
+            self.M169 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M169.amnt+=amnt
+        if x > 170 :
+            self.M170 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M170.amnt+=amnt
+        if x > 171 :
+            self.M171 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M171.amnt+=amnt
+        if x > 172 :
+            self.M172 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M172.amnt+=amnt
+        if x > 173 :
+            self.M173 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M173.amnt+=amnt
+        if x > 174 :
+            self.M174 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M174.amnt+=amnt
+        if x > 175 :
+            self.M175 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M175.amnt+=amnt
+        if x > 176 :
+            self.M176 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M176.amnt+=amnt
+        if x > 177 :
+            self.M177 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M177.amnt+=amnt
+        if x > 178 :
+            self.M178 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M178.amnt+=amnt
+        if x > 179 :
+            self.M179 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M179.amnt+=amnt
+        if x > 180 :
+            self.M180 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M180.amnt+=amnt
+        if x > 181 :
+            self.M181 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M181.amnt+=amnt
+        if x > 182 :
+            self.M182 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M182.amnt+=amnt
+        if x > 183 :
+            self.M183 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M183.amnt+=amnt
+        if x > 184 :
+            self.M184 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M184.amnt+=amnt
+        if x > 185 :
+            self.M185 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M185.amnt+=amnt
+        if x > 186 :
+            self.M186 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M186.amnt+=amnt
+        if x > 187 :
+            self.M187 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M187.amnt+=amnt
+        if x > 188 :
+            self.M188 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M188.amnt+=amnt
+        if x > 189 :
+            self.M189 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M189.amnt+=amnt
+        if x > 190 :
+            self.M190 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M190.amnt+=amnt
+        if x > 191 :
+            self.M191 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M191.amnt+=amnt
+        if x > 192 :
+            self.M192 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M192.amnt+=amnt
+        if x > 193 :
+            self.M193 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M193.amnt+=amnt
+        if x > 194 :
+            self.M194 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M194.amnt+=amnt
+        if x > 195 :
+            self.M195 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M195.amnt+=amnt
+        if x > 196 :
+            self.M196 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M196.amnt+=amnt
+        if x > 197 :
+            self.M197 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M197.amnt+=amnt
+        if x > 198 :
+            self.M198 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M198.amnt+=amnt
+        if x > 199 :
+            self.M199 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M199.amnt+=amnt
+        if x > 200 :
+            self.M200 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M200.amnt+=amnt
+        if x > 201 :
+            self.M201 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M201.amnt+=amnt
+        if x > 202 :
+            self.M202 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M202.amnt+=amnt
+        if x > 203 :
+            self.M203 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M203.amnt+=amnt
+        if x > 204 :
+            self.M204 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M204.amnt+=amnt
+        if x > 205 :
+            self.M205 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M205.amnt+=amnt
+        if x > 206 :
+            self.M206 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M206.amnt+=amnt
+        if x > 207 :
+            self.M207 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M207.amnt+=amnt
+        if x > 208 :
+            self.M208 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M208.amnt+=amnt
+        if x > 209 :
+            self.M209 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M209.amnt+=amnt
+        if x > 210 :
+            self.M210 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M210.amnt+=amnt
+        if x > 211 :
+            self.M211 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M211.amnt+=amnt
+        if x > 212 :
+            self.M212 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M212.amnt+=amnt
+        if x > 213 :
+            self.M213 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M213.amnt+=amnt
+        if x > 214 :
+            self.M214 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M214.amnt+=amnt
+        if x > 215 :
+            self.M215 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M215.amnt+=amnt
+        if x > 216 :
+            self.M216 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M216.amnt+=amnt
+        if x > 217 :
+            self.M217 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M217.amnt+=amnt
+        if x > 218 :
+            self.M218 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M218.amnt+=amnt
+        if x > 219 :
+            self.M219 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M219.amnt+=amnt
+        if x > 220 :
+            self.M220 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M220.amnt+=amnt
+        if x > 221 :
+            self.M221 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M221.amnt+=amnt
+        if x > 222 :
+            self.M222 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M222.amnt+=amnt
+        if x > 223 :
+            self.M223 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M223.amnt+=amnt
+        if x > 224 :
+            self.M224 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M224.amnt+=amnt
+        if x > 225 :
+            self.M225 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M225.amnt+=amnt
+        if x > 226 :
+            self.M226 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M226.amnt+=amnt
+        if x > 227 :
+            self.M227 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M227.amnt+=amnt
+        if x > 228 :
+            self.M228 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M228.amnt+=amnt
+        if x > 229 :
+            self.M229 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M229.amnt+=amnt
+        if x > 230 :
+            self.M230 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M230.amnt+=amnt
+        if x > 231 :
+            self.M231 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M231.amnt+=amnt
+        if x > 232 :
+            self.M232 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M232.amnt+=amnt
+        if x > 233 :
+            self.M233 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M233.amnt+=amnt
+        if x > 234 :
+            self.M234 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M234.amnt+=amnt
+        if x > 235 :
+            self.M235 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M235.amnt+=amnt
+        if x > 236 :
+            self.M236 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M236.amnt+=amnt
+        if x > 237 :
+            self.M237 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M237.amnt+=amnt
+        if x > 238 :
+            self.M238 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M238.amnt+=amnt
+        if x > 239 :
+            self.M239 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M239.amnt+=amnt
+        if x > 240 :
+            self.M240 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M240.amnt+=amnt
+        if x > 241 :
+            self.M241 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M241.amnt+=amnt
+        if x > 242 :
+            self.M242 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M242.amnt+=amnt
+        if x > 243 :
+            self.M243 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M243.amnt+=amnt
+        if x > 244 :
+            self.M244 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M244.amnt+=amnt
+        if x > 245 :
+            self.M245 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M245.amnt+=amnt
+        if x > 246 :
+            self.M246 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M246.amnt+=amnt
+        if x > 247 :
+            self.M247 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M247.amnt+=amnt
+        if x > 248 :
+            self.M248 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M248.amnt+=amnt
+        if x > 249 :
+            self.M249 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M249.amnt+=amnt
+        if x > 250 :
+            self.M250 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M250.amnt+=amnt
+        if x > 251 :
+            self.M251 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M251.amnt+=amnt
+        if x > 252 :
+            self.M252 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M252.amnt+=amnt
+        if x > 253 :
+            self.M253 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M253.amnt+=amnt
+        if x > 254 :
+            self.M254 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M254.amnt+=amnt
+        if x > 255 :
+            self.M255 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M255.amnt+=amnt
+        if x > 256 :
+            self.M256 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M256.amnt+=amnt
+        if x > 257 :
+            self.M257 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M257.amnt+=amnt
+        if x > 258 :
+            self.M258 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M258.amnt+=amnt
+        if x > 259 :
+            self.M259 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M259.amnt+=amnt
+        if x > 260 :
+            self.M260 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M260.amnt+=amnt
+        if x > 261 :
+            self.M261 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M261.amnt+=amnt
+        if x > 262 :
+            self.M262 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M262.amnt+=amnt
+        if x > 263 :
+            self.M263 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M263.amnt+=amnt
+        if x > 264 :
+            self.M264 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M264.amnt+=amnt
+        if x > 265 :
+            self.M265 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M265.amnt+=amnt
+        if x > 266 :
+            self.M266 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M266.amnt+=amnt
+        if x > 267 :
+            self.M267 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M267.amnt+=amnt
+        if x > 268 :
+            self.M268 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M268.amnt+=amnt
+        if x > 269 :
+            self.M269 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M269.amnt+=amnt
+        if x > 270 :
+            self.M270 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M270.amnt+=amnt
+        if x > 271 :
+            self.M271 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M271.amnt+=amnt
+        if x > 272 :
+            self.M272 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M272.amnt+=amnt
+        if x > 273 :
+            self.M273 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M273.amnt+=amnt
+        if x > 274 :
+            self.M274 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M274.amnt+=amnt
+        if x > 275 :
+            self.M275 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M275.amnt+=amnt
+        if x > 276 :
+            self.M276 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M276.amnt+=amnt
+        if x > 277 :
+            self.M277 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M277.amnt+=amnt
+        if x > 278 :
+            self.M278 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M278.amnt+=amnt
+        if x > 279 :
+            self.M279 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M279.amnt+=amnt
+        if x > 280 :
+            self.M280 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M280.amnt+=amnt
+        if x > 281 :
+            self.M281 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M281.amnt+=amnt
+        if x > 282 :
+            self.M282 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M282.amnt+=amnt
+        if x > 283 :
+            self.M283 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M283.amnt+=amnt
+        if x > 284 :
+            self.M284 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M284.amnt+=amnt
+        if x > 285 :
+            self.M285 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M285.amnt+=amnt
+        if x > 286 :
+            self.M286 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M286.amnt+=amnt
+        if x > 287 :
+            self.M287 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M287.amnt+=amnt
+        if x > 288 :
+            self.M288 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M288.amnt+=amnt
+        if x > 289 :
+            self.M289 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M289.amnt+=amnt
+        if x > 290 :
+            self.M290 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M290.amnt+=amnt
+        if x > 291 :
+            self.M291 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M291.amnt+=amnt
+        if x > 292 :
+            self.M292 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M292.amnt+=amnt
+        if x > 293 :
+            self.M293 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M293.amnt+=amnt
+        if x > 294 :
+            self.M294 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M294.amnt+=amnt
+        if x > 295 :
+            self.M295 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M295.amnt+=amnt
+        if x > 296 :
+            self.M296 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M296.amnt+=amnt
+        if x > 297 :
+            self.M297 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M297.amnt+=amnt
+        if x > 298 :
+            self.M298 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M298.amnt+=amnt
+        if x > 299 :
+            self.M299 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M299.amnt+=amnt
+        if x > 300 :
+            self.M300 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M300.amnt+=amnt
+        if x > 301 :
+            self.M301 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M301.amnt+=amnt
+        if x > 302 :
+            self.M302 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M302.amnt+=amnt
+        if x > 303 :
+            self.M303 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M303.amnt+=amnt
+        if x > 304 :
+            self.M304 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M304.amnt+=amnt
+        if x > 305 :
+            self.M305 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M305.amnt+=amnt
+        if x > 306 :
+            self.M306 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M306.amnt+=amnt
+        if x > 307 :
+            self.M307 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M307.amnt+=amnt
+        if x > 308 :
+            self.M308 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M308.amnt+=amnt
+        if x > 309 :
+            self.M309 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M309.amnt+=amnt
+        if x > 310 :
+            self.M310 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M310.amnt+=amnt
+        if x > 311 :
+            self.M311 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M311.amnt+=amnt
+        if x > 312 :
+            self.M312 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M312.amnt+=amnt
+        if x > 313 :
+            self.M313 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M313.amnt+=amnt
+        if x > 314 :
+            self.M314 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M314.amnt+=amnt
+        if x > 315 :
+            self.M315 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M315.amnt+=amnt
+        if x > 316 :
+            self.M316 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M316.amnt+=amnt
+        if x > 317 :
+            self.M317 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M317.amnt+=amnt
+        if x > 318 :
+            self.M318 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M318.amnt+=amnt
+        if x > 319 :
+            self.M319 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M319.amnt+=amnt
+        if x > 320 :
+            self.M320 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M320.amnt+=amnt
+        if x > 321 :
+            self.M321 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M321.amnt+=amnt
+        if x > 322 :
+            self.M322 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M322.amnt+=amnt
+        if x > 323 :
+            self.M323 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M323.amnt+=amnt
+        if x > 324 :
+            self.M324 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M324.amnt+=amnt
+        if x > 325 :
+            self.M325 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M325.amnt+=amnt
+        if x > 326 :
+            self.M326 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M326.amnt+=amnt
+        if x > 327 :
+            self.M327 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M327.amnt+=amnt
+        if x > 328 :
+            self.M328 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M328.amnt+=amnt
+        if x > 329 :
+            self.M329 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M329.amnt+=amnt
+        if x > 330 :
+            self.M330 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M330.amnt+=amnt
+        if x > 331 :
+            self.M331 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M331.amnt+=amnt
+        if x > 332 :
+            self.M332 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M332.amnt+=amnt
+        if x > 333 :
+            self.M333 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M333.amnt+=amnt
+        if x > 334 :
+            self.M334 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M334.amnt+=amnt
+        if x > 335 :
+            self.M335 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M335.amnt+=amnt
+        if x > 336 :
+            self.M336 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M336.amnt+=amnt
+        if x > 337 :
+            self.M337 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M337.amnt+=amnt
+        if x > 338 :
+            self.M338 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M338.amnt+=amnt
+        if x > 339 :
+            self.M339 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M339.amnt+=amnt
+        if x > 340 :
+            self.M340 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M340.amnt+=amnt
+        if x > 341 :
+            self.M341 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M341.amnt+=amnt
+        if x > 342 :
+            self.M342 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M342.amnt+=amnt
+        if x > 343 :
+            self.M343 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M343.amnt+=amnt
+        if x > 344 :
+            self.M344 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M344.amnt+=amnt
+        if x > 345 :
+            self.M345 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M345.amnt+=amnt
+        if x > 346 :
+            self.M346 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M346.amnt+=amnt
+        if x > 347 :
+            self.M347 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M347.amnt+=amnt
+        if x > 348 :
+            self.M348 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M348.amnt+=amnt
+        if x > 349 :
+            self.M349 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M349.amnt+=amnt
+        if x > 350 :
+            self.M350 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M350.amnt+=amnt
+        if x > 351 :
+            self.M351 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M351.amnt+=amnt
+        if x > 352 :
+            self.M352 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M352.amnt+=amnt
+        if x > 353 :
+            self.M353 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M353.amnt+=amnt
+        if x > 354 :
+            self.M354 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M354.amnt+=amnt
+        if x > 355 :
+            self.M355 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M355.amnt+=amnt
+        if x > 356 :
+            self.M356 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M356.amnt+=amnt
+        if x > 357 :
+            self.M357 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M357.amnt+=amnt
+        if x > 358 :
+            self.M358 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M358.amnt+=amnt
+        if x > 359 :
+            self.M359 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M359.amnt+=amnt
+        if x > 360 :
+            self.M360 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M360.amnt+=amnt
+        if x > 361 :
+            self.M361 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M361.amnt+=amnt
+        if x > 362 :
+            self.M362 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M362.amnt+=amnt
+        if x > 363 :
+            self.M363 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M363.amnt+=amnt
+        if x > 364 :
+            self.M364 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M364.amnt+=amnt
+        if x > 365 :
+            self.M365 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M365.amnt+=amnt
+        if x > 366 :
+            self.M366 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M366.amnt+=amnt
+        if x > 367 :
+            self.M367 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M367.amnt+=amnt
+        if x > 368 :
+            self.M368 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M368.amnt+=amnt
+        if x > 369 :
+            self.M369 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M369.amnt+=amnt
+        if x > 370 :
+            self.M370 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M370.amnt+=amnt
+        if x > 371 :
+            self.M371 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M371.amnt+=amnt
+        if x > 372 :
+            self.M372 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M372.amnt+=amnt
+        if x > 373 :
+            self.M373 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M373.amnt+=amnt
+        if x > 374 :
+            self.M374 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M374.amnt+=amnt
+        if x > 375 :
+            self.M375 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M375.amnt+=amnt
+        if x > 376 :
+            self.M376 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M376.amnt+=amnt
+        if x > 377 :
+            self.M377 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M377.amnt+=amnt
+        if x > 378 :
+            self.M378 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M378.amnt+=amnt
+        if x > 379 :
+            self.M379 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M379.amnt+=amnt
+        if x > 380 :
+            self.M380 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M380.amnt+=amnt
+        if x > 381 :
+            self.M381 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M381.amnt+=amnt
+        if x > 382 :
+            self.M382 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M382.amnt+=amnt
+        if x > 383 :
+            self.M383 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M383.amnt+=amnt
+        if x > 384 :
+            self.M384 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M384.amnt+=amnt
+        if x > 385 :
+            self.M385 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M385.amnt+=amnt
+        if x > 386 :
+            self.M386 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M386.amnt+=amnt
+        if x > 387 :
+            self.M387 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M387.amnt+=amnt
+        if x > 388 :
+            self.M388 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M388.amnt+=amnt
+        if x > 389 :
+            self.M389 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M389.amnt+=amnt
+        if x > 390 :
+            self.M390 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M390.amnt+=amnt
+        if x > 391 :
+            self.M391 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M391.amnt+=amnt
+        if x > 392 :
+            self.M392 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M392.amnt+=amnt
+        if x > 393 :
+            self.M393 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M393.amnt+=amnt
+        if x > 394 :
+            self.M394 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M394.amnt+=amnt
+        if x > 395 :
+            self.M395 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M395.amnt+=amnt
+        if x > 396 :
+            self.M396 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M396.amnt+=amnt
+        if x > 397 :
+            self.M397 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M397.amnt+=amnt
+        if x > 398 :
+            self.M398 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M398.amnt+=amnt
+        if x > 399 :
+            self.M399 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M399.amnt+=amnt
+        if x > 400 :
+            self.M400 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M400.amnt+=amnt
+        if x > 401 :
+            self.M401 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M401.amnt+=amnt
+        if x > 402 :
+            self.M402 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M402.amnt+=amnt
+        if x > 403 :
+            self.M403 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M403.amnt+=amnt
+        if x > 404 :
+            self.M404 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M404.amnt+=amnt
+        if x > 405 :
+            self.M405 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M405.amnt+=amnt
+        if x > 406 :
+            self.M406 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M406.amnt+=amnt
+        if x > 407 :
+            self.M407 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M407.amnt+=amnt
+        if x > 408 :
+            self.M408 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M408.amnt+=amnt
+        if x > 409 :
+            self.M409 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M409.amnt+=amnt
+        if x > 410 :
+            self.M410 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M410.amnt+=amnt
+        if x > 411 :
+            self.M411 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M411.amnt+=amnt
+        if x > 412 :
+            self.M412 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M412.amnt+=amnt
+        if x > 413 :
+            self.M413 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M413.amnt+=amnt
+        if x > 414 :
+            self.M414 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M414.amnt+=amnt
+        if x > 415 :
+            self.M415 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M415.amnt+=amnt
+        if x > 416 :
+            self.M416 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M416.amnt+=amnt
+        if x > 417 :
+            self.M417 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M417.amnt+=amnt
+        if x > 418 :
+            self.M418 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M418.amnt+=amnt
+        if x > 419 :
+            self.M419 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M419.amnt+=amnt
+        if x > 420 :
+            self.M420 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M420.amnt+=amnt
+        if x > 421 :
+            self.M421 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M421.amnt+=amnt
+        if x > 422 :
+            self.M422 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M422.amnt+=amnt
+        if x > 423 :
+            self.M423 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M423.amnt+=amnt
+        if x > 424 :
+            self.M424 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M424.amnt+=amnt
+        if x > 425 :
+            self.M425 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M425.amnt+=amnt
+        if x > 426 :
+            self.M426 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M426.amnt+=amnt
+        if x > 427 :
+            self.M427 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M427.amnt+=amnt
+        if x > 428 :
+            self.M428 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M428.amnt+=amnt
+        if x > 429 :
+            self.M429 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M429.amnt+=amnt
+        if x > 430 :
+            self.M430 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M430.amnt+=amnt
+        if x > 431 :
+            self.M431 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M431.amnt+=amnt
+        if x > 432 :
+            self.M432 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M432.amnt+=amnt
+        if x > 433 :
+            self.M433 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M433.amnt+=amnt
+        if x > 434 :
+            self.M434 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M434.amnt+=amnt
+        if x > 435 :
+            self.M435 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M435.amnt+=amnt
+        if x > 436 :
+            self.M436 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M436.amnt+=amnt
+        if x > 437 :
+            self.M437 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M437.amnt+=amnt
+        if x > 438 :
+            self.M438 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M438.amnt+=amnt
+        if x > 439 :
+            self.M439 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M439.amnt+=amnt
+        if x > 440 :
+            self.M440 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M440.amnt+=amnt
+        if x > 441 :
+            self.M441 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M441.amnt+=amnt
+        if x > 442 :
+            self.M442 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M442.amnt+=amnt
+        if x > 443 :
+            self.M443 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M443.amnt+=amnt
+        if x > 444 :
+            self.M444 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M444.amnt+=amnt
+        if x > 445 :
+            self.M445 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M445.amnt+=amnt
+        if x > 446 :
+            self.M446 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M446.amnt+=amnt
+        if x > 447 :
+            self.M447 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M447.amnt+=amnt
+        if x > 448 :
+            self.M448 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M448.amnt+=amnt
+        if x > 449 :
+            self.M449 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M449.amnt+=amnt
+        if x > 450 :
+            self.M450 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M450.amnt+=amnt
+        if x > 451 :
+            self.M451 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M451.amnt+=amnt
+        if x > 452 :
+            self.M452 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M452.amnt+=amnt
+        if x > 453 :
+            self.M453 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M453.amnt+=amnt
+        if x > 454 :
+            self.M454 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M454.amnt+=amnt
+        if x > 455 :
+            self.M455 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M455.amnt+=amnt
+        if x > 456 :
+            self.M456 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M456.amnt+=amnt
+        if x > 457 :
+            self.M457 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M457.amnt+=amnt
+        if x > 458 :
+            self.M458 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M458.amnt+=amnt
+        if x > 459 :
+            self.M459 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M459.amnt+=amnt
+        if x > 460 :
+            self.M460 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M460.amnt+=amnt
+        if x > 461 :
+            self.M461 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M461.amnt+=amnt
+        if x > 462 :
+            self.M462 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M462.amnt+=amnt
+        if x > 463 :
+            self.M463 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M463.amnt+=amnt
+        if x > 464 :
+            self.M464 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M464.amnt+=amnt
+        if x > 465 :
+            self.M465 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M465.amnt+=amnt
+        if x > 466 :
+            self.M466 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M466.amnt+=amnt
+        if x > 467 :
+            self.M467 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M467.amnt+=amnt
+        if x > 468 :
+            self.M468 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M468.amnt+=amnt
+        if x > 469 :
+            self.M469 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M469.amnt+=amnt
+        if x > 470 :
+            self.M470 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M470.amnt+=amnt
+        if x > 471 :
+            self.M471 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M471.amnt+=amnt
+        if x > 472 :
+            self.M472 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M472.amnt+=amnt
+        if x > 473 :
+            self.M473 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M473.amnt+=amnt
+        if x > 474 :
+            self.M474 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M474.amnt+=amnt
+        if x > 475 :
+            self.M475 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M475.amnt+=amnt
+        if x > 476 :
+            self.M476 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M476.amnt+=amnt
+        if x > 477 :
+            self.M477 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M477.amnt+=amnt
+        if x > 478 :
+            self.M478 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M478.amnt+=amnt
+        if x > 479 :
+            self.M479 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M479.amnt+=amnt
+        if x > 480 :
+            self.M480 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M480.amnt+=amnt
+        if x > 481 :
+            self.M481 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M481.amnt+=amnt
+        if x > 482 :
+            self.M482 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M482.amnt+=amnt
+        if x > 483 :
+            self.M483 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M483.amnt+=amnt
+        if x > 484 :
+            self.M484 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M484.amnt+=amnt
+        if x > 485 :
+            self.M485 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M485.amnt+=amnt
+        if x > 486 :
+            self.M486 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M486.amnt+=amnt
+        if x > 487 :
+            self.M487 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M487.amnt+=amnt
+        if x > 488 :
+            self.M488 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M488.amnt+=amnt
+        if x > 489 :
+            self.M489 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M489.amnt+=amnt
+        if x > 490 :
+            self.M490 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M490.amnt+=amnt
+        if x > 491 :
+            self.M491 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M491.amnt+=amnt
+        if x > 492 :
+            self.M492 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M492.amnt+=amnt
+        if x > 493 :
+            self.M493 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M493.amnt+=amnt
+        if x > 494 :
+            self.M494 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M494.amnt+=amnt
+        if x > 495 :
+            self.M495 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M495.amnt+=amnt
+        if x > 496 :
+            self.M496 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M496.amnt+=amnt
+        if x > 497 :
+            self.M497 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M497.amnt+=amnt
+        if x > 498 :
+            self.M498 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M498.amnt+=amnt
+        if x > 499 :
+            self.M499 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M499.amnt+=amnt
+        if x > 500 :
+            self.M500 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M500.amnt+=amnt
+        if x > 501 :
+            self.M501 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M501.amnt+=amnt
+        if x > 502 :
+            self.M502 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M502.amnt+=amnt
+        if x > 503 :
+            self.M503 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M503.amnt+=amnt
+        if x > 504 :
+            self.M504 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M504.amnt+=amnt
+        if x > 505 :
+            self.M505 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M505.amnt+=amnt
+        if x > 506 :
+            self.M506 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M506.amnt+=amnt
+        if x > 507 :
+            self.M507 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M507.amnt+=amnt
+        if x > 508 :
+            self.M508 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M508.amnt+=amnt
+        if x > 509 :
+            self.M509 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M509.amnt+=amnt
+        if x > 510 :
+            self.M510 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M510.amnt+=amnt
+        if x > 511 :
+            self.M511 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M511.amnt+=amnt
+        if x > 512 :
+            self.M512 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M512.amnt+=amnt
+        if x > 513 :
+            self.M513 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M513.amnt+=amnt
+        if x > 514 :
+            self.M514 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M514.amnt+=amnt
+        if x > 515 :
+            self.M515 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M515.amnt+=amnt
+        if x > 516 :
+            self.M516 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M516.amnt+=amnt
+        if x > 517 :
+            self.M517 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M517.amnt+=amnt
+        if x > 518 :
+            self.M518 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M518.amnt+=amnt
+        if x > 519 :
+            self.M519 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M519.amnt+=amnt
+        if x > 520 :
+            self.M520 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M520.amnt+=amnt
+        if x > 521 :
+            self.M521 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M521.amnt+=amnt
+        if x > 522 :
+            self.M522 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M522.amnt+=amnt
+        if x > 523 :
+            self.M523 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M523.amnt+=amnt
+        if x > 524 :
+            self.M524 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M524.amnt+=amnt
+        if x > 525 :
+            self.M525 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M525.amnt+=amnt
+        if x > 526 :
+            self.M526 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M526.amnt+=amnt
+        if x > 527 :
+            self.M527 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M527.amnt+=amnt
+        if x > 528 :
+            self.M528 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M528.amnt+=amnt
+        if x > 529 :
+            self.M529 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M529.amnt+=amnt
+        if x > 530 :
+            self.M530 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M530.amnt+=amnt
+        if x > 531 :
+            self.M531 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M531.amnt+=amnt
+        if x > 532 :
+            self.M532 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M532.amnt+=amnt
+        if x > 533 :
+            self.M533 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M533.amnt+=amnt
+        if x > 534 :
+            self.M534 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M534.amnt+=amnt
+        if x > 535 :
+            self.M535 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M535.amnt+=amnt
+        if x > 536 :
+            self.M536 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M536.amnt+=amnt
+        if x > 537 :
+            self.M537 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M537.amnt+=amnt
+        if x > 538 :
+            self.M538 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M538.amnt+=amnt
+        if x > 539 :
+            self.M539 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M539.amnt+=amnt
+        if x > 540 :
+            self.M540 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M540.amnt+=amnt
+        if x > 541 :
+            self.M541 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M541.amnt+=amnt
+        if x > 542 :
+            self.M542 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M542.amnt+=amnt
+        if x > 543 :
+            self.M543 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M543.amnt+=amnt
+        if x > 544 :
+            self.M544 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M544.amnt+=amnt
+        if x > 545 :
+            self.M545 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M545.amnt+=amnt
+        if x > 546 :
+            self.M546 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M546.amnt+=amnt
+        if x > 547 :
+            self.M547 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M547.amnt+=amnt
+        if x > 548 :
+            self.M548 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M548.amnt+=amnt
+        if x > 549 :
+            self.M549 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M549.amnt+=amnt
+        if x > 550 :
+            self.M550 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M550.amnt+=amnt
+        if x > 551 :
+            self.M551 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M551.amnt+=amnt
+        if x > 552 :
+            self.M552 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M552.amnt+=amnt
+        if x > 553 :
+            self.M553 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M553.amnt+=amnt
+        if x > 554 :
+            self.M554 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M554.amnt+=amnt
+        if x > 555 :
+            self.M555 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M555.amnt+=amnt
+        if x > 556 :
+            self.M556 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M556.amnt+=amnt
+        if x > 557 :
+            self.M557 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M557.amnt+=amnt
+        if x > 558 :
+            self.M558 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M558.amnt+=amnt
+        if x > 559 :
+            self.M559 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M559.amnt+=amnt
+        if x > 560 :
+            self.M560 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M560.amnt+=amnt
+        if x > 561 :
+            self.M561 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M561.amnt+=amnt
+        if x > 562 :
+            self.M562 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M562.amnt+=amnt
+        if x > 563 :
+            self.M563 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M563.amnt+=amnt
+        if x > 564 :
+            self.M564 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M564.amnt+=amnt
+        if x > 565 :
+            self.M565 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M565.amnt+=amnt
+        if x > 566 :
+            self.M566 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M566.amnt+=amnt
+        if x > 567 :
+            self.M567 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M567.amnt+=amnt
+        if x > 568 :
+            self.M568 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M568.amnt+=amnt
+        if x > 569 :
+            self.M569 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M569.amnt+=amnt
+        if x > 570 :
+            self.M570 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M570.amnt+=amnt
+        if x > 571 :
+            self.M571 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M571.amnt+=amnt
+        if x > 572 :
+            self.M572 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M572.amnt+=amnt
+        if x > 573 :
+            self.M573 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M573.amnt+=amnt
+        if x > 574 :
+            self.M574 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M574.amnt+=amnt
+        if x > 575 :
+            self.M575 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M575.amnt+=amnt
+        if x > 576 :
+            self.M576 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M576.amnt+=amnt
+        if x > 577 :
+            self.M577 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M577.amnt+=amnt
+        if x > 578 :
+            self.M578 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M578.amnt+=amnt
+        if x > 579 :
+            self.M579 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M579.amnt+=amnt
+        if x > 580 :
+            self.M580 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M580.amnt+=amnt
+        if x > 581 :
+            self.M581 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M581.amnt+=amnt
+        if x > 582 :
+            self.M582 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M582.amnt+=amnt
+        if x > 583 :
+            self.M583 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M583.amnt+=amnt
+        if x > 584 :
+            self.M584 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M584.amnt+=amnt
+        if x > 585 :
+            self.M585 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M585.amnt+=amnt
+        if x > 586 :
+            self.M586 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M586.amnt+=amnt
+        if x > 587 :
+            self.M587 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M587.amnt+=amnt
+        if x > 588 :
+            self.M588 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M588.amnt+=amnt
+        if x > 589 :
+            self.M589 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M589.amnt+=amnt
+        if x > 590 :
+            self.M590 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M590.amnt+=amnt
+        if x > 591 :
+            self.M591 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M591.amnt+=amnt
+        if x > 592 :
+            self.M592 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M592.amnt+=amnt
+        if x > 593 :
+            self.M593 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M593.amnt+=amnt
+        if x > 594 :
+            self.M594 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M594.amnt+=amnt
+        if x > 595 :
+            self.M595 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M595.amnt+=amnt
+        if x > 596 :
+            self.M596 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M596.amnt+=amnt
+        if x > 597 :
+            self.M597 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M597.amnt+=amnt
+        if x > 598 :
+            self.M598 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M598.amnt+=amnt
+        if x > 599 :
+            self.M599 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M599.amnt+=amnt
+        if x > 600 :
+            self.M600 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M600.amnt+=amnt
+        if x > 601 :
+            self.M601 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M601.amnt+=amnt
+        if x > 602 :
+            self.M602 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M602.amnt+=amnt
+        if x > 603 :
+            self.M603 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M603.amnt+=amnt
+        if x > 604 :
+            self.M604 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M604.amnt+=amnt
+        if x > 605 :
+            self.M605 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M605.amnt+=amnt
+        if x > 606 :
+            self.M606 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M606.amnt+=amnt
+        if x > 607 :
+            self.M607 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M607.amnt+=amnt
+        if x > 608 :
+            self.M608 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M608.amnt+=amnt
+        if x > 609 :
+            self.M609 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M609.amnt+=amnt
+        if x > 610 :
+            self.M610 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M610.amnt+=amnt
+        if x > 611 :
+            self.M611 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M611.amnt+=amnt
+        if x > 612 :
+            self.M612 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M612.amnt+=amnt
+        if x > 613 :
+            self.M613 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M613.amnt+=amnt
+        if x > 614 :
+            self.M614 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M614.amnt+=amnt
+        if x > 615 :
+            self.M615 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M615.amnt+=amnt
+        if x > 616 :
+            self.M616 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M616.amnt+=amnt
+        if x > 617 :
+            self.M617 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M617.amnt+=amnt
+        if x > 618 :
+            self.M618 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M618.amnt+=amnt
+        if x > 619 :
+            self.M619 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M619.amnt+=amnt
+        if x > 620 :
+            self.M620 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M620.amnt+=amnt
+        if x > 621 :
+            self.M621 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M621.amnt+=amnt
+        if x > 622 :
+            self.M622 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M622.amnt+=amnt
+        if x > 623 :
+            self.M623 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M623.amnt+=amnt
+        if x > 624 :
+            self.M624 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M624.amnt+=amnt
+        if x > 625 :
+            self.M625 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M625.amnt+=amnt
+        if x > 626 :
+            self.M626 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M626.amnt+=amnt
+        if x > 627 :
+            self.M627 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M627.amnt+=amnt
+        if x > 628 :
+            self.M628 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M628.amnt+=amnt
+        if x > 629 :
+            self.M629 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M629.amnt+=amnt
+        if x > 630 :
+            self.M630 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M630.amnt+=amnt
+        if x > 631 :
+            self.M631 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M631.amnt+=amnt
+        if x > 632 :
+            self.M632 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M632.amnt+=amnt
+        if x > 633 :
+            self.M633 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M633.amnt+=amnt
+        if x > 634 :
+            self.M634 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M634.amnt+=amnt
+        if x > 635 :
+            self.M635 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M635.amnt+=amnt
+        if x > 636 :
+            self.M636 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M636.amnt+=amnt
+        if x > 637 :
+            self.M637 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M637.amnt+=amnt
+        if x > 638 :
+            self.M638 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M638.amnt+=amnt
+        if x > 639 :
+            self.M639 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M639.amnt+=amnt
+        if x > 640 :
+            self.M640 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M640.amnt+=amnt
+        if x > 641 :
+            self.M641 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M641.amnt+=amnt
+        if x > 642 :
+            self.M642 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M642.amnt+=amnt
+        if x > 643 :
+            self.M643 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M643.amnt+=amnt
+        if x > 644 :
+            self.M644 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M644.amnt+=amnt
+        if x > 645 :
+            self.M645 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M645.amnt+=amnt
+        if x > 646 :
+            self.M646 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M646.amnt+=amnt
+        if x > 647 :
+            self.M647 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M647.amnt+=amnt
+        if x > 648 :
+            self.M648 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M648.amnt+=amnt
+        if x > 649 :
+            self.M649 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M649.amnt+=amnt
+        if x > 650 :
+            self.M650 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M650.amnt+=amnt
+        if x > 651 :
+            self.M651 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M651.amnt+=amnt
+        if x > 652 :
+            self.M652 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M652.amnt+=amnt
+        if x > 653 :
+            self.M653 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M653.amnt+=amnt
+        if x > 654 :
+            self.M654 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M654.amnt+=amnt
+        if x > 655 :
+            self.M655 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M655.amnt+=amnt
+        if x > 656 :
+            self.M656 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M656.amnt+=amnt
+        if x > 657 :
+            self.M657 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M657.amnt+=amnt
+        if x > 658 :
+            self.M658 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M658.amnt+=amnt
+        if x > 659 :
+            self.M659 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M659.amnt+=amnt
+        if x > 660 :
+            self.M660 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M660.amnt+=amnt
+        if x > 661 :
+            self.M661 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M661.amnt+=amnt
+        if x > 662 :
+            self.M662 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M662.amnt+=amnt
+        if x > 663 :
+            self.M663 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M663.amnt+=amnt
+        if x > 664 :
+            self.M664 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M664.amnt+=amnt
+        if x > 665 :
+            self.M665 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M665.amnt+=amnt
+        if x > 666 :
+            self.M666 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M666.amnt+=amnt
+        if x > 667 :
+            self.M667 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M667.amnt+=amnt
+        if x > 668 :
+            self.M668 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M668.amnt+=amnt
+        if x > 669 :
+            self.M669 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M669.amnt+=amnt
+        if x > 670 :
+            self.M670 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M670.amnt+=amnt
+        if x > 671 :
+            self.M671 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M671.amnt+=amnt
+        if x > 672 :
+            self.M672 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M672.amnt+=amnt
+        if x > 673 :
+            self.M673 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M673.amnt+=amnt
+        if x > 674 :
+            self.M674 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M674.amnt+=amnt
+        if x > 675 :
+            self.M675 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M675.amnt+=amnt
+        if x > 676 :
+            self.M676 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M676.amnt+=amnt
+        if x > 677 :
+            self.M677 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M677.amnt+=amnt
+        if x > 678 :
+            self.M678 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M678.amnt+=amnt
+        if x > 679 :
+            self.M679 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M679.amnt+=amnt
+        if x > 680 :
+            self.M680 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M680.amnt+=amnt
+        if x > 681 :
+            self.M681 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M681.amnt+=amnt
+        if x > 682 :
+            self.M682 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M682.amnt+=amnt
+        if x > 683 :
+            self.M683 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M683.amnt+=amnt
+        if x > 684 :
+            self.M684 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M684.amnt+=amnt
+        if x > 685 :
+            self.M685 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M685.amnt+=amnt
+        if x > 686 :
+            self.M686 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M686.amnt+=amnt
+        if x > 687 :
+            self.M687 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M687.amnt+=amnt
+        if x > 688 :
+            self.M688 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M688.amnt+=amnt
+        if x > 689 :
+            self.M689 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M689.amnt+=amnt
+        if x > 690 :
+            self.M690 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M690.amnt+=amnt
+        if x > 691 :
+            self.M691 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M691.amnt+=amnt
+        if x > 692 :
+            self.M692 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M692.amnt+=amnt
+        if x > 693 :
+            self.M693 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M693.amnt+=amnt
+        if x > 694 :
+            self.M694 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M694.amnt+=amnt
+        if x > 695 :
+            self.M695 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M695.amnt+=amnt
+        if x > 696 :
+            self.M696 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M696.amnt+=amnt
+        if x > 697 :
+            self.M697 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M697.amnt+=amnt
+        if x > 698 :
+            self.M698 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M698.amnt+=amnt
+        if x > 699 :
+            self.M699 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M699.amnt+=amnt
+        if x > 700 :
+            self.M700 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M700.amnt+=amnt
+        if x > 701 :
+            self.M701 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M701.amnt+=amnt
+        if x > 702 :
+            self.M702 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M702.amnt+=amnt
+        if x > 703 :
+            self.M703 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M703.amnt+=amnt
+        if x > 704 :
+            self.M704 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M704.amnt+=amnt
+        if x > 705 :
+            self.M705 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M705.amnt+=amnt
+        if x > 706 :
+            self.M706 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M706.amnt+=amnt
+        if x > 707 :
+            self.M707 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M707.amnt+=amnt
+        if x > 708 :
+            self.M708 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M708.amnt+=amnt
+        if x > 709 :
+            self.M709 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M709.amnt+=amnt
+        if x > 710 :
+            self.M710 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M710.amnt+=amnt
+        if x > 711 :
+            self.M711 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M711.amnt+=amnt
+        if x > 712 :
+            self.M712 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M712.amnt+=amnt
+        if x > 713 :
+            self.M713 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M713.amnt+=amnt
+        if x > 714 :
+            self.M714 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M714.amnt+=amnt
+        if x > 715 :
+            self.M715 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M715.amnt+=amnt
+        if x > 716 :
+            self.M716 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M716.amnt+=amnt
+        if x > 717 :
+            self.M717 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M717.amnt+=amnt
+        if x > 718 :
+            self.M718 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M718.amnt+=amnt
+        if x > 719 :
+            self.M719 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M719.amnt+=amnt
+        if x > 720 :
+            self.M720 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M720.amnt+=amnt
+        if x > 721 :
+            self.M721 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M721.amnt+=amnt
+        if x > 722 :
+            self.M722 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M722.amnt+=amnt
+        if x > 723 :
+            self.M723 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M723.amnt+=amnt
+        if x > 724 :
+            self.M724 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M724.amnt+=amnt
+        if x > 725 :
+            self.M725 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M725.amnt+=amnt
+        if x > 726 :
+            self.M726 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M726.amnt+=amnt
+        if x > 727 :
+            self.M727 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M727.amnt+=amnt
+        if x > 728 :
+            self.M728 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M728.amnt+=amnt
+        if x > 729 :
+            self.M729 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M729.amnt+=amnt
+        if x > 730 :
+            self.M730 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M730.amnt+=amnt
+        if x > 731 :
+            self.M731 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M731.amnt+=amnt
+        if x > 732 :
+            self.M732 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M732.amnt+=amnt
+        if x > 733 :
+            self.M733 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M733.amnt+=amnt
+        if x > 734 :
+            self.M734 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M734.amnt+=amnt
+        if x > 735 :
+            self.M735 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M735.amnt+=amnt
+        if x > 736 :
+            self.M736 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M736.amnt+=amnt
+        if x > 737 :
+            self.M737 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M737.amnt+=amnt
+        if x > 738 :
+            self.M738 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M738.amnt+=amnt
+        if x > 739 :
+            self.M739 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M739.amnt+=amnt
+        if x > 740 :
+            self.M740 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M740.amnt+=amnt
+        if x > 741 :
+            self.M741 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M741.amnt+=amnt
+        if x > 742 :
+            self.M742 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M742.amnt+=amnt
+        if x > 743 :
+            self.M743 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M743.amnt+=amnt
+        if x > 744 :
+            self.M744 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M744.amnt+=amnt
+        if x > 745 :
+            self.M745 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M745.amnt+=amnt
+        if x > 746 :
+            self.M746 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M746.amnt+=amnt
+        if x > 747 :
+            self.M747 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M747.amnt+=amnt
+        if x > 748 :
+            self.M748 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M748.amnt+=amnt
+        if x > 749 :
+            self.M749 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M749.amnt+=amnt
+        if x > 750 :
+            self.M750 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M750.amnt+=amnt
+        if x > 751 :
+            self.M751 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M751.amnt+=amnt
+        if x > 752 :
+            self.M752 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M752.amnt+=amnt
+        if x > 753 :
+            self.M753 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M753.amnt+=amnt
+        if x > 754 :
+            self.M754 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M754.amnt+=amnt
+        if x > 755 :
+            self.M755 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M755.amnt+=amnt
+        if x > 756 :
+            self.M756 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M756.amnt+=amnt
+        if x > 757 :
+            self.M757 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M757.amnt+=amnt
+        if x > 758 :
+            self.M758 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M758.amnt+=amnt
+        if x > 759 :
+            self.M759 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M759.amnt+=amnt
+        if x > 760 :
+            self.M760 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M760.amnt+=amnt
+        if x > 761 :
+            self.M761 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M761.amnt+=amnt
+        if x > 762 :
+            self.M762 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M762.amnt+=amnt
+        if x > 763 :
+            self.M763 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M763.amnt+=amnt
+        if x > 764 :
+            self.M764 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M764.amnt+=amnt
+        if x > 765 :
+            self.M765 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M765.amnt+=amnt
+        if x > 766 :
+            self.M766 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M766.amnt+=amnt
+        if x > 767 :
+            self.M767 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M767.amnt+=amnt
+        if x > 768 :
+            self.M768 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M768.amnt+=amnt
+        if x > 769 :
+            self.M769 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M769.amnt+=amnt
+        if x > 770 :
+            self.M770 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M770.amnt+=amnt
+        if x > 771 :
+            self.M771 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M771.amnt+=amnt
+        if x > 772 :
+            self.M772 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M772.amnt+=amnt
+        if x > 773 :
+            self.M773 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M773.amnt+=amnt
+        if x > 774 :
+            self.M774 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M774.amnt+=amnt
+        if x > 775 :
+            self.M775 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M775.amnt+=amnt
+        if x > 776 :
+            self.M776 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M776.amnt+=amnt
+        if x > 777 :
+            self.M777 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M777.amnt+=amnt
+        if x > 778 :
+            self.M778 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M778.amnt+=amnt
+        if x > 779 :
+            self.M779 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M779.amnt+=amnt
+        if x > 780 :
+            self.M780 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M780.amnt+=amnt
+        if x > 781 :
+            self.M781 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M781.amnt+=amnt
+        if x > 782 :
+            self.M782 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M782.amnt+=amnt
+        if x > 783 :
+            self.M783 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M783.amnt+=amnt
+        if x > 784 :
+            self.M784 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M784.amnt+=amnt
+        if x > 785 :
+            self.M785 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M785.amnt+=amnt
+        if x > 786 :
+            self.M786 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M786.amnt+=amnt
+        if x > 787 :
+            self.M787 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M787.amnt+=amnt
+        if x > 788 :
+            self.M788 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M788.amnt+=amnt
+        if x > 789 :
+            self.M789 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M789.amnt+=amnt
+        if x > 790 :
+            self.M790 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M790.amnt+=amnt
+        if x > 791 :
+            self.M791 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M791.amnt+=amnt
+        if x > 792 :
+            self.M792 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M792.amnt+=amnt
+        if x > 793 :
+            self.M793 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M793.amnt+=amnt
+        if x > 794 :
+            self.M794 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M794.amnt+=amnt
+        if x > 795 :
+            self.M795 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M795.amnt+=amnt
+        if x > 796 :
+            self.M796 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M796.amnt+=amnt
+        if x > 797 :
+            self.M797 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M797.amnt+=amnt
+        if x > 798 :
+            self.M798 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M798.amnt+=amnt
+        if x > 799 :
+            self.M799 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M799.amnt+=amnt
+        if x > 800 :
+            self.M800 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M800.amnt+=amnt
+        if x > 801 :
+            self.M801 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M801.amnt+=amnt
+        if x > 802 :
+            self.M802 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M802.amnt+=amnt
+        if x > 803 :
+            self.M803 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M803.amnt+=amnt
+        if x > 804 :
+            self.M804 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M804.amnt+=amnt
+        if x > 805 :
+            self.M805 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M805.amnt+=amnt
+        if x > 806 :
+            self.M806 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M806.amnt+=amnt
+        if x > 807 :
+            self.M807 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M807.amnt+=amnt
+        if x > 808 :
+            self.M808 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M808.amnt+=amnt
+        if x > 809 :
+            self.M809 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M809.amnt+=amnt
+        if x > 810 :
+            self.M810 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M810.amnt+=amnt
+        if x > 811 :
+            self.M811 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M811.amnt+=amnt
+        if x > 812 :
+            self.M812 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M812.amnt+=amnt
+        if x > 813 :
+            self.M813 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M813.amnt+=amnt
+        if x > 814 :
+            self.M814 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M814.amnt+=amnt
+        if x > 815 :
+            self.M815 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M815.amnt+=amnt
+        if x > 816 :
+            self.M816 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M816.amnt+=amnt
+        if x > 817 :
+            self.M817 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M817.amnt+=amnt
+        if x > 818 :
+            self.M818 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M818.amnt+=amnt
+        if x > 819 :
+            self.M819 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M819.amnt+=amnt
+        if x > 820 :
+            self.M820 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M820.amnt+=amnt
+        if x > 821 :
+            self.M821 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M821.amnt+=amnt
+        if x > 822 :
+            self.M822 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M822.amnt+=amnt
+        if x > 823 :
+            self.M823 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M823.amnt+=amnt
+        if x > 824 :
+            self.M824 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M824.amnt+=amnt
+        if x > 825 :
+            self.M825 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M825.amnt+=amnt
+        if x > 826 :
+            self.M826 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M826.amnt+=amnt
+        if x > 827 :
+            self.M827 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M827.amnt+=amnt
+        if x > 828 :
+            self.M828 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M828.amnt+=amnt
+        if x > 829 :
+            self.M829 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M829.amnt+=amnt
+        if x > 830 :
+            self.M830 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M830.amnt+=amnt
+        if x > 831 :
+            self.M831 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M831.amnt+=amnt
+        if x > 832 :
+            self.M832 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M832.amnt+=amnt
+        if x > 833 :
+            self.M833 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M833.amnt+=amnt
+        if x > 834 :
+            self.M834 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M834.amnt+=amnt
+        if x > 835 :
+            self.M835 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M835.amnt+=amnt
+        if x > 836 :
+            self.M836 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M836.amnt+=amnt
+        if x > 837 :
+            self.M837 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M837.amnt+=amnt
+        if x > 838 :
+            self.M838 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M838.amnt+=amnt
+        if x > 839 :
+            self.M839 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M839.amnt+=amnt
+        if x > 840 :
+            self.M840 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M840.amnt+=amnt
+        if x > 841 :
+            self.M841 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M841.amnt+=amnt
+        if x > 842 :
+            self.M842 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M842.amnt+=amnt
+        if x > 843 :
+            self.M843 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M843.amnt+=amnt
+        if x > 844 :
+            self.M844 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M844.amnt+=amnt
+        if x > 845 :
+            self.M845 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M845.amnt+=amnt
+        if x > 846 :
+            self.M846 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M846.amnt+=amnt
+        if x > 847 :
+            self.M847 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M847.amnt+=amnt
+        if x > 848 :
+            self.M848 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M848.amnt+=amnt
+        if x > 849 :
+            self.M849 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M849.amnt+=amnt
+        if x > 850 :
+            self.M850 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M850.amnt+=amnt
+        if x > 851 :
+            self.M851 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M851.amnt+=amnt
+        if x > 852 :
+            self.M852 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M852.amnt+=amnt
+        if x > 853 :
+            self.M853 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M853.amnt+=amnt
+        if x > 854 :
+            self.M854 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M854.amnt+=amnt
+        if x > 855 :
+            self.M855 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M855.amnt+=amnt
+        if x > 856 :
+            self.M856 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M856.amnt+=amnt
+        if x > 857 :
+            self.M857 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M857.amnt+=amnt
+        if x > 858 :
+            self.M858 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M858.amnt+=amnt
+        if x > 859 :
+            self.M859 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M859.amnt+=amnt
+        if x > 860 :
+            self.M860 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M860.amnt+=amnt
+        if x > 861 :
+            self.M861 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M861.amnt+=amnt
+        if x > 862 :
+            self.M862 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M862.amnt+=amnt
+        if x > 863 :
+            self.M863 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M863.amnt+=amnt
+        if x > 864 :
+            self.M864 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M864.amnt+=amnt
+        if x > 865 :
+            self.M865 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M865.amnt+=amnt
+        if x > 866 :
+            self.M866 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M866.amnt+=amnt
+        if x > 867 :
+            self.M867 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M867.amnt+=amnt
+        if x > 868 :
+            self.M868 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M868.amnt+=amnt
+        if x > 869 :
+            self.M869 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M869.amnt+=amnt
+        if x > 870 :
+            self.M870 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M870.amnt+=amnt
+        if x > 871 :
+            self.M871 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M871.amnt+=amnt
+        if x > 872 :
+            self.M872 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M872.amnt+=amnt
+        if x > 873 :
+            self.M873 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M873.amnt+=amnt
+        if x > 874 :
+            self.M874 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M874.amnt+=amnt
+        if x > 875 :
+            self.M875 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M875.amnt+=amnt
+        if x > 876 :
+            self.M876 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M876.amnt+=amnt
+        if x > 877 :
+            self.M877 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M877.amnt+=amnt
+        if x > 878 :
+            self.M878 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M878.amnt+=amnt
+        if x > 879 :
+            self.M879 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M879.amnt+=amnt
+        if x > 880 :
+            self.M880 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M880.amnt+=amnt
+        if x > 881 :
+            self.M881 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M881.amnt+=amnt
+        if x > 882 :
+            self.M882 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M882.amnt+=amnt
+        if x > 883 :
+            self.M883 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M883.amnt+=amnt
+        if x > 884 :
+            self.M884 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M884.amnt+=amnt
+        if x > 885 :
+            self.M885 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M885.amnt+=amnt
+        if x > 886 :
+            self.M886 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M886.amnt+=amnt
+        if x > 887 :
+            self.M887 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M887.amnt+=amnt
+        if x > 888 :
+            self.M888 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M888.amnt+=amnt
+        if x > 889 :
+            self.M889 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M889.amnt+=amnt
+        if x > 890 :
+            self.M890 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M890.amnt+=amnt
+        if x > 891 :
+            self.M891 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M891.amnt+=amnt
+        if x > 892 :
+            self.M892 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M892.amnt+=amnt
+        if x > 893 :
+            self.M893 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M893.amnt+=amnt
+        if x > 894 :
+            self.M894 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M894.amnt+=amnt
+        if x > 895 :
+            self.M895 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M895.amnt+=amnt
+        if x > 896 :
+            self.M896 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M896.amnt+=amnt
+        if x > 897 :
+            self.M897 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M897.amnt+=amnt
+        if x > 898 :
+            self.M898 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M898.amnt+=amnt
+        if x > 899 :
+            self.M899 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M899.amnt+=amnt
+        if x > 900 :
+            self.M900 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M900.amnt+=amnt
+        if x > 901 :
+            self.M901 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M901.amnt+=amnt
+        if x > 902 :
+            self.M902 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M902.amnt+=amnt
+        if x > 903 :
+            self.M903 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M903.amnt+=amnt
+        if x > 904 :
+            self.M904 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M904.amnt+=amnt
+        if x > 905 :
+            self.M905 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M905.amnt+=amnt
+        if x > 906 :
+            self.M906 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M906.amnt+=amnt
+        if x > 907 :
+            self.M907 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M907.amnt+=amnt
+        if x > 908 :
+            self.M908 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M908.amnt+=amnt
+        if x > 909 :
+            self.M909 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M909.amnt+=amnt
+        if x > 910 :
+            self.M910 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M910.amnt+=amnt
+        if x > 911 :
+            self.M911 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M911.amnt+=amnt
+        if x > 912 :
+            self.M912 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M912.amnt+=amnt
+        if x > 913 :
+            self.M913 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M913.amnt+=amnt
+        if x > 914 :
+            self.M914 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M914.amnt+=amnt
+        if x > 915 :
+            self.M915 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M915.amnt+=amnt
+        if x > 916 :
+            self.M916 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M916.amnt+=amnt
+        if x > 917 :
+            self.M917 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M917.amnt+=amnt
+        if x > 918 :
+            self.M918 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M918.amnt+=amnt
+        if x > 919 :
+            self.M919 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M919.amnt+=amnt
+        if x > 920 :
+            self.M920 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M920.amnt+=amnt
+        if x > 921 :
+            self.M921 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M921.amnt+=amnt
+        if x > 922 :
+            self.M922 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M922.amnt+=amnt
+        if x > 923 :
+            self.M923 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M923.amnt+=amnt
+        if x > 924 :
+            self.M924 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M924.amnt+=amnt
+        if x > 925 :
+            self.M925 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M925.amnt+=amnt
+        if x > 926 :
+            self.M926 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M926.amnt+=amnt
+        if x > 927 :
+            self.M927 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M927.amnt+=amnt
+        if x > 928 :
+            self.M928 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M928.amnt+=amnt
+        if x > 929 :
+            self.M929 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M929.amnt+=amnt
+        if x > 930 :
+            self.M930 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M930.amnt+=amnt
+        if x > 931 :
+            self.M931 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M931.amnt+=amnt
+        if x > 932 :
+            self.M932 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M932.amnt+=amnt
+        if x > 933 :
+            self.M933 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M933.amnt+=amnt
+        if x > 934 :
+            self.M934 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M934.amnt+=amnt
+        if x > 935 :
+            self.M935 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M935.amnt+=amnt
+        if x > 936 :
+            self.M936 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M936.amnt+=amnt
+        if x > 937 :
+            self.M937 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M937.amnt+=amnt
+        if x > 938 :
+            self.M938 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M938.amnt+=amnt
+        if x > 939 :
+            self.M939 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M939.amnt+=amnt
+        if x > 940 :
+            self.M940 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M940.amnt+=amnt
+        if x > 941 :
+            self.M941 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M941.amnt+=amnt
+        if x > 942 :
+            self.M942 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M942.amnt+=amnt
+        if x > 943 :
+            self.M943 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M943.amnt+=amnt
+        if x > 944 :
+            self.M944 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M944.amnt+=amnt
+        if x > 945 :
+            self.M945 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M945.amnt+=amnt
+        if x > 946 :
+            self.M946 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M946.amnt+=amnt
+        if x > 947 :
+            self.M947 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M947.amnt+=amnt
+        if x > 948 :
+            self.M948 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M948.amnt+=amnt
+        if x > 949 :
+            self.M949 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M949.amnt+=amnt
+        if x > 950 :
+            self.M950 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M950.amnt+=amnt
+        if x > 951 :
+            self.M951 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M951.amnt+=amnt
+        if x > 952 :
+            self.M952 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M952.amnt+=amnt
+        if x > 953 :
+            self.M953 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M953.amnt+=amnt
+        if x > 954 :
+            self.M954 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M954.amnt+=amnt
+        if x > 955 :
+            self.M955 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M955.amnt+=amnt
+        if x > 956 :
+            self.M956 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M956.amnt+=amnt
+        if x > 957 :
+            self.M957 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M957.amnt+=amnt
+        if x > 958 :
+            self.M958 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M958.amnt+=amnt
+        if x > 959 :
+            self.M959 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M959.amnt+=amnt
+        if x > 960 :
+            self.M960 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M960.amnt+=amnt
+        if x > 961 :
+            self.M961 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M961.amnt+=amnt
+        if x > 962 :
+            self.M962 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M962.amnt+=amnt
+        if x > 963 :
+            self.M963 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M963.amnt+=amnt
+        if x > 964 :
+            self.M964 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M964.amnt+=amnt
+        if x > 965 :
+            self.M965 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M965.amnt+=amnt
+        if x > 966 :
+            self.M966 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M966.amnt+=amnt
+        if x > 967 :
+            self.M967 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M967.amnt+=amnt
+        if x > 968 :
+            self.M968 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M968.amnt+=amnt
+        if x > 969 :
+            self.M969 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M969.amnt+=amnt
+        if x > 970 :
+            self.M970 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M970.amnt+=amnt
+        if x > 971 :
+            self.M971 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M971.amnt+=amnt
+        if x > 972 :
+            self.M972 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M972.amnt+=amnt
+        if x > 973 :
+            self.M973 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M973.amnt+=amnt
+        if x > 974 :
+            self.M974 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M974.amnt+=amnt
+        if x > 975 :
+            self.M975 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M975.amnt+=amnt
+        if x > 976 :
+            self.M976 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M976.amnt+=amnt
+        if x > 977 :
+            self.M977 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M977.amnt+=amnt
+        if x > 978 :
+            self.M978 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M978.amnt+=amnt
+        if x > 979 :
+            self.M979 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M979.amnt+=amnt
+        if x > 980 :
+            self.M980 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M980.amnt+=amnt
+        if x > 981 :
+            self.M981 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M981.amnt+=amnt
+        if x > 982 :
+            self.M982 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M982.amnt+=amnt
+        if x > 983 :
+            self.M983 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M983.amnt+=amnt
+        if x > 984 :
+            self.M984 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M984.amnt+=amnt
+        if x > 985 :
+            self.M985 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M985.amnt+=amnt
+        if x > 986 :
+            self.M986 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M986.amnt+=amnt
+        if x > 987 :
+            self.M987 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M987.amnt+=amnt
+        if x > 988 :
+            self.M988 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M988.amnt+=amnt
+        if x > 989 :
+            self.M989 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M989.amnt+=amnt
+        if x > 990 :
+            self.M990 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M990.amnt+=amnt
+        if x > 991 :
+            self.M991 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M991.amnt+=amnt
+        if x > 992 :
+            self.M992 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M992.amnt+=amnt
+        if x > 993 :
+            self.M993 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M993.amnt+=amnt
+        if x > 994 :
+            self.M994 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M994.amnt+=amnt
+        if x > 995 :
+            self.M995 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M995.amnt+=amnt
+        if x > 996 :
+            self.M996 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M996.amnt+=amnt
+        if x > 997 :
+            self.M997 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M997.amnt+=amnt
+        if x > 998 :
+            self.M998 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M998.amnt+=amnt
+        if x > 999 :
+            self.M999 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M999.amnt+=amnt
+        if x > 1000 :
+            self.M1000 =Mkule()
+            amnt=int(input('amount of this molecule'))
+            self.M1000.amnt+=amnt
+
+        
+    def TV(self):
+                        
+        if self.M0 !=0:
+            self.mv+=self.M0.volume
+        if self.M1 !=0:
+            self.mv+=self.M1.volume
+        if self.M2 !=0:
+            self.mv+=self.M2.volume
+        if self.M3 !=0:
+            self.mv+=self.M3.volume
+        if self.M4 !=0:
+            self.mv+=self.M4.volume
+        if self.M5 !=0:
+            self.mv+=self.M5.volume
+        if self.M6 !=0:
+            self.mv+=self.M6.volume
+        if self.M7 !=0:
+            self.mv+=self.M7.volume
+        if self.M8 !=0:
+            self.mv+=self.M8.volume
+        if self.M9 !=0:
+            self.mv+=self.M9.volume
+        if self.M10 !=0:
+            self.mv+=self.M10.volume
+        if self.M11 !=0:
+            self.mv+=self.M11.volume
+        if self.M12 !=0:
+            self.mv+=self.M12.volume
+        if self.M13 !=0:
+            self.mv+=self.M13.volume
+        if self.M14 !=0:
+            self.mv+=self.M14.volume
+        if self.M15 !=0:
+            self.mv+=self.M15.volume
+        if self.M16 !=0:
+            self.mv+=self.M16.volume
+        if self.M17 !=0:
+            self.mv+=self.M17.volume
+        if self.M18 !=0:
+            self.mv+=self.M18.volume
+        if self.M19 !=0:
+            self.mv+=self.M19.volume
+        if self.M20 !=0:
+            self.mv+=self.M20.volume
+        if self.M21 !=0:
+            self.mv+=self.M21.volume
+        if self.M22 !=0:
+            self.mv+=self.M22.volume
+        if self.M23 !=0:
+            self.mv+=self.M23.volume
+        if self.M24 !=0:
+            self.mv+=self.M24.volume
+        if self.M25 !=0:
+            self.mv+=self.M25.volume
+        if self.M26 !=0:
+            self.mv+=self.M26.volume
+        if self.M27 !=0:
+            self.mv+=self.M27.volume
+        if self.M28 !=0:
+            self.mv+=self.M28.volume
+        if self.M29 !=0:
+            self.mv+=self.M29.volume
+        if self.M30 !=0:
+            self.mv+=self.M30.volume
+        if self.M31 !=0:
+            self.mv+=self.M31.volume
+        if self.M32 !=0:
+            self.mv+=self.M32.volume
+        if self.M33 !=0:
+            self.mv+=self.M33.volume
+        if self.M34 !=0:
+            self.mv+=self.M34.volume
+        if self.M35 !=0:
+            self.mv+=self.M35.volume
+        if self.M36 !=0:
+            self.mv+=self.M36.volume
+        if self.M37 !=0:
+            self.mv+=self.M37.volume
+        if self.M38 !=0:
+            self.mv+=self.M38.volume
+        if self.M39 !=0:
+            self.mv+=self.M39.volume
+        if self.M40 !=0:
+            self.mv+=self.M40.volume
+        if self.M41 !=0:
+            self.mv+=self.M41.volume
+        if self.M42 !=0:
+            self.mv+=self.M42.volume
+        if self.M43 !=0:
+            self.mv+=self.M43.volume
+        if self.M44 !=0:
+            self.mv+=self.M44.volume
+        if self.M45 !=0:
+            self.mv+=self.M45.volume
+        if self.M46 !=0:
+            self.mv+=self.M46.volume
+        if self.M47 !=0:
+            self.mv+=self.M47.volume
+        if self.M48 !=0:
+            self.mv+=self.M48.volume
+        if self.M49 !=0:
+            self.mv+=self.M49.volume
+        if self.M50 !=0:
+            self.mv+=self.M50.volume
+        if self.M51 !=0:
+            self.mv+=self.M51.volume
+        if self.M52 !=0:
+            self.mv+=self.M52.volume
+        if self.M53 !=0:
+            self.mv+=self.M53.volume
+        if self.M54 !=0:
+            self.mv+=self.M54.volume
+        if self.M55 !=0:
+            self.mv+=self.M55.volume
+        if self.M56 !=0:
+            self.mv+=self.M56.volume
+        if self.M57 !=0:
+            self.mv+=self.M57.volume
+        if self.M58 !=0:
+            self.mv+=self.M58.volume
+        if self.M59 !=0:
+            self.mv+=self.M59.volume
+        if self.M60 !=0:
+            self.mv+=self.M60.volume
+        if self.M61 !=0:
+            self.mv+=self.M61.volume
+        if self.M62 !=0:
+            self.mv+=self.M62.volume
+        if self.M63 !=0:
+            self.mv+=self.M63.volume
+        if self.M64 !=0:
+            self.mv+=self.M64.volume
+        if self.M65 !=0:
+            self.mv+=self.M65.volume
+        if self.M66 !=0:
+            self.mv+=self.M66.volume
+        if self.M67 !=0:
+            self.mv+=self.M67.volume
+        if self.M68 !=0:
+            self.mv+=self.M68.volume
+        if self.M69 !=0:
+            self.mv+=self.M69.volume
+        if self.M70 !=0:
+            self.mv+=self.M70.volume
+        if self.M71 !=0:
+            self.mv+=self.M71.volume
+        if self.M72 !=0:
+            self.mv+=self.M72.volume
+        if self.M73 !=0:
+            self.mv+=self.M73.volume
+        if self.M74 !=0:
+            self.mv+=self.M74.volume
+        if self.M75 !=0:
+            self.mv+=self.M75.volume
+        if self.M76 !=0:
+            self.mv+=self.M76.volume
+        if self.M77 !=0:
+            self.mv+=self.M77.volume
+        if self.M78 !=0:
+            self.mv+=self.M78.volume
+        if self.M79 !=0:
+            self.mv+=self.M79.volume
+        if self.M80 !=0:
+            self.mv+=self.M80.volume
+        if self.M81 !=0:
+            self.mv+=self.M81.volume
+        if self.M82 !=0:
+            self.mv+=self.M82.volume
+        if self.M83 !=0:
+            self.mv+=self.M83.volume
+        if self.M84 !=0:
+            self.mv+=self.M84.volume
+        if self.M85 !=0:
+            self.mv+=self.M85.volume
+        if self.M86 !=0:
+            self.mv+=self.M86.volume
+        if self.M87 !=0:
+            self.mv+=self.M87.volume
+        if self.M88 !=0:
+            self.mv+=self.M88.volume
+        if self.M89 !=0:
+            self.mv+=self.M89.volume
+        if self.M90 !=0:
+            self.mv+=self.M90.volume
+        if self.M91 !=0:
+            self.mv+=self.M91.volume
+        if self.M92 !=0:
+            self.mv+=self.M92.volume
+        if self.M93 !=0:
+            self.mv+=self.M93.volume
+        if self.M94 !=0:
+            self.mv+=self.M94.volume
+        if self.M95 !=0:
+            self.mv+=self.M95.volume
+        if self.M96 !=0:
+            self.mv+=self.M96.volume
+        if self.M97 !=0:
+            self.mv+=self.M97.volume
+        if self.M98 !=0:
+            self.mv+=self.M98.volume
+        if self.M99 !=0:
+            self.mv+=self.M99.volume
+        if self.M100 !=0:
+            self.mv+=self.M100.volume
+        if self.M101 !=0:
+            self.mv+=self.M101.volume
+        if self.M102 !=0:
+            self.mv+=self.M102.volume
+        if self.M103 !=0:
+            self.mv+=self.M103.volume
+        if self.M104 !=0:
+            self.mv+=self.M104.volume
+        if self.M105 !=0:
+            self.mv+=self.M105.volume
+        if self.M106 !=0:
+            self.mv+=self.M106.volume
+        if self.M107 !=0:
+            self.mv+=self.M107.volume
+        if self.M108 !=0:
+            self.mv+=self.M108.volume
+        if self.M109 !=0:
+            self.mv+=self.M109.volume
+        if self.M110 !=0:
+            self.mv+=self.M110.volume
+        if self.M111 !=0:
+            self.mv+=self.M111.volume
+        if self.M112 !=0:
+            self.mv+=self.M112.volume
+        if self.M113 !=0:
+            self.mv+=self.M113.volume
+        if self.M114 !=0:
+            self.mv+=self.M114.volume
+        if self.M115 !=0:
+            self.mv+=self.M115.volume
+        if self.M116 !=0:
+            self.mv+=self.M116.volume
+        if self.M117 !=0:
+            self.mv+=self.M117.volume
+        if self.M118 !=0:
+            self.mv+=self.M118.volume
+        if self.M119 !=0:
+            self.mv+=self.M119.volume
+        if self.M120 !=0:
+            self.mv+=self.M120.volume
+        if self.M121 !=0:
+            self.mv+=self.M121.volume
+        if self.M122 !=0:
+            self.mv+=self.M122.volume
+        if self.M123 !=0:
+            self.mv+=self.M123.volume
+        if self.M124 !=0:
+            self.mv+=self.M124.volume
+        if self.M125 !=0:
+            self.mv+=self.M125.volume
+        if self.M126 !=0:
+            self.mv+=self.M126.volume
+        if self.M127 !=0:
+            self.mv+=self.M127.volume
+        if self.M128 !=0:
+            self.mv+=self.M128.volume
+        if self.M129 !=0:
+            self.mv+=self.M129.volume
+        if self.M130 !=0:
+            self.mv+=self.M130.volume
+        if self.M131 !=0:
+            self.mv+=self.M131.volume
+        if self.M132 !=0:
+            self.mv+=self.M132.volume
+        if self.M133 !=0:
+            self.mv+=self.M133.volume
+        if self.M134 !=0:
+            self.mv+=self.M134.volume
+        if self.M135 !=0:
+            self.mv+=self.M135.volume
+        if self.M136 !=0:
+            self.mv+=self.M136.volume
+        if self.M137 !=0:
+            self.mv+=self.M137.volume
+        if self.M138 !=0:
+            self.mv+=self.M138.volume
+        if self.M139 !=0:
+            self.mv+=self.M139.volume
+        if self.M140 !=0:
+            self.mv+=self.M140.volume
+        if self.M141 !=0:
+            self.mv+=self.M141.volume
+        if self.M142 !=0:
+            self.mv+=self.M142.volume
+        if self.M143 !=0:
+            self.mv+=self.M143.volume
+        if self.M144 !=0:
+            self.mv+=self.M144.volume
+        if self.M145 !=0:
+            self.mv+=self.M145.volume
+        if self.M146 !=0:
+            self.mv+=self.M146.volume
+        if self.M147 !=0:
+            self.mv+=self.M147.volume
+        if self.M148 !=0:
+            self.mv+=self.M148.volume
+        if self.M149 !=0:
+            self.mv+=self.M149.volume
+        if self.M150 !=0:
+            self.mv+=self.M150.volume
+        if self.M151 !=0:
+            self.mv+=self.M151.volume
+        if self.M152 !=0:
+            self.mv+=self.M152.volume
+        if self.M153 !=0:
+            self.mv+=self.M153.volume
+        if self.M154 !=0:
+            self.mv+=self.M154.volume
+        if self.M155 !=0:
+            self.mv+=self.M155.volume
+        if self.M156 !=0:
+            self.mv+=self.M156.volume
+        if self.M157 !=0:
+            self.mv+=self.M157.volume
+        if self.M158 !=0:
+            self.mv+=self.M158.volume
+        if self.M159 !=0:
+            self.mv+=self.M159.volume
+        if self.M160 !=0:
+            self.mv+=self.M160.volume
+        if self.M161 !=0:
+            self.mv+=self.M161.volume
+        if self.M162 !=0:
+            self.mv+=self.M162.volume
+        if self.M163 !=0:
+            self.mv+=self.M163.volume
+        if self.M164 !=0:
+            self.mv+=self.M164.volume
+        if self.M165 !=0:
+            self.mv+=self.M165.volume
+        if self.M166 !=0:
+            self.mv+=self.M166.volume
+        if self.M167 !=0:
+            self.mv+=self.M167.volume
+        if self.M168 !=0:
+            self.mv+=self.M168.volume
+        if self.M169 !=0:
+            self.mv+=self.M169.volume
+        if self.M170 !=0:
+            self.mv+=self.M170.volume
+        if self.M171 !=0:
+            self.mv+=self.M171.volume
+        if self.M172 !=0:
+            self.mv+=self.M172.volume
+        if self.M173 !=0:
+            self.mv+=self.M173.volume
+        if self.M174 !=0:
+            self.mv+=self.M174.volume
+        if self.M175 !=0:
+            self.mv+=self.M175.volume
+        if self.M176 !=0:
+            self.mv+=self.M176.volume
+        if self.M177 !=0:
+            self.mv+=self.M177.volume
+        if self.M178 !=0:
+            self.mv+=self.M178.volume
+        if self.M179 !=0:
+            self.mv+=self.M179.volume
+        if self.M180 !=0:
+            self.mv+=self.M180.volume
+        if self.M181 !=0:
+            self.mv+=self.M181.volume
+        if self.M182 !=0:
+            self.mv+=self.M182.volume
+        if self.M183 !=0:
+            self.mv+=self.M183.volume
+        if self.M184 !=0:
+            self.mv+=self.M184.volume
+        if self.M185 !=0:
+            self.mv+=self.M185.volume
+        if self.M186 !=0:
+            self.mv+=self.M186.volume
+        if self.M187 !=0:
+            self.mv+=self.M187.volume
+        if self.M188 !=0:
+            self.mv+=self.M188.volume
+        if self.M189 !=0:
+            self.mv+=self.M189.volume
+        if self.M190 !=0:
+            self.mv+=self.M190.volume
+        if self.M191 !=0:
+            self.mv+=self.M191.volume
+        if self.M192 !=0:
+            self.mv+=self.M192.volume
+        if self.M193 !=0:
+            self.mv+=self.M193.volume
+        if self.M194 !=0:
+            self.mv+=self.M194.volume
+        if self.M195 !=0:
+            self.mv+=self.M195.volume
+        if self.M196 !=0:
+            self.mv+=self.M196.volume
+        if self.M197 !=0:
+            self.mv+=self.M197.volume
+        if self.M198 !=0:
+            self.mv+=self.M198.volume
+        if self.M199 !=0:
+            self.mv+=self.M199.volume
+        if self.M200 !=0:
+            self.mv+=self.M200.volume
+        if self.M201 !=0:
+            self.mv+=self.M201.volume
+        if self.M202 !=0:
+            self.mv+=self.M202.volume
+        if self.M203 !=0:
+            self.mv+=self.M203.volume
+        if self.M204 !=0:
+            self.mv+=self.M204.volume
+        if self.M205 !=0:
+            self.mv+=self.M205.volume
+        if self.M206 !=0:
+            self.mv+=self.M206.volume
+        if self.M207 !=0:
+            self.mv+=self.M207.volume
+        if self.M208 !=0:
+            self.mv+=self.M208.volume
+        if self.M209 !=0:
+            self.mv+=self.M209.volume
+        if self.M210 !=0:
+            self.mv+=self.M210.volume
+        if self.M211 !=0:
+            self.mv+=self.M211.volume
+        if self.M212 !=0:
+            self.mv+=self.M212.volume
+        if self.M213 !=0:
+            self.mv+=self.M213.volume
+        if self.M214 !=0:
+            self.mv+=self.M214.volume
+        if self.M215 !=0:
+            self.mv+=self.M215.volume
+        if self.M216 !=0:
+            self.mv+=self.M216.volume
+        if self.M217 !=0:
+            self.mv+=self.M217.volume
+        if self.M218 !=0:
+            self.mv+=self.M218.volume
+        if self.M219 !=0:
+            self.mv+=self.M219.volume
+        if self.M220 !=0:
+            self.mv+=self.M220.volume
+        if self.M221 !=0:
+            self.mv+=self.M221.volume
+        if self.M222 !=0:
+            self.mv+=self.M222.volume
+        if self.M223 !=0:
+            self.mv+=self.M223.volume
+        if self.M224 !=0:
+            self.mv+=self.M224.volume
+        if self.M225 !=0:
+            self.mv+=self.M225.volume
+        if self.M226 !=0:
+            self.mv+=self.M226.volume
+        if self.M227 !=0:
+            self.mv+=self.M227.volume
+        if self.M228 !=0:
+            self.mv+=self.M228.volume
+        if self.M229 !=0:
+            self.mv+=self.M229.volume
+        if self.M230 !=0:
+            self.mv+=self.M230.volume
+        if self.M231 !=0:
+            self.mv+=self.M231.volume
+        if self.M232 !=0:
+            self.mv+=self.M232.volume
+        if self.M233 !=0:
+            self.mv+=self.M233.volume
+        if self.M234 !=0:
+            self.mv+=self.M234.volume
+        if self.M235 !=0:
+            self.mv+=self.M235.volume
+        if self.M236 !=0:
+            self.mv+=self.M236.volume
+        if self.M237 !=0:
+            self.mv+=self.M237.volume
+        if self.M238 !=0:
+            self.mv+=self.M238.volume
+        if self.M239 !=0:
+            self.mv+=self.M239.volume
+        if self.M240 !=0:
+            self.mv+=self.M240.volume
+        if self.M241 !=0:
+            self.mv+=self.M241.volume
+        if self.M242 !=0:
+            self.mv+=self.M242.volume
+        if self.M243 !=0:
+            self.mv+=self.M243.volume
+        if self.M244 !=0:
+            self.mv+=self.M244.volume
+        if self.M245 !=0:
+            self.mv+=self.M245.volume
+        if self.M246 !=0:
+            self.mv+=self.M246.volume
+        if self.M247 !=0:
+            self.mv+=self.M247.volume
+        if self.M248 !=0:
+            self.mv+=self.M248.volume
+        if self.M249 !=0:
+            self.mv+=self.M249.volume
+        if self.M250 !=0:
+            self.mv+=self.M250.volume
+        if self.M251 !=0:
+            self.mv+=self.M251.volume
+        if self.M252 !=0:
+            self.mv+=self.M252.volume
+        if self.M253 !=0:
+            self.mv+=self.M253.volume
+        if self.M254 !=0:
+            self.mv+=self.M254.volume
+        if self.M255 !=0:
+            self.mv+=self.M255.volume
+        if self.M256 !=0:
+            self.mv+=self.M256.volume
+        if self.M257 !=0:
+            self.mv+=self.M257.volume
+        if self.M258 !=0:
+            self.mv+=self.M258.volume
+        if self.M259 !=0:
+            self.mv+=self.M259.volume
+        if self.M260 !=0:
+            self.mv+=self.M260.volume
+        if self.M261 !=0:
+            self.mv+=self.M261.volume
+        if self.M262 !=0:
+            self.mv+=self.M262.volume
+        if self.M263 !=0:
+            self.mv+=self.M263.volume
+        if self.M264 !=0:
+            self.mv+=self.M264.volume
+        if self.M265 !=0:
+            self.mv+=self.M265.volume
+        if self.M266 !=0:
+            self.mv+=self.M266.volume
+        if self.M267 !=0:
+            self.mv+=self.M267.volume
+        if self.M268 !=0:
+            self.mv+=self.M268.volume
+        if self.M269 !=0:
+            self.mv+=self.M269.volume
+        if self.M270 !=0:
+            self.mv+=self.M270.volume
+        if self.M271 !=0:
+            self.mv+=self.M271.volume
+        if self.M272 !=0:
+            self.mv+=self.M272.volume
+        if self.M273 !=0:
+            self.mv+=self.M273.volume
+        if self.M274 !=0:
+            self.mv+=self.M274.volume
+        if self.M275 !=0:
+            self.mv+=self.M275.volume
+        if self.M276 !=0:
+            self.mv+=self.M276.volume
+        if self.M277 !=0:
+            self.mv+=self.M277.volume
+        if self.M278 !=0:
+            self.mv+=self.M278.volume
+        if self.M279 !=0:
+            self.mv+=self.M279.volume
+        if self.M280 !=0:
+            self.mv+=self.M280.volume
+        if self.M281 !=0:
+            self.mv+=self.M281.volume
+        if self.M282 !=0:
+            self.mv+=self.M282.volume
+        if self.M283 !=0:
+            self.mv+=self.M283.volume
+        if self.M284 !=0:
+            self.mv+=self.M284.volume
+        if self.M285 !=0:
+            self.mv+=self.M285.volume
+        if self.M286 !=0:
+            self.mv+=self.M286.volume
+        if self.M287 !=0:
+            self.mv+=self.M287.volume
+        if self.M288 !=0:
+            self.mv+=self.M288.volume
+        if self.M289 !=0:
+            self.mv+=self.M289.volume
+        if self.M290 !=0:
+            self.mv+=self.M290.volume
+        if self.M291 !=0:
+            self.mv+=self.M291.volume
+        if self.M292 !=0:
+            self.mv+=self.M292.volume
+        if self.M293 !=0:
+            self.mv+=self.M293.volume
+        if self.M294 !=0:
+            self.mv+=self.M294.volume
+        if self.M295 !=0:
+            self.mv+=self.M295.volume
+        if self.M296 !=0:
+            self.mv+=self.M296.volume
+        if self.M297 !=0:
+            self.mv+=self.M297.volume
+        if self.M298 !=0:
+            self.mv+=self.M298.volume
+        if self.M299 !=0:
+            self.mv+=self.M299.volume
+        if self.M300 !=0:
+            self.mv+=self.M300.volume
+        if self.M301 !=0:
+            self.mv+=self.M301.volume
+        if self.M302 !=0:
+            self.mv+=self.M302.volume
+        if self.M303 !=0:
+            self.mv+=self.M303.volume
+        if self.M304 !=0:
+            self.mv+=self.M304.volume
+        if self.M305 !=0:
+            self.mv+=self.M305.volume
+        if self.M306 !=0:
+            self.mv+=self.M306.volume
+        if self.M307 !=0:
+            self.mv+=self.M307.volume
+        if self.M308 !=0:
+            self.mv+=self.M308.volume
+        if self.M309 !=0:
+            self.mv+=self.M309.volume
+        if self.M310 !=0:
+            self.mv+=self.M310.volume
+        if self.M311 !=0:
+            self.mv+=self.M311.volume
+        if self.M312 !=0:
+            self.mv+=self.M312.volume
+        if self.M313 !=0:
+            self.mv+=self.M313.volume
+        if self.M314 !=0:
+            self.mv+=self.M314.volume
+        if self.M315 !=0:
+            self.mv+=self.M315.volume
+        if self.M316 !=0:
+            self.mv+=self.M316.volume
+        if self.M317 !=0:
+            self.mv+=self.M317.volume
+        if self.M318 !=0:
+            self.mv+=self.M318.volume
+        if self.M319 !=0:
+            self.mv+=self.M319.volume
+        if self.M320 !=0:
+            self.mv+=self.M320.volume
+        if self.M321 !=0:
+            self.mv+=self.M321.volume
+        if self.M322 !=0:
+            self.mv+=self.M322.volume
+        if self.M323 !=0:
+            self.mv+=self.M323.volume
+        if self.M324 !=0:
+            self.mv+=self.M324.volume
+        if self.M325 !=0:
+            self.mv+=self.M325.volume
+        if self.M326 !=0:
+            self.mv+=self.M326.volume
+        if self.M327 !=0:
+            self.mv+=self.M327.volume
+        if self.M328 !=0:
+            self.mv+=self.M328.volume
+        if self.M329 !=0:
+            self.mv+=self.M329.volume
+        if self.M330 !=0:
+            self.mv+=self.M330.volume
+        if self.M331 !=0:
+            self.mv+=self.M331.volume
+        if self.M332 !=0:
+            self.mv+=self.M332.volume
+        if self.M333 !=0:
+            self.mv+=self.M333.volume
+        if self.M334 !=0:
+            self.mv+=self.M334.volume
+        if self.M335 !=0:
+            self.mv+=self.M335.volume
+        if self.M336 !=0:
+            self.mv+=self.M336.volume
+        if self.M337 !=0:
+            self.mv+=self.M337.volume
+        if self.M338 !=0:
+            self.mv+=self.M338.volume
+        if self.M339 !=0:
+            self.mv+=self.M339.volume
+        if self.M340 !=0:
+            self.mv+=self.M340.volume
+        if self.M341 !=0:
+            self.mv+=self.M341.volume
+        if self.M342 !=0:
+            self.mv+=self.M342.volume
+        if self.M343 !=0:
+            self.mv+=self.M343.volume
+        if self.M344 !=0:
+            self.mv+=self.M344.volume
+        if self.M345 !=0:
+            self.mv+=self.M345.volume
+        if self.M346 !=0:
+            self.mv+=self.M346.volume
+        if self.M347 !=0:
+            self.mv+=self.M347.volume
+        if self.M348 !=0:
+            self.mv+=self.M348.volume
+        if self.M349 !=0:
+            self.mv+=self.M349.volume
+        if self.M350 !=0:
+            self.mv+=self.M350.volume
+        if self.M351 !=0:
+            self.mv+=self.M351.volume
+        if self.M352 !=0:
+            self.mv+=self.M352.volume
+        if self.M353 !=0:
+            self.mv+=self.M353.volume
+        if self.M354 !=0:
+            self.mv+=self.M354.volume
+        if self.M355 !=0:
+            self.mv+=self.M355.volume
+        if self.M356 !=0:
+            self.mv+=self.M356.volume
+        if self.M357 !=0:
+            self.mv+=self.M357.volume
+        if self.M358 !=0:
+            self.mv+=self.M358.volume
+        if self.M359 !=0:
+            self.mv+=self.M359.volume
+        if self.M360 !=0:
+            self.mv+=self.M360.volume
+        if self.M361 !=0:
+            self.mv+=self.M361.volume
+        if self.M362 !=0:
+            self.mv+=self.M362.volume
+        if self.M363 !=0:
+            self.mv+=self.M363.volume
+        if self.M364 !=0:
+            self.mv+=self.M364.volume
+        if self.M365 !=0:
+            self.mv+=self.M365.volume
+        if self.M366 !=0:
+            self.mv+=self.M366.volume
+        if self.M367 !=0:
+            self.mv+=self.M367.volume
+        if self.M368 !=0:
+            self.mv+=self.M368.volume
+        if self.M369 !=0:
+            self.mv+=self.M369.volume
+        if self.M370 !=0:
+            self.mv+=self.M370.volume
+        if self.M371 !=0:
+            self.mv+=self.M371.volume
+        if self.M372 !=0:
+            self.mv+=self.M372.volume
+        if self.M373 !=0:
+            self.mv+=self.M373.volume
+        if self.M374 !=0:
+            self.mv+=self.M374.volume
+        if self.M375 !=0:
+            self.mv+=self.M375.volume
+        if self.M376 !=0:
+            self.mv+=self.M376.volume
+        if self.M377 !=0:
+            self.mv+=self.M377.volume
+        if self.M378 !=0:
+            self.mv+=self.M378.volume
+        if self.M379 !=0:
+            self.mv+=self.M379.volume
+        if self.M380 !=0:
+            self.mv+=self.M380.volume
+        if self.M381 !=0:
+            self.mv+=self.M381.volume
+        if self.M382 !=0:
+            self.mv+=self.M382.volume
+        if self.M383 !=0:
+            self.mv+=self.M383.volume
+        if self.M384 !=0:
+            self.mv+=self.M384.volume
+        if self.M385 !=0:
+            self.mv+=self.M385.volume
+        if self.M386 !=0:
+            self.mv+=self.M386.volume
+        if self.M387 !=0:
+            self.mv+=self.M387.volume
+        if self.M388 !=0:
+            self.mv+=self.M388.volume
+        if self.M389 !=0:
+            self.mv+=self.M389.volume
+        if self.M390 !=0:
+            self.mv+=self.M390.volume
+        if self.M391 !=0:
+            self.mv+=self.M391.volume
+        if self.M392 !=0:
+            self.mv+=self.M392.volume
+        if self.M393 !=0:
+            self.mv+=self.M393.volume
+        if self.M394 !=0:
+            self.mv+=self.M394.volume
+        if self.M395 !=0:
+            self.mv+=self.M395.volume
+        if self.M396 !=0:
+            self.mv+=self.M396.volume
+        if self.M397 !=0:
+            self.mv+=self.M397.volume
+        if self.M398 !=0:
+            self.mv+=self.M398.volume
+        if self.M399 !=0:
+            self.mv+=self.M399.volume
+        if self.M400 !=0:
+            self.mv+=self.M400.volume
+        if self.M401 !=0:
+            self.mv+=self.M401.volume
+        if self.M402 !=0:
+            self.mv+=self.M402.volume
+        if self.M403 !=0:
+            self.mv+=self.M403.volume
+        if self.M404 !=0:
+            self.mv+=self.M404.volume
+        if self.M405 !=0:
+            self.mv+=self.M405.volume
+        if self.M406 !=0:
+            self.mv+=self.M406.volume
+        if self.M407 !=0:
+            self.mv+=self.M407.volume
+        if self.M408 !=0:
+            self.mv+=self.M408.volume
+        if self.M409 !=0:
+            self.mv+=self.M409.volume
+        if self.M410 !=0:
+            self.mv+=self.M410.volume
+        if self.M411 !=0:
+            self.mv+=self.M411.volume
+        if self.M412 !=0:
+            self.mv+=self.M412.volume
+        if self.M413 !=0:
+            self.mv+=self.M413.volume
+        if self.M414 !=0:
+            self.mv+=self.M414.volume
+        if self.M415 !=0:
+            self.mv+=self.M415.volume
+        if self.M416 !=0:
+            self.mv+=self.M416.volume
+        if self.M417 !=0:
+            self.mv+=self.M417.volume
+        if self.M418 !=0:
+            self.mv+=self.M418.volume
+        if self.M419 !=0:
+            self.mv+=self.M419.volume
+        if self.M420 !=0:
+            self.mv+=self.M420.volume
+        if self.M421 !=0:
+            self.mv+=self.M421.volume
+        if self.M422 !=0:
+            self.mv+=self.M422.volume
+        if self.M423 !=0:
+            self.mv+=self.M423.volume
+        if self.M424 !=0:
+            self.mv+=self.M424.volume
+        if self.M425 !=0:
+            self.mv+=self.M425.volume
+        if self.M426 !=0:
+            self.mv+=self.M426.volume
+        if self.M427 !=0:
+            self.mv+=self.M427.volume
+        if self.M428 !=0:
+            self.mv+=self.M428.volume
+        if self.M429 !=0:
+            self.mv+=self.M429.volume
+        if self.M430 !=0:
+            self.mv+=self.M430.volume
+        if self.M431 !=0:
+            self.mv+=self.M431.volume
+        if self.M432 !=0:
+            self.mv+=self.M432.volume
+        if self.M433 !=0:
+            self.mv+=self.M433.volume
+        if self.M434 !=0:
+            self.mv+=self.M434.volume
+        if self.M435 !=0:
+            self.mv+=self.M435.volume
+        if self.M436 !=0:
+            self.mv+=self.M436.volume
+        if self.M437 !=0:
+            self.mv+=self.M437.volume
+        if self.M438 !=0:
+            self.mv+=self.M438.volume
+        if self.M439 !=0:
+            self.mv+=self.M439.volume
+        if self.M440 !=0:
+            self.mv+=self.M440.volume
+        if self.M441 !=0:
+            self.mv+=self.M441.volume
+        if self.M442 !=0:
+            self.mv+=self.M442.volume
+        if self.M443 !=0:
+            self.mv+=self.M443.volume
+        if self.M444 !=0:
+            self.mv+=self.M444.volume
+        if self.M445 !=0:
+            self.mv+=self.M445.volume
+        if self.M446 !=0:
+            self.mv+=self.M446.volume
+        if self.M447 !=0:
+            self.mv+=self.M447.volume
+        if self.M448 !=0:
+            self.mv+=self.M448.volume
+        if self.M449 !=0:
+            self.mv+=self.M449.volume
+        if self.M450 !=0:
+            self.mv+=self.M450.volume
+        if self.M451 !=0:
+            self.mv+=self.M451.volume
+        if self.M452 !=0:
+            self.mv+=self.M452.volume
+        if self.M453 !=0:
+            self.mv+=self.M453.volume
+        if self.M454 !=0:
+            self.mv+=self.M454.volume
+        if self.M455 !=0:
+            self.mv+=self.M455.volume
+        if self.M456 !=0:
+            self.mv+=self.M456.volume
+        if self.M457 !=0:
+            self.mv+=self.M457.volume
+        if self.M458 !=0:
+            self.mv+=self.M458.volume
+        if self.M459 !=0:
+            self.mv+=self.M459.volume
+        if self.M460 !=0:
+            self.mv+=self.M460.volume
+        if self.M461 !=0:
+            self.mv+=self.M461.volume
+        if self.M462 !=0:
+            self.mv+=self.M462.volume
+        if self.M463 !=0:
+            self.mv+=self.M463.volume
+        if self.M464 !=0:
+            self.mv+=self.M464.volume
+        if self.M465 !=0:
+            self.mv+=self.M465.volume
+        if self.M466 !=0:
+            self.mv+=self.M466.volume
+        if self.M467 !=0:
+            self.mv+=self.M467.volume
+        if self.M468 !=0:
+            self.mv+=self.M468.volume
+        if self.M469 !=0:
+            self.mv+=self.M469.volume
+        if self.M470 !=0:
+            self.mv+=self.M470.volume
+        if self.M471 !=0:
+            self.mv+=self.M471.volume
+        if self.M472 !=0:
+            self.mv+=self.M472.volume
+        if self.M473 !=0:
+            self.mv+=self.M473.volume
+        if self.M474 !=0:
+            self.mv+=self.M474.volume
+        if self.M475 !=0:
+            self.mv+=self.M475.volume
+        if self.M476 !=0:
+            self.mv+=self.M476.volume
+        if self.M477 !=0:
+            self.mv+=self.M477.volume
+        if self.M478 !=0:
+            self.mv+=self.M478.volume
+        if self.M479 !=0:
+            self.mv+=self.M479.volume
+        if self.M480 !=0:
+            self.mv+=self.M480.volume
+        if self.M481 !=0:
+            self.mv+=self.M481.volume
+        if self.M482 !=0:
+            self.mv+=self.M482.volume
+        if self.M483 !=0:
+            self.mv+=self.M483.volume
+        if self.M484 !=0:
+            self.mv+=self.M484.volume
+        if self.M485 !=0:
+            self.mv+=self.M485.volume
+        if self.M486 !=0:
+            self.mv+=self.M486.volume
+        if self.M487 !=0:
+            self.mv+=self.M487.volume
+        if self.M488 !=0:
+            self.mv+=self.M488.volume
+        if self.M489 !=0:
+            self.mv+=self.M489.volume
+        if self.M490 !=0:
+            self.mv+=self.M490.volume
+        if self.M491 !=0:
+            self.mv+=self.M491.volume
+        if self.M492 !=0:
+            self.mv+=self.M492.volume
+        if self.M493 !=0:
+            self.mv+=self.M493.volume
+        if self.M494 !=0:
+            self.mv+=self.M494.volume
+        if self.M495 !=0:
+            self.mv+=self.M495.volume
+        if self.M496 !=0:
+            self.mv+=self.M496.volume
+        if self.M497 !=0:
+            self.mv+=self.M497.volume
+        if self.M498 !=0:
+            self.mv+=self.M498.volume
+        if self.M499 !=0:
+            self.mv+=self.M499.volume
+        if self.M500 !=0:
+            self.mv+=self.M500.volume
+        if self.M501 !=0:
+            self.mv+=self.M501.volume
+        if self.M502 !=0:
+            self.mv+=self.M502.volume
+        if self.M503 !=0:
+            self.mv+=self.M503.volume
+        if self.M504 !=0:
+            self.mv+=self.M504.volume
+        if self.M505 !=0:
+            self.mv+=self.M505.volume
+        if self.M506 !=0:
+            self.mv+=self.M506.volume
+        if self.M507 !=0:
+            self.mv+=self.M507.volume
+        if self.M508 !=0:
+            self.mv+=self.M508.volume
+        if self.M509 !=0:
+            self.mv+=self.M509.volume
+        if self.M510 !=0:
+            self.mv+=self.M510.volume
+        if self.M511 !=0:
+            self.mv+=self.M511.volume
+        if self.M512 !=0:
+            self.mv+=self.M512.volume
+        if self.M513 !=0:
+            self.mv+=self.M513.volume
+        if self.M514 !=0:
+            self.mv+=self.M514.volume
+        if self.M515 !=0:
+            self.mv+=self.M515.volume
+        if self.M516 !=0:
+            self.mv+=self.M516.volume
+        if self.M517 !=0:
+            self.mv+=self.M517.volume
+        if self.M518 !=0:
+            self.mv+=self.M518.volume
+        if self.M519 !=0:
+            self.mv+=self.M519.volume
+        if self.M520 !=0:
+            self.mv+=self.M520.volume
+        if self.M521 !=0:
+            self.mv+=self.M521.volume
+        if self.M522 !=0:
+            self.mv+=self.M522.volume
+        if self.M523 !=0:
+            self.mv+=self.M523.volume
+        if self.M524 !=0:
+            self.mv+=self.M524.volume
+        if self.M525 !=0:
+            self.mv+=self.M525.volume
+        if self.M526 !=0:
+            self.mv+=self.M526.volume
+        if self.M527 !=0:
+            self.mv+=self.M527.volume
+        if self.M528 !=0:
+            self.mv+=self.M528.volume
+        if self.M529 !=0:
+            self.mv+=self.M529.volume
+        if self.M530 !=0:
+            self.mv+=self.M530.volume
+        if self.M531 !=0:
+            self.mv+=self.M531.volume
+        if self.M532 !=0:
+            self.mv+=self.M532.volume
+        if self.M533 !=0:
+            self.mv+=self.M533.volume
+        if self.M534 !=0:
+            self.mv+=self.M534.volume
+        if self.M535 !=0:
+            self.mv+=self.M535.volume
+        if self.M536 !=0:
+            self.mv+=self.M536.volume
+        if self.M537 !=0:
+            self.mv+=self.M537.volume
+        if self.M538 !=0:
+            self.mv+=self.M538.volume
+        if self.M539 !=0:
+            self.mv+=self.M539.volume
+        if self.M540 !=0:
+            self.mv+=self.M540.volume
+        if self.M541 !=0:
+            self.mv+=self.M541.volume
+        if self.M542 !=0:
+            self.mv+=self.M542.volume
+        if self.M543 !=0:
+            self.mv+=self.M543.volume
+        if self.M544 !=0:
+            self.mv+=self.M544.volume
+        if self.M545 !=0:
+            self.mv+=self.M545.volume
+        if self.M546 !=0:
+            self.mv+=self.M546.volume
+        if self.M547 !=0:
+            self.mv+=self.M547.volume
+        if self.M548 !=0:
+            self.mv+=self.M548.volume
+        if self.M549 !=0:
+            self.mv+=self.M549.volume
+        if self.M550 !=0:
+            self.mv+=self.M550.volume
+        if self.M551 !=0:
+            self.mv+=self.M551.volume
+        if self.M552 !=0:
+            self.mv+=self.M552.volume
+        if self.M553 !=0:
+            self.mv+=self.M553.volume
+        if self.M554 !=0:
+            self.mv+=self.M554.volume
+        if self.M555 !=0:
+            self.mv+=self.M555.volume
+        if self.M556 !=0:
+            self.mv+=self.M556.volume
+        if self.M557 !=0:
+            self.mv+=self.M557.volume
+        if self.M558 !=0:
+            self.mv+=self.M558.volume
+        if self.M559 !=0:
+            self.mv+=self.M559.volume
+        if self.M560 !=0:
+            self.mv+=self.M560.volume
+        if self.M561 !=0:
+            self.mv+=self.M561.volume
+        if self.M562 !=0:
+            self.mv+=self.M562.volume
+        if self.M563 !=0:
+            self.mv+=self.M563.volume
+        if self.M564 !=0:
+            self.mv+=self.M564.volume
+        if self.M565 !=0:
+            self.mv+=self.M565.volume
+        if self.M566 !=0:
+            self.mv+=self.M566.volume
+        if self.M567 !=0:
+            self.mv+=self.M567.volume
+        if self.M568 !=0:
+            self.mv+=self.M568.volume
+        if self.M569 !=0:
+            self.mv+=self.M569.volume
+        if self.M570 !=0:
+            self.mv+=self.M570.volume
+        if self.M571 !=0:
+            self.mv+=self.M571.volume
+        if self.M572 !=0:
+            self.mv+=self.M572.volume
+        if self.M573 !=0:
+            self.mv+=self.M573.volume
+        if self.M574 !=0:
+            self.mv+=self.M574.volume
+        if self.M575 !=0:
+            self.mv+=self.M575.volume
+        if self.M576 !=0:
+            self.mv+=self.M576.volume
+        if self.M577 !=0:
+            self.mv+=self.M577.volume
+        if self.M578 !=0:
+            self.mv+=self.M578.volume
+        if self.M579 !=0:
+            self.mv+=self.M579.volume
+        if self.M580 !=0:
+            self.mv+=self.M580.volume
+        if self.M581 !=0:
+            self.mv+=self.M581.volume
+        if self.M582 !=0:
+            self.mv+=self.M582.volume
+        if self.M583 !=0:
+            self.mv+=self.M583.volume
+        if self.M584 !=0:
+            self.mv+=self.M584.volume
+        if self.M585 !=0:
+            self.mv+=self.M585.volume
+        if self.M586 !=0:
+            self.mv+=self.M586.volume
+        if self.M587 !=0:
+            self.mv+=self.M587.volume
+        if self.M588 !=0:
+            self.mv+=self.M588.volume
+        if self.M589 !=0:
+            self.mv+=self.M589.volume
+        if self.M590 !=0:
+            self.mv+=self.M590.volume
+        if self.M591 !=0:
+            self.mv+=self.M591.volume
+        if self.M592 !=0:
+            self.mv+=self.M592.volume
+        if self.M593 !=0:
+            self.mv+=self.M593.volume
+        if self.M594 !=0:
+            self.mv+=self.M594.volume
+        if self.M595 !=0:
+            self.mv+=self.M595.volume
+        if self.M596 !=0:
+            self.mv+=self.M596.volume
+        if self.M597 !=0:
+            self.mv+=self.M597.volume
+        if self.M598 !=0:
+            self.mv+=self.M598.volume
+        if self.M599 !=0:
+            self.mv+=self.M599.volume
+        if self.M600 !=0:
+            self.mv+=self.M600.volume
+        if self.M601 !=0:
+            self.mv+=self.M601.volume
+        if self.M602 !=0:
+            self.mv+=self.M602.volume
+        if self.M603 !=0:
+            self.mv+=self.M603.volume
+        if self.M604 !=0:
+            self.mv+=self.M604.volume
+        if self.M605 !=0:
+            self.mv+=self.M605.volume
+        if self.M606 !=0:
+            self.mv+=self.M606.volume
+        if self.M607 !=0:
+            self.mv+=self.M607.volume
+        if self.M608 !=0:
+            self.mv+=self.M608.volume
+        if self.M609 !=0:
+            self.mv+=self.M609.volume
+        if self.M610 !=0:
+            self.mv+=self.M610.volume
+        if self.M611 !=0:
+            self.mv+=self.M611.volume
+        if self.M612 !=0:
+            self.mv+=self.M612.volume
+        if self.M613 !=0:
+            self.mv+=self.M613.volume
+        if self.M614 !=0:
+            self.mv+=self.M614.volume
+        if self.M615 !=0:
+            self.mv+=self.M615.volume
+        if self.M616 !=0:
+            self.mv+=self.M616.volume
+        if self.M617 !=0:
+            self.mv+=self.M617.volume
+        if self.M618 !=0:
+            self.mv+=self.M618.volume
+        if self.M619 !=0:
+            self.mv+=self.M619.volume
+        if self.M620 !=0:
+            self.mv+=self.M620.volume
+        if self.M621 !=0:
+            self.mv+=self.M621.volume
+        if self.M622 !=0:
+            self.mv+=self.M622.volume
+        if self.M623 !=0:
+            self.mv+=self.M623.volume
+        if self.M624 !=0:
+            self.mv+=self.M624.volume
+        if self.M625 !=0:
+            self.mv+=self.M625.volume
+        if self.M626 !=0:
+            self.mv+=self.M626.volume
+        if self.M627 !=0:
+            self.mv+=self.M627.volume
+        if self.M628 !=0:
+            self.mv+=self.M628.volume
+        if self.M629 !=0:
+            self.mv+=self.M629.volume
+        if self.M630 !=0:
+            self.mv+=self.M630.volume
+        if self.M631 !=0:
+            self.mv+=self.M631.volume
+        if self.M632 !=0:
+            self.mv+=self.M632.volume
+        if self.M633 !=0:
+            self.mv+=self.M633.volume
+        if self.M634 !=0:
+            self.mv+=self.M634.volume
+        if self.M635 !=0:
+            self.mv+=self.M635.volume
+        if self.M636 !=0:
+            self.mv+=self.M636.volume
+        if self.M637 !=0:
+            self.mv+=self.M637.volume
+        if self.M638 !=0:
+            self.mv+=self.M638.volume
+        if self.M639 !=0:
+            self.mv+=self.M639.volume
+        if self.M640 !=0:
+            self.mv+=self.M640.volume
+        if self.M641 !=0:
+            self.mv+=self.M641.volume
+        if self.M642 !=0:
+            self.mv+=self.M642.volume
+        if self.M643 !=0:
+            self.mv+=self.M643.volume
+        if self.M644 !=0:
+            self.mv+=self.M644.volume
+        if self.M645 !=0:
+            self.mv+=self.M645.volume
+        if self.M646 !=0:
+            self.mv+=self.M646.volume
+        if self.M647 !=0:
+            self.mv+=self.M647.volume
+        if self.M648 !=0:
+            self.mv+=self.M648.volume
+        if self.M649 !=0:
+            self.mv+=self.M649.volume
+        if self.M650 !=0:
+            self.mv+=self.M650.volume
+        if self.M651 !=0:
+            self.mv+=self.M651.volume
+        if self.M652 !=0:
+            self.mv+=self.M652.volume
+        if self.M653 !=0:
+            self.mv+=self.M653.volume
+        if self.M654 !=0:
+            self.mv+=self.M654.volume
+        if self.M655 !=0:
+            self.mv+=self.M655.volume
+        if self.M656 !=0:
+            self.mv+=self.M656.volume
+        if self.M657 !=0:
+            self.mv+=self.M657.volume
+        if self.M658 !=0:
+            self.mv+=self.M658.volume
+        if self.M659 !=0:
+            self.mv+=self.M659.volume
+        if self.M660 !=0:
+            self.mv+=self.M660.volume
+        if self.M661 !=0:
+            self.mv+=self.M661.volume
+        if self.M662 !=0:
+            self.mv+=self.M662.volume
+        if self.M663 !=0:
+            self.mv+=self.M663.volume
+        if self.M664 !=0:
+            self.mv+=self.M664.volume
+        if self.M665 !=0:
+            self.mv+=self.M665.volume
+        if self.M666 !=0:
+            self.mv+=self.M666.volume
+        if self.M667 !=0:
+            self.mv+=self.M667.volume
+        if self.M668 !=0:
+            self.mv+=self.M668.volume
+        if self.M669 !=0:
+            self.mv+=self.M669.volume
+        if self.M670 !=0:
+            self.mv+=self.M670.volume
+        if self.M671 !=0:
+            self.mv+=self.M671.volume
+        if self.M672 !=0:
+            self.mv+=self.M672.volume
+        if self.M673 !=0:
+            self.mv+=self.M673.volume
+        if self.M674 !=0:
+            self.mv+=self.M674.volume
+        if self.M675 !=0:
+            self.mv+=self.M675.volume
+        if self.M676 !=0:
+            self.mv+=self.M676.volume
+        if self.M677 !=0:
+            self.mv+=self.M677.volume
+        if self.M678 !=0:
+            self.mv+=self.M678.volume
+        if self.M679 !=0:
+            self.mv+=self.M679.volume
+        if self.M680 !=0:
+            self.mv+=self.M680.volume
+        if self.M681 !=0:
+            self.mv+=self.M681.volume
+        if self.M682 !=0:
+            self.mv+=self.M682.volume
+        if self.M683 !=0:
+            self.mv+=self.M683.volume
+        if self.M684 !=0:
+            self.mv+=self.M684.volume
+        if self.M685 !=0:
+            self.mv+=self.M685.volume
+        if self.M686 !=0:
+            self.mv+=self.M686.volume
+        if self.M687 !=0:
+            self.mv+=self.M687.volume
+        if self.M688 !=0:
+            self.mv+=self.M688.volume
+        if self.M689 !=0:
+            self.mv+=self.M689.volume
+        if self.M690 !=0:
+            self.mv+=self.M690.volume
+        if self.M691 !=0:
+            self.mv+=self.M691.volume
+        if self.M692 !=0:
+            self.mv+=self.M692.volume
+        if self.M693 !=0:
+            self.mv+=self.M693.volume
+        if self.M694 !=0:
+            self.mv+=self.M694.volume
+        if self.M695 !=0:
+            self.mv+=self.M695.volume
+        if self.M696 !=0:
+            self.mv+=self.M696.volume
+        if self.M697 !=0:
+            self.mv+=self.M697.volume
+        if self.M698 !=0:
+            self.mv+=self.M698.volume
+        if self.M699 !=0:
+            self.mv+=self.M699.volume
+        if self.M700 !=0:
+            self.mv+=self.M700.volume
+        if self.M701 !=0:
+            self.mv+=self.M701.volume
+        if self.M702 !=0:
+            self.mv+=self.M702.volume
+        if self.M703 !=0:
+            self.mv+=self.M703.volume
+        if self.M704 !=0:
+            self.mv+=self.M704.volume
+        if self.M705 !=0:
+            self.mv+=self.M705.volume
+        if self.M706 !=0:
+            self.mv+=self.M706.volume
+        if self.M707 !=0:
+            self.mv+=self.M707.volume
+        if self.M708 !=0:
+            self.mv+=self.M708.volume
+        if self.M709 !=0:
+            self.mv+=self.M709.volume
+        if self.M710 !=0:
+            self.mv+=self.M710.volume
+        if self.M711 !=0:
+            self.mv+=self.M711.volume
+        if self.M712 !=0:
+            self.mv+=self.M712.volume
+        if self.M713 !=0:
+            self.mv+=self.M713.volume
+        if self.M714 !=0:
+            self.mv+=self.M714.volume
+        if self.M715 !=0:
+            self.mv+=self.M715.volume
+        if self.M716 !=0:
+            self.mv+=self.M716.volume
+        if self.M717 !=0:
+            self.mv+=self.M717.volume
+        if self.M718 !=0:
+            self.mv+=self.M718.volume
+        if self.M719 !=0:
+            self.mv+=self.M719.volume
+        if self.M720 !=0:
+            self.mv+=self.M720.volume
+        if self.M721 !=0:
+            self.mv+=self.M721.volume
+        if self.M722 !=0:
+            self.mv+=self.M722.volume
+        if self.M723 !=0:
+            self.mv+=self.M723.volume
+        if self.M724 !=0:
+            self.mv+=self.M724.volume
+        if self.M725 !=0:
+            self.mv+=self.M725.volume
+        if self.M726 !=0:
+            self.mv+=self.M726.volume
+        if self.M727 !=0:
+            self.mv+=self.M727.volume
+        if self.M728 !=0:
+            self.mv+=self.M728.volume
+        if self.M729 !=0:
+            self.mv+=self.M729.volume
+        if self.M730 !=0:
+            self.mv+=self.M730.volume
+        if self.M731 !=0:
+            self.mv+=self.M731.volume
+        if self.M732 !=0:
+            self.mv+=self.M732.volume
+        if self.M733 !=0:
+            self.mv+=self.M733.volume
+        if self.M734 !=0:
+            self.mv+=self.M734.volume
+        if self.M735 !=0:
+            self.mv+=self.M735.volume
+        if self.M736 !=0:
+            self.mv+=self.M736.volume
+        if self.M737 !=0:
+            self.mv+=self.M737.volume
+        if self.M738 !=0:
+            self.mv+=self.M738.volume
+        if self.M739 !=0:
+            self.mv+=self.M739.volume
+        if self.M740 !=0:
+            self.mv+=self.M740.volume
+        if self.M741 !=0:
+            self.mv+=self.M741.volume
+        if self.M742 !=0:
+            self.mv+=self.M742.volume
+        if self.M743 !=0:
+            self.mv+=self.M743.volume
+        if self.M744 !=0:
+            self.mv+=self.M744.volume
+        if self.M745 !=0:
+            self.mv+=self.M745.volume
+        if self.M746 !=0:
+            self.mv+=self.M746.volume
+        if self.M747 !=0:
+            self.mv+=self.M747.volume
+        if self.M748 !=0:
+            self.mv+=self.M748.volume
+        if self.M749 !=0:
+            self.mv+=self.M749.volume
+        if self.M750 !=0:
+            self.mv+=self.M750.volume
+        if self.M751 !=0:
+            self.mv+=self.M751.volume
+        if self.M752 !=0:
+            self.mv+=self.M752.volume
+        if self.M753 !=0:
+            self.mv+=self.M753.volume
+        if self.M754 !=0:
+            self.mv+=self.M754.volume
+        if self.M755 !=0:
+            self.mv+=self.M755.volume
+        if self.M756 !=0:
+            self.mv+=self.M756.volume
+        if self.M757 !=0:
+            self.mv+=self.M757.volume
+        if self.M758 !=0:
+            self.mv+=self.M758.volume
+        if self.M759 !=0:
+            self.mv+=self.M759.volume
+        if self.M760 !=0:
+            self.mv+=self.M760.volume
+        if self.M761 !=0:
+            self.mv+=self.M761.volume
+        if self.M762 !=0:
+            self.mv+=self.M762.volume
+        if self.M763 !=0:
+            self.mv+=self.M763.volume
+        if self.M764 !=0:
+            self.mv+=self.M764.volume
+        if self.M765 !=0:
+            self.mv+=self.M765.volume
+        if self.M766 !=0:
+            self.mv+=self.M766.volume
+        if self.M767 !=0:
+            self.mv+=self.M767.volume
+        if self.M768 !=0:
+            self.mv+=self.M768.volume
+        if self.M769 !=0:
+            self.mv+=self.M769.volume
+        if self.M770 !=0:
+            self.mv+=self.M770.volume
+        if self.M771 !=0:
+            self.mv+=self.M771.volume
+        if self.M772 !=0:
+            self.mv+=self.M772.volume
+        if self.M773 !=0:
+            self.mv+=self.M773.volume
+        if self.M774 !=0:
+            self.mv+=self.M774.volume
+        if self.M775 !=0:
+            self.mv+=self.M775.volume
+        if self.M776 !=0:
+            self.mv+=self.M776.volume
+        if self.M777 !=0:
+            self.mv+=self.M777.volume
+        if self.M778 !=0:
+            self.mv+=self.M778.volume
+        if self.M779 !=0:
+            self.mv+=self.M779.volume
+        if self.M780 !=0:
+            self.mv+=self.M780.volume
+        if self.M781 !=0:
+            self.mv+=self.M781.volume
+        if self.M782 !=0:
+            self.mv+=self.M782.volume
+        if self.M783 !=0:
+            self.mv+=self.M783.volume
+        if self.M784 !=0:
+            self.mv+=self.M784.volume
+        if self.M785 !=0:
+            self.mv+=self.M785.volume
+        if self.M786 !=0:
+            self.mv+=self.M786.volume
+        if self.M787 !=0:
+            self.mv+=self.M787.volume
+        if self.M788 !=0:
+            self.mv+=self.M788.volume
+        if self.M789 !=0:
+            self.mv+=self.M789.volume
+        if self.M790 !=0:
+            self.mv+=self.M790.volume
+        if self.M791 !=0:
+            self.mv+=self.M791.volume
+        if self.M792 !=0:
+            self.mv+=self.M792.volume
+        if self.M793 !=0:
+            self.mv+=self.M793.volume
+        if self.M794 !=0:
+            self.mv+=self.M794.volume
+        if self.M795 !=0:
+            self.mv+=self.M795.volume
+        if self.M796 !=0:
+            self.mv+=self.M796.volume
+        if self.M797 !=0:
+            self.mv+=self.M797.volume
+        if self.M798 !=0:
+            self.mv+=self.M798.volume
+        if self.M799 !=0:
+            self.mv+=self.M799.volume
+        if self.M800 !=0:
+            self.mv+=self.M800.volume
+        if self.M801 !=0:
+            self.mv+=self.M801.volume
+        if self.M802 !=0:
+            self.mv+=self.M802.volume
+        if self.M803 !=0:
+            self.mv+=self.M803.volume
+        if self.M804 !=0:
+            self.mv+=self.M804.volume
+        if self.M805 !=0:
+            self.mv+=self.M805.volume
+        if self.M806 !=0:
+            self.mv+=self.M806.volume
+        if self.M807 !=0:
+            self.mv+=self.M807.volume
+        if self.M808 !=0:
+            self.mv+=self.M808.volume
+        if self.M809 !=0:
+            self.mv+=self.M809.volume
+        if self.M810 !=0:
+            self.mv+=self.M810.volume
+        if self.M811 !=0:
+            self.mv+=self.M811.volume
+        if self.M812 !=0:
+            self.mv+=self.M812.volume
+        if self.M813 !=0:
+            self.mv+=self.M813.volume
+        if self.M814 !=0:
+            self.mv+=self.M814.volume
+        if self.M815 !=0:
+            self.mv+=self.M815.volume
+        if self.M816 !=0:
+            self.mv+=self.M816.volume
+        if self.M817 !=0:
+            self.mv+=self.M817.volume
+        if self.M818 !=0:
+            self.mv+=self.M818.volume
+        if self.M819 !=0:
+            self.mv+=self.M819.volume
+        if self.M820 !=0:
+            self.mv+=self.M820.volume
+        if self.M821 !=0:
+            self.mv+=self.M821.volume
+        if self.M822 !=0:
+            self.mv+=self.M822.volume
+        if self.M823 !=0:
+            self.mv+=self.M823.volume
+        if self.M824 !=0:
+            self.mv+=self.M824.volume
+        if self.M825 !=0:
+            self.mv+=self.M825.volume
+        if self.M826 !=0:
+            self.mv+=self.M826.volume
+        if self.M827 !=0:
+            self.mv+=self.M827.volume
+        if self.M828 !=0:
+            self.mv+=self.M828.volume
+        if self.M829 !=0:
+            self.mv+=self.M829.volume
+        if self.M830 !=0:
+            self.mv+=self.M830.volume
+        if self.M831 !=0:
+            self.mv+=self.M831.volume
+        if self.M832 !=0:
+            self.mv+=self.M832.volume
+        if self.M833 !=0:
+            self.mv+=self.M833.volume
+        if self.M834 !=0:
+            self.mv+=self.M834.volume
+        if self.M835 !=0:
+            self.mv+=self.M835.volume
+        if self.M836 !=0:
+            self.mv+=self.M836.volume
+        if self.M837 !=0:
+            self.mv+=self.M837.volume
+        if self.M838 !=0:
+            self.mv+=self.M838.volume
+        if self.M839 !=0:
+            self.mv+=self.M839.volume
+        if self.M840 !=0:
+            self.mv+=self.M840.volume
+        if self.M841 !=0:
+            self.mv+=self.M841.volume
+        if self.M842 !=0:
+            self.mv+=self.M842.volume
+        if self.M843 !=0:
+            self.mv+=self.M843.volume
+        if self.M844 !=0:
+            self.mv+=self.M844.volume
+        if self.M845 !=0:
+            self.mv+=self.M845.volume
+        if self.M846 !=0:
+            self.mv+=self.M846.volume
+        if self.M847 !=0:
+            self.mv+=self.M847.volume
+        if self.M848 !=0:
+            self.mv+=self.M848.volume
+        if self.M849 !=0:
+            self.mv+=self.M849.volume
+        if self.M850 !=0:
+            self.mv+=self.M850.volume
+        if self.M851 !=0:
+            self.mv+=self.M851.volume
+        if self.M852 !=0:
+            self.mv+=self.M852.volume
+        if self.M853 !=0:
+            self.mv+=self.M853.volume
+        if self.M854 !=0:
+            self.mv+=self.M854.volume
+        if self.M855 !=0:
+            self.mv+=self.M855.volume
+        if self.M856 !=0:
+            self.mv+=self.M856.volume
+        if self.M857 !=0:
+            self.mv+=self.M857.volume
+        if self.M858 !=0:
+            self.mv+=self.M858.volume
+        if self.M859 !=0:
+            self.mv+=self.M859.volume
+        if self.M860 !=0:
+            self.mv+=self.M860.volume
+        if self.M861 !=0:
+            self.mv+=self.M861.volume
+        if self.M862 !=0:
+            self.mv+=self.M862.volume
+        if self.M863 !=0:
+            self.mv+=self.M863.volume
+        if self.M864 !=0:
+            self.mv+=self.M864.volume
+        if self.M865 !=0:
+            self.mv+=self.M865.volume
+        if self.M866 !=0:
+            self.mv+=self.M866.volume
+        if self.M867 !=0:
+            self.mv+=self.M867.volume
+        if self.M868 !=0:
+            self.mv+=self.M868.volume
+        if self.M869 !=0:
+            self.mv+=self.M869.volume
+        if self.M870 !=0:
+            self.mv+=self.M870.volume
+        if self.M871 !=0:
+            self.mv+=self.M871.volume
+        if self.M872 !=0:
+            self.mv+=self.M872.volume
+        if self.M873 !=0:
+            self.mv+=self.M873.volume
+        if self.M874 !=0:
+            self.mv+=self.M874.volume
+        if self.M875 !=0:
+            self.mv+=self.M875.volume
+        if self.M876 !=0:
+            self.mv+=self.M876.volume
+        if self.M877 !=0:
+            self.mv+=self.M877.volume
+        if self.M878 !=0:
+            self.mv+=self.M878.volume
+        if self.M879 !=0:
+            self.mv+=self.M879.volume
+        if self.M880 !=0:
+            self.mv+=self.M880.volume
+        if self.M881 !=0:
+            self.mv+=self.M881.volume
+        if self.M882 !=0:
+            self.mv+=self.M882.volume
+        if self.M883 !=0:
+            self.mv+=self.M883.volume
+        if self.M884 !=0:
+            self.mv+=self.M884.volume
+        if self.M885 !=0:
+            self.mv+=self.M885.volume
+        if self.M886 !=0:
+            self.mv+=self.M886.volume
+        if self.M887 !=0:
+            self.mv+=self.M887.volume
+        if self.M888 !=0:
+            self.mv+=self.M888.volume
+        if self.M889 !=0:
+            self.mv+=self.M889.volume
+        if self.M890 !=0:
+            self.mv+=self.M890.volume
+        if self.M891 !=0:
+            self.mv+=self.M891.volume
+        if self.M892 !=0:
+            self.mv+=self.M892.volume
+        if self.M893 !=0:
+            self.mv+=self.M893.volume
+        if self.M894 !=0:
+            self.mv+=self.M894.volume
+        if self.M895 !=0:
+            self.mv+=self.M895.volume
+        if self.M896 !=0:
+            self.mv+=self.M896.volume
+        if self.M897 !=0:
+            self.mv+=self.M897.volume
+        if self.M898 !=0:
+            self.mv+=self.M898.volume
+        if self.M899 !=0:
+            self.mv+=self.M899.volume
+        if self.M900 !=0:
+            self.mv+=self.M900.volume
+        if self.M901 !=0:
+            self.mv+=self.M901.volume
+        if self.M902 !=0:
+            self.mv+=self.M902.volume
+        if self.M903 !=0:
+            self.mv+=self.M903.volume
+        if self.M904 !=0:
+            self.mv+=self.M904.volume
+        if self.M905 !=0:
+            self.mv+=self.M905.volume
+        if self.M906 !=0:
+            self.mv+=self.M906.volume
+        if self.M907 !=0:
+            self.mv+=self.M907.volume
+        if self.M908 !=0:
+            self.mv+=self.M908.volume
+        if self.M909 !=0:
+            self.mv+=self.M909.volume
+        if self.M910 !=0:
+            self.mv+=self.M910.volume
+        if self.M911 !=0:
+            self.mv+=self.M911.volume
+        if self.M912 !=0:
+            self.mv+=self.M912.volume
+        if self.M913 !=0:
+            self.mv+=self.M913.volume
+        if self.M914 !=0:
+            self.mv+=self.M914.volume
+        if self.M915 !=0:
+            self.mv+=self.M915.volume
+        if self.M916 !=0:
+            self.mv+=self.M916.volume
+        if self.M917 !=0:
+            self.mv+=self.M917.volume
+        if self.M918 !=0:
+            self.mv+=self.M918.volume
+        if self.M919 !=0:
+            self.mv+=self.M919.volume
+        if self.M920 !=0:
+            self.mv+=self.M920.volume
+        if self.M921 !=0:
+            self.mv+=self.M921.volume
+        if self.M922 !=0:
+            self.mv+=self.M922.volume
+        if self.M923 !=0:
+            self.mv+=self.M923.volume
+        if self.M924 !=0:
+            self.mv+=self.M924.volume
+        if self.M925 !=0:
+            self.mv+=self.M925.volume
+        if self.M926 !=0:
+            self.mv+=self.M926.volume
+        if self.M927 !=0:
+            self.mv+=self.M927.volume
+        if self.M928 !=0:
+            self.mv+=self.M928.volume
+        if self.M929 !=0:
+            self.mv+=self.M929.volume
+        if self.M930 !=0:
+            self.mv+=self.M930.volume
+        if self.M931 !=0:
+            self.mv+=self.M931.volume
+        if self.M932 !=0:
+            self.mv+=self.M932.volume
+        if self.M933 !=0:
+            self.mv+=self.M933.volume
+        if self.M934 !=0:
+            self.mv+=self.M934.volume
+        if self.M935 !=0:
+            self.mv+=self.M935.volume
+        if self.M936 !=0:
+            self.mv+=self.M936.volume
+        if self.M937 !=0:
+            self.mv+=self.M937.volume
+        if self.M938 !=0:
+            self.mv+=self.M938.volume
+        if self.M939 !=0:
+            self.mv+=self.M939.volume
+        if self.M940 !=0:
+            self.mv+=self.M940.volume
+        if self.M941 !=0:
+            self.mv+=self.M941.volume
+        if self.M942 !=0:
+            self.mv+=self.M942.volume
+        if self.M943 !=0:
+            self.mv+=self.M943.volume
+        if self.M944 !=0:
+            self.mv+=self.M944.volume
+        if self.M945 !=0:
+            self.mv+=self.M945.volume
+        if self.M946 !=0:
+            self.mv+=self.M946.volume
+        if self.M947 !=0:
+            self.mv+=self.M947.volume
+        if self.M948 !=0:
+            self.mv+=self.M948.volume
+        if self.M949 !=0:
+            self.mv+=self.M949.volume
+        if self.M950 !=0:
+            self.mv+=self.M950.volume
+        if self.M951 !=0:
+            self.mv+=self.M951.volume
+        if self.M952 !=0:
+            self.mv+=self.M952.volume
+        if self.M953 !=0:
+            self.mv+=self.M953.volume
+        if self.M954 !=0:
+            self.mv+=self.M954.volume
+        if self.M955 !=0:
+            self.mv+=self.M955.volume
+        if self.M956 !=0:
+            self.mv+=self.M956.volume
+        if self.M957 !=0:
+            self.mv+=self.M957.volume
+        if self.M958 !=0:
+            self.mv+=self.M958.volume
+        if self.M959 !=0:
+            self.mv+=self.M959.volume
+        if self.M960 !=0:
+            self.mv+=self.M960.volume
+        if self.M961 !=0:
+            self.mv+=self.M961.volume
+        if self.M962 !=0:
+            self.mv+=self.M962.volume
+        if self.M963 !=0:
+            self.mv+=self.M963.volume
+        if self.M964 !=0:
+            self.mv+=self.M964.volume
+        if self.M965 !=0:
+            self.mv+=self.M965.volume
+        if self.M966 !=0:
+            self.mv+=self.M966.volume
+        if self.M967 !=0:
+            self.mv+=self.M967.volume
+        if self.M968 !=0:
+            self.mv+=self.M968.volume
+        if self.M969 !=0:
+            self.mv+=self.M969.volume
+        if self.M970 !=0:
+            self.mv+=self.M970.volume
+        if self.M971 !=0:
+            self.mv+=self.M971.volume
+        if self.M972 !=0:
+            self.mv+=self.M972.volume
+        if self.M973 !=0:
+            self.mv+=self.M973.volume
+        if self.M974 !=0:
+            self.mv+=self.M974.volume
+        if self.M975 !=0:
+            self.mv+=self.M975.volume
+        if self.M976 !=0:
+            self.mv+=self.M976.volume
+        if self.M977 !=0:
+            self.mv+=self.M977.volume
+        if self.M978 !=0:
+            self.mv+=self.M978.volume
+        if self.M979 !=0:
+            self.mv+=self.M979.volume
+        if self.M980 !=0:
+            self.mv+=self.M980.volume
+        if self.M981 !=0:
+            self.mv+=self.M981.volume
+        if self.M982 !=0:
+            self.mv+=self.M982.volume
+        if self.M983 !=0:
+            self.mv+=self.M983.volume
+        if self.M984 !=0:
+            self.mv+=self.M984.volume
+        if self.M985 !=0:
+            self.mv+=self.M985.volume
+        if self.M986 !=0:
+            self.mv+=self.M986.volume
+        if self.M987 !=0:
+            self.mv+=self.M987.volume
+        if self.M988 !=0:
+            self.mv+=self.M988.volume
+        if self.M989 !=0:
+            self.mv+=self.M989.volume
+        if self.M990 !=0:
+            self.mv+=self.M990.volume
+        if self.M991 !=0:
+            self.mv+=self.M991.volume
+        if self.M992 !=0:
+            self.mv+=self.M992.volume
+        if self.M993 !=0:
+            self.mv+=self.M993.volume
+        if self.M994 !=0:
+            self.mv+=self.M994.volume
+        if self.M995 !=0:
+            self.mv+=self.M995.volume
+        if self.M996 !=0:
+            self.mv+=self.M996.volume
+        if self.M997 !=0:
+            self.mv+=self.M997.volume
+        if self.M998 !=0:
+            self.mv+=self.M998.volume
+        if self.M999 !=0:
+            self.mv+=self.M999.volume
+        if self.M1000 !=0:
+            self.mv+=self.M1000.volume
+
+    def equil(self):
+        x=0
+        y=0
+        l=[self.M1 ,self.M2 ,self.M3 ,self.M4 ,self.M5 ,self.M6 ,self.M7 ,self.M8 ,self.M9 ,self.M10 ,self.M11 ,self.M12 ,self.M13 ,self.M14 ,self.M15 ,self.M16 ,self.M17 ,self.M18 ,self.M19 ,self.M20 ,self.M21 ,self.M22 ,self.M23 ,self.M24 ,self.M25 ,self.M26 ,self.M27 ,self.M28 ,self.M29 ,self.M30 ,self.M31 ,self.M32 ,self.M33 ,self.M34 ,self.M35 ,self.M36 ,self.M37 ,self.M38 ,self.M39 ,self.M40 ,self.M41 ,self.M42 ,self.M43 ,self.M44 ,self.M45 ,self.M46 ,self.M47 ,self.M48 ,self.M49 ,self.M50 ,self.M51 ,self.M52 ,self.M53 ,self.M54 ,self.M55 ,self.M56 ,self.M57 ,self.M58 ,self.M59 ,self.M60 ,self.M61 ,self.M62 ,self.M63 ,self.M64 ,self.M65 ,self.M66 ,self.M67 ,self.M68 ,self.M69 ,self.M70 ,self.M71 ,self.M72 ,self.M73 ,self.M74 ,self.M75 ,self.M76 ,self.M77 ,self.M78 ,self.M79 ,self.M80 ,self.M81 ,self.M82 ,self.M83 ,self.M84 ,self.M85 ,self.M86 ,self.M87 ,self.M88 ,self.M89 ,self.M90 ,self.M91 ,self.M92 ,self.M93 ,self.M94 ,self.M95 ,self.M96 ,self.M97 ,self.M98 ,self.M99 ,self.M100 ,self.M101 ,self.M102 ,self.M103 ,self.M104 ,self.M105 ,self.M106 ,self.M107 ,self.M108 ,self.M109 ,self.M110 ,self.M111 ,self.M112 ,self.M113 ,self.M114 ,self.M115 ,self.M116 ,self.M117 ,self.M118 ,self.M119 ,self.M120 ,self.M121 ,self.M122 ,self.M123 ,self.M124 ,self.M125 ,self.M126 ,self.M127 ,self.M128 ,self.M129 ,self.M130 ,self.M131 ,self.M132 ,self.M133 ,self.M134 ,self.M135 ,self.M136 ,self.M137 ,self.M138 ,self.M139 ,self.M140 ,self.M141 ,self.M142 ,self.M143 ,self.M144 ,self.M145 ,self.M146 ,self.M147 ,self.M148 ,self.M149 ,self.M150 ,self.M151 ,self.M152 ,self.M153 ,self.M154 ,self.M155 ,self.M156 ,self.M157 ,self.M158 ,self.M159 ,self.M160 ,self.M161 ,self.M162 ,self.M163 ,self.M164 ,self.M165 ,self.M166 ,self.M167 ,self.M168 ,self.M169 ,self.M170 ,self.M171 ,self.M172 ,self.M173 ,self.M174 ,self.M175 ,self.M176 ,self.M177 ,self.M178 ,self.M179 ,self.M180 ,self.M181 ,self.M182 ,self.M183 ,self.M184 ,self.M185 ,self.M186 ,self.M187 ,self.M188 ,self.M189 ,self.M190 ,self.M191 ,self.M192 ,self.M193 ,self.M194 ,self.M195 ,self.M196 ,self.M197 ,self.M198 ,self.M199 ,self.M200 ,self.M201 ,self.M202 ,self.M203 ,self.M204 ,self.M205 ,self.M206 ,self.M207 ,self.M208 ,self.M209 ,self.M210 ,self.M211 ,self.M212 ,self.M213 ,self.M214 ,self.M215 ,self.M216 ,self.M217 ,self.M218 ,self.M219 ,self.M220 ,self.M221 ,self.M222 ,self.M223 ,self.M224 ,self.M225 ,self.M226 ,self.M227 ,self.M228 ,self.M229 ,self.M230 ,self.M231 ,self.M232 ,self.M233 ,self.M234 ,self.M235 ,self.M236 ,self.M237 ,self.M238 ,self.M239 ,self.M240 ,self.M241 ,self.M242 ,self.M243 ,self.M244 ,self.M245 ,self.M246 ,self.M247 ,self.M248 ,self.M249 ,self.M250 ,self.M251 ,self.M252 ,self.M253 ,self.M254 ,self.M255 ,self.M256 ,self.M257 ,self.M258 ,self.M259 ,self.M260 ,self.M261 ,self.M262 ,self.M263 ,self.M264 ,self.M265 ,self.M266 ,self.M267 ,self.M268 ,self.M269 ,self.M270 ,self.M271 ,self.M272 ,self.M273 ,self.M274 ,self.M275 ,self.M276 ,self.M277 ,self.M278 ,self.M279 ,self.M280 ,self.M281 ,self.M282 ,self.M283 ,self.M284 ,self.M285 ,self.M286 ,self.M287 ,self.M288 ,self.M289 ,self.M290 ,self.M291 ,self.M292 ,self.M293 ,self.M294 ,self.M295 ,self.M296 ,self.M297 ,self.M298 ,self.M299 ,self.M300 ,self.M301 ,self.M302 ,self.M303 ,self.M304 ,self.M305 ,self.M306 ,self.M307 ,self.M308 ,self.M309 ,self.M310 ,self.M311 ,self.M312 ,self.M313 ,self.M314 ,self.M315 ,self.M316 ,self.M317 ,self.M318 ,self.M319 ,self.M320 ,self.M321 ,self.M322 ,self.M323 ,self.M324 ,self.M325 ,self.M326 ,self.M327 ,self.M328 ,self.M329 ,self.M330 ,self.M331 ,self.M332 ,self.M333 ,self.M334 ,self.M335 ,self.M336 ,self.M337 ,self.M338 ,self.M339 ,self.M340 ,self.M341 ,self.M342 ,self.M343 ,self.M344 ,self.M345 ,self.M346 ,self.M347 ,self.M348 ,self.M349 ,self.M350 ,self.M351 ,self.M352 ,self.M353 ,self.M354 ,self.M355 ,self.M356 ,self.M357 ,self.M358 ,self.M359 ,self.M360 ,self.M361 ,self.M362 ,self.M363 ,self.M364 ,self.M365 ,self.M366 ,self.M367 ,self.M368 ,self.M369 ,self.M370 ,self.M371 ,self.M372 ,self.M373 ,self.M374 ,self.M375 ,self.M376 ,self.M377 ,self.M378 ,self.M379 ,self.M380 ,self.M381 ,self.M382 ,self.M383 ,self.M384 ,self.M385 ,self.M386 ,self.M387 ,self.M388 ,self.M389 ,self.M390 ,self.M391 ,self.M392 ,self.M393 ,self.M394 ,self.M395 ,self.M396 ,self.M397 ,self.M398 ,self.M399 ,self.M400 ,self.M401 ,self.M402 ,self.M403 ,self.M404 ,self.M405 ,self.M406 ,self.M407 ,self.M408 ,self.M409 ,self.M410 ,self.M411 ,self.M412 ,self.M413 ,self.M414 ,self.M415 ,self.M416 ,self.M417 ,self.M418 ,self.M419 ,self.M420 ,self.M421 ,self.M422 ,self.M423 ,self.M424 ,self.M425 ,self.M426 ,self.M427 ,self.M428 ,self.M429 ,self.M430 ,self.M431 ,self.M432 ,self.M433 ,self.M434 ,self.M435 ,self.M436 ,self.M437 ,self.M438 ,self.M439 ,self.M440 ,self.M441 ,self.M442 ,self.M443 ,self.M444 ,self.M445 ,self.M446 ,self.M447 ,self.M448 ,self.M449 ,self.M450 ,self.M451 ,self.M452 ,self.M453 ,self.M454 ,self.M455 ,self.M456 ,self.M457 ,self.M458 ,self.M459 ,self.M460 ,self.M461 ,self.M462 ,self.M463 ,self.M464 ,self.M465 ,self.M466 ,self.M467 ,self.M468 ,self.M469 ,self.M470 ,self.M471 ,self.M472 ,self.M473 ,self.M474 ,self.M475 ,self.M476 ,self.M477 ,self.M478 ,self.M479 ,self.M480 ,self.M481 ,self.M482 ,self.M483 ,self.M484 ,self.M485 ,self.M486 ,self.M487 ,self.M488 ,self.M489 ,self.M490 ,self.M491 ,self.M492 ,self.M493 ,self.M494 ,self.M495 ,self.M496 ,self.M497 ,self.M498 ,self.M499 ,self.M500 ,self.M501 ,self.M502 ,self.M503 ,self.M504 ,self.M505 ,self.M506 ,self.M507 ,self.M508 ,self.M509 ,self.M510 ,self.M511 ,self.M512 ,self.M513 ,self.M514 ,self.M515 ,self.M516 ,self.M517 ,self.M518 ,self.M519 ,self.M520 ,self.M521 ,self.M522 ,self.M523 ,self.M524 ,self.M525 ,self.M526 ,self.M527 ,self.M528 ,self.M529 ,self.M530 ,self.M531 ,self.M532 ,self.M533 ,self.M534 ,self.M535 ,self.M536 ,self.M537 ,self.M538 ,self.M539 ,self.M540 ,self.M541 ,self.M542 ,self.M543 ,self.M544 ,self.M545 ,self.M546 ,self.M547 ,self.M548 ,self.M549 ,self.M550 ,self.M551 ,self.M552 ,self.M553 ,self.M554 ,self.M555 ,self.M556 ,self.M557 ,self.M558 ,self.M559 ,self.M560 ,self.M561 ,self.M562 ,self.M563 ,self.M564 ,self.M565 ,self.M566 ,self.M567 ,self.M568 ,self.M569 ,self.M570 ,self.M571 ,self.M572 ,self.M573 ,self.M574 ,self.M575 ,self.M576 ,self.M577 ,self.M578 ,self.M579 ,self.M580 ,self.M581 ,self.M582 ,self.M583 ,self.M584 ,self.M585 ,self.M586 ,self.M587 ,self.M588 ,self.M589 ,self.M590 ,self.M591 ,self.M592 ,self.M593 ,self.M594 ,self.M595 ,self.M596 ,self.M597 ,self.M598 ,self.M599 ,self.M600 ,self.M601 ,self.M602 ,self.M603 ,self.M604 ,self.M605 ,self.M606 ,self.M607 ,self.M608 ,self.M609 ,self.M610 ,self.M611 ,self.M612 ,self.M613 ,self.M614 ,self.M615 ,self.M616 ,self.M617 ,self.M618 ,self.M619 ,self.M620 ,self.M621 ,self.M622 ,self.M623 ,self.M624 ,self.M625 ,self.M626 ,self.M627 ,self.M628 ,self.M629 ,self.M630 ,self.M631 ,self.M632 ,self.M633 ,self.M634 ,self.M635 ,self.M636 ,self.M637 ,self.M638 ,self.M639 ,self.M640 ,self.M641 ,self.M642 ,self.M643 ,self.M644 ,self.M645 ,self.M646 ,self.M647 ,self.M648 ,self.M649 ,self.M650 ,self.M651 ,self.M652 ,self.M653 ,self.M654 ,self.M655 ,self.M656 ,self.M657 ,self.M658 ,self.M659 ,self.M660 ,self.M661 ,self.M662 ,self.M663 ,self.M664 ,self.M665 ,self.M666 ,self.M667 ,self.M668 ,self.M669 ,self.M670 ,self.M671 ,self.M672 ,self.M673 ,self.M674 ,self.M675 ,self.M676 ,self.M677 ,self.M678 ,self.M679 ,self.M680 ,self.M681 ,self.M682 ,self.M683 ,self.M684 ,self.M685 ,self.M686 ,self.M687 ,self.M688 ,self.M689 ,self.M690 ,self.M691 ,self.M692 ,self.M693 ,self.M694 ,self.M695 ,self.M696 ,self.M697 ,self.M698 ,self.M699 ,self.M700 ,self.M701 ,self.M702 ,self.M703 ,self.M704 ,self.M705 ,self.M706 ,self.M707 ,self.M708 ,self.M709 ,self.M710 ,self.M711 ,self.M712 ,self.M713 ,self.M714 ,self.M715 ,self.M716 ,self.M717 ,self.M718 ,self.M719 ,self.M720 ,self.M721 ,self.M722 ,self.M723 ,self.M724 ,self.M725 ,self.M726 ,self.M727 ,self.M728 ,self.M729 ,self.M730 ,self.M731 ,self.M732 ,self.M733 ,self.M734 ,self.M735 ,self.M736 ,self.M737 ,self.M738 ,self.M739 ,self.M740 ,self.M741 ,self.M742 ,self.M743 ,self.M744 ,self.M745 ,self.M746 ,self.M747 ,self.M748 ,self.M749 ,self.M750 ,self.M751 ,self.M752 ,self.M753 ,self.M754 ,self.M755 ,self.M756 ,self.M757 ,self.M758 ,self.M759 ,self.M760 ,self.M761 ,self.M762 ,self.M763 ,self.M764 ,self.M765 ,self.M766 ,self.M767 ,self.M768 ,self.M769 ,self.M770 ,self.M771 ,self.M772 ,self.M773 ,self.M774 ,self.M775 ,self.M776 ,self.M777 ,self.M778 ,self.M779 ,self.M780 ,self.M781 ,self.M782 ,self.M783 ,self.M784 ,self.M785 ,self.M786 ,self.M787 ,self.M788 ,self.M789 ,self.M790 ,self.M791 ,self.M792 ,self.M793 ,self.M794 ,self.M795 ,self.M796 ,self.M797 ,self.M798 ,self.M799 ,self.M800 ,self.M801 ,self.M802 ,self.M803 ,self.M804 ,self.M805 ,self.M806 ,self.M807 ,self.M808 ,self.M809 ,self.M810 ,self.M811 ,self.M812 ,self.M813 ,self.M814 ,self.M815 ,self.M816 ,self.M817 ,self.M818 ,self.M819 ,self.M820 ,self.M821 ,self.M822 ,self.M823 ,self.M824 ,self.M825 ,self.M826 ,self.M827 ,self.M828 ,self.M829 ,self.M830 ,self.M831 ,self.M832 ,self.M833 ,self.M834 ,self.M835 ,self.M836 ,self.M837 ,self.M838 ,self.M839 ,self.M840 ,self.M841 ,self.M842 ,self.M843 ,self.M844 ,self.M845 ,self.M846 ,self.M847 ,self.M848 ,self.M849 ,self.M850 ,self.M851 ,self.M852 ,self.M853 ,self.M854 ,self.M855 ,self.M856 ,self.M857 ,self.M858 ,self.M859 ,self.M860 ,self.M861 ,self.M862 ,self.M863 ,self.M864 ,self.M865 ,self.M866 ,self.M867 ,self.M868 ,self.M869 ,self.M870 ,self.M871 ,self.M872 ,self.M873 ,self.M874 ,self.M875 ,self.M876 ,self.M877 ,self.M878 ,self.M879 ,self.M880 ,self.M881 ,self.M882 ,self.M883 ,self.M884 ,self.M885 ,self.M886 ,self.M887 ,self.M888 ,self.M889 ,self.M890 ,self.M891 ,self.M892 ,self.M893 ,self.M894 ,self.M895 ,self.M896 ,self.M897 ,self.M898 ,self.M899 ,self.M900 ,self.M901 ,self.M902 ,self.M903 ,self.M904 ,self.M905 ,self.M906 ,self.M907 ,self.M908 ,self.M909 ,self.M910 ,self.M911 ,self.M912 ,self.M913 ,self.M914 ,self.M915 ,self.M916 ,self.M917 ,self.M918 ,self.M919 ,self.M920 ,self.M921 ,self.M922 ,self.M923 ,self.M924 ,self.M925 ,self.M926 ,self.M927 ,self.M928 ,self.M929 ,self.M930 ,self.M931 ,self.M932 ,self.M933 ,self.M934 ,self.M935 ,self.M936 ,self.M937 ,self.M938 ,self.M939 ,self.M940 ,self.M941 ,self.M942 ,self.M943 ,self.M944 ,self.M945 ,self.M946 ,self.M947 ,self.M948 ,self.M949 ,self.M950 ,self.M951 ,self.M952 ,self.M953 ,self.M954 ,self.M955 ,self.M956 ,self.M957 ,self.M958 ,self.M959 ,self.M960 ,self.M961 ,self.M962 ,self.M963 ,self.M964 ,self.M965 ,self.M966 ,self.M967 ,self.M968 ,self.M969 ,self.M970 ,self.M971 ,self.M972 ,self.M973 ,self.M974 ,self.M975 ,self.M976 ,self.M977 ,self.M978 ,self.M979 ,self.M980 ,self.M981 ,self.M982 ,self.M983 ,self.M984 ,self.M985 ,self.M986 ,self.M987 ,self.M988 ,self.M989 ,self.M990 ,self.M991 ,self.M992 ,self.M993 ,self.M994 ,self.M995 ,self.M996 ,self.M997 ,self.M998 ,self.M999 ,self.M1000]
+        for object in l:
+            if object == 0:
+                y+=1
+        m=1001-y
+        return m
+    
+    def totalmass(self):
+        if self.M0 !=0:
+            self.tm+=((self.M0.mslf())*(self.M0.amnt))
+        if self.M1 !=0:
+            self.tm+=((self.M1.mslf())*(self.M1.amnt))
+        if self.M2 !=0:
+            self.tm+=((self.M2.mslf())*(self.M2.amnt))
+        if self.M3 !=0:
+            self.tm+=((self.M3.mslf())*(self.M3.amnt))
+        if self.M4 !=0:
+            self.tm+=((self.M4.mslf())*(self.M4.amnt))
+        if self.M5 !=0:
+            self.tm+=((self.M5.mslf())*(self.M5.amnt))
+        if self.M6 !=0:
+            self.tm+=((self.M6.mslf())*(self.M6.amnt))
+        if self.M7 !=0:
+            self.tm+=((self.M7.mslf())*(self.M7.amnt))
+        if self.M8 !=0:
+            self.tm+=((self.M8.mslf())*(self.M8.amnt))
+        if self.M9 !=0:
+            self.tm+=((self.M9.mslf())*(self.M9.amnt))
+        if self.M10 !=0:
+            self.tm+=((self.M10.mslf())*(self.M10.amnt))
+        if self.M11 !=0:
+            self.tm+=((self.M11.mslf())*(self.M11.amnt))
+        if self.M12 !=0:
+            self.tm+=((self.M12.mslf())*(self.M12.amnt))
+        if self.M13 !=0:
+            self.tm+=((self.M13.mslf())*(self.M13.amnt))
+        if self.M14 !=0:
+            self.tm+=((self.M14.mslf())*(self.M14.amnt))
+        if self.M15 !=0:
+            self.tm+=((self.M15.mslf())*(self.M15.amnt))
+        if self.M16 !=0:
+            self.tm+=((self.M16.mslf())*(self.M16.amnt))
+        if self.M17 !=0:
+            self.tm+=((self.M17.mslf())*(self.M17.amnt))
+        if self.M18 !=0:
+            self.tm+=((self.M18.mslf())*(self.M18.amnt))
+        if self.M19 !=0:
+            self.tm+=((self.M19.mslf())*(self.M19.amnt))
+        if self.M20 !=0:
+            self.tm+=((self.M20.mslf())*(self.M20.amnt))
+        if self.M21 !=0:
+            self.tm+=((self.M21.mslf())*(self.M21.amnt))
+        if self.M22 !=0:
+            self.tm+=((self.M22.mslf())*(self.M22.amnt))
+        if self.M23 !=0:
+            self.tm+=((self.M23.mslf())*(self.M23.amnt))
+        if self.M24 !=0:
+            self.tm+=((self.M24.mslf())*(self.M24.amnt))
+        if self.M25 !=0:
+            self.tm+=((self.M25.mslf())*(self.M25.amnt))
+        if self.M26 !=0:
+            self.tm+=((self.M26.mslf())*(self.M26.amnt))
+        if self.M27 !=0:
+            self.tm+=((self.M27.mslf())*(self.M27.amnt))
+        if self.M28 !=0:
+            self.tm+=((self.M28.mslf())*(self.M28.amnt))
+        if self.M29 !=0:
+            self.tm+=((self.M29.mslf())*(self.M29.amnt))
+        if self.M30 !=0:
+            self.tm+=((self.M30.mslf())*(self.M30.amnt))
+        if self.M31 !=0:
+            self.tm+=((self.M31.mslf())*(self.M31.amnt))
+        if self.M32 !=0:
+            self.tm+=((self.M32.mslf())*(self.M32.amnt))
+        if self.M33 !=0:
+            self.tm+=((self.M33.mslf())*(self.M33.amnt))
+        if self.M34 !=0:
+            self.tm+=((self.M34.mslf())*(self.M34.amnt))
+        if self.M35 !=0:
+            self.tm+=((self.M35.mslf())*(self.M35.amnt))
+        if self.M36 !=0:
+            self.tm+=((self.M36.mslf())*(self.M36.amnt))
+        if self.M37 !=0:
+            self.tm+=((self.M37.mslf())*(self.M37.amnt))
+        if self.M38 !=0:
+            self.tm+=((self.M38.mslf())*(self.M38.amnt))
+        if self.M39 !=0:
+            self.tm+=((self.M39.mslf())*(self.M39.amnt))
+        if self.M40 !=0:
+            self.tm+=((self.M40.mslf())*(self.M40.amnt))
+        if self.M41 !=0:
+            self.tm+=((self.M41.mslf())*(self.M41.amnt))
+        if self.M42 !=0:
+            self.tm+=((self.M42.mslf())*(self.M42.amnt))
+        if self.M43 !=0:
+            self.tm+=((self.M43.mslf())*(self.M43.amnt))
+        if self.M44 !=0:
+            self.tm+=((self.M44.mslf())*(self.M44.amnt))
+        if self.M45 !=0:
+            self.tm+=((self.M45.mslf())*(self.M45.amnt))
+        if self.M46 !=0:
+            self.tm+=((self.M46.mslf())*(self.M46.amnt))
+        if self.M47 !=0:
+            self.tm+=((self.M47.mslf())*(self.M47.amnt))
+        if self.M48 !=0:
+            self.tm+=((self.M48.mslf())*(self.M48.amnt))
+        if self.M49 !=0:
+            self.tm+=((self.M49.mslf())*(self.M49.amnt))
+        if self.M50 !=0:
+            self.tm+=((self.M50.mslf())*(self.M50.amnt))
+        if self.M51 !=0:
+            self.tm+=((self.M51.mslf())*(self.M51.amnt))
+        if self.M52 !=0:
+            self.tm+=((self.M52.mslf())*(self.M52.amnt))
+        if self.M53 !=0:
+            self.tm+=((self.M53.mslf())*(self.M53.amnt))
+        if self.M54 !=0:
+            self.tm+=((self.M54.mslf())*(self.M54.amnt))
+        if self.M55 !=0:
+            self.tm+=((self.M55.mslf())*(self.M55.amnt))
+        if self.M56 !=0:
+            self.tm+=((self.M56.mslf())*(self.M56.amnt))
+        if self.M57 !=0:
+            self.tm+=((self.M57.mslf())*(self.M57.amnt))
+        if self.M58 !=0:
+            self.tm+=((self.M58.mslf())*(self.M58.amnt))
+        if self.M59 !=0:
+            self.tm+=((self.M59.mslf())*(self.M59.amnt))
+        if self.M60 !=0:
+            self.tm+=((self.M60.mslf())*(self.M60.amnt))
+        if self.M61 !=0:
+            self.tm+=((self.M61.mslf())*(self.M61.amnt))
+        if self.M62 !=0:
+            self.tm+=((self.M62.mslf())*(self.M62.amnt))
+        if self.M63 !=0:
+            self.tm+=((self.M63.mslf())*(self.M63.amnt))
+        if self.M64 !=0:
+            self.tm+=((self.M64.mslf())*(self.M64.amnt))
+        if self.M65 !=0:
+            self.tm+=((self.M65.mslf())*(self.M65.amnt))
+        if self.M66 !=0:
+            self.tm+=((self.M66.mslf())*(self.M66.amnt))
+        if self.M67 !=0:
+            self.tm+=((self.M67.mslf())*(self.M67.amnt))
+        if self.M68 !=0:
+            self.tm+=((self.M68.mslf())*(self.M68.amnt))
+        if self.M69 !=0:
+            self.tm+=((self.M69.mslf())*(self.M69.amnt))
+        if self.M70 !=0:
+            self.tm+=((self.M70.mslf())*(self.M70.amnt))
+        if self.M71 !=0:
+            self.tm+=((self.M71.mslf())*(self.M71.amnt))
+        if self.M72 !=0:
+            self.tm+=((self.M72.mslf())*(self.M72.amnt))
+        if self.M73 !=0:
+            self.tm+=((self.M73.mslf())*(self.M73.amnt))
+        if self.M74 !=0:
+            self.tm+=((self.M74.mslf())*(self.M74.amnt))
+        if self.M75 !=0:
+            self.tm+=((self.M75.mslf())*(self.M75.amnt))
+        if self.M76 !=0:
+            self.tm+=((self.M76.mslf())*(self.M76.amnt))
+        if self.M77 !=0:
+            self.tm+=((self.M77.mslf())*(self.M77.amnt))
+        if self.M78 !=0:
+            self.tm+=((self.M78.mslf())*(self.M78.amnt))
+        if self.M79 !=0:
+            self.tm+=((self.M79.mslf())*(self.M79.amnt))
+        if self.M80 !=0:
+            self.tm+=((self.M80.mslf())*(self.M80.amnt))
+        if self.M81 !=0:
+            self.tm+=((self.M81.mslf())*(self.M81.amnt))
+        if self.M82 !=0:
+            self.tm+=((self.M82.mslf())*(self.M82.amnt))
+        if self.M83 !=0:
+            self.tm+=((self.M83.mslf())*(self.M83.amnt))
+        if self.M84 !=0:
+            self.tm+=((self.M84.mslf())*(self.M84.amnt))
+        if self.M85 !=0:
+            self.tm+=((self.M85.mslf())*(self.M85.amnt))
+        if self.M86 !=0:
+            self.tm+=((self.M86.mslf())*(self.M86.amnt))
+        if self.M87 !=0:
+            self.tm+=((self.M87.mslf())*(self.M87.amnt))
+        if self.M88 !=0:
+            self.tm+=((self.M88.mslf())*(self.M88.amnt))
+        if self.M89 !=0:
+            self.tm+=((self.M89.mslf())*(self.M89.amnt))
+        if self.M90 !=0:
+            self.tm+=((self.M90.mslf())*(self.M90.amnt))
+        if self.M91 !=0:
+            self.tm+=((self.M91.mslf())*(self.M91.amnt))
+        if self.M92 !=0:
+            self.tm+=((self.M92.mslf())*(self.M92.amnt))
+        if self.M93 !=0:
+            self.tm+=((self.M93.mslf())*(self.M93.amnt))
+        if self.M94 !=0:
+            self.tm+=((self.M94.mslf())*(self.M94.amnt))
+        if self.M95 !=0:
+            self.tm+=((self.M95.mslf())*(self.M95.amnt))
+        if self.M96 !=0:
+            self.tm+=((self.M96.mslf())*(self.M96.amnt))
+        if self.M97 !=0:
+            self.tm+=((self.M97.mslf())*(self.M97.amnt))
+        if self.M98 !=0:
+            self.tm+=((self.M98.mslf())*(self.M98.amnt))
+        if self.M99 !=0:
+            self.tm+=((self.M99.mslf())*(self.M99.amnt))
+        if self.M100 !=0:
+            self.tm+=((self.M100.mslf())*(self.M100.amnt))
+        if self.M101 !=0:
+            self.tm+=((self.M101.mslf())*(self.M101.amnt))
+        if self.M102 !=0:
+            self.tm+=((self.M102.mslf())*(self.M102.amnt))
+        if self.M103 !=0:
+            self.tm+=((self.M103.mslf())*(self.M103.amnt))
+        if self.M104 !=0:
+            self.tm+=((self.M104.mslf())*(self.M104.amnt))
+        if self.M105 !=0:
+            self.tm+=((self.M105.mslf())*(self.M105.amnt))
+        if self.M106 !=0:
+            self.tm+=((self.M106.mslf())*(self.M106.amnt))
+        if self.M107 !=0:
+            self.tm+=((self.M107.mslf())*(self.M107.amnt))
+        if self.M108 !=0:
+            self.tm+=((self.M108.mslf())*(self.M108.amnt))
+        if self.M109 !=0:
+            self.tm+=((self.M109.mslf())*(self.M109.amnt))
+        if self.M110 !=0:
+            self.tm+=((self.M110.mslf())*(self.M110.amnt))
+        if self.M111 !=0:
+            self.tm+=((self.M111.mslf())*(self.M111.amnt))
+        if self.M112 !=0:
+            self.tm+=((self.M112.mslf())*(self.M112.amnt))
+        if self.M113 !=0:
+            self.tm+=((self.M113.mslf())*(self.M113.amnt))
+        if self.M114 !=0:
+            self.tm+=((self.M114.mslf())*(self.M114.amnt))
+        if self.M115 !=0:
+            self.tm+=((self.M115.mslf())*(self.M115.amnt))
+        if self.M116 !=0:
+            self.tm+=((self.M116.mslf())*(self.M116.amnt))
+        if self.M117 !=0:
+            self.tm+=((self.M117.mslf())*(self.M117.amnt))
+        if self.M118 !=0:
+            self.tm+=((self.M118.mslf())*(self.M118.amnt))
+        if self.M119 !=0:
+            self.tm+=((self.M119.mslf())*(self.M119.amnt))
+        if self.M120 !=0:
+            self.tm+=((self.M120.mslf())*(self.M120.amnt))
+        if self.M121 !=0:
+            self.tm+=((self.M121.mslf())*(self.M121.amnt))
+        if self.M122 !=0:
+            self.tm+=((self.M122.mslf())*(self.M122.amnt))
+        if self.M123 !=0:
+            self.tm+=((self.M123.mslf())*(self.M123.amnt))
+        if self.M124 !=0:
+            self.tm+=((self.M124.mslf())*(self.M124.amnt))
+        if self.M125 !=0:
+            self.tm+=((self.M125.mslf())*(self.M125.amnt))
+        if self.M126 !=0:
+            self.tm+=((self.M126.mslf())*(self.M126.amnt))
+        if self.M127 !=0:
+            self.tm+=((self.M127.mslf())*(self.M127.amnt))
+        if self.M128 !=0:
+            self.tm+=((self.M128.mslf())*(self.M128.amnt))
+        if self.M129 !=0:
+            self.tm+=((self.M129.mslf())*(self.M129.amnt))
+        if self.M130 !=0:
+            self.tm+=((self.M130.mslf())*(self.M130.amnt))
+        if self.M131 !=0:
+            self.tm+=((self.M131.mslf())*(self.M131.amnt))
+        if self.M132 !=0:
+            self.tm+=((self.M132.mslf())*(self.M132.amnt))
+        if self.M133 !=0:
+            self.tm+=((self.M133.mslf())*(self.M133.amnt))
+        if self.M134 !=0:
+            self.tm+=((self.M134.mslf())*(self.M134.amnt))
+        if self.M135 !=0:
+            self.tm+=((self.M135.mslf())*(self.M135.amnt))
+        if self.M136 !=0:
+            self.tm+=((self.M136.mslf())*(self.M136.amnt))
+        if self.M137 !=0:
+            self.tm+=((self.M137.mslf())*(self.M137.amnt))
+        if self.M138 !=0:
+            self.tm+=((self.M138.mslf())*(self.M138.amnt))
+        if self.M139 !=0:
+            self.tm+=((self.M139.mslf())*(self.M139.amnt))
+        if self.M140 !=0:
+            self.tm+=((self.M140.mslf())*(self.M140.amnt))
+        if self.M141 !=0:
+            self.tm+=((self.M141.mslf())*(self.M141.amnt))
+        if self.M142 !=0:
+            self.tm+=((self.M142.mslf())*(self.M142.amnt))
+        if self.M143 !=0:
+            self.tm+=((self.M143.mslf())*(self.M143.amnt))
+        if self.M144 !=0:
+            self.tm+=((self.M144.mslf())*(self.M144.amnt))
+        if self.M145 !=0:
+            self.tm+=((self.M145.mslf())*(self.M145.amnt))
+        if self.M146 !=0:
+            self.tm+=((self.M146.mslf())*(self.M146.amnt))
+        if self.M147 !=0:
+            self.tm+=((self.M147.mslf())*(self.M147.amnt))
+        if self.M148 !=0:
+            self.tm+=((self.M148.mslf())*(self.M148.amnt))
+        if self.M149 !=0:
+            self.tm+=((self.M149.mslf())*(self.M149.amnt))
+        if self.M150 !=0:
+            self.tm+=((self.M150.mslf())*(self.M150.amnt))
+        if self.M151 !=0:
+            self.tm+=((self.M151.mslf())*(self.M151.amnt))
+        if self.M152 !=0:
+            self.tm+=((self.M152.mslf())*(self.M152.amnt))
+        if self.M153 !=0:
+            self.tm+=((self.M153.mslf())*(self.M153.amnt))
+        if self.M154 !=0:
+            self.tm+=((self.M154.mslf())*(self.M154.amnt))
+        if self.M155 !=0:
+            self.tm+=((self.M155.mslf())*(self.M155.amnt))
+        if self.M156 !=0:
+            self.tm+=((self.M156.mslf())*(self.M156.amnt))
+        if self.M157 !=0:
+            self.tm+=((self.M157.mslf())*(self.M157.amnt))
+        if self.M158 !=0:
+            self.tm+=((self.M158.mslf())*(self.M158.amnt))
+        if self.M159 !=0:
+            self.tm+=((self.M159.mslf())*(self.M159.amnt))
+        if self.M160 !=0:
+            self.tm+=((self.M160.mslf())*(self.M160.amnt))
+        if self.M161 !=0:
+            self.tm+=((self.M161.mslf())*(self.M161.amnt))
+        if self.M162 !=0:
+            self.tm+=((self.M162.mslf())*(self.M162.amnt))
+        if self.M163 !=0:
+            self.tm+=((self.M163.mslf())*(self.M163.amnt))
+        if self.M164 !=0:
+            self.tm+=((self.M164.mslf())*(self.M164.amnt))
+        if self.M165 !=0:
+            self.tm+=((self.M165.mslf())*(self.M165.amnt))
+        if self.M166 !=0:
+            self.tm+=((self.M166.mslf())*(self.M166.amnt))
+        if self.M167 !=0:
+            self.tm+=((self.M167.mslf())*(self.M167.amnt))
+        if self.M168 !=0:
+            self.tm+=((self.M168.mslf())*(self.M168.amnt))
+        if self.M169 !=0:
+            self.tm+=((self.M169.mslf())*(self.M169.amnt))
+        if self.M170 !=0:
+            self.tm+=((self.M170.mslf())*(self.M170.amnt))
+        if self.M171 !=0:
+            self.tm+=((self.M171.mslf())*(self.M171.amnt))
+        if self.M172 !=0:
+            self.tm+=((self.M172.mslf())*(self.M172.amnt))
+        if self.M173 !=0:
+            self.tm+=((self.M173.mslf())*(self.M173.amnt))
+        if self.M174 !=0:
+            self.tm+=((self.M174.mslf())*(self.M174.amnt))
+        if self.M175 !=0:
+            self.tm+=((self.M175.mslf())*(self.M175.amnt))
+        if self.M176 !=0:
+            self.tm+=((self.M176.mslf())*(self.M176.amnt))
+        if self.M177 !=0:
+            self.tm+=((self.M177.mslf())*(self.M177.amnt))
+        if self.M178 !=0:
+            self.tm+=((self.M178.mslf())*(self.M178.amnt))
+        if self.M179 !=0:
+            self.tm+=((self.M179.mslf())*(self.M179.amnt))
+        if self.M180 !=0:
+            self.tm+=((self.M180.mslf())*(self.M180.amnt))
+        if self.M181 !=0:
+            self.tm+=((self.M181.mslf())*(self.M181.amnt))
+        if self.M182 !=0:
+            self.tm+=((self.M182.mslf())*(self.M182.amnt))
+        if self.M183 !=0:
+            self.tm+=((self.M183.mslf())*(self.M183.amnt))
+        if self.M184 !=0:
+            self.tm+=((self.M184.mslf())*(self.M184.amnt))
+        if self.M185 !=0:
+            self.tm+=((self.M185.mslf())*(self.M185.amnt))
+        if self.M186 !=0:
+            self.tm+=((self.M186.mslf())*(self.M186.amnt))
+        if self.M187 !=0:
+            self.tm+=((self.M187.mslf())*(self.M187.amnt))
+        if self.M188 !=0:
+            self.tm+=((self.M188.mslf())*(self.M188.amnt))
+        if self.M189 !=0:
+            self.tm+=((self.M189.mslf())*(self.M189.amnt))
+        if self.M190 !=0:
+            self.tm+=((self.M190.mslf())*(self.M190.amnt))
+        if self.M191 !=0:
+            self.tm+=((self.M191.mslf())*(self.M191.amnt))
+        if self.M192 !=0:
+            self.tm+=((self.M192.mslf())*(self.M192.amnt))
+        if self.M193 !=0:
+            self.tm+=((self.M193.mslf())*(self.M193.amnt))
+        if self.M194 !=0:
+            self.tm+=((self.M194.mslf())*(self.M194.amnt))
+        if self.M195 !=0:
+            self.tm+=((self.M195.mslf())*(self.M195.amnt))
+        if self.M196 !=0:
+            self.tm+=((self.M196.mslf())*(self.M196.amnt))
+        if self.M197 !=0:
+            self.tm+=((self.M197.mslf())*(self.M197.amnt))
+        if self.M198 !=0:
+            self.tm+=((self.M198.mslf())*(self.M198.amnt))
+        if self.M199 !=0:
+            self.tm+=((self.M199.mslf())*(self.M199.amnt))
+        if self.M200 !=0:
+            self.tm+=((self.M200.mslf())*(self.M200.amnt))
+        if self.M201 !=0:
+            self.tm+=((self.M201.mslf())*(self.M201.amnt))
+        if self.M202 !=0:
+            self.tm+=((self.M202.mslf())*(self.M202.amnt))
+        if self.M203 !=0:
+            self.tm+=((self.M203.mslf())*(self.M203.amnt))
+        if self.M204 !=0:
+            self.tm+=((self.M204.mslf())*(self.M204.amnt))
+        if self.M205 !=0:
+            self.tm+=((self.M205.mslf())*(self.M205.amnt))
+        if self.M206 !=0:
+            self.tm+=((self.M206.mslf())*(self.M206.amnt))
+        if self.M207 !=0:
+            self.tm+=((self.M207.mslf())*(self.M207.amnt))
+        if self.M208 !=0:
+            self.tm+=((self.M208.mslf())*(self.M208.amnt))
+        if self.M209 !=0:
+            self.tm+=((self.M209.mslf())*(self.M209.amnt))
+        if self.M210 !=0:
+            self.tm+=((self.M210.mslf())*(self.M210.amnt))
+        if self.M211 !=0:
+            self.tm+=((self.M211.mslf())*(self.M211.amnt))
+        if self.M212 !=0:
+            self.tm+=((self.M212.mslf())*(self.M212.amnt))
+        if self.M213 !=0:
+            self.tm+=((self.M213.mslf())*(self.M213.amnt))
+        if self.M214 !=0:
+            self.tm+=((self.M214.mslf())*(self.M214.amnt))
+        if self.M215 !=0:
+            self.tm+=((self.M215.mslf())*(self.M215.amnt))
+        if self.M216 !=0:
+            self.tm+=((self.M216.mslf())*(self.M216.amnt))
+        if self.M217 !=0:
+            self.tm+=((self.M217.mslf())*(self.M217.amnt))
+        if self.M218 !=0:
+            self.tm+=((self.M218.mslf())*(self.M218.amnt))
+        if self.M219 !=0:
+            self.tm+=((self.M219.mslf())*(self.M219.amnt))
+        if self.M220 !=0:
+            self.tm+=((self.M220.mslf())*(self.M220.amnt))
+        if self.M221 !=0:
+            self.tm+=((self.M221.mslf())*(self.M221.amnt))
+        if self.M222 !=0:
+            self.tm+=((self.M222.mslf())*(self.M222.amnt))
+        if self.M223 !=0:
+            self.tm+=((self.M223.mslf())*(self.M223.amnt))
+        if self.M224 !=0:
+            self.tm+=((self.M224.mslf())*(self.M224.amnt))
+        if self.M225 !=0:
+            self.tm+=((self.M225.mslf())*(self.M225.amnt))
+        if self.M226 !=0:
+            self.tm+=((self.M226.mslf())*(self.M226.amnt))
+        if self.M227 !=0:
+            self.tm+=((self.M227.mslf())*(self.M227.amnt))
+        if self.M228 !=0:
+            self.tm+=((self.M228.mslf())*(self.M228.amnt))
+        if self.M229 !=0:
+            self.tm+=((self.M229.mslf())*(self.M229.amnt))
+        if self.M230 !=0:
+            self.tm+=((self.M230.mslf())*(self.M230.amnt))
+        if self.M231 !=0:
+            self.tm+=((self.M231.mslf())*(self.M231.amnt))
+        if self.M232 !=0:
+            self.tm+=((self.M232.mslf())*(self.M232.amnt))
+        if self.M233 !=0:
+            self.tm+=((self.M233.mslf())*(self.M233.amnt))
+        if self.M234 !=0:
+            self.tm+=((self.M234.mslf())*(self.M234.amnt))
+        if self.M235 !=0:
+            self.tm+=((self.M235.mslf())*(self.M235.amnt))
+        if self.M236 !=0:
+            self.tm+=((self.M236.mslf())*(self.M236.amnt))
+        if self.M237 !=0:
+            self.tm+=((self.M237.mslf())*(self.M237.amnt))
+        if self.M238 !=0:
+            self.tm+=((self.M238.mslf())*(self.M238.amnt))
+        if self.M239 !=0:
+            self.tm+=((self.M239.mslf())*(self.M239.amnt))
+        if self.M240 !=0:
+            self.tm+=((self.M240.mslf())*(self.M240.amnt))
+        if self.M241 !=0:
+            self.tm+=((self.M241.mslf())*(self.M241.amnt))
+        if self.M242 !=0:
+            self.tm+=((self.M242.mslf())*(self.M242.amnt))
+        if self.M243 !=0:
+            self.tm+=((self.M243.mslf())*(self.M243.amnt))
+        if self.M244 !=0:
+            self.tm+=((self.M244.mslf())*(self.M244.amnt))
+        if self.M245 !=0:
+            self.tm+=((self.M245.mslf())*(self.M245.amnt))
+        if self.M246 !=0:
+            self.tm+=((self.M246.mslf())*(self.M246.amnt))
+        if self.M247 !=0:
+            self.tm+=((self.M247.mslf())*(self.M247.amnt))
+        if self.M248 !=0:
+            self.tm+=((self.M248.mslf())*(self.M248.amnt))
+        if self.M249 !=0:
+            self.tm+=((self.M249.mslf())*(self.M249.amnt))
+        if self.M250 !=0:
+            self.tm+=((self.M250.mslf())*(self.M250.amnt))
+        if self.M251 !=0:
+            self.tm+=((self.M251.mslf())*(self.M251.amnt))
+        if self.M252 !=0:
+            self.tm+=((self.M252.mslf())*(self.M252.amnt))
+        if self.M253 !=0:
+            self.tm+=((self.M253.mslf())*(self.M253.amnt))
+        if self.M254 !=0:
+            self.tm+=((self.M254.mslf())*(self.M254.amnt))
+        if self.M255 !=0:
+            self.tm+=((self.M255.mslf())*(self.M255.amnt))
+        if self.M256 !=0:
+            self.tm+=((self.M256.mslf())*(self.M256.amnt))
+        if self.M257 !=0:
+            self.tm+=((self.M257.mslf())*(self.M257.amnt))
+        if self.M258 !=0:
+            self.tm+=((self.M258.mslf())*(self.M258.amnt))
+        if self.M259 !=0:
+            self.tm+=((self.M259.mslf())*(self.M259.amnt))
+        if self.M260 !=0:
+            self.tm+=((self.M260.mslf())*(self.M260.amnt))
+        if self.M261 !=0:
+            self.tm+=((self.M261.mslf())*(self.M261.amnt))
+        if self.M262 !=0:
+            self.tm+=((self.M262.mslf())*(self.M262.amnt))
+        if self.M263 !=0:
+            self.tm+=((self.M263.mslf())*(self.M263.amnt))
+        if self.M264 !=0:
+            self.tm+=((self.M264.mslf())*(self.M264.amnt))
+        if self.M265 !=0:
+            self.tm+=((self.M265.mslf())*(self.M265.amnt))
+        if self.M266 !=0:
+            self.tm+=((self.M266.mslf())*(self.M266.amnt))
+        if self.M267 !=0:
+            self.tm+=((self.M267.mslf())*(self.M267.amnt))
+        if self.M268 !=0:
+            self.tm+=((self.M268.mslf())*(self.M268.amnt))
+        if self.M269 !=0:
+            self.tm+=((self.M269.mslf())*(self.M269.amnt))
+        if self.M270 !=0:
+            self.tm+=((self.M270.mslf())*(self.M270.amnt))
+        if self.M271 !=0:
+            self.tm+=((self.M271.mslf())*(self.M271.amnt))
+        if self.M272 !=0:
+            self.tm+=((self.M272.mslf())*(self.M272.amnt))
+        if self.M273 !=0:
+            self.tm+=((self.M273.mslf())*(self.M273.amnt))
+        if self.M274 !=0:
+            self.tm+=((self.M274.mslf())*(self.M274.amnt))
+        if self.M275 !=0:
+            self.tm+=((self.M275.mslf())*(self.M275.amnt))
+        if self.M276 !=0:
+            self.tm+=((self.M276.mslf())*(self.M276.amnt))
+        if self.M277 !=0:
+            self.tm+=((self.M277.mslf())*(self.M277.amnt))
+        if self.M278 !=0:
+            self.tm+=((self.M278.mslf())*(self.M278.amnt))
+        if self.M279 !=0:
+            self.tm+=((self.M279.mslf())*(self.M279.amnt))
+        if self.M280 !=0:
+            self.tm+=((self.M280.mslf())*(self.M280.amnt))
+        if self.M281 !=0:
+            self.tm+=((self.M281.mslf())*(self.M281.amnt))
+        if self.M282 !=0:
+            self.tm+=((self.M282.mslf())*(self.M282.amnt))
+        if self.M283 !=0:
+            self.tm+=((self.M283.mslf())*(self.M283.amnt))
+        if self.M284 !=0:
+            self.tm+=((self.M284.mslf())*(self.M284.amnt))
+        if self.M285 !=0:
+            self.tm+=((self.M285.mslf())*(self.M285.amnt))
+        if self.M286 !=0:
+            self.tm+=((self.M286.mslf())*(self.M286.amnt))
+        if self.M287 !=0:
+            self.tm+=((self.M287.mslf())*(self.M287.amnt))
+        if self.M288 !=0:
+            self.tm+=((self.M288.mslf())*(self.M288.amnt))
+        if self.M289 !=0:
+            self.tm+=((self.M289.mslf())*(self.M289.amnt))
+        if self.M290 !=0:
+            self.tm+=((self.M290.mslf())*(self.M290.amnt))
+        if self.M291 !=0:
+            self.tm+=((self.M291.mslf())*(self.M291.amnt))
+        if self.M292 !=0:
+            self.tm+=((self.M292.mslf())*(self.M292.amnt))
+        if self.M293 !=0:
+            self.tm+=((self.M293.mslf())*(self.M293.amnt))
+        if self.M294 !=0:
+            self.tm+=((self.M294.mslf())*(self.M294.amnt))
+        if self.M295 !=0:
+            self.tm+=((self.M295.mslf())*(self.M295.amnt))
+        if self.M296 !=0:
+            self.tm+=((self.M296.mslf())*(self.M296.amnt))
+        if self.M297 !=0:
+            self.tm+=((self.M297.mslf())*(self.M297.amnt))
+        if self.M298 !=0:
+            self.tm+=((self.M298.mslf())*(self.M298.amnt))
+        if self.M299 !=0:
+            self.tm+=((self.M299.mslf())*(self.M299.amnt))
+        if self.M300 !=0:
+            self.tm+=((self.M300.mslf())*(self.M300.amnt))
+        if self.M301 !=0:
+            self.tm+=((self.M301.mslf())*(self.M301.amnt))
+        if self.M302 !=0:
+            self.tm+=((self.M302.mslf())*(self.M302.amnt))
+        if self.M303 !=0:
+            self.tm+=((self.M303.mslf())*(self.M303.amnt))
+        if self.M304 !=0:
+            self.tm+=((self.M304.mslf())*(self.M304.amnt))
+        if self.M305 !=0:
+            self.tm+=((self.M305.mslf())*(self.M305.amnt))
+        if self.M306 !=0:
+            self.tm+=((self.M306.mslf())*(self.M306.amnt))
+        if self.M307 !=0:
+            self.tm+=((self.M307.mslf())*(self.M307.amnt))
+        if self.M308 !=0:
+            self.tm+=((self.M308.mslf())*(self.M308.amnt))
+        if self.M309 !=0:
+            self.tm+=((self.M309.mslf())*(self.M309.amnt))
+        if self.M310 !=0:
+            self.tm+=((self.M310.mslf())*(self.M310.amnt))
+        if self.M311 !=0:
+            self.tm+=((self.M311.mslf())*(self.M311.amnt))
+        if self.M312 !=0:
+            self.tm+=((self.M312.mslf())*(self.M312.amnt))
+        if self.M313 !=0:
+            self.tm+=((self.M313.mslf())*(self.M313.amnt))
+        if self.M314 !=0:
+            self.tm+=((self.M314.mslf())*(self.M314.amnt))
+        if self.M315 !=0:
+            self.tm+=((self.M315.mslf())*(self.M315.amnt))
+        if self.M316 !=0:
+            self.tm+=((self.M316.mslf())*(self.M316.amnt))
+        if self.M317 !=0:
+            self.tm+=((self.M317.mslf())*(self.M317.amnt))
+        if self.M318 !=0:
+            self.tm+=((self.M318.mslf())*(self.M318.amnt))
+        if self.M319 !=0:
+            self.tm+=((self.M319.mslf())*(self.M319.amnt))
+        if self.M320 !=0:
+            self.tm+=((self.M320.mslf())*(self.M320.amnt))
+        if self.M321 !=0:
+            self.tm+=((self.M321.mslf())*(self.M321.amnt))
+        if self.M322 !=0:
+            self.tm+=((self.M322.mslf())*(self.M322.amnt))
+        if self.M323 !=0:
+            self.tm+=((self.M323.mslf())*(self.M323.amnt))
+        if self.M324 !=0:
+            self.tm+=((self.M324.mslf())*(self.M324.amnt))
+        if self.M325 !=0:
+            self.tm+=((self.M325.mslf())*(self.M325.amnt))
+        if self.M326 !=0:
+            self.tm+=((self.M326.mslf())*(self.M326.amnt))
+        if self.M327 !=0:
+            self.tm+=((self.M327.mslf())*(self.M327.amnt))
+        if self.M328 !=0:
+            self.tm+=((self.M328.mslf())*(self.M328.amnt))
+        if self.M329 !=0:
+            self.tm+=((self.M329.mslf())*(self.M329.amnt))
+        if self.M330 !=0:
+            self.tm+=((self.M330.mslf())*(self.M330.amnt))
+        if self.M331 !=0:
+            self.tm+=((self.M331.mslf())*(self.M331.amnt))
+        if self.M332 !=0:
+            self.tm+=((self.M332.mslf())*(self.M332.amnt))
+        if self.M333 !=0:
+            self.tm+=((self.M333.mslf())*(self.M333.amnt))
+        if self.M334 !=0:
+            self.tm+=((self.M334.mslf())*(self.M334.amnt))
+        if self.M335 !=0:
+            self.tm+=((self.M335.mslf())*(self.M335.amnt))
+        if self.M336 !=0:
+            self.tm+=((self.M336.mslf())*(self.M336.amnt))
+        if self.M337 !=0:
+            self.tm+=((self.M337.mslf())*(self.M337.amnt))
+        if self.M338 !=0:
+            self.tm+=((self.M338.mslf())*(self.M338.amnt))
+        if self.M339 !=0:
+            self.tm+=((self.M339.mslf())*(self.M339.amnt))
+        if self.M340 !=0:
+            self.tm+=((self.M340.mslf())*(self.M340.amnt))
+        if self.M341 !=0:
+            self.tm+=((self.M341.mslf())*(self.M341.amnt))
+        if self.M342 !=0:
+            self.tm+=((self.M342.mslf())*(self.M342.amnt))
+        if self.M343 !=0:
+            self.tm+=((self.M343.mslf())*(self.M343.amnt))
+        if self.M344 !=0:
+            self.tm+=((self.M344.mslf())*(self.M344.amnt))
+        if self.M345 !=0:
+            self.tm+=((self.M345.mslf())*(self.M345.amnt))
+        if self.M346 !=0:
+            self.tm+=((self.M346.mslf())*(self.M346.amnt))
+        if self.M347 !=0:
+            self.tm+=((self.M347.mslf())*(self.M347.amnt))
+        if self.M348 !=0:
+            self.tm+=((self.M348.mslf())*(self.M348.amnt))
+        if self.M349 !=0:
+            self.tm+=((self.M349.mslf())*(self.M349.amnt))
+        if self.M350 !=0:
+            self.tm+=((self.M350.mslf())*(self.M350.amnt))
+        if self.M351 !=0:
+            self.tm+=((self.M351.mslf())*(self.M351.amnt))
+        if self.M352 !=0:
+            self.tm+=((self.M352.mslf())*(self.M352.amnt))
+        if self.M353 !=0:
+            self.tm+=((self.M353.mslf())*(self.M353.amnt))
+        if self.M354 !=0:
+            self.tm+=((self.M354.mslf())*(self.M354.amnt))
+        if self.M355 !=0:
+            self.tm+=((self.M355.mslf())*(self.M355.amnt))
+        if self.M356 !=0:
+            self.tm+=((self.M356.mslf())*(self.M356.amnt))
+        if self.M357 !=0:
+            self.tm+=((self.M357.mslf())*(self.M357.amnt))
+        if self.M358 !=0:
+            self.tm+=((self.M358.mslf())*(self.M358.amnt))
+        if self.M359 !=0:
+            self.tm+=((self.M359.mslf())*(self.M359.amnt))
+        if self.M360 !=0:
+            self.tm+=((self.M360.mslf())*(self.M360.amnt))
+        if self.M361 !=0:
+            self.tm+=((self.M361.mslf())*(self.M361.amnt))
+        if self.M362 !=0:
+            self.tm+=((self.M362.mslf())*(self.M362.amnt))
+        if self.M363 !=0:
+            self.tm+=((self.M363.mslf())*(self.M363.amnt))
+        if self.M364 !=0:
+            self.tm+=((self.M364.mslf())*(self.M364.amnt))
+        if self.M365 !=0:
+            self.tm+=((self.M365.mslf())*(self.M365.amnt))
+        if self.M366 !=0:
+            self.tm+=((self.M366.mslf())*(self.M366.amnt))
+        if self.M367 !=0:
+            self.tm+=((self.M367.mslf())*(self.M367.amnt))
+        if self.M368 !=0:
+            self.tm+=((self.M368.mslf())*(self.M368.amnt))
+        if self.M369 !=0:
+            self.tm+=((self.M369.mslf())*(self.M369.amnt))
+        if self.M370 !=0:
+            self.tm+=((self.M370.mslf())*(self.M370.amnt))
+        if self.M371 !=0:
+            self.tm+=((self.M371.mslf())*(self.M371.amnt))
+        if self.M372 !=0:
+            self.tm+=((self.M372.mslf())*(self.M372.amnt))
+        if self.M373 !=0:
+            self.tm+=((self.M373.mslf())*(self.M373.amnt))
+        if self.M374 !=0:
+            self.tm+=((self.M374.mslf())*(self.M374.amnt))
+        if self.M375 !=0:
+            self.tm+=((self.M375.mslf())*(self.M375.amnt))
+        if self.M376 !=0:
+            self.tm+=((self.M376.mslf())*(self.M376.amnt))
+        if self.M377 !=0:
+            self.tm+=((self.M377.mslf())*(self.M377.amnt))
+        if self.M378 !=0:
+            self.tm+=((self.M378.mslf())*(self.M378.amnt))
+        if self.M379 !=0:
+            self.tm+=((self.M379.mslf())*(self.M379.amnt))
+        if self.M380 !=0:
+            self.tm+=((self.M380.mslf())*(self.M380.amnt))
+        if self.M381 !=0:
+            self.tm+=((self.M381.mslf())*(self.M381.amnt))
+        if self.M382 !=0:
+            self.tm+=((self.M382.mslf())*(self.M382.amnt))
+        if self.M383 !=0:
+            self.tm+=((self.M383.mslf())*(self.M383.amnt))
+        if self.M384 !=0:
+            self.tm+=((self.M384.mslf())*(self.M384.amnt))
+        if self.M385 !=0:
+            self.tm+=((self.M385.mslf())*(self.M385.amnt))
+        if self.M386 !=0:
+            self.tm+=((self.M386.mslf())*(self.M386.amnt))
+        if self.M387 !=0:
+            self.tm+=((self.M387.mslf())*(self.M387.amnt))
+        if self.M388 !=0:
+            self.tm+=((self.M388.mslf())*(self.M388.amnt))
+        if self.M389 !=0:
+            self.tm+=((self.M389.mslf())*(self.M389.amnt))
+        if self.M390 !=0:
+            self.tm+=((self.M390.mslf())*(self.M390.amnt))
+        if self.M391 !=0:
+            self.tm+=((self.M391.mslf())*(self.M391.amnt))
+        if self.M392 !=0:
+            self.tm+=((self.M392.mslf())*(self.M392.amnt))
+        if self.M393 !=0:
+            self.tm+=((self.M393.mslf())*(self.M393.amnt))
+        if self.M394 !=0:
+            self.tm+=((self.M394.mslf())*(self.M394.amnt))
+        if self.M395 !=0:
+            self.tm+=((self.M395.mslf())*(self.M395.amnt))
+        if self.M396 !=0:
+            self.tm+=((self.M396.mslf())*(self.M396.amnt))
+        if self.M397 !=0:
+            self.tm+=((self.M397.mslf())*(self.M397.amnt))
+        if self.M398 !=0:
+            self.tm+=((self.M398.mslf())*(self.M398.amnt))
+        if self.M399 !=0:
+            self.tm+=((self.M399.mslf())*(self.M399.amnt))
+        if self.M400 !=0:
+            self.tm+=((self.M400.mslf())*(self.M400.amnt))
+        if self.M401 !=0:
+            self.tm+=((self.M401.mslf())*(self.M401.amnt))
+        if self.M402 !=0:
+            self.tm+=((self.M402.mslf())*(self.M402.amnt))
+        if self.M403 !=0:
+            self.tm+=((self.M403.mslf())*(self.M403.amnt))
+        if self.M404 !=0:
+            self.tm+=((self.M404.mslf())*(self.M404.amnt))
+        if self.M405 !=0:
+            self.tm+=((self.M405.mslf())*(self.M405.amnt))
+        if self.M406 !=0:
+            self.tm+=((self.M406.mslf())*(self.M406.amnt))
+        if self.M407 !=0:
+            self.tm+=((self.M407.mslf())*(self.M407.amnt))
+        if self.M408 !=0:
+            self.tm+=((self.M408.mslf())*(self.M408.amnt))
+        if self.M409 !=0:
+            self.tm+=((self.M409.mslf())*(self.M409.amnt))
+        if self.M410 !=0:
+            self.tm+=((self.M410.mslf())*(self.M410.amnt))
+        if self.M411 !=0:
+            self.tm+=((self.M411.mslf())*(self.M411.amnt))
+        if self.M412 !=0:
+            self.tm+=((self.M412.mslf())*(self.M412.amnt))
+        if self.M413 !=0:
+            self.tm+=((self.M413.mslf())*(self.M413.amnt))
+        if self.M414 !=0:
+            self.tm+=((self.M414.mslf())*(self.M414.amnt))
+        if self.M415 !=0:
+            self.tm+=((self.M415.mslf())*(self.M415.amnt))
+        if self.M416 !=0:
+            self.tm+=((self.M416.mslf())*(self.M416.amnt))
+        if self.M417 !=0:
+            self.tm+=((self.M417.mslf())*(self.M417.amnt))
+        if self.M418 !=0:
+            self.tm+=((self.M418.mslf())*(self.M418.amnt))
+        if self.M419 !=0:
+            self.tm+=((self.M419.mslf())*(self.M419.amnt))
+        if self.M420 !=0:
+            self.tm+=((self.M420.mslf())*(self.M420.amnt))
+        if self.M421 !=0:
+            self.tm+=((self.M421.mslf())*(self.M421.amnt))
+        if self.M422 !=0:
+            self.tm+=((self.M422.mslf())*(self.M422.amnt))
+        if self.M423 !=0:
+            self.tm+=((self.M423.mslf())*(self.M423.amnt))
+        if self.M424 !=0:
+            self.tm+=((self.M424.mslf())*(self.M424.amnt))
+        if self.M425 !=0:
+            self.tm+=((self.M425.mslf())*(self.M425.amnt))
+        if self.M426 !=0:
+            self.tm+=((self.M426.mslf())*(self.M426.amnt))
+        if self.M427 !=0:
+            self.tm+=((self.M427.mslf())*(self.M427.amnt))
+        if self.M428 !=0:
+            self.tm+=((self.M428.mslf())*(self.M428.amnt))
+        if self.M429 !=0:
+            self.tm+=((self.M429.mslf())*(self.M429.amnt))
+        if self.M430 !=0:
+            self.tm+=((self.M430.mslf())*(self.M430.amnt))
+        if self.M431 !=0:
+            self.tm+=((self.M431.mslf())*(self.M431.amnt))
+        if self.M432 !=0:
+            self.tm+=((self.M432.mslf())*(self.M432.amnt))
+        if self.M433 !=0:
+            self.tm+=((self.M433.mslf())*(self.M433.amnt))
+        if self.M434 !=0:
+            self.tm+=((self.M434.mslf())*(self.M434.amnt))
+        if self.M435 !=0:
+            self.tm+=((self.M435.mslf())*(self.M435.amnt))
+        if self.M436 !=0:
+            self.tm+=((self.M436.mslf())*(self.M436.amnt))
+        if self.M437 !=0:
+            self.tm+=((self.M437.mslf())*(self.M437.amnt))
+        if self.M438 !=0:
+            self.tm+=((self.M438.mslf())*(self.M438.amnt))
+        if self.M439 !=0:
+            self.tm+=((self.M439.mslf())*(self.M439.amnt))
+        if self.M440 !=0:
+            self.tm+=((self.M440.mslf())*(self.M440.amnt))
+        if self.M441 !=0:
+            self.tm+=((self.M441.mslf())*(self.M441.amnt))
+        if self.M442 !=0:
+            self.tm+=((self.M442.mslf())*(self.M442.amnt))
+        if self.M443 !=0:
+            self.tm+=((self.M443.mslf())*(self.M443.amnt))
+        if self.M444 !=0:
+            self.tm+=((self.M444.mslf())*(self.M444.amnt))
+        if self.M445 !=0:
+            self.tm+=((self.M445.mslf())*(self.M445.amnt))
+        if self.M446 !=0:
+            self.tm+=((self.M446.mslf())*(self.M446.amnt))
+        if self.M447 !=0:
+            self.tm+=((self.M447.mslf())*(self.M447.amnt))
+        if self.M448 !=0:
+            self.tm+=((self.M448.mslf())*(self.M448.amnt))
+        if self.M449 !=0:
+            self.tm+=((self.M449.mslf())*(self.M449.amnt))
+        if self.M450 !=0:
+            self.tm+=((self.M450.mslf())*(self.M450.amnt))
+        if self.M451 !=0:
+            self.tm+=((self.M451.mslf())*(self.M451.amnt))
+        if self.M452 !=0:
+            self.tm+=((self.M452.mslf())*(self.M452.amnt))
+        if self.M453 !=0:
+            self.tm+=((self.M453.mslf())*(self.M453.amnt))
+        if self.M454 !=0:
+            self.tm+=((self.M454.mslf())*(self.M454.amnt))
+        if self.M455 !=0:
+            self.tm+=((self.M455.mslf())*(self.M455.amnt))
+        if self.M456 !=0:
+            self.tm+=((self.M456.mslf())*(self.M456.amnt))
+        if self.M457 !=0:
+            self.tm+=((self.M457.mslf())*(self.M457.amnt))
+        if self.M458 !=0:
+            self.tm+=((self.M458.mslf())*(self.M458.amnt))
+        if self.M459 !=0:
+            self.tm+=((self.M459.mslf())*(self.M459.amnt))
+        if self.M460 !=0:
+            self.tm+=((self.M460.mslf())*(self.M460.amnt))
+        if self.M461 !=0:
+            self.tm+=((self.M461.mslf())*(self.M461.amnt))
+        if self.M462 !=0:
+            self.tm+=((self.M462.mslf())*(self.M462.amnt))
+        if self.M463 !=0:
+            self.tm+=((self.M463.mslf())*(self.M463.amnt))
+        if self.M464 !=0:
+            self.tm+=((self.M464.mslf())*(self.M464.amnt))
+        if self.M465 !=0:
+            self.tm+=((self.M465.mslf())*(self.M465.amnt))
+        if self.M466 !=0:
+            self.tm+=((self.M466.mslf())*(self.M466.amnt))
+        if self.M467 !=0:
+            self.tm+=((self.M467.mslf())*(self.M467.amnt))
+        if self.M468 !=0:
+            self.tm+=((self.M468.mslf())*(self.M468.amnt))
+        if self.M469 !=0:
+            self.tm+=((self.M469.mslf())*(self.M469.amnt))
+        if self.M470 !=0:
+            self.tm+=((self.M470.mslf())*(self.M470.amnt))
+        if self.M471 !=0:
+            self.tm+=((self.M471.mslf())*(self.M471.amnt))
+        if self.M472 !=0:
+            self.tm+=((self.M472.mslf())*(self.M472.amnt))
+        if self.M473 !=0:
+            self.tm+=((self.M473.mslf())*(self.M473.amnt))
+        if self.M474 !=0:
+            self.tm+=((self.M474.mslf())*(self.M474.amnt))
+        if self.M475 !=0:
+            self.tm+=((self.M475.mslf())*(self.M475.amnt))
+        if self.M476 !=0:
+            self.tm+=((self.M476.mslf())*(self.M476.amnt))
+        if self.M477 !=0:
+            self.tm+=((self.M477.mslf())*(self.M477.amnt))
+        if self.M478 !=0:
+            self.tm+=((self.M478.mslf())*(self.M478.amnt))
+        if self.M479 !=0:
+            self.tm+=((self.M479.mslf())*(self.M479.amnt))
+        if self.M480 !=0:
+            self.tm+=((self.M480.mslf())*(self.M480.amnt))
+        if self.M481 !=0:
+            self.tm+=((self.M481.mslf())*(self.M481.amnt))
+        if self.M482 !=0:
+            self.tm+=((self.M482.mslf())*(self.M482.amnt))
+        if self.M483 !=0:
+            self.tm+=((self.M483.mslf())*(self.M483.amnt))
+        if self.M484 !=0:
+            self.tm+=((self.M484.mslf())*(self.M484.amnt))
+        if self.M485 !=0:
+            self.tm+=((self.M485.mslf())*(self.M485.amnt))
+        if self.M486 !=0:
+            self.tm+=((self.M486.mslf())*(self.M486.amnt))
+        if self.M487 !=0:
+            self.tm+=((self.M487.mslf())*(self.M487.amnt))
+        if self.M488 !=0:
+            self.tm+=((self.M488.mslf())*(self.M488.amnt))
+        if self.M489 !=0:
+            self.tm+=((self.M489.mslf())*(self.M489.amnt))
+        if self.M490 !=0:
+            self.tm+=((self.M490.mslf())*(self.M490.amnt))
+        if self.M491 !=0:
+            self.tm+=((self.M491.mslf())*(self.M491.amnt))
+        if self.M492 !=0:
+            self.tm+=((self.M492.mslf())*(self.M492.amnt))
+        if self.M493 !=0:
+            self.tm+=((self.M493.mslf())*(self.M493.amnt))
+        if self.M494 !=0:
+            self.tm+=((self.M494.mslf())*(self.M494.amnt))
+        if self.M495 !=0:
+            self.tm+=((self.M495.mslf())*(self.M495.amnt))
+        if self.M496 !=0:
+            self.tm+=((self.M496.mslf())*(self.M496.amnt))
+        if self.M497 !=0:
+            self.tm+=((self.M497.mslf())*(self.M497.amnt))
+        if self.M498 !=0:
+            self.tm+=((self.M498.mslf())*(self.M498.amnt))
+        if self.M499 !=0:
+            self.tm+=((self.M499.mslf())*(self.M499.amnt))
+        if self.M500 !=0:
+            self.tm+=((self.M500.mslf())*(self.M500.amnt))
+        if self.M501 !=0:
+            self.tm+=((self.M501.mslf())*(self.M501.amnt))
+        if self.M502 !=0:
+            self.tm+=((self.M502.mslf())*(self.M502.amnt))
+        if self.M503 !=0:
+            self.tm+=((self.M503.mslf())*(self.M503.amnt))
+        if self.M504 !=0:
+            self.tm+=((self.M504.mslf())*(self.M504.amnt))
+        if self.M505 !=0:
+            self.tm+=((self.M505.mslf())*(self.M505.amnt))
+        if self.M506 !=0:
+            self.tm+=((self.M506.mslf())*(self.M506.amnt))
+        if self.M507 !=0:
+            self.tm+=((self.M507.mslf())*(self.M507.amnt))
+        if self.M508 !=0:
+            self.tm+=((self.M508.mslf())*(self.M508.amnt))
+        if self.M509 !=0:
+            self.tm+=((self.M509.mslf())*(self.M509.amnt))
+        if self.M510 !=0:
+            self.tm+=((self.M510.mslf())*(self.M510.amnt))
+        if self.M511 !=0:
+            self.tm+=((self.M511.mslf())*(self.M511.amnt))
+        if self.M512 !=0:
+            self.tm+=((self.M512.mslf())*(self.M512.amnt))
+        if self.M513 !=0:
+            self.tm+=((self.M513.mslf())*(self.M513.amnt))
+        if self.M514 !=0:
+            self.tm+=((self.M514.mslf())*(self.M514.amnt))
+        if self.M515 !=0:
+            self.tm+=((self.M515.mslf())*(self.M515.amnt))
+        if self.M516 !=0:
+            self.tm+=((self.M516.mslf())*(self.M516.amnt))
+        if self.M517 !=0:
+            self.tm+=((self.M517.mslf())*(self.M517.amnt))
+        if self.M518 !=0:
+            self.tm+=((self.M518.mslf())*(self.M518.amnt))
+        if self.M519 !=0:
+            self.tm+=((self.M519.mslf())*(self.M519.amnt))
+        if self.M520 !=0:
+            self.tm+=((self.M520.mslf())*(self.M520.amnt))
+        if self.M521 !=0:
+            self.tm+=((self.M521.mslf())*(self.M521.amnt))
+        if self.M522 !=0:
+            self.tm+=((self.M522.mslf())*(self.M522.amnt))
+        if self.M523 !=0:
+            self.tm+=((self.M523.mslf())*(self.M523.amnt))
+        if self.M524 !=0:
+            self.tm+=((self.M524.mslf())*(self.M524.amnt))
+        if self.M525 !=0:
+            self.tm+=((self.M525.mslf())*(self.M525.amnt))
+        if self.M526 !=0:
+            self.tm+=((self.M526.mslf())*(self.M526.amnt))
+        if self.M527 !=0:
+            self.tm+=((self.M527.mslf())*(self.M527.amnt))
+        if self.M528 !=0:
+            self.tm+=((self.M528.mslf())*(self.M528.amnt))
+        if self.M529 !=0:
+            self.tm+=((self.M529.mslf())*(self.M529.amnt))
+        if self.M530 !=0:
+            self.tm+=((self.M530.mslf())*(self.M530.amnt))
+        if self.M531 !=0:
+            self.tm+=((self.M531.mslf())*(self.M531.amnt))
+        if self.M532 !=0:
+            self.tm+=((self.M532.mslf())*(self.M532.amnt))
+        if self.M533 !=0:
+            self.tm+=((self.M533.mslf())*(self.M533.amnt))
+        if self.M534 !=0:
+            self.tm+=((self.M534.mslf())*(self.M534.amnt))
+        if self.M535 !=0:
+            self.tm+=((self.M535.mslf())*(self.M535.amnt))
+        if self.M536 !=0:
+            self.tm+=((self.M536.mslf())*(self.M536.amnt))
+        if self.M537 !=0:
+            self.tm+=((self.M537.mslf())*(self.M537.amnt))
+        if self.M538 !=0:
+            self.tm+=((self.M538.mslf())*(self.M538.amnt))
+        if self.M539 !=0:
+            self.tm+=((self.M539.mslf())*(self.M539.amnt))
+        if self.M540 !=0:
+            self.tm+=((self.M540.mslf())*(self.M540.amnt))
+        if self.M541 !=0:
+            self.tm+=((self.M541.mslf())*(self.M541.amnt))
+        if self.M542 !=0:
+            self.tm+=((self.M542.mslf())*(self.M542.amnt))
+        if self.M543 !=0:
+            self.tm+=((self.M543.mslf())*(self.M543.amnt))
+        if self.M544 !=0:
+            self.tm+=((self.M544.mslf())*(self.M544.amnt))
+        if self.M545 !=0:
+            self.tm+=((self.M545.mslf())*(self.M545.amnt))
+        if self.M546 !=0:
+            self.tm+=((self.M546.mslf())*(self.M546.amnt))
+        if self.M547 !=0:
+            self.tm+=((self.M547.mslf())*(self.M547.amnt))
+        if self.M548 !=0:
+            self.tm+=((self.M548.mslf())*(self.M548.amnt))
+        if self.M549 !=0:
+            self.tm+=((self.M549.mslf())*(self.M549.amnt))
+        if self.M550 !=0:
+            self.tm+=((self.M550.mslf())*(self.M550.amnt))
+        if self.M551 !=0:
+            self.tm+=((self.M551.mslf())*(self.M551.amnt))
+        if self.M552 !=0:
+            self.tm+=((self.M552.mslf())*(self.M552.amnt))
+        if self.M553 !=0:
+            self.tm+=((self.M553.mslf())*(self.M553.amnt))
+        if self.M554 !=0:
+            self.tm+=((self.M554.mslf())*(self.M554.amnt))
+        if self.M555 !=0:
+            self.tm+=((self.M555.mslf())*(self.M555.amnt))
+        if self.M556 !=0:
+            self.tm+=((self.M556.mslf())*(self.M556.amnt))
+        if self.M557 !=0:
+            self.tm+=((self.M557.mslf())*(self.M557.amnt))
+        if self.M558 !=0:
+            self.tm+=((self.M558.mslf())*(self.M558.amnt))
+        if self.M559 !=0:
+            self.tm+=((self.M559.mslf())*(self.M559.amnt))
+        if self.M560 !=0:
+            self.tm+=((self.M560.mslf())*(self.M560.amnt))
+        if self.M561 !=0:
+            self.tm+=((self.M561.mslf())*(self.M561.amnt))
+        if self.M562 !=0:
+            self.tm+=((self.M562.mslf())*(self.M562.amnt))
+        if self.M563 !=0:
+            self.tm+=((self.M563.mslf())*(self.M563.amnt))
+        if self.M564 !=0:
+            self.tm+=((self.M564.mslf())*(self.M564.amnt))
+        if self.M565 !=0:
+            self.tm+=((self.M565.mslf())*(self.M565.amnt))
+        if self.M566 !=0:
+            self.tm+=((self.M566.mslf())*(self.M566.amnt))
+        if self.M567 !=0:
+            self.tm+=((self.M567.mslf())*(self.M567.amnt))
+        if self.M568 !=0:
+            self.tm+=((self.M568.mslf())*(self.M568.amnt))
+        if self.M569 !=0:
+            self.tm+=((self.M569.mslf())*(self.M569.amnt))
+        if self.M570 !=0:
+            self.tm+=((self.M570.mslf())*(self.M570.amnt))
+        if self.M571 !=0:
+            self.tm+=((self.M571.mslf())*(self.M571.amnt))
+        if self.M572 !=0:
+            self.tm+=((self.M572.mslf())*(self.M572.amnt))
+        if self.M573 !=0:
+            self.tm+=((self.M573.mslf())*(self.M573.amnt))
+        if self.M574 !=0:
+            self.tm+=((self.M574.mslf())*(self.M574.amnt))
+        if self.M575 !=0:
+            self.tm+=((self.M575.mslf())*(self.M575.amnt))
+        if self.M576 !=0:
+            self.tm+=((self.M576.mslf())*(self.M576.amnt))
+        if self.M577 !=0:
+            self.tm+=((self.M577.mslf())*(self.M577.amnt))
+        if self.M578 !=0:
+            self.tm+=((self.M578.mslf())*(self.M578.amnt))
+        if self.M579 !=0:
+            self.tm+=((self.M579.mslf())*(self.M579.amnt))
+        if self.M580 !=0:
+            self.tm+=((self.M580.mslf())*(self.M580.amnt))
+        if self.M581 !=0:
+            self.tm+=((self.M581.mslf())*(self.M581.amnt))
+        if self.M582 !=0:
+            self.tm+=((self.M582.mslf())*(self.M582.amnt))
+        if self.M583 !=0:
+            self.tm+=((self.M583.mslf())*(self.M583.amnt))
+        if self.M584 !=0:
+            self.tm+=((self.M584.mslf())*(self.M584.amnt))
+        if self.M585 !=0:
+            self.tm+=((self.M585.mslf())*(self.M585.amnt))
+        if self.M586 !=0:
+            self.tm+=((self.M586.mslf())*(self.M586.amnt))
+        if self.M587 !=0:
+            self.tm+=((self.M587.mslf())*(self.M587.amnt))
+        if self.M588 !=0:
+            self.tm+=((self.M588.mslf())*(self.M588.amnt))
+        if self.M589 !=0:
+            self.tm+=((self.M589.mslf())*(self.M589.amnt))
+        if self.M590 !=0:
+            self.tm+=((self.M590.mslf())*(self.M590.amnt))
+        if self.M591 !=0:
+            self.tm+=((self.M591.mslf())*(self.M591.amnt))
+        if self.M592 !=0:
+            self.tm+=((self.M592.mslf())*(self.M592.amnt))
+        if self.M593 !=0:
+            self.tm+=((self.M593.mslf())*(self.M593.amnt))
+        if self.M594 !=0:
+            self.tm+=((self.M594.mslf())*(self.M594.amnt))
+        if self.M595 !=0:
+            self.tm+=((self.M595.mslf())*(self.M595.amnt))
+        if self.M596 !=0:
+            self.tm+=((self.M596.mslf())*(self.M596.amnt))
+        if self.M597 !=0:
+            self.tm+=((self.M597.mslf())*(self.M597.amnt))
+        if self.M598 !=0:
+            self.tm+=((self.M598.mslf())*(self.M598.amnt))
+        if self.M599 !=0:
+            self.tm+=((self.M599.mslf())*(self.M599.amnt))
+        if self.M600 !=0:
+            self.tm+=((self.M600.mslf())*(self.M600.amnt))
+        if self.M601 !=0:
+            self.tm+=((self.M601.mslf())*(self.M601.amnt))
+        if self.M602 !=0:
+            self.tm+=((self.M602.mslf())*(self.M602.amnt))
+        if self.M603 !=0:
+            self.tm+=((self.M603.mslf())*(self.M603.amnt))
+        if self.M604 !=0:
+            self.tm+=((self.M604.mslf())*(self.M604.amnt))
+        if self.M605 !=0:
+            self.tm+=((self.M605.mslf())*(self.M605.amnt))
+        if self.M606 !=0:
+            self.tm+=((self.M606.mslf())*(self.M606.amnt))
+        if self.M607 !=0:
+            self.tm+=((self.M607.mslf())*(self.M607.amnt))
+        if self.M608 !=0:
+            self.tm+=((self.M608.mslf())*(self.M608.amnt))
+        if self.M609 !=0:
+            self.tm+=((self.M609.mslf())*(self.M609.amnt))
+        if self.M610 !=0:
+            self.tm+=((self.M610.mslf())*(self.M610.amnt))
+        if self.M611 !=0:
+            self.tm+=((self.M611.mslf())*(self.M611.amnt))
+        if self.M612 !=0:
+            self.tm+=((self.M612.mslf())*(self.M612.amnt))
+        if self.M613 !=0:
+            self.tm+=((self.M613.mslf())*(self.M613.amnt))
+        if self.M614 !=0:
+            self.tm+=((self.M614.mslf())*(self.M614.amnt))
+        if self.M615 !=0:
+            self.tm+=((self.M615.mslf())*(self.M615.amnt))
+        if self.M616 !=0:
+            self.tm+=((self.M616.mslf())*(self.M616.amnt))
+        if self.M617 !=0:
+            self.tm+=((self.M617.mslf())*(self.M617.amnt))
+        if self.M618 !=0:
+            self.tm+=((self.M618.mslf())*(self.M618.amnt))
+        if self.M619 !=0:
+            self.tm+=((self.M619.mslf())*(self.M619.amnt))
+        if self.M620 !=0:
+            self.tm+=((self.M620.mslf())*(self.M620.amnt))
+        if self.M621 !=0:
+            self.tm+=((self.M621.mslf())*(self.M621.amnt))
+        if self.M622 !=0:
+            self.tm+=((self.M622.mslf())*(self.M622.amnt))
+        if self.M623 !=0:
+            self.tm+=((self.M623.mslf())*(self.M623.amnt))
+        if self.M624 !=0:
+            self.tm+=((self.M624.mslf())*(self.M624.amnt))
+        if self.M625 !=0:
+            self.tm+=((self.M625.mslf())*(self.M625.amnt))
+        if self.M626 !=0:
+            self.tm+=((self.M626.mslf())*(self.M626.amnt))
+        if self.M627 !=0:
+            self.tm+=((self.M627.mslf())*(self.M627.amnt))
+        if self.M628 !=0:
+            self.tm+=((self.M628.mslf())*(self.M628.amnt))
+        if self.M629 !=0:
+            self.tm+=((self.M629.mslf())*(self.M629.amnt))
+        if self.M630 !=0:
+            self.tm+=((self.M630.mslf())*(self.M630.amnt))
+        if self.M631 !=0:
+            self.tm+=((self.M631.mslf())*(self.M631.amnt))
+        if self.M632 !=0:
+            self.tm+=((self.M632.mslf())*(self.M632.amnt))
+        if self.M633 !=0:
+            self.tm+=((self.M633.mslf())*(self.M633.amnt))
+        if self.M634 !=0:
+            self.tm+=((self.M634.mslf())*(self.M634.amnt))
+        if self.M635 !=0:
+            self.tm+=((self.M635.mslf())*(self.M635.amnt))
+        if self.M636 !=0:
+            self.tm+=((self.M636.mslf())*(self.M636.amnt))
+        if self.M637 !=0:
+            self.tm+=((self.M637.mslf())*(self.M637.amnt))
+        if self.M638 !=0:
+            self.tm+=((self.M638.mslf())*(self.M638.amnt))
+        if self.M639 !=0:
+            self.tm+=((self.M639.mslf())*(self.M639.amnt))
+        if self.M640 !=0:
+            self.tm+=((self.M640.mslf())*(self.M640.amnt))
+        if self.M641 !=0:
+            self.tm+=((self.M641.mslf())*(self.M641.amnt))
+        if self.M642 !=0:
+            self.tm+=((self.M642.mslf())*(self.M642.amnt))
+        if self.M643 !=0:
+            self.tm+=((self.M643.mslf())*(self.M643.amnt))
+        if self.M644 !=0:
+            self.tm+=((self.M644.mslf())*(self.M644.amnt))
+        if self.M645 !=0:
+            self.tm+=((self.M645.mslf())*(self.M645.amnt))
+        if self.M646 !=0:
+            self.tm+=((self.M646.mslf())*(self.M646.amnt))
+        if self.M647 !=0:
+            self.tm+=((self.M647.mslf())*(self.M647.amnt))
+        if self.M648 !=0:
+            self.tm+=((self.M648.mslf())*(self.M648.amnt))
+        if self.M649 !=0:
+            self.tm+=((self.M649.mslf())*(self.M649.amnt))
+        if self.M650 !=0:
+            self.tm+=((self.M650.mslf())*(self.M650.amnt))
+        if self.M651 !=0:
+            self.tm+=((self.M651.mslf())*(self.M651.amnt))
+        if self.M652 !=0:
+            self.tm+=((self.M652.mslf())*(self.M652.amnt))
+        if self.M653 !=0:
+            self.tm+=((self.M653.mslf())*(self.M653.amnt))
+        if self.M654 !=0:
+            self.tm+=((self.M654.mslf())*(self.M654.amnt))
+        if self.M655 !=0:
+            self.tm+=((self.M655.mslf())*(self.M655.amnt))
+        if self.M656 !=0:
+            self.tm+=((self.M656.mslf())*(self.M656.amnt))
+        if self.M657 !=0:
+            self.tm+=((self.M657.mslf())*(self.M657.amnt))
+        if self.M658 !=0:
+            self.tm+=((self.M658.mslf())*(self.M658.amnt))
+        if self.M659 !=0:
+            self.tm+=((self.M659.mslf())*(self.M659.amnt))
+        if self.M660 !=0:
+            self.tm+=((self.M660.mslf())*(self.M660.amnt))
+        if self.M661 !=0:
+            self.tm+=((self.M661.mslf())*(self.M661.amnt))
+        if self.M662 !=0:
+            self.tm+=((self.M662.mslf())*(self.M662.amnt))
+        if self.M663 !=0:
+            self.tm+=((self.M663.mslf())*(self.M663.amnt))
+        if self.M664 !=0:
+            self.tm+=((self.M664.mslf())*(self.M664.amnt))
+        if self.M665 !=0:
+            self.tm+=((self.M665.mslf())*(self.M665.amnt))
+        if self.M666 !=0:
+            self.tm+=((self.M666.mslf())*(self.M666.amnt))
+        if self.M667 !=0:
+            self.tm+=((self.M667.mslf())*(self.M667.amnt))
+        if self.M668 !=0:
+            self.tm+=((self.M668.mslf())*(self.M668.amnt))
+        if self.M669 !=0:
+            self.tm+=((self.M669.mslf())*(self.M669.amnt))
+        if self.M670 !=0:
+            self.tm+=((self.M670.mslf())*(self.M670.amnt))
+        if self.M671 !=0:
+            self.tm+=((self.M671.mslf())*(self.M671.amnt))
+        if self.M672 !=0:
+            self.tm+=((self.M672.mslf())*(self.M672.amnt))
+        if self.M673 !=0:
+            self.tm+=((self.M673.mslf())*(self.M673.amnt))
+        if self.M674 !=0:
+            self.tm+=((self.M674.mslf())*(self.M674.amnt))
+        if self.M675 !=0:
+            self.tm+=((self.M675.mslf())*(self.M675.amnt))
+        if self.M676 !=0:
+            self.tm+=((self.M676.mslf())*(self.M676.amnt))
+        if self.M677 !=0:
+            self.tm+=((self.M677.mslf())*(self.M677.amnt))
+        if self.M678 !=0:
+            self.tm+=((self.M678.mslf())*(self.M678.amnt))
+        if self.M679 !=0:
+            self.tm+=((self.M679.mslf())*(self.M679.amnt))
+        if self.M680 !=0:
+            self.tm+=((self.M680.mslf())*(self.M680.amnt))
+        if self.M681 !=0:
+            self.tm+=((self.M681.mslf())*(self.M681.amnt))
+        if self.M682 !=0:
+            self.tm+=((self.M682.mslf())*(self.M682.amnt))
+        if self.M683 !=0:
+            self.tm+=((self.M683.mslf())*(self.M683.amnt))
+        if self.M684 !=0:
+            self.tm+=((self.M684.mslf())*(self.M684.amnt))
+        if self.M685 !=0:
+            self.tm+=((self.M685.mslf())*(self.M685.amnt))
+        if self.M686 !=0:
+            self.tm+=((self.M686.mslf())*(self.M686.amnt))
+        if self.M687 !=0:
+            self.tm+=((self.M687.mslf())*(self.M687.amnt))
+        if self.M688 !=0:
+            self.tm+=((self.M688.mslf())*(self.M688.amnt))
+        if self.M689 !=0:
+            self.tm+=((self.M689.mslf())*(self.M689.amnt))
+        if self.M690 !=0:
+            self.tm+=((self.M690.mslf())*(self.M690.amnt))
+        if self.M691 !=0:
+            self.tm+=((self.M691.mslf())*(self.M691.amnt))
+        if self.M692 !=0:
+            self.tm+=((self.M692.mslf())*(self.M692.amnt))
+        if self.M693 !=0:
+            self.tm+=((self.M693.mslf())*(self.M693.amnt))
+        if self.M694 !=0:
+            self.tm+=((self.M694.mslf())*(self.M694.amnt))
+        if self.M695 !=0:
+            self.tm+=((self.M695.mslf())*(self.M695.amnt))
+        if self.M696 !=0:
+            self.tm+=((self.M696.mslf())*(self.M696.amnt))
+        if self.M697 !=0:
+            self.tm+=((self.M697.mslf())*(self.M697.amnt))
+        if self.M698 !=0:
+            self.tm+=((self.M698.mslf())*(self.M698.amnt))
+        if self.M699 !=0:
+            self.tm+=((self.M699.mslf())*(self.M699.amnt))
+        if self.M700 !=0:
+            self.tm+=((self.M700.mslf())*(self.M700.amnt))
+        if self.M701 !=0:
+            self.tm+=((self.M701.mslf())*(self.M701.amnt))
+        if self.M702 !=0:
+            self.tm+=((self.M702.mslf())*(self.M702.amnt))
+        if self.M703 !=0:
+            self.tm+=((self.M703.mslf())*(self.M703.amnt))
+        if self.M704 !=0:
+            self.tm+=((self.M704.mslf())*(self.M704.amnt))
+        if self.M705 !=0:
+            self.tm+=((self.M705.mslf())*(self.M705.amnt))
+        if self.M706 !=0:
+            self.tm+=((self.M706.mslf())*(self.M706.amnt))
+        if self.M707 !=0:
+            self.tm+=((self.M707.mslf())*(self.M707.amnt))
+        if self.M708 !=0:
+            self.tm+=((self.M708.mslf())*(self.M708.amnt))
+        if self.M709 !=0:
+            self.tm+=((self.M709.mslf())*(self.M709.amnt))
+        if self.M710 !=0:
+            self.tm+=((self.M710.mslf())*(self.M710.amnt))
+        if self.M711 !=0:
+            self.tm+=((self.M711.mslf())*(self.M711.amnt))
+        if self.M712 !=0:
+            self.tm+=((self.M712.mslf())*(self.M712.amnt))
+        if self.M713 !=0:
+            self.tm+=((self.M713.mslf())*(self.M713.amnt))
+        if self.M714 !=0:
+            self.tm+=((self.M714.mslf())*(self.M714.amnt))
+        if self.M715 !=0:
+            self.tm+=((self.M715.mslf())*(self.M715.amnt))
+        if self.M716 !=0:
+            self.tm+=((self.M716.mslf())*(self.M716.amnt))
+        if self.M717 !=0:
+            self.tm+=((self.M717.mslf())*(self.M717.amnt))
+        if self.M718 !=0:
+            self.tm+=((self.M718.mslf())*(self.M718.amnt))
+        if self.M719 !=0:
+            self.tm+=((self.M719.mslf())*(self.M719.amnt))
+        if self.M720 !=0:
+            self.tm+=((self.M720.mslf())*(self.M720.amnt))
+        if self.M721 !=0:
+            self.tm+=((self.M721.mslf())*(self.M721.amnt))
+        if self.M722 !=0:
+            self.tm+=((self.M722.mslf())*(self.M722.amnt))
+        if self.M723 !=0:
+            self.tm+=((self.M723.mslf())*(self.M723.amnt))
+        if self.M724 !=0:
+            self.tm+=((self.M724.mslf())*(self.M724.amnt))
+        if self.M725 !=0:
+            self.tm+=((self.M725.mslf())*(self.M725.amnt))
+        if self.M726 !=0:
+            self.tm+=((self.M726.mslf())*(self.M726.amnt))
+        if self.M727 !=0:
+            self.tm+=((self.M727.mslf())*(self.M727.amnt))
+        if self.M728 !=0:
+            self.tm+=((self.M728.mslf())*(self.M728.amnt))
+        if self.M729 !=0:
+            self.tm+=((self.M729.mslf())*(self.M729.amnt))
+        if self.M730 !=0:
+            self.tm+=((self.M730.mslf())*(self.M730.amnt))
+        if self.M731 !=0:
+            self.tm+=((self.M731.mslf())*(self.M731.amnt))
+        if self.M732 !=0:
+            self.tm+=((self.M732.mslf())*(self.M732.amnt))
+        if self.M733 !=0:
+            self.tm+=((self.M733.mslf())*(self.M733.amnt))
+        if self.M734 !=0:
+            self.tm+=((self.M734.mslf())*(self.M734.amnt))
+        if self.M735 !=0:
+            self.tm+=((self.M735.mslf())*(self.M735.amnt))
+        if self.M736 !=0:
+            self.tm+=((self.M736.mslf())*(self.M736.amnt))
+        if self.M737 !=0:
+            self.tm+=((self.M737.mslf())*(self.M737.amnt))
+        if self.M738 !=0:
+            self.tm+=((self.M738.mslf())*(self.M738.amnt))
+        if self.M739 !=0:
+            self.tm+=((self.M739.mslf())*(self.M739.amnt))
+        if self.M740 !=0:
+            self.tm+=((self.M740.mslf())*(self.M740.amnt))
+        if self.M741 !=0:
+            self.tm+=((self.M741.mslf())*(self.M741.amnt))
+        if self.M742 !=0:
+            self.tm+=((self.M742.mslf())*(self.M742.amnt))
+        if self.M743 !=0:
+            self.tm+=((self.M743.mslf())*(self.M743.amnt))
+        if self.M744 !=0:
+            self.tm+=((self.M744.mslf())*(self.M744.amnt))
+        if self.M745 !=0:
+            self.tm+=((self.M745.mslf())*(self.M745.amnt))
+        if self.M746 !=0:
+            self.tm+=((self.M746.mslf())*(self.M746.amnt))
+        if self.M747 !=0:
+            self.tm+=((self.M747.mslf())*(self.M747.amnt))
+        if self.M748 !=0:
+            self.tm+=((self.M748.mslf())*(self.M748.amnt))
+        if self.M749 !=0:
+            self.tm+=((self.M749.mslf())*(self.M749.amnt))
+        if self.M750 !=0:
+            self.tm+=((self.M750.mslf())*(self.M750.amnt))
+        if self.M751 !=0:
+            self.tm+=((self.M751.mslf())*(self.M751.amnt))
+        if self.M752 !=0:
+            self.tm+=((self.M752.mslf())*(self.M752.amnt))
+        if self.M753 !=0:
+            self.tm+=((self.M753.mslf())*(self.M753.amnt))
+        if self.M754 !=0:
+            self.tm+=((self.M754.mslf())*(self.M754.amnt))
+        if self.M755 !=0:
+            self.tm+=((self.M755.mslf())*(self.M755.amnt))
+        if self.M756 !=0:
+            self.tm+=((self.M756.mslf())*(self.M756.amnt))
+        if self.M757 !=0:
+            self.tm+=((self.M757.mslf())*(self.M757.amnt))
+        if self.M758 !=0:
+            self.tm+=((self.M758.mslf())*(self.M758.amnt))
+        if self.M759 !=0:
+            self.tm+=((self.M759.mslf())*(self.M759.amnt))
+        if self.M760 !=0:
+            self.tm+=((self.M760.mslf())*(self.M760.amnt))
+        if self.M761 !=0:
+            self.tm+=((self.M761.mslf())*(self.M761.amnt))
+        if self.M762 !=0:
+            self.tm+=((self.M762.mslf())*(self.M762.amnt))
+        if self.M763 !=0:
+            self.tm+=((self.M763.mslf())*(self.M763.amnt))
+        if self.M764 !=0:
+            self.tm+=((self.M764.mslf())*(self.M764.amnt))
+        if self.M765 !=0:
+            self.tm+=((self.M765.mslf())*(self.M765.amnt))
+        if self.M766 !=0:
+            self.tm+=((self.M766.mslf())*(self.M766.amnt))
+        if self.M767 !=0:
+            self.tm+=((self.M767.mslf())*(self.M767.amnt))
+        if self.M768 !=0:
+            self.tm+=((self.M768.mslf())*(self.M768.amnt))
+        if self.M769 !=0:
+            self.tm+=((self.M769.mslf())*(self.M769.amnt))
+        if self.M770 !=0:
+            self.tm+=((self.M770.mslf())*(self.M770.amnt))
+        if self.M771 !=0:
+            self.tm+=((self.M771.mslf())*(self.M771.amnt))
+        if self.M772 !=0:
+            self.tm+=((self.M772.mslf())*(self.M772.amnt))
+        if self.M773 !=0:
+            self.tm+=((self.M773.mslf())*(self.M773.amnt))
+        if self.M774 !=0:
+            self.tm+=((self.M774.mslf())*(self.M774.amnt))
+        if self.M775 !=0:
+            self.tm+=((self.M775.mslf())*(self.M775.amnt))
+        if self.M776 !=0:
+            self.tm+=((self.M776.mslf())*(self.M776.amnt))
+        if self.M777 !=0:
+            self.tm+=((self.M777.mslf())*(self.M777.amnt))
+        if self.M778 !=0:
+            self.tm+=((self.M778.mslf())*(self.M778.amnt))
+        if self.M779 !=0:
+            self.tm+=((self.M779.mslf())*(self.M779.amnt))
+        if self.M780 !=0:
+            self.tm+=((self.M780.mslf())*(self.M780.amnt))
+        if self.M781 !=0:
+            self.tm+=((self.M781.mslf())*(self.M781.amnt))
+        if self.M782 !=0:
+            self.tm+=((self.M782.mslf())*(self.M782.amnt))
+        if self.M783 !=0:
+            self.tm+=((self.M783.mslf())*(self.M783.amnt))
+        if self.M784 !=0:
+            self.tm+=((self.M784.mslf())*(self.M784.amnt))
+        if self.M785 !=0:
+            self.tm+=((self.M785.mslf())*(self.M785.amnt))
+        if self.M786 !=0:
+            self.tm+=((self.M786.mslf())*(self.M786.amnt))
+        if self.M787 !=0:
+            self.tm+=((self.M787.mslf())*(self.M787.amnt))
+        if self.M788 !=0:
+            self.tm+=((self.M788.mslf())*(self.M788.amnt))
+        if self.M789 !=0:
+            self.tm+=((self.M789.mslf())*(self.M789.amnt))
+        if self.M790 !=0:
+            self.tm+=((self.M790.mslf())*(self.M790.amnt))
+        if self.M791 !=0:
+            self.tm+=((self.M791.mslf())*(self.M791.amnt))
+        if self.M792 !=0:
+            self.tm+=((self.M792.mslf())*(self.M792.amnt))
+        if self.M793 !=0:
+            self.tm+=((self.M793.mslf())*(self.M793.amnt))
+        if self.M794 !=0:
+            self.tm+=((self.M794.mslf())*(self.M794.amnt))
+        if self.M795 !=0:
+            self.tm+=((self.M795.mslf())*(self.M795.amnt))
+        if self.M796 !=0:
+            self.tm+=((self.M796.mslf())*(self.M796.amnt))
+        if self.M797 !=0:
+            self.tm+=((self.M797.mslf())*(self.M797.amnt))
+        if self.M798 !=0:
+            self.tm+=((self.M798.mslf())*(self.M798.amnt))
+        if self.M799 !=0:
+            self.tm+=((self.M799.mslf())*(self.M799.amnt))
+        if self.M800 !=0:
+            self.tm+=((self.M800.mslf())*(self.M800.amnt))
+        if self.M801 !=0:
+            self.tm+=((self.M801.mslf())*(self.M801.amnt))
+        if self.M802 !=0:
+            self.tm+=((self.M802.mslf())*(self.M802.amnt))
+        if self.M803 !=0:
+            self.tm+=((self.M803.mslf())*(self.M803.amnt))
+        if self.M804 !=0:
+            self.tm+=((self.M804.mslf())*(self.M804.amnt))
+        if self.M805 !=0:
+            self.tm+=((self.M805.mslf())*(self.M805.amnt))
+        if self.M806 !=0:
+            self.tm+=((self.M806.mslf())*(self.M806.amnt))
+        if self.M807 !=0:
+            self.tm+=((self.M807.mslf())*(self.M807.amnt))
+        if self.M808 !=0:
+            self.tm+=((self.M808.mslf())*(self.M808.amnt))
+        if self.M809 !=0:
+            self.tm+=((self.M809.mslf())*(self.M809.amnt))
+        if self.M810 !=0:
+            self.tm+=((self.M810.mslf())*(self.M810.amnt))
+        if self.M811 !=0:
+            self.tm+=((self.M811.mslf())*(self.M811.amnt))
+        if self.M812 !=0:
+            self.tm+=((self.M812.mslf())*(self.M812.amnt))
+        if self.M813 !=0:
+            self.tm+=((self.M813.mslf())*(self.M813.amnt))
+        if self.M814 !=0:
+            self.tm+=((self.M814.mslf())*(self.M814.amnt))
+        if self.M815 !=0:
+            self.tm+=((self.M815.mslf())*(self.M815.amnt))
+        if self.M816 !=0:
+            self.tm+=((self.M816.mslf())*(self.M816.amnt))
+        if self.M817 !=0:
+            self.tm+=((self.M817.mslf())*(self.M817.amnt))
+        if self.M818 !=0:
+            self.tm+=((self.M818.mslf())*(self.M818.amnt))
+        if self.M819 !=0:
+            self.tm+=((self.M819.mslf())*(self.M819.amnt))
+        if self.M820 !=0:
+            self.tm+=((self.M820.mslf())*(self.M820.amnt))
+        if self.M821 !=0:
+            self.tm+=((self.M821.mslf())*(self.M821.amnt))
+        if self.M822 !=0:
+            self.tm+=((self.M822.mslf())*(self.M822.amnt))
+        if self.M823 !=0:
+            self.tm+=((self.M823.mslf())*(self.M823.amnt))
+        if self.M824 !=0:
+            self.tm+=((self.M824.mslf())*(self.M824.amnt))
+        if self.M825 !=0:
+            self.tm+=((self.M825.mslf())*(self.M825.amnt))
+        if self.M826 !=0:
+            self.tm+=((self.M826.mslf())*(self.M826.amnt))
+        if self.M827 !=0:
+            self.tm+=((self.M827.mslf())*(self.M827.amnt))
+        if self.M828 !=0:
+            self.tm+=((self.M828.mslf())*(self.M828.amnt))
+        if self.M829 !=0:
+            self.tm+=((self.M829.mslf())*(self.M829.amnt))
+        if self.M830 !=0:
+            self.tm+=((self.M830.mslf())*(self.M830.amnt))
+        if self.M831 !=0:
+            self.tm+=((self.M831.mslf())*(self.M831.amnt))
+        if self.M832 !=0:
+            self.tm+=((self.M832.mslf())*(self.M832.amnt))
+        if self.M833 !=0:
+            self.tm+=((self.M833.mslf())*(self.M833.amnt))
+        if self.M834 !=0:
+            self.tm+=((self.M834.mslf())*(self.M834.amnt))
+        if self.M835 !=0:
+            self.tm+=((self.M835.mslf())*(self.M835.amnt))
+        if self.M836 !=0:
+            self.tm+=((self.M836.mslf())*(self.M836.amnt))
+        if self.M837 !=0:
+            self.tm+=((self.M837.mslf())*(self.M837.amnt))
+        if self.M838 !=0:
+            self.tm+=((self.M838.mslf())*(self.M838.amnt))
+        if self.M839 !=0:
+            self.tm+=((self.M839.mslf())*(self.M839.amnt))
+        if self.M840 !=0:
+            self.tm+=((self.M840.mslf())*(self.M840.amnt))
+        if self.M841 !=0:
+            self.tm+=((self.M841.mslf())*(self.M841.amnt))
+        if self.M842 !=0:
+            self.tm+=((self.M842.mslf())*(self.M842.amnt))
+        if self.M843 !=0:
+            self.tm+=((self.M843.mslf())*(self.M843.amnt))
+        if self.M844 !=0:
+            self.tm+=((self.M844.mslf())*(self.M844.amnt))
+        if self.M845 !=0:
+            self.tm+=((self.M845.mslf())*(self.M845.amnt))
+        if self.M846 !=0:
+            self.tm+=((self.M846.mslf())*(self.M846.amnt))
+        if self.M847 !=0:
+            self.tm+=((self.M847.mslf())*(self.M847.amnt))
+        if self.M848 !=0:
+            self.tm+=((self.M848.mslf())*(self.M848.amnt))
+        if self.M849 !=0:
+            self.tm+=((self.M849.mslf())*(self.M849.amnt))
+        if self.M850 !=0:
+            self.tm+=((self.M850.mslf())*(self.M850.amnt))
+        if self.M851 !=0:
+            self.tm+=((self.M851.mslf())*(self.M851.amnt))
+        if self.M852 !=0:
+            self.tm+=((self.M852.mslf())*(self.M852.amnt))
+        if self.M853 !=0:
+            self.tm+=((self.M853.mslf())*(self.M853.amnt))
+        if self.M854 !=0:
+            self.tm+=((self.M854.mslf())*(self.M854.amnt))
+        if self.M855 !=0:
+            self.tm+=((self.M855.mslf())*(self.M855.amnt))
+        if self.M856 !=0:
+            self.tm+=((self.M856.mslf())*(self.M856.amnt))
+        if self.M857 !=0:
+            self.tm+=((self.M857.mslf())*(self.M857.amnt))
+        if self.M858 !=0:
+            self.tm+=((self.M858.mslf())*(self.M858.amnt))
+        if self.M859 !=0:
+            self.tm+=((self.M859.mslf())*(self.M859.amnt))
+        if self.M860 !=0:
+            self.tm+=((self.M860.mslf())*(self.M860.amnt))
+        if self.M861 !=0:
+            self.tm+=((self.M861.mslf())*(self.M861.amnt))
+        if self.M862 !=0:
+            self.tm+=((self.M862.mslf())*(self.M862.amnt))
+        if self.M863 !=0:
+            self.tm+=((self.M863.mslf())*(self.M863.amnt))
+        if self.M864 !=0:
+            self.tm+=((self.M864.mslf())*(self.M864.amnt))
+        if self.M865 !=0:
+            self.tm+=((self.M865.mslf())*(self.M865.amnt))
+        if self.M866 !=0:
+            self.tm+=((self.M866.mslf())*(self.M866.amnt))
+        if self.M867 !=0:
+            self.tm+=((self.M867.mslf())*(self.M867.amnt))
+        if self.M868 !=0:
+            self.tm+=((self.M868.mslf())*(self.M868.amnt))
+        if self.M869 !=0:
+            self.tm+=((self.M869.mslf())*(self.M869.amnt))
+        if self.M870 !=0:
+            self.tm+=((self.M870.mslf())*(self.M870.amnt))
+        if self.M871 !=0:
+            self.tm+=((self.M871.mslf())*(self.M871.amnt))
+        if self.M872 !=0:
+            self.tm+=((self.M872.mslf())*(self.M872.amnt))
+        if self.M873 !=0:
+            self.tm+=((self.M873.mslf())*(self.M873.amnt))
+        if self.M874 !=0:
+            self.tm+=((self.M874.mslf())*(self.M874.amnt))
+        if self.M875 !=0:
+            self.tm+=((self.M875.mslf())*(self.M875.amnt))
+        if self.M876 !=0:
+            self.tm+=((self.M876.mslf())*(self.M876.amnt))
+        if self.M877 !=0:
+            self.tm+=((self.M877.mslf())*(self.M877.amnt))
+        if self.M878 !=0:
+            self.tm+=((self.M878.mslf())*(self.M878.amnt))
+        if self.M879 !=0:
+            self.tm+=((self.M879.mslf())*(self.M879.amnt))
+        if self.M880 !=0:
+            self.tm+=((self.M880.mslf())*(self.M880.amnt))
+        if self.M881 !=0:
+            self.tm+=((self.M881.mslf())*(self.M881.amnt))
+        if self.M882 !=0:
+            self.tm+=((self.M882.mslf())*(self.M882.amnt))
+        if self.M883 !=0:
+            self.tm+=((self.M883.mslf())*(self.M883.amnt))
+        if self.M884 !=0:
+            self.tm+=((self.M884.mslf())*(self.M884.amnt))
+        if self.M885 !=0:
+            self.tm+=((self.M885.mslf())*(self.M885.amnt))
+        if self.M886 !=0:
+            self.tm+=((self.M886.mslf())*(self.M886.amnt))
+        if self.M887 !=0:
+            self.tm+=((self.M887.mslf())*(self.M887.amnt))
+        if self.M888 !=0:
+            self.tm+=((self.M888.mslf())*(self.M888.amnt))
+        if self.M889 !=0:
+            self.tm+=((self.M889.mslf())*(self.M889.amnt))
+        if self.M890 !=0:
+            self.tm+=((self.M890.mslf())*(self.M890.amnt))
+        if self.M891 !=0:
+            self.tm+=((self.M891.mslf())*(self.M891.amnt))
+        if self.M892 !=0:
+            self.tm+=((self.M892.mslf())*(self.M892.amnt))
+        if self.M893 !=0:
+            self.tm+=((self.M893.mslf())*(self.M893.amnt))
+        if self.M894 !=0:
+            self.tm+=((self.M894.mslf())*(self.M894.amnt))
+        if self.M895 !=0:
+            self.tm+=((self.M895.mslf())*(self.M895.amnt))
+        if self.M896 !=0:
+            self.tm+=((self.M896.mslf())*(self.M896.amnt))
+        if self.M897 !=0:
+            self.tm+=((self.M897.mslf())*(self.M897.amnt))
+        if self.M898 !=0:
+            self.tm+=((self.M898.mslf())*(self.M898.amnt))
+        if self.M899 !=0:
+            self.tm+=((self.M899.mslf())*(self.M899.amnt))
+        if self.M900 !=0:
+            self.tm+=((self.M900.mslf())*(self.M900.amnt))
+        if self.M901 !=0:
+            self.tm+=((self.M901.mslf())*(self.M901.amnt))
+        if self.M902 !=0:
+            self.tm+=((self.M902.mslf())*(self.M902.amnt))
+        if self.M903 !=0:
+            self.tm+=((self.M903.mslf())*(self.M903.amnt))
+        if self.M904 !=0:
+            self.tm+=((self.M904.mslf())*(self.M904.amnt))
+        if self.M905 !=0:
+            self.tm+=((self.M905.mslf())*(self.M905.amnt))
+        if self.M906 !=0:
+            self.tm+=((self.M906.mslf())*(self.M906.amnt))
+        if self.M907 !=0:
+            self.tm+=((self.M907.mslf())*(self.M907.amnt))
+        if self.M908 !=0:
+            self.tm+=((self.M908.mslf())*(self.M908.amnt))
+        if self.M909 !=0:
+            self.tm+=((self.M909.mslf())*(self.M909.amnt))
+        if self.M910 !=0:
+            self.tm+=((self.M910.mslf())*(self.M910.amnt))
+        if self.M911 !=0:
+            self.tm+=((self.M911.mslf())*(self.M911.amnt))
+        if self.M912 !=0:
+            self.tm+=((self.M912.mslf())*(self.M912.amnt))
+        if self.M913 !=0:
+            self.tm+=((self.M913.mslf())*(self.M913.amnt))
+        if self.M914 !=0:
+            self.tm+=((self.M914.mslf())*(self.M914.amnt))
+        if self.M915 !=0:
+            self.tm+=((self.M915.mslf())*(self.M915.amnt))
+        if self.M916 !=0:
+            self.tm+=((self.M916.mslf())*(self.M916.amnt))
+        if self.M917 !=0:
+            self.tm+=((self.M917.mslf())*(self.M917.amnt))
+        if self.M918 !=0:
+            self.tm+=((self.M918.mslf())*(self.M918.amnt))
+        if self.M919 !=0:
+            self.tm+=((self.M919.mslf())*(self.M919.amnt))
+        if self.M920 !=0:
+            self.tm+=((self.M920.mslf())*(self.M920.amnt))
+        if self.M921 !=0:
+            self.tm+=((self.M921.mslf())*(self.M921.amnt))
+        if self.M922 !=0:
+            self.tm+=((self.M922.mslf())*(self.M922.amnt))
+        if self.M923 !=0:
+            self.tm+=((self.M923.mslf())*(self.M923.amnt))
+        if self.M924 !=0:
+            self.tm+=((self.M924.mslf())*(self.M924.amnt))
+        if self.M925 !=0:
+            self.tm+=((self.M925.mslf())*(self.M925.amnt))
+        if self.M926 !=0:
+            self.tm+=((self.M926.mslf())*(self.M926.amnt))
+        if self.M927 !=0:
+            self.tm+=((self.M927.mslf())*(self.M927.amnt))
+        if self.M928 !=0:
+            self.tm+=((self.M928.mslf())*(self.M928.amnt))
+        if self.M929 !=0:
+            self.tm+=((self.M929.mslf())*(self.M929.amnt))
+        if self.M930 !=0:
+            self.tm+=((self.M930.mslf())*(self.M930.amnt))
+        if self.M931 !=0:
+            self.tm+=((self.M931.mslf())*(self.M931.amnt))
+        if self.M932 !=0:
+            self.tm+=((self.M932.mslf())*(self.M932.amnt))
+        if self.M933 !=0:
+            self.tm+=((self.M933.mslf())*(self.M933.amnt))
+        if self.M934 !=0:
+            self.tm+=((self.M934.mslf())*(self.M934.amnt))
+        if self.M935 !=0:
+            self.tm+=((self.M935.mslf())*(self.M935.amnt))
+        if self.M936 !=0:
+            self.tm+=((self.M936.mslf())*(self.M936.amnt))
+        if self.M937 !=0:
+            self.tm+=((self.M937.mslf())*(self.M937.amnt))
+        if self.M938 !=0:
+            self.tm+=((self.M938.mslf())*(self.M938.amnt))
+        if self.M939 !=0:
+            self.tm+=((self.M939.mslf())*(self.M939.amnt))
+        if self.M940 !=0:
+            self.tm+=((self.M940.mslf())*(self.M940.amnt))
+        if self.M941 !=0:
+            self.tm+=((self.M941.mslf())*(self.M941.amnt))
+        if self.M942 !=0:
+            self.tm+=((self.M942.mslf())*(self.M942.amnt))
+        if self.M943 !=0:
+            self.tm+=((self.M943.mslf())*(self.M943.amnt))
+        if self.M944 !=0:
+            self.tm+=((self.M944.mslf())*(self.M944.amnt))
+        if self.M945 !=0:
+            self.tm+=((self.M945.mslf())*(self.M945.amnt))
+        if self.M946 !=0:
+            self.tm+=((self.M946.mslf())*(self.M946.amnt))
+        if self.M947 !=0:
+            self.tm+=((self.M947.mslf())*(self.M947.amnt))
+        if self.M948 !=0:
+            self.tm+=((self.M948.mslf())*(self.M948.amnt))
+        if self.M949 !=0:
+            self.tm+=((self.M949.mslf())*(self.M949.amnt))
+        if self.M950 !=0:
+            self.tm+=((self.M950.mslf())*(self.M950.amnt))
+        if self.M951 !=0:
+            self.tm+=((self.M951.mslf())*(self.M951.amnt))
+        if self.M952 !=0:
+            self.tm+=((self.M952.mslf())*(self.M952.amnt))
+        if self.M953 !=0:
+            self.tm+=((self.M953.mslf())*(self.M953.amnt))
+        if self.M954 !=0:
+            self.tm+=((self.M954.mslf())*(self.M954.amnt))
+        if self.M955 !=0:
+            self.tm+=((self.M955.mslf())*(self.M955.amnt))
+        if self.M956 !=0:
+            self.tm+=((self.M956.mslf())*(self.M956.amnt))
+        if self.M957 !=0:
+            self.tm+=((self.M957.mslf())*(self.M957.amnt))
+        if self.M958 !=0:
+            self.tm+=((self.M958.mslf())*(self.M958.amnt))
+        if self.M959 !=0:
+            self.tm+=((self.M959.mslf())*(self.M959.amnt))
+        if self.M960 !=0:
+            self.tm+=((self.M960.mslf())*(self.M960.amnt))
+        if self.M961 !=0:
+            self.tm+=((self.M961.mslf())*(self.M961.amnt))
+        if self.M962 !=0:
+            self.tm+=((self.M962.mslf())*(self.M962.amnt))
+        if self.M963 !=0:
+            self.tm+=((self.M963.mslf())*(self.M963.amnt))
+        if self.M964 !=0:
+            self.tm+=((self.M964.mslf())*(self.M964.amnt))
+        if self.M965 !=0:
+            self.tm+=((self.M965.mslf())*(self.M965.amnt))
+        if self.M966 !=0:
+            self.tm+=((self.M966.mslf())*(self.M966.amnt))
+        if self.M967 !=0:
+            self.tm+=((self.M967.mslf())*(self.M967.amnt))
+        if self.M968 !=0:
+            self.tm+=((self.M968.mslf())*(self.M968.amnt))
+        if self.M969 !=0:
+            self.tm+=((self.M969.mslf())*(self.M969.amnt))
+        if self.M970 !=0:
+            self.tm+=((self.M970.mslf())*(self.M970.amnt))
+        if self.M971 !=0:
+            self.tm+=((self.M971.mslf())*(self.M971.amnt))
+        if self.M972 !=0:
+            self.tm+=((self.M972.mslf())*(self.M972.amnt))
+        if self.M973 !=0:
+            self.tm+=((self.M973.mslf())*(self.M973.amnt))
+        if self.M974 !=0:
+            self.tm+=((self.M974.mslf())*(self.M974.amnt))
+        if self.M975 !=0:
+            self.tm+=((self.M975.mslf())*(self.M975.amnt))
+        if self.M976 !=0:
+            self.tm+=((self.M976.mslf())*(self.M976.amnt))
+        if self.M977 !=0:
+            self.tm+=((self.M977.mslf())*(self.M977.amnt))
+        if self.M978 !=0:
+            self.tm+=((self.M978.mslf())*(self.M978.amnt))
+        if self.M979 !=0:
+            self.tm+=((self.M979.mslf())*(self.M979.amnt))
+        if self.M980 !=0:
+            self.tm+=((self.M980.mslf())*(self.M980.amnt))
+        if self.M981 !=0:
+            self.tm+=((self.M981.mslf())*(self.M981.amnt))
+        if self.M982 !=0:
+            self.tm+=((self.M982.mslf())*(self.M982.amnt))
+        if self.M983 !=0:
+            self.tm+=((self.M983.mslf())*(self.M983.amnt))
+        if self.M984 !=0:
+            self.tm+=((self.M984.mslf())*(self.M984.amnt))
+        if self.M985 !=0:
+            self.tm+=((self.M985.mslf())*(self.M985.amnt))
+        if self.M986 !=0:
+            self.tm+=((self.M986.mslf())*(self.M986.amnt))
+        if self.M987 !=0:
+            self.tm+=((self.M987.mslf())*(self.M987.amnt))
+        if self.M988 !=0:
+            self.tm+=((self.M988.mslf())*(self.M988.amnt))
+        if self.M989 !=0:
+            self.tm+=((self.M989.mslf())*(self.M989.amnt))
+        if self.M990 !=0:
+            self.tm+=((self.M990.mslf())*(self.M990.amnt))
+        if self.M991 !=0:
+            self.tm+=((self.M991.mslf())*(self.M991.amnt))
+        if self.M992 !=0:
+            self.tm+=((self.M992.mslf())*(self.M992.amnt))
+        if self.M993 !=0:
+            self.tm+=((self.M993.mslf())*(self.M993.amnt))
+        if self.M994 !=0:
+            self.tm+=((self.M994.mslf())*(self.M994.amnt))
+        if self.M995 !=0:
+            self.tm+=((self.M995.mslf())*(self.M995.amnt))
+        if self.M996 !=0:
+            self.tm+=((self.M996.mslf())*(self.M996.amnt))
+        if self.M997 !=0:
+            self.tm+=((self.M997.mslf())*(self.M997.amnt))
+        if self.M998 !=0:
+            self.tm+=((self.M998.mslf())*(self.M998.amnt))
+        if self.M999 !=0:
+            self.tm+=((self.M999.mslf())*(self.M999.amnt))
+        if self.M1000 !=0:
+            self.tm+=((self.M1000.mslf())*(self.M1000.amnt))
+    def density(self):
+            d=self.tm/self.volume
+            return d
+    def ksp(self):
+        total=self.equil()
+        
+        print(total)
+        C=float(input('conc. of C?'))
+        D=float(input('conc. of D?'))
+        A=float(input('conc. of A?'))
+        B=float(input('conc. of B?'))
+        C1=0
+        C2=0
+        C3=0
+        C4=0
+        C5=0
+        C6=0
+        C7=0
+        C8=0
+        C9=0
+        C10=0
+        C11=0
+        C12=0
+        C13=0
+        C14=0
+        C15=0
+        C16=0
+        C17=0
+        C18=0
+        C19=0
+        C20=0
+        C21=0
+        C22=0
+        C23=0
+        C24=0
+        C25=0
+        C26=0
+        D1=0
+        D2=0
+        D3=0
+        D4=0
+        D5=0
+        D6=0
+        D7=0
+        D8=0
+        D9=0
+        D10=0
+        D11=0
+        D12=0
+        D13=0
+        D14=0
+        D15=0
+        D16=0
+        D17=0
+        D18=0
+        D19=0
+        D20=0
+        D21=0
+        D22=0
+        D23=0
+        D24=0
+        D25=0
+        D26=0
+        A1=0
+        A2=0
+        A3=0
+        A4=0
+        A5=0
+        A6=0
+        A7=0
+        A8=0
+        A9=0
+        A10=0
+        A11=0
+        A12=0
+        A13=0
+        A14=0
+        A15=0
+        A16=0
+        A17=0
+        A18=0
+        A19=0
+        A20=0
+        A21=0
+        A22=0
+        A23=0
+        A24=0
+        A25=0
+        A26=0
+        B1=0
+        B2=0
+        B3=0
+        B4=0
+        B5=0
+        B6=0
+        B7=0
+        B8=0
+        B9=0
+        B10=0
+        B11=0
+        B12=0
+        B13=0
+        B14=0
+        B15=0
+        B16=0
+        B17=0
+        B18=0
+        B19=0
+        B20=0
+        B21=0
+        B22=0
+        B23=0
+        B24=0
+        B25=0
+        B26=0
+        
+        
+        c=float(input('co-efficient of B?'))
+        d=float(input('co-efficient of B?'))
+        a=float(input('co-efficient of B?'))
+        b=float(input('co-efficient of B?'))
+        
+        if self.species==2:
+            ksp=(C**c)*(D**d)/(A**a)*(B**b)
+        if self.species== 3 :
+            ksp=(C**c)*(C1**c1)*(D**d)/(A**a)*(A1**a1)*(B**b)
+        if self.species== 4 :
+            ksp=(C**c)*(C1**c1)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(B1**b1)*(B**b)
+        if self.species== 5 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(B1**b1)*(B**b)
+        if self.species== 6 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 7 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 8 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 9 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 10 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 11 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 12 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 13 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 14 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 15 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 16 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 17 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 18 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 19 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 20 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 21 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 22 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 23 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 24 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 25 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 26 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 27 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 28 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 29 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 30 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 31 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 32 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 33 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 34 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 35 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 36 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 37 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 38 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 39 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 40 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 41 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 42 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 43 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 44 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 45 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(C22**c22)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(A22**a22)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 46 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(C22**c22)*(D22**d22)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(A22**a22)*(B22**b22)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 47 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(C22**c22)*(C23**c23)*(D22**d22)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(A22**a22)*(A23**a23)*(B22**b22)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 48 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(C22**c22)*(C23**c23)*(D23**d23)*(D22**d22)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(A22**a22)*(A23**a23)*(B23**b23)*(B22**b22)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 49 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(C22**c22)*(C23**c23)*(C24**c24)*(D23**d23)*(D22**d22)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(A22**a22)*(A23**a23)*(A24**a24)*(B23**b23)*(B22**b22)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 50 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(C22**c22)*(C23**c23)*(C24**c24)*(D24**d24)*(D23**d23)*(D22**d22)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(A22**a22)*(A23**a23)*(A24**a24)*(B24**b24)*(B23**b23)*(B22**b22)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 51 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(C22**c22)*(C23**c23)*(C24**c24)*(C25**c25)*(D24**d24)*(D23**d23)*(D22**d22)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(A22**a22)*(A23**a23)*(A24**a24)*(A25**a25)*(B24**b24)*(B23**b23)*(B22**b22)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 52 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(C22**c22)*(C23**c23)*(C24**c24)*(C25**c25)*(D25**d25)*(D24**d24)*(D23**d23)*(D22**d22)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(A22**a22)*(A23**a23)*(A24**a24)*(A25**a25)*(B25**b25)*(B24**b24)*(B23**b23)*(B22**b22)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 53 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(C22**c22)*(C23**c23)*(C24**c24)*(C25**c25)*(C26**c26)*(D25**d25)*(D24**d24)*(D23**d23)*(D22**d22)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(A22**a22)*(A23**a23)*(A24**a24)*(A25**a25)*(A26**a26)*(B25**b25)*(B24**b24)*(B23**b23)*(B22**b22)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 54 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(C22**c22)*(C23**c23)*(C24**c24)*(C25**c25)*(C26**c26)*(D26**d26)*(D25**d25)*(D24**d24)*(D23**d23)*(D22**d22)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(A22**a22)*(A23**a23)*(A24**a24)*(A25**a25)*(A26**a26)*(B26**b26)*(B25**b25)*(B24**b24)*(B23**b23)*(B22**b22)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        if self.species== 55 :
+            ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(C22**c22)*(C23**c23)*(C24**c24)*(C25**c25)*(C26**c26)*(C27**c28)*(D26**d26)*(D25**d25)*(D24**d24)*(D23**d23)*(D22**d22)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(A22**a22)*(A23**a23)*(A24**a24)*(A25**a25)*(A26**a26)*(A27**a27)*(B26**b26)*(B25**b25)*(B24**b24)*(B23**b23)*(B22**b22)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
+        
+
+        
+
+def see():
+    x0 = hA()
+    x1 = heA()
+    x2 = liA()
+    x3 = beA()
+    x4 = bA()
+    x5 = cA()
+    x6 = nA()
+    x7 = oA()
+    x8 = fA()
+    x9 = neA()
+    x10 = naA()
+    x11 = mgA()
+    x12 = alA()
+    x13 = siA()
+    x14 = pA()
+    x15 = sA()
+    x16 = clA()
+    x17 = arA()
+    x18 = kA()
+    x19 = caA()
+    x20 = seA()
+    x21 = tiA()
+    x22 = vA()
+    x23 = crA()
+    x24 = mnA()
+    x25 = feA()
+    x26 = coA()
+    x27 = niA()
+    x28 = cuA()
+    x29 = znA()
+    x30 = gaA()
+    x31 = geA()
+    x32 = arsA()
+    x33 = seA()
+    x34 = brA()
+    x35 = krA()
+    x36 = rbA()
+    x37 = srA()
+    x38 = yA()
+    x39 = zrA()
+    x40 = nbA()
+    x41 = moA()
+    x42 = tcA()
+    x43 = ruA()
+    x44 = rhA()
+    x45 = pdA()
+    x46 = agA()
+    x47 = cdA()
+    x48 = indA()
+    x49 = snA()
+    x50 = sbA()
+    x51 = teA()
+    x52 = iA()
+    x53 = xeA()
+    x54 = csA()
+    x55 = baA()
+    x56 = laA()
+    x57 = ceA()
+    x58 = prA()
+    x59 = ndA()
+    x60 = pmA()
+    x61 = smA()
+    x62 = euA()
+    x63 = gdA()
+    x64 = tbA()
+    x65 = dyA()
+    x66 = hoA()
+    x67 = erA()
+    x68 = tmA()
+    x69 = ybA()
+    x70 = luA()
+    x71 = hfA()
+    x72 = taA()
+    x73 = wA()
+    x74 = reA()
+    x75 = osA()
+    x76 = irA()
+    x77 = ptA()
+    x78 = auA()
+    x79 = hgA()
+    x80 = tlA()
+    x81 = pbA()
+    x82 = biA()
+    x83 = poA()
+    x84 = atA()
+    x85 = rnA()
+    x86 = frA()
+    x87 = raA()
+    x88 = acA()
+    x89 = thA()
+    x90 = paA()
+    x91 = uA()
+    x92 = npA()
+    x93 = puA()
+    x94 = amA()
+    x95 = cmA()
+    x96 = bkA()
+    x97 = cfA()
+    x98 = esA()
+    x99 = fmA()
+    x100 = mdA()
+    x101 = noA()
+    x102 = lrA()
+    x103 = rfA()
+    x104 = dbA()
+    x105 = sgA()
+    x106 = bhA()
+    x107 = hsA()
+    x108 = mtA()
+    x109 = dsA()
+    x110 = rgA()
+    x111 = cnA()
+    print (x0.e(), '1')
+    print (x1.e() ,'2')
+    print (x2.e() ,'3')
+    print (x3.e(), '4')
+    print (x4.e(), '5')
+    print (x5.e(), '6')
+    print (x6.e(), '7')
+    print (x7.e(), '8')
+    print (x8.e(), '9')
+    print (x9.e(), '10')
+    print (x10.e(), '11')
+    print (x11.e() ,'12')
+    print (x12.e() ,'13')
+    print (x13.e(), '14')
+    print (x14.e(), '15')
+    print (x15.e(), '16')
+    print (x16.e(), '17')
+    print (x17.e(), '18')
+    print (x18.e(), '19')
+    print (x19.e(), '20')
+    print (x20.e(), '21')
+    print (x21.e(), '22')
+    print (x22.e(), '23')
+    print (x23.e(), '24')
+    print (x24.e(), '25')
+    print (x25.e(), '26')
+    print (x26.e(), '27')
+    print (x27.e(), '28')
+    print (x28.e(), '29')
+    print (x29.e(), '30')
+    print (x30.e(), '31')
+    print (x31.e(), '32')
+    print (x32.e(), '33')
+    print (x33.e(), '34')
+    print (x34.e() ,'35')
+    print (x35.e() ,'36')
+    print (x36.e(), '37')
+    print (x37.e(), '38')
+    print (x38.e(), '39')
+    print (x39.e() ,'40')
+    print (x40.e() ,'41')
+    print (x41.e() ,'42')
+    print (x42.e() ,'43')
+    print (x43.e() ,'44')
+    print (x44.e() ,'45')
+    print (x45.e() ,'46')
+    print (x46.e() ,'47')
+    print (x47.e() ,'48')
+    print (x48.e() ,'49')
+    print (x49.e() ,'50')
+    print (x50.e() ,'51')
+    print (x51.e() ,'52')
+    print (x52.e() ,'53')
+    print (x53.e() ,'54')
+    print (x54.e() ,'55')
+    print (x55.e() ,'56')
+    print (x56.e() ,'57')
+    print (x57.e() ,'58')
+    print (x58.e() ,'59')
+    print (x59.e() ,'60')
+    print (x60.e() ,'61')
+    print (x61.e() ,'62')
+    print (x62.e() ,'63')
+    print (x63.e() ,'64')
+    print (x64.e() ,'65')
+    print (x65.e() ,'66')
+    print (x66.e() ,'67')
+    print (x67.e() ,'68')
+    print (x68.e() ,'69')
+    print (x69.e() ,'70')
+    print (x70.e() ,'71')
+    print (x71.e() ,'72')
+    print (x72.e() ,'73')
+    print (x73.e() ,'74')
+    print (x74.e() ,'75')
+    print (x75.e() ,'76')
+    print (x76.e(), '77')
+    print (x77.e(), '78')
+    print (x78.e(), '79')
+    print (x79.e(), '80')
+    print (x80.e(), '81')
+    print (x81.e(), '82')
+    print (x82.e(), '83')
+    print( x83.e(), '84')
+    print( x84.e(), '85')
+    print (x85.e(), '86')
+    print (x86.e(), '87')
+    print (x87.e(), '88')
+    print (x88.e(), '89')
+    print (x89.e(), '90')
+    print (x90.e(), '91')
+    print( x91.e(), '92')
+    print (x92.e(), '93')
+    print(x93.e(), '94')
+    print (x94.e(), '95')
+    print (x95.e(), '96')
+    print (x96.e(), '97')
+    print (x97.e(), '98')
+    print (x98.e() ,'99')
+    print (x99.e(), '100')
+    print (x100.e(), '101')
+    print (x101.e(), '102')
+    print (x102.e(), '103')
+    print (x103.e() ,'104')
+    print (x104.e() ,'105')
+    print (x105.e() ,'106')
+    print (x106.e() ,'107')
+    print (x107.e() ,'108')
+    print (x108.e() ,'109')
+    print( x109.e() ,'110')
+    print (x110.e() ,'111')
+    print (x111.e() ,'112')
+
+       
