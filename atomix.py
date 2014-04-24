@@ -1,10 +1,16 @@
 import math
+import math
 from fractions import gcd
+from decimal import Decimal
 def lcm(a,b):
     return (a*b)/gcd(a,b)
+def nth_root(num_decimal, n_integer):
+    exponent = Decimal("1.0") / Decimal(n_integer)
+    return num_decimal ** exponent
 log10=math.log10
 pi=math.pi
 log=math.log
+ke=8.9875517873681764*10**9
 av=6.0221413*10**23
 amu=1.66053886 * 10**-27
 e= 5.4857990946*10**-4
@@ -154,9 +160,15 @@ class world():
     def pmom(self):
         pmom=self.mass()*self.velocity
         return pmom
+    Pmom=0
+    impact=0
     collision=0
+    if collision>0:
+        self.velocity+=impact
     fnet=0
     velocity=0
+    if velocity>0:
+        self.velocity-=fg()
     time=0
     direct=''
     dXx=0
@@ -1588,6 +1600,8 @@ class world():
             
 class heA(world):
     def __init__(self):
+        self.tb=0
+        self.bonds=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('He')
         self.volume=(4/3)*pi*self.radius**3
@@ -1603,6 +1617,8 @@ class heA(world):
     
 class neA(world):
     def __init__(self):
+        self.tb=0
+        self.bonds=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ne')
         self.volume=(4/3)*pi*self.radius**3
@@ -1627,6 +1643,8 @@ class neA(world):
         return x
 class arA(world):
     def __init__(self):
+        self.tb=0
+        self.bonds=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ar')
         self.volume=(4/3)*pi*self.radius**3
@@ -1659,6 +1677,10 @@ class arA(world):
 
 class hA(world):
     def __init__(self):
+        self.tb=1
+        self.bonds=0
+        self.b0=0
+        self.bs=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('H')
         self.volume=(4/3)*pi*self.radius**3
@@ -1670,10 +1692,12 @@ class hA(world):
     def mass(self):
         m=pro+e
         x=m/av
-        return x
-    
+        return x   
 class liA(world):
     def __init__(self):
+        self.tb=1
+        self.bonds=0
+        self.b0=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Li')
         self.volume=(4/3)*pi*self.radius**3
@@ -1691,6 +1715,9 @@ class liA(world):
 
 class fA(world):
     def __init__(self):
+        self.tb=1
+        self.bonds=0
+        self.b0=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('F')
         self.volume=(4/3)*pi*self.radius**3
@@ -1714,6 +1741,9 @@ class fA(world):
   
 class naA(world):
     def __init__(self):
+        self.tb=1
+        self.bonds=0
+        self.b0=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Na')
         self.volume=(4/3)*pi*self.radius**3
@@ -1739,6 +1769,9 @@ class naA(world):
     
 class kA(world):
     def __init__(self):
+        self.tb=1
+        self.bonds=0
+        self.b0=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('K')
         self.volume=(4/3)*pi*self.radius**3
@@ -1773,6 +1806,9 @@ class kA(world):
     
 class rbA(world):
     def __init__(self):
+        self.tb=1
+        self.bonds=0
+        self.b0=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Rb')
         self.volume=(4/3)*pi*self.radius**3
@@ -1825,6 +1861,9 @@ class rbA(world):
     
 class csA(world):
     def __init__(self):
+        self.tb=1
+        self.bonds=0
+        self.b0=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Cs')
         self.volume=(4/3)*pi*self.radius**3
@@ -1895,6 +1934,9 @@ class csA(world):
     
 class frA(world):
     def __init__(self):
+        self.tb=1
+        self.bonds=0
+        self.b0=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Fr')
         self.volume=(4/3)*pi*self.radius**3
@@ -1996,6 +2038,10 @@ class frA(world):
     
 class beA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Be')
         self.volume=(4/3)*pi*self.radius**3
@@ -2014,6 +2060,10 @@ class beA(world):
         return x
 class oA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('O')
         self.volume=(4/3)*pi*self.radius**3
@@ -2035,6 +2085,10 @@ class oA(world):
         return x
 class caA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ca')
         self.volume=(4/3)*pi*self.radius**3
@@ -2070,6 +2124,10 @@ class caA(world):
         return x
 class mgA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Mg')
         self.volume=(4/3)*pi*self.radius**3
@@ -2097,6 +2155,11 @@ class mgA(world):
         return x
 class cuA(world):
     def __init__(self):
+        self.tb=3
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Cu')
         self.volume=(4/3)*pi*self.radius**3
@@ -2142,6 +2205,10 @@ class cuA(world):
     
 class znA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Zn')
         self.volume=(4/3)*pi*self.radius**3
@@ -2187,6 +2254,8 @@ class znA(world):
     
 class krA(world):
     def __init__(self):
+        self.bonds=0
+        self.tb=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Kr')
         self.volume=(4/3)*pi*self.radius**3
@@ -2238,6 +2307,10 @@ class krA(world):
     
 class srA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Sr')
         self.volume=(4/3)*pi*self.radius**3
@@ -2290,6 +2363,10 @@ class srA(world):
     
 class cdA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Cd')
         self.volume=(4/3)*pi*self.radius**3
@@ -2353,6 +2430,10 @@ class cdA(world):
     
 class baA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ba')
         self.volume=(4/3)*pi*self.radius**3
@@ -2423,6 +2504,10 @@ class baA(world):
     
 class raA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ra')
         self.volume=(4/3)*pi*self.radius**3
@@ -2525,6 +2610,13 @@ class raA(world):
     
 class bA(world):
     def __init__(self):
+        self.tb=5
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('B')
         self.volume=(4/3)*pi*self.radius**3
@@ -2544,6 +2636,11 @@ class bA(world):
     
 class nA(world):
     def __init__(self):
+        self.tb=3
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('N')
         self.volume=(4/3)*pi*self.radius**3
@@ -2566,6 +2663,19 @@ class nA(world):
     
 class scA(world):
     def __init__(self):
+        self.tb=11
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Sc')
         self.volume=(4/3)*pi*self.radius**3
@@ -2591,19 +2701,6 @@ class scA(world):
         self.FOURs=True
         self.fours=True
         self.THREEd=True
-        self.threed=True
-        self.Threed=True
-        self.tHreed=True
-        self.thReed=True
-        self.thrEed=True
-        self.threEd=True
-        self.threeD=True
-        self.THreed=True
-        self.tHReed=True
-        self.FOURp=True
-        self.fourp=True
-        self.Fourp=True
-        self.fOurp=True
         self.weight=Sc
         self.Mass=self.weight/Gr
     
@@ -2614,6 +2711,15 @@ class scA(world):
     
 class alA(world):
     def __init__(self):
+        self.tb=7
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Al')
         self.volume=(4/3)*pi*self.radius**3
@@ -2641,6 +2747,13 @@ class alA(world):
     
 class gaA(world):
     def __init__(self):
+        self.tb=5
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ga')
         self.volume=(4/3)*pi*self.radius**3
@@ -2686,6 +2799,19 @@ class gaA(world):
     
 class yA(world):
     def __init__(self):
+        self.tb=11
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Y')
         self.volume=(4/3)*pi*self.radius**3
@@ -2739,6 +2865,11 @@ class yA(world):
       
 class agA(world):
     def __init__(self):
+        self.tb=3
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ag')
         self.volume=(4/3)*pi*self.radius**3
@@ -2800,6 +2931,13 @@ class agA(world):
     
 class indA(world):
     def __init__(self):
+        self.tb=5
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('In')
         self.volume=(4/3)*pi*self.radius**3
@@ -2863,6 +3001,23 @@ class indA(world):
     
 class laA(world):
     def __init__(self):
+        self.tb=15
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
+        self.b11=0
+        self.b12=0
+        self.b13=0
+        self.b14=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('La')
         self.volume=(4/3)*pi*self.radius**3
@@ -2934,6 +3089,20 @@ class laA(world):
     
 class ndA(world):
     def __init__(self):
+        self.tb=12
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
+        self.b11=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Nd')
         self.volume=(4/3)*pi*self.radius**3
@@ -3008,6 +3177,19 @@ class ndA(world):
     
 class pmA(world):
     def __init__(self):
+        self.tb=11
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Pm')
         self.volume=(4/3)*pi*self.radius**3
@@ -3083,6 +3265,18 @@ class pmA(world):
     
 class smA(world):
     def __init__(self):
+        self.tb=10
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Sm')
         self.volume=(4/3)*pi*self.radius**3
@@ -3159,6 +3353,17 @@ class smA(world):
     
 class euA(world):
     def __init__(self):
+        self.tb=9
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Eu')
         self.volume=(4/3)*pi*self.radius**3
@@ -3236,6 +3441,16 @@ class euA(world):
     
 class gdA(world):
     def __init__(self):
+        self.tb=8
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Gd')
         self.volume=(4/3)*pi*self.radius**3
@@ -3314,6 +3529,14 @@ class gdA(world):
     
 class dyA(world):
     def __init__(self):
+        self.tb=6
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Dy')
         self.volume=(4/3)*pi*self.radius**3
@@ -3394,6 +3617,13 @@ class dyA(world):
     
 class hoA(world):
     def __init__(self):
+        self.tb=5
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ho')
         self.volume=(4/3)*pi*self.radius**3
@@ -3475,6 +3705,12 @@ class hoA(world):
     
 class erA(world):
     def __init__(self):
+        self.tb=4
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Er')
         self.volume=(4/3)*pi*self.radius**3
@@ -3557,6 +3793,11 @@ class erA(world):
     
 class tmA(world):
     def __init__(self):
+        self.tb=3
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Tm')
         self.volume=(4/3)*pi*self.radius**3
@@ -3640,6 +3881,10 @@ class tmA(world):
     
 class ybA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Yb')
         self.volume=(4/3)*pi*self.radius**3
@@ -3724,6 +3969,19 @@ class ybA(world):
     
 class luA(world):
     def __init__(self):
+        self.tb=11
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Lu')
         self.volume=(4/3)*pi*self.radius**3
@@ -3809,6 +4067,13 @@ class luA(world):
     
 class tlA(world):
     def __init__(self):
+        self.tb=5
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Tl')
         self.volume=(4/3)*pi*self.radius**3
@@ -3905,6 +4170,18 @@ class tlA(world):
     
 class tiA(world):
     def __init__(self):
+        self.tb=10
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ti')
         self.volume=(4/3)*pi*self.radius**3
@@ -3941,6 +4218,23 @@ class tiA(world):
     
 class acA(world):
     def __init__(self):
+        self.tb=15
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
+        self.b11=0
+        self.b12=0
+        self.b13=0
+        self.b14=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ac')
         self.volume=(4/3)*pi*self.radius**3
@@ -4044,6 +4338,12 @@ class acA(world):
     
 class fmA(world):
     def __init__(self):
+        self.tb=4
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Fm')
         self.volume=(4/3)*pi*self.radius**3
@@ -4158,6 +4458,11 @@ class fmA(world):
     
 class mdA(world):
     def __init__(self):
+        self.tb=3
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Md')
         self.volume=(4/3)*pi*self.radius**3
@@ -4273,6 +4578,10 @@ class mdA(world):
     
 class noA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('No')
         self.volume=(4/3)*pi*self.radius**3
@@ -4389,6 +4698,18 @@ class noA(world):
     
 class lrA(world):
     def __init__(self):
+        self.tb=10
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Lr')
         self.volume=(4/3)*pi*self.radius**3
@@ -4506,6 +4827,12 @@ class lrA(world):
     
 class cA(world):
     def __init__(self):
+        self.tb=4
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('C')
         self.volume=(4/3)*pi*self.radius**3
@@ -4526,6 +4853,14 @@ class cA(world):
     
 class siA(world):
     def __init__(self):
+        self.tb=6
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Si')
         self.volume=(4/3)*pi*self.radius**3
@@ -4555,6 +4890,15 @@ class siA(world):
     
 class mnA(world):
     def __init__(self):
+        self.tb=7
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Mn')
         self.volume=(4/3)*pi*self.radius**3
@@ -4595,6 +4939,14 @@ class mnA(world):
     
 class feA(world):
     def __init__(self):
+        self.tb=6
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Fe')
         self.volume=(4/3)*pi*self.radius**3
@@ -4635,6 +4987,13 @@ class feA(world):
     
 class coA(world):
     def __init__(self):
+        self.tb=5
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Co')
         self.volume=(4/3)*pi*self.radius**3
@@ -4676,6 +5035,12 @@ class coA(world):
     
 class niA(world):
     def __init__(self):
+        self.tb=4
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ni')
         self.volume=(4/3)*pi*self.radius**3
@@ -4718,6 +5083,12 @@ class niA(world):
     
 class geA(world):
     def __init__(self):
+        self.tb=4
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ge')
         self.volume=(4/3)*pi*self.radius**3
@@ -4764,6 +5135,18 @@ class geA(world):
     
 class zrA(world):
     def __init__(self):
+        self.tb=10
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Zr')
         self.volume=(4/3)*pi*self.radius**3
@@ -4818,6 +5201,12 @@ class zrA(world):
     
 class pdA(world):
     def __init__(self):
+        self.tb=4
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Pd')
         self.volume=(4/3)*pi*self.radius**3
@@ -4878,6 +5267,12 @@ class pdA(world):
     
 class snA(world):
     def __init__(self):
+        self.tb=4
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Sn')
         self.volume=(4/3)*pi*self.radius**3
@@ -4942,6 +5337,22 @@ class snA(world):
     
 class ceA(world):
     def __init__(self):
+        self.tb=14
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
+        self.b11=0
+        self.b12=0
+        self.b13=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ce')
         self.volume=(4/3)*pi*self.radius**3
@@ -5014,6 +5425,21 @@ class ceA(world):
     
 class prA(world):
     def __init__(self):
+        self.tb=13
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
+        self.b11=0
+        self.b12=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Pr')
         self.volume=(4/3)*pi*self.radius**3
@@ -5087,6 +5513,15 @@ class prA(world):
     
 class tbA(world):
     def __init__(self):
+        self.tb=7
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Tb')
         self.volume=(4/3)*pi*self.radius**3
@@ -5166,6 +5601,18 @@ class tbA(world):
     
 class hfA(world):
     def __init__(self):
+        self.tb=10
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Hf')
         self.volume=(4/3)*pi*self.radius**3
@@ -5252,6 +5699,10 @@ class hfA(world):
     
 class hgA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Hg')
         self.volume=(4/3)*pi*self.radius**3
@@ -5347,6 +5798,12 @@ class hgA(world):
     
 class pbA(world):
     def __init__(self):
+        self.tb=4
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Pb')
         self.volume=(4/3)*pi*self.radius**3
@@ -5443,6 +5900,22 @@ class pbA(world):
     
 class thA(world):
     def __init__(self):
+        self.tb=14
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
+        self.b11=0
+        self.b12=0
+        self.b13=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Th')
         self.volume=(4/3)*pi*self.radius**3
@@ -5547,6 +6020,17 @@ class thA(world):
     
 class amA(world):
     def __init__(self):
+        self.tb=9
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Am')
         self.volume=(4/3)*pi*self.radius**3
@@ -5656,6 +6140,16 @@ class amA(world):
       
 class cmA(world):
     def __init__(self):
+        self.tb=8
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Cm')
         self.volume=(4/3)*pi*self.radius**3
@@ -5766,6 +6260,15 @@ class cmA(world):
     
 class bkA(world):
     def __init__(self):
+        self.tb=7
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Bk')
         self.volume=(4/3)*pi*self.radius**3
@@ -5877,6 +6380,15 @@ class bkA(world):
     
 class cfA(world):
     def __init__(self):
+        self.tb=7
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Cf')
         self.volume=(4/3)*pi*self.radius**3
@@ -5989,6 +6501,13 @@ class cfA(world):
     
 class esA(world):
     def __init__(self):
+        self.tb=5
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Es')
         self.volume=(4/3)*pi*self.radius**3
@@ -6102,6 +6621,17 @@ class esA(world):
     
 class rfA(world):
     def __init__(self):
+        self.tb=9
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Rf')
         self.volume=(4/3)*pi*self.radius**3
@@ -6220,6 +6750,13 @@ class rfA(world):
     
 class pA(world):
     def __init__(self):
+        self.tb=5
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('P')
         self.volume=(4/3)*pi*self.radius**3
@@ -6249,6 +6786,11 @@ class pA(world):
     
 class clA(world):
     def __init__(self):
+        self.tb=3
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Cl')
         self.volume=(4/3)*pi*self.radius**3
@@ -6280,6 +6822,17 @@ class clA(world):
     
 class vA(world):
     def __init__(self):
+        self.tb=9
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('V')
         self.volume=(4/3)*pi*self.radius**3
@@ -6317,6 +6870,11 @@ class vA(world):
     
 class arsA(world):
     def __init__(self):
+        self.tb=3
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ar')
         self.volume=(4/3)*pi*self.radius**3
@@ -6361,9 +6919,12 @@ class arsA(world):
         m=74.9216
         x=m/av
         return x
- ##up2   
+    
 class brA(world):
     def __init__(self):
+        self.tb=1
+        self.bonds=0
+        self.b0=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Br')
         self.volume=(4/3)*pi*self.radius**3
@@ -6413,6 +6974,17 @@ class brA(world):
     
 class nbA(world):
     def __init__(self):
+        self.tb=9
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Nb')
         self.volume=(4/3)*pi*self.radius**3
@@ -6468,6 +7040,11 @@ class nbA(world):
     
 class sbA(world):
     def __init__(self):
+        self.tb=3
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Sb')
         self.volume=(4/3)*pi*self.radius**3
@@ -6533,6 +7110,17 @@ class sbA(world):
     
 class taA(world):
     def __init__(self):
+        self.tb=9
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ta')
         self.volume=(4/3)*pi*self.radius**3
@@ -6620,6 +7208,11 @@ class taA(world):
     
 class auA(world):
     def __init__(self):
+        self.tb=4
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b3=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Au')
         self.volume=(4/3)*pi*self.radius**3
@@ -6713,6 +7306,11 @@ class auA(world):
     
 class biA(world):
     def __init__(self):
+        self.tb=3
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Bi')
         self.volume=(4/3)*pi*self.radius**3
@@ -6810,6 +7408,21 @@ class biA(world):
     
 class paA(world):
     def __init__(self):
+        self.tb=13
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
+        self.b11=0
+        self.b12=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Pa')
         self.volume=(4/3)*pi*self.radius**3
@@ -6915,6 +7528,16 @@ class paA(world):
     
 class dbA(world):
     def __init__(self):
+        self.tb=8
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Db')
         self.volume=(4/3)*pi*self.radius**3
@@ -7034,6 +7657,12 @@ class dbA(world):
     
 class sA(world):
     def __init__(self):
+        self.tb=4
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('S')
         self.volume=(4/3)*pi*self.radius**3
@@ -7064,6 +7693,16 @@ class sA(world):
     
 class crA(world):
     def __init__(self):
+        self.tb=8
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Cr')
         self.volume=(4/3)*pi*self.radius**3
@@ -7102,6 +7741,10 @@ class crA(world):
     
 class seA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Se')
         self.volume=(4/3)*pi*self.radius**3
@@ -7150,6 +7793,16 @@ class seA(world):
     
 class moA(world):
     def __init__(self):
+        self.tb=8
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Mo')
         self.volume=(4/3)*pi*self.radius**3
@@ -7206,6 +7859,15 @@ class moA(world):
     
 class tcA(world):
     def __init__(self):
+        self.tb=7
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Tc')
         self.volume=(4/3)*pi*self.radius**3
@@ -7263,6 +7925,14 @@ class tcA(world):
     
 class ruA(world):
     def __init__(self):
+        self.tb=6
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ru')
         self.volume=(4/3)*pi*self.radius**3
@@ -7321,6 +7991,13 @@ class ruA(world):
     
 class rhA(world):
     def __init__(self):
+        self.tb=5
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Rh')
         self.volume=(4/3)*pi*self.radius**3
@@ -7380,6 +8057,10 @@ class rhA(world):
     
 class teA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Te')
         self.volume=(4/3)*pi*self.radius**3
@@ -7445,6 +8126,8 @@ class teA(world):
         return x
 class xeA(world):
     def __init__(self):
+        self.tb=0
+        self.bonds=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Xe')
         self.volume=(4/3)*pi*self.radius**3
@@ -7513,6 +8196,16 @@ class xeA(world):
    
 class wA(world):
     def __init__(self):
+        self.tb=8
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('W')
         self.volume=(4/3)*pi*self.radius**3
@@ -7601,6 +8294,14 @@ class wA(world):
     
 class osA(world):
     def __init__(self):
+        self.tb=6
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Os')
         self.volume=(4/3)*pi*self.radius**3
@@ -7691,6 +8392,13 @@ class osA(world):
     
 class irA(world):
     def __init__(self):
+        self.tb=5
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ir')
         self.volume=(4/3)*pi*self.radius**3
@@ -7782,6 +8490,12 @@ class irA(world):
     
 class ptA(world):
     def __init__(self):
+        self.tb=4
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Pt')
         self.volume=(4/3)*pi*self.radius**3
@@ -7874,6 +8588,10 @@ class ptA(world):
     
 class poA(world):
     def __init__(self):
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Po')
         self.volume=(4/3)*pi*self.radius**3
@@ -7972,6 +8690,9 @@ class poA(world):
     
 class rnA(world):
     def __init__(self):
+        
+        self.bonds=0
+        self.tb=0
         x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Rn')
         self.volume=(4/3)*pi*self.radius**3
@@ -8072,6 +8793,19 @@ class rnA(world):
     
 class uA(world):
     def __init__(self):
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
+        self.b11=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('U')
         self.volume=(4/3)*pi*self.radius**3
@@ -8178,6 +8912,19 @@ class uA(world):
     
 class npA(world):
     def __init__(self):
+        self.tb=11
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Np')
         self.volume=(4/3)*pi*self.radius**3
@@ -8285,6 +9032,18 @@ class npA(world):
     
 class puA(world):
     def __init__(self):
+        self.tb=10
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Pu')
         self.volume=(4/3)*pi*self.radius**3
@@ -8393,6 +9152,15 @@ class puA(world):
     
 class sgA(world):
     def __init__(self):
+        self.tb=7
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Sg')
         self.volume=(4/3)*pi*self.radius**3
@@ -8513,7 +9281,11 @@ class sgA(world):
     
 class cnA(world):
     def __init__(self):
-        x={'x':0,'y':0,'z':0}
+        self.tb=2
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Cn')
         self.volume=(4/3)*pi*self.radius**3
         self.ONEs= True
@@ -8638,6 +9410,9 @@ class cnA(world):
     
 class iA(world):
     def __init__(self):
+        self.tb=1
+        self.bonds=0
+        self.b0=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('I')
         self.volume=(4/3)*pi*self.radius**3
@@ -8705,6 +9480,15 @@ class iA(world):
     
 class reA(world):
     def __init__(self):
+        self.tb=7
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Re')
         self.volume=(4/3)*pi*self.radius**3
@@ -8794,10 +9578,13 @@ class reA(world):
     
 class atA(world):
     def __init__(self):
-        x={'x':0,'y':0,'z':0}
+        self.tb=1
+        self.bonds=0
+        self.b0=0
+        self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('At')
         self.volume=(4/3)*pi*self.radius**3
-        iE=9.31751
+        self.iE=9.31751
         self.ONEs= True
         self.ones=True
         self.TWOs=True
@@ -8893,6 +9680,14 @@ class atA(world):
     
 class bhA(world):
     def __init__(self):
+        self.tb=6
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Bh')
         self.volume=(4/3)*pi*self.radius**3
@@ -9014,6 +9809,13 @@ class bhA(world):
     
 class hsA(world):
     def __init__(self):
+        self.tb=5
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Hs')
         self.volume=(4/3)*pi*self.radius**3
@@ -9136,6 +9938,12 @@ class hsA(world):
     
 class mtA(world):
     def __init__(self):
+        self.tb=4
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Mt')
         self.volume=(4/3)*pi*self.radius**3
@@ -9258,6 +10066,11 @@ class mtA(world):
     
 class dsA(world):
     def __init__(self):
+        self.tb=3
+        self.bonds=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Ds')
         self.volume=(4/3)*pi*self.radius**3
@@ -9381,6 +10194,10 @@ class dsA(world):
     
 class rgA(world):
     def __init__(self):
+        self.bonds=0
+        self.tb=2
+        self.b0=0
+        self.b1=0
         self.x={'x':0,'y':0,'z':0}
         self.radius=Atomsr.get('Rg')
         self.volume=(4/3)*pi*self.radius**3
@@ -9502,13 +10319,264 @@ class rgA(world):
         m=(D*93)+(T*28)
         x=m/av
         return x
-
-
+a0 =object
+a1 =object
+a2 =object
+a3 =object
+a4 =object
+a5 =object
+a6 =object
+a7 =object
+a8 =object
+a9 =object
+a10 =object
+a11 =object
+a12 =object
+a13 =object
+a14 =object
+a15 =object
+a16 =object
+a17 =object
+a18 =object
+a19 =object
+a20 =object
+a21 =object
+a22 =object
+a23 =object
+a24 =object
+a25 =object
+a26 =object
+a27 =object
+a28 =object
+a29 =object
+a30 =object
+a31 =object
+a32 =object
+a33 =object
+a34 =object
+a35 =object
+a36 =object
+a37 =object
+a38 =object
+a39 =object
+a40 =object
+a41 =object
+a42 =object
+a43 =object
+a44 =object
+a45 =object
+a46 =object
+a47 =object
+a48 =object
+a49 =object
+a50 =object
+a51 =object
+a52 =object
+a53 =object
+a54 =object
+a55 =object
+a56 =object
+a57 =object
+a58 =object
+a59 =object
+a60 =object
+a61 =object
+a62 =object
+a63 =object
+a64 =object
+a65 =object
+a66 =object
+a67 =object
+a68 =object
+a69 =object
+a70 =object
+a71 =object
+a72 =object
+a73 =object
+a74 =object
+a75 =object
+a76 =object
+a77 =object
+a78 =object
+a79 =object
+a80 =object
+a81 =object
+a82 =object
+a83 =object
+a84 =object
+a85 =object
+a86 =object
+a87 =object
+a88 =object
+a89 =object
+a90 =object
+a91 =object
+a92 =object
+a93 =object
+a94 =object
+a95 =object
+a96 =object
+a97 =object
+a98 =object
+a99 =object
+a100 =object
+a101 =object
+a102 =object
+a103 =object
+a104 =object
+a105 =object
+a106 =object
+a107 =object
+a108 =object
+a109 =object
+a110 =object
+a111 =object
+class Bond():
+    def __init__(self):
+        self.s=0
+        self.b0=0
+        self.b1=0
+        self.b2=0
+        self.b3=0
+        self.b4=0
+        self.b5=0
+        self.b6=0
+        self.b7=0
+        self.b8=0
+        self.b9=0
+        self.b10=0
+        self.b11=0
+        self.b12=0
+        self.b13=0
+        self.b14=0
+def bond(a0,a1):
+    try:
+        s=a0.iE+a1.iE
+        if a0.e()>0:
+            if a1.e()>0:
+                if a0.bonds<a0.tb and a1.bonds<a1.tb:
+                
+                    A=a0.eo()-a0.e()
+                    B=a1.eo()-a1.e()
+                    C=a0.e()+a1.e()
+                    if A>0 and B>0:
+                        a0.x=a1.x
+                        a1.x=a0.x
+                        v=1
+                        if a0.b0==0 and v==1:
+                            a0.b0=a1
+                            v-=1
+                        elif a0.b1==0 and v==1:
+                            a0.b1=a1
+                            v-=1
+                        elif a0.b2==0 and v==1:
+                            a0.b2=a1
+                            v-=1
+                        elif a0.b3==0 and v==1:
+                            a0.b3=a1
+                            v-=1
+                        elif a0.b4==0 and v==1:
+                            a0.b4=a1
+                            v-=1
+                        elif a0.b5==0 and v==1:
+                            a0.b5=a1
+                            v-=1
+                        elif a0.b6==0 and v==1:
+                            a0.b6=a1
+                            v-=1
+                        elif a0.b7==0 and v==1:
+                            a0.b7=a1
+                            v-=1
+                        elif a0.b8==0 and v==1:
+                            a0.b8=a1
+                            v-=1
+                        elif a0.b9==0 and v==1:
+                            a0.b9=a1
+                            v-=1
+                        elif a0.b10==0 and v==1:
+                            a0.b10=a1
+                            v-=1
+                        elif a0.b11==0 and v==1:
+                            a0.b11=a1
+                            v-=1
+                        elif a0.b12==0 and v==1:
+                            a0.b12=a1
+                            v-=1
+                        elif a0.b13==0 and v==1:
+                            a0.b13=a1
+                            v-=1
+                        elif a0.b14==0 and v==1:
+                            a0.b14=a1
+                            v-=1
+                        elif a0.b15==0 and v==1:
+                            a0.b15=a1
+                            v-=1
+                        V=1    
+                        if a1.b0==0:
+                            a1.b0=a0
+                            V-=1
+                        elif a1.b1==0 and V==1:
+                            a1.b1=a0
+                            V-=1
+                        elif a1.b2==0 and V==1:
+                            a1.b2=a0
+                            V-=1
+                        elif a1.b3==0 and V==1:
+                            a1.b3=a0
+                            V-=1
+                        elif a1.b4==0 and v==1:
+                            a1.b4=a0
+                            V-=1
+                        elif a1.b5==0 and V==1:
+                            a1.b5=a0
+                            V-=1
+                        elif a1.b6==0 and V==1:
+                            a1.b6=a0
+                            V-=1
+                        elif a1.b7==0 and V==1:
+                            a1.b7=a0
+                            V-=1
+                        elif a1.b8==0 and V==1:
+                            a1.b8=a0
+                            V-=1
+                        elif a1.b9==0 and V==1:
+                            a1.b9=a0
+                            V-=1
+                        elif a1.b10==0 and V==1:
+                            a1.b10=a0
+                            V-=1
+                        elif a1.b11==0 and V==1:
+                            a1.b11=a0
+                            V-=1
+                        elif a1.b12==0 and V==1:
+                            a1.b12=a0
+                            V-=1
+                        elif a1.b13==0 and V==1:
+                            a1.b13=a0
+                            V-=1
+                        elif a1.b14==0 and V==1:
+                            a1.b14=a0
+                            V-=1
+                        elif a1.b15==0 and V==1:
+                            a1.b15=a0
+                            V-=1
+                            
+                        a0.bonds+=1
+                        a1.bonds+=1
+    except AttributeError:
+        pass
+    
+                    
+                
+                    
+                        
+                    
 class Mkule():
     e= 5.4857990946*10**-4
     pro=1.007276466812
     neu=1.00866491600
     def __init__(self):
+        self.bonds=0
         self.x={'x':0,'y':0,'z':0}
         self.freebonds=0
         self.fnet=0
@@ -9542,9 +10610,7 @@ class Mkule():
         self.U1=0
         self.V1=0
         self.W1=0
-        self.X1=0
-        self.Y1=0
-        self.Z1=0
+        
 
         self.CoA1=0
         self.CoB1=0
@@ -9569,2839 +10635,3158 @@ class Mkule():
         self.CoU1=0
         self.CoV1=0
         self.CoW1=0
-        self.CoX1=0
-        self.CoY1=0
-        self.CoZ1=0
+        
     def react(self):
-        if self.A1.collision==1:
-            bo=0
-            one=self.A1.e()
-            One=self.A1.eo()
-            oNe=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-                Four=self.B1.fnet
-                Five=self.B1.pmom
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-                Four=self.C1.fnet
-                Five=self.C1.pmom
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-                Four=self.D1.fnet
-                Five=self.D1.pmom
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-                Four=self.E1.fnet
-                Five=self.E1.pmom
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-                Four=self.F1.fnet
-                Five=self.F1.pmom
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-                Four=self.G1.fnet
-                Five=self.G1.pmom
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-                Four=self.H1.fnet
-                Five=self.H1.pmom
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-                Four=self.I1.fnet
-                Five=self.I1.pmom
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-                Four=self.J1.fnet
-                Five=self.J1.pmom
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-                Four=self.K1.fnet
-                Five=self.K1.pmom
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-                Four=self.L1.fnet
-                Five=self.L1.pmom
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-                Four=self.M1.fnet
-                Five=self.M1.pmom
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-                Four=self.N1.fnet
-                Five=self.N1.pmom
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-                Four=self.O1.fnet
-                Five=self.O1.pmom
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-                Four=self.P1.fnet
-                Five=self.P1.pmom
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-                Four=self.Q1.fnet
-                Five=self.Q1.pmom
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-                Four=self.R1.fnet
-                Five=self.R1.pmom
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-                Four=self.S1.fnet
-                Five=self.S1.pmom
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-                Four=self.T1.fnet
-                Five=self.T1.pmom
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-                Four=self.U1.fnet
-                Five=self.U1.pmom
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-                Four=self.V1.fnet
-                Five=self.V1.pmom
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-                Four=self.W1.fnet
-                Five=self.W1.pmom
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.A1.collision-=1
-                self.A1.x=Three
-            elif (one + two)/bo>1:
-                if self.A1.collision==1:
-                    self.collisions-=1
-                    if self.A1.fnet<Four:
-                        self.A1.pmom+=Five
-                        
-                    elif self.A1.fnet>Four:
-                        self.A1.pmom-=Five
-                    elif self.A1.fnet==Four:
-                        self.A1.fnet=0
-                        
-        if self.B1.collision==1:
-            bo=0
-            one=self.B1.e()
-            One=self.B1.eo()
-            oNe=self.B1.x
+        try:
+            
             if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.B1.collision-=1
-            elif (one + two)/bo>1:
                 if self.B1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.C1.collision==1:
-            bo=0
-            one=self.C1.e()
-            One=self.C1.eo()
-            oNe=self.C1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.C1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.C1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.D1.collision==1:
-            bo=0
-            one=self.D1.e()
-            One=self.D1.eo()
-            oNe=self.D1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-                
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.D1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.D1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.E1.collision==1:
-            bo=0
-            one=self.E1.e()
-            One=self.E1.eo()
-            oNe=self.E1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-                
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-                
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.E1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.E1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.F1.collision==1:
-            bo=0
-            one=self.F1.e()
-            One=self.F1.eo()
-            oNe=self.F1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-                
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-                
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.F1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.F1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.G1.collision==1:
-            bo=0
-            one=self.G1.e()
-            One=self.G1.eo()
-            oNe=self.G1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-                
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-                
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.G1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.G1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.H1.collision==1:
-            bo=0
-            one=self.H1.e()
-            One=self.H1.eo()
-            oNe=self.H1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-                
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-                
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.H1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.H1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.I1.collision==1:
-            bo=0
-            one=self.I1.e()
-            One=self.I1.eo()
-            oNe=self.I1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-                
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-                
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.I1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.I1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.J1.collision==1:
-            bo=0
-            one=self.J1.e()
-            One=self.J1.eo()
-            oNe=self.J1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-                
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-                
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.J1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.J1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.K1.collision==1:
-            bo=0
-            one=self.K1.e()
-            One=self.K1.eo()
-            oNe=self.K1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-                
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-                
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.K1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.K1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.L1.collision==1:
-            bo=0
-            one=self.L1.e()
-            One=self.L1.eo()
-            oNe=self.L1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-                
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-                
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.L1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.L1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.M1.collision==1:
-            bo=0
-            one=self.M1.e()
-            One=self.M1.eo()
-            oNe=self.M1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-                
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.M1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.M1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.N1.collision==1:
-            bo=0
-            one=self.N1.e()
-            One=self.N1.eo()
-            oNe=self.N1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-                
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.N1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.N1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.O1.collision==1:
-            bo=0
-            one=self.O1.e()
-            One=self.O1.eo()
-            oNe=self.O1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-                
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.O1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.O1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.P1.collision==1:
-            bo=0
-            one=self.P1.e()
-            One=self.P1.eo()
-            oNe=self.P1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-                
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.P1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.P1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.Q1.collision==1:
-            bo=0
-            one=self.Q1.e()
-            One=self.Q1.eo()
-            oNe=self.Q1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-                
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.Q1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.Q1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.R1.collision==1:
-            bo=0
-            one=self.R1.e()
-            One=self.R1.eo()
-            oNe=self.R1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-                
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.R1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.R1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.S1.collision==1:
-            bo=0
-            one=self.S1.e()
-            One=self.S1.eo()
-            oNe=self.S1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-                
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.S1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.S1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.T1.collision==1:
-            bo=0
-            one=self.T1.e()
-            One=self.T1.eo()
-            oNe=self.T1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-                
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.T1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.T1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.U1.collision==1:
-            bo=0
-            one=self.U1.e()
-            One=self.U1.eo()
-            oNe=self.U1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-                
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.U1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.U1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.V1.collision==1:
-            bo=0
-            one=self.V1.e()
-            One=self.V1.eo()
-            oNe=self.V1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-                
-            if self.W1.collision==1:
-                two=self.W1.e()
-                Two=self.W1.eo()
-                Three=self.W1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.V1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.V1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
-        if self.W1.collision==1:
-            bo=0
-            one=self.W1.e()
-            One=self.W1.eo()
-            oNe=self.W1.x
-            if self.A1.collision==1:
-                two=self.A1.e()
-                Two=self.A1.eo()
-                Three=self.A1.x
-            if self.B1.collision==1:
-                two=self.B1.e()
-                Two=self.B1.eo()
-                Three=self.B1.x
-            if self.C1.collision==1:
-                two=self.C1.e()
-                Two=self.C1.eo()
-                Three=self.C1.x
-            if self.D1.collision==1:
-                two=self.D1.e()
-                Two=self.D1.eo()
-                Three=self.D1.x
-            if self.E1.collision==1:
-                two=self.E1.e()
-                Two=self.E1.eo()
-                Three=self.E1.x
-            if self.F1.collision==1:
-                two=self.F1.e()
-                Two=self.F1.eo()
-                Three=self.F1.x
-            if self.G1.collision==1:
-                two=self.G1.e()
-                Two=self.G1.eo()
-                Three=self.G1.x
-            if self.H1.collision==1:
-                two=self.H1.e()
-                Two=self.H1.eo()
-                Three=self.H1.x
-            if self.I1.collision==1:
-                two=self.I1.e()
-                Two=self.I1.eo()
-                Three=self.I1.x
-            if self.J1.collision==1:
-                two=self.J1.e()
-                Two=self.J1.eo()
-                Three=self.J1.x
-            if self.K1.collision==1:
-                two=self.K1.e()
-                Two=self.K1.eo()
-                Three=self.K1.x
-            if self.L1.collision==1:
-                two=self.L1.e()
-                Two=self.L1.eo()
-                Three=self.L1.x
-            if self.M1.collision==1:
-                two=self.M1.e()
-                Two=self.M1.eo()
-                Three=self.M1.x
-            if self.N1.collision==1:
-                two=self.N1.e()
-                Two=self.N1.eo()
-                Three=self.N1.x
-            if self.O1.collision==1:
-                two=self.O1.e()
-                Two=self.O1.eo()
-                Three=self.O1.x
-            if self.P1.collision==1:
-                two=self.P1.e()
-                Two=self.P1.eo()
-                Three=self.P1.x
-            if self.Q1.collision==1:
-                two=self.Q1.e()
-                Two=self.Q1.eo()
-                Three=self.Q1.x
-            if self.R1.collision==1:
-                two=self.R1.e()
-                Two=self.R1.eo()
-                Three=self.R1.x
-            if self.S1.collision==1:
-                two=self.S1.e()
-                Two=self.S1.eo()
-                Three=self.S1.x
-            if self.T1.collision==1:
-                two=self.T1.e()
-                Two=self.T1.eo()
-                Three=self.T1.x
-            if self.U1.collision==1:
-                two=self.U1.e()
-                Two=self.U1.eo()
-                Three=self.U1.x
-            if self.V1.collision==1:
-                two=self.V1.e()
-                Two=self.V1.eo()
-                Three=self.V1.x
-            if One-Two==0:
-                bo+=One
-            elif One-Two>0:
-                bo+=One
-            elif One-Two<0:
-                bo+=Two
-            if (one + two)/bo<1:
-                self.W1.collision-=1
-            elif (one + two)/bo>1:
+                    bond(self.A1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
                 if self.W1.collision==1:
-                    self.collisions-=1
-                    if random.random()<0.5:
-                        oNe.update(x=oNe.get('x')+1)
-                        Three.update(x=Three.get('x')-1)
-                        oNe.update(y=oNe.get('y')+1)
-                        Three.update(y=Three.get('y')-1)
-                        oNe.update(z=oNe.get('z')+1)
-                        Three.update(z=Three.get('z')-1)
-                    elif random.random()>0.5:
-                        oNe.update(x=oNe.get('x')-1)
-                        Three.update(x=Three.get('x')+1)
-                        oNe.update(y=oNe.get('y')-1)
-                        Three.update(y=Three.get('y')+1)
-                        oNe.update(z=oNe.get('z')-1)
-                        Three.update(z=Three.get('z')+1)
+                    bond(self.A1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.A1.fnet+=Four
+                    self.A1.Pmom+=Five
+                self.A1.collision-=1
+            if self.B1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.B1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.B1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.B1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.B1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.B1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.B1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.B1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.B1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.B1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.B1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.B1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.B1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.B1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.B1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.B1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.B1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.B1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.B1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.B1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.B1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.B1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.B1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.B1.fnet+=Four
+                    self.B1.Pmom+=Five
+                self.B1.collision-=1
+            if self.C1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.C1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.C1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.C1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.C1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.C1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.C1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.C1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.C1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.C1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.C1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.C1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.C1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.C1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.C1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.C1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.C1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.C1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.C1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.C1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.C1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.C1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.C1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.C1.fnet+=Four
+                    self.C1.Pmom+=Five
+                self.C1.collision-=1
+            if self.D1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.D1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.D1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.D1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.D1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.D1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.D1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.D1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.D1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.D1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.D1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.D1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.D1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.D1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.D1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.D1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.D1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.D1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.D1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.D1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.D1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.D1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.D1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.D1.fnet+=Four
+                    self.D1.Pmom+=Five
+                self.D1.collision-=1
+            if self.E1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.E1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.E1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.E1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.E1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.E1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.E1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.E1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.E1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.E1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.E1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.E1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.E1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.E1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.E1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.E1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.E1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.E1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.E1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.E1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.E1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.E1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.E1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.E1.fnet+=Four
+                    self.E1.Pmom+=Five
+                self.E1.collision-=1
+            if self.F1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.F1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.F1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.F1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.F1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.F1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.F1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.F1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.F1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.F1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.F1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.F1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.F1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.F1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.F1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.F1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.F1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.F1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.F1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.F1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.F1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.F1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.F1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.F1.fnet+=Four
+                    self.F1.Pmom+=Five
+                self.F1.collision-=1
+            if self.G1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.G1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.G1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.G1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.G1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.G1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.G1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.G1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.G1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.G1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.G1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.G1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.G1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.G1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.G1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.G1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.G1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.G1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.G1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.G1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.G1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.G1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.G1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.G1.fnet+=Four
+                    self.G1.Pmom+=Five
+                self.G1.collision-=1
+            if self.H1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.H1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.H1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.H1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.H1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.H1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.H1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.H1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.H1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.H1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.H1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.H1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.H1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.H1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.H1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.H1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.H1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.H1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.H1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.H1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.H1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.H1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.H1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.H1.fnet+=Four
+                    self.H1.Pmom+=Five
+                self.H1.collision-=1
+            if self.I1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.I1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.I1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.I1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.I1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.I1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.I1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.I1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.I1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.I1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.I1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.I1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.I1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.I1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.I1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.I1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.I1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.I1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.I1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.I1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.I1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.I1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.I1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.I1.fnet+=Four
+                    self.I1.Pmom+=Five
+                self.I1.collision-=1
+            if self.J1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.J1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.J1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.J1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.J1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.J1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.J1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.J1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.J1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.J1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.J1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.J1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.J1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.J1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.J1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.J1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.J1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.J1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.J1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.J1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.J1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.J1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.J1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.J1.fnet+=Four
+                    self.J1.Pmom+=Five
+                self.J1.collision-=1
+            if self.K1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.K1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.K1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.K1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.K1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.K1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.K1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.K1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.K1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.K1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.K1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.K1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.K1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.K1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.K1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.K1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.K1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.K1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.K1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.K1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.K1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.K1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.K1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.K1.fnet+=Four
+                    self.K1.Pmom+=Five
+                self.K1.collision-=1
+            if self.L1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.L1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.L1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.L1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.L1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.L1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.L1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.L1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.L1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.L1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.L1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.L1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.L1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.L1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.L1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.L1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.L1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.L1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.L1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.L1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.L1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.L1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.L1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.L1.fnet+=Four
+                    self.L1.Pmom+=Five
+                self.L1.collision-=1
+            if self.M1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.M1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.M1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.M1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.M1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.M1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.M1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.M1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.M1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.M1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.M1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.M1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.M1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.M1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.M1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.M1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.M1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.M1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.M1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.M1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.M1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.M1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.M1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.M1.fnet+=Four
+                    self.M1.Pmom+=Five
+                self.M1.collision-=1
+            if self.N1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.N1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.N1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.N1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.N1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.N1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.N1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.N1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.N1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.N1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.N1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.N1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.N1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.N1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.N1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.N1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.N1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.N1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.N1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.N1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.N1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.N1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.N1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.N1.fnet+=Four
+                    self.N1.Pmom+=Five
+                self.N1.collision-=1
+            if self.O1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.O1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.O1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.O1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.O1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.O1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.O1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.O1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.O1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.O1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.O1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.O1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.O1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.O1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.O1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.O1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.O1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.O1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.O1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.O1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.O1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.O1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.O1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.O1.fnet+=Four
+                    self.O1.Pmom+=Five
+                self.O1.collision-=1
+            if self.P1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.P1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.P1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.P1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.P1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.P1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.P1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.P1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.P1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.P1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.P1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.P1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.P1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.P1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.P1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.P1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.P1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.P1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.P1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.P1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.P1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.P1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.P1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.P1.fnet+=Four
+                    self.P1.Pmom+=Five
+                self.P1.collision-=1
+            if self.Q1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.Q1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.Q1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.Q1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.Q1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.Q1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.Q1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.Q1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.Q1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.Q1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.Q1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.Q1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.Q1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.Q1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.Q1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.Q1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.Q1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.Q1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.Q1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.Q1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.Q1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.Q1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.Q1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.Q1.fnet+=Four
+                    self.Q1.Pmom+=Five
+                self.Q1.collision-=1
+            if self.R1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.R1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.R1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.R1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.R1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.R1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.R1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.R1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.R1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.R1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.R1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.R1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.R1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.R1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.R1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.R1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.R1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.R1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.R1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.R1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.R1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.R1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.R1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.R1.fnet+=Four
+                    self.R1.Pmom+=Five
+                self.R1.collision-=1
+            if self.S1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.S1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.S1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.S1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.S1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.S1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.S1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.S1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.S1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.S1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.S1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.S1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.S1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.S1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.S1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.S1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.S1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.S1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.S1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.S1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.S1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.S1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.S1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.S1.fnet+=Four
+                    self.S1.Pmom+=Five
+                self.S1.collision-=1
+            if self.T1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.T1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.T1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.T1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.T1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.T1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.T1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.T1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.T1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.T1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.T1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.T1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.T1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.T1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.T1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.T1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.T1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.T1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.T1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.T1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.T1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.T1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.T1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.T1.fnet+=Four
+                    self.T1.Pmom+=Five
+                self.T1.collision-=1
+            if self.U1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.U1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.U1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.U1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.U1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.U1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.U1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.U1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.U1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.U1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.U1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.U1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.U1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.U1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.U1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.U1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.U1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.U1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.U1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.U1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.U1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.U1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.U1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.U1.fnet+=Four
+                    self.U1.Pmom+=Five
+                self.U1.collision-=1
+            if self.V1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.V1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.V1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.V1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.V1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.V1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.V1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.V1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.V1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.V1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.V1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.V1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.V1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.V1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.V1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.V1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.V1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.V1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.V1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.V1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.V1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.V1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                if self.W1.collision==1:
+                    bond(self.V1,self.W1)
+                    Four=self.W1.fnet
+                    Five=self.W1.pmom()
+                    self.V1.fnet+=Four
+                    self.V1.Pmom+=Five
+                self.V1.collision-=1
+            if self.W1.collision==1:
+                if self.A1.collision==1:
+                    bond(self.W1,self.A1)
+                    Four=self.A1.fnet
+                    Five=self.A1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.B1.collision==1:
+                    bond(self.W1,self.B1)
+                    Four=self.B1.fnet
+                    Five=self.B1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.C1.collision==1:
+                    bond(self.W1,self.C1)
+                    Four=self.C1.fnet
+                    Five=self.C1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.D1.collision==1:
+                    bond(self.W1,self.D1)
+                    Four=self.D1.fnet
+                    Five=self.D1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.E1.collision==1:
+                    bond(self.W1,self.E1)
+                    Four=self.E1.fnet
+                    Five=self.E1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.F1.collision==1:
+                    bond(self.W1,self.F1)
+                    Four=self.F1.fnet
+                    Five=self.F1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.G1.collision==1:
+                    bond(self.W1,self.G1)
+                    Four=self.G1.fnet
+                    Five=self.G1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.H1.collision==1:
+                    bond(self.W1,self.H1)
+                    Four=self.H1.fnet
+                    Five=self.H1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.I1.collision==1:
+                    bond(self.W1,self.I1)
+                    Four=self.I1.fnet
+                    Five=self.I1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.J1.collision==1:
+                    bond(self.W1,self.J1)
+                    Four=self.J1.fnet
+                    Five=self.J1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.K1.collision==1:
+                    bond(self.W1,self.K1)
+                    Four=self.K1.fnet
+                    Five=self.K1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.L1.collision==1:
+                    bond(self.W1,self.L1)
+                    Four=self.L1.fnet
+                    Five=self.L1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.M1.collision==1:
+                    bond(self.W1,self.M1)
+                    Four=self.M1.fnet
+                    Five=self.M1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.N1.collision==1:
+                    bond(self.W1,self.N1)
+                    Four=self.N1.fnet
+                    Five=self.N1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.O1.collision==1:
+                    bond(self.W1,self.O1)
+                    Four=self.O1.fnet
+                    Five=self.O1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.P1.collision==1:
+                    bond(self.W1,self.P1)
+                    Four=self.P1.fnet
+                    Five=self.P1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.Q1.collision==1:
+                    bond(self.W1,self.Q1)
+                    Four=self.Q1.fnet
+                    Five=self.Q1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.R1.collision==1:
+                    bond(self.W1,self.R1)
+                    Four=self.R1.fnet
+                    Five=self.R1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.S1.collision==1:
+                    bond(self.W1,self.S1)
+                    Four=self.S1.fnet
+                    Five=self.S1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.T1.collision==1:
+                    bond(self.W1,self.T1)
+                    Four=self.T1.fnet
+                    Five=self.T1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.U1.collision==1:
+                    bond(self.W1,self.U1)
+                    Four=self.U1.fnet
+                    Five=self.U1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                if self.V1.collision==1:
+                    bond(self.W1,self.V1)
+                    Four=self.V1.fnet
+                    Five=self.V1.pmom()
+                    self.W1.fnet+=Four
+                    self.W1.Pmom+=Five
+                self.W1.collision-=1
+        except AttributeError:
+            pass
+
+
+
+
+
+
+
+
+
+
+
+
 
     def collisions(self):
-        if self.A1.x==self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.A1.collision+=1
-        if self.B1.x==self.A1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.B1.collision+=1
-        if self.C1.x==self.A1.x or self.B1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.C1.collision+=1
-        if self.D1.x==self.A1.x or self.B1.x or self.C1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.D1.collision+=1
-        if self.E1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.E1.collision+=1
-        if self.F1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.F1.collision+=1
-        if self.G1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.G1.collision+=1
-        if self.H1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.H1.collision+=1
-        if self.I1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.I1.collision+=1
-        if self.J1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.J1.collision+=1
-        if self.K1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.K1.collision+=1
-        if self.L1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.L1.collision+=1
-        if self.M1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.M1.collision+=1
-        if self.N1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.N1.collision+=1
-        if self.O1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.O1.collision+=1
-        if self.P1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.P1.collision+=1
-        if self.Q1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.Q1.collision+=1
-        if self.R1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.R1.collision+=1
-        if self.S1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.S1.collision+=1
-        if self.T1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.U1.x or self.V1.x or self.W1.x:
-            self.T1.collision+=1
-        if self.U1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.V1.x or self.W1.x:
-            self.U1.collision+=1
-        if self.V1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.W1.x:
-            self.V1.collision+=1
-        if self.W1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x:
-            self.W1.collision+=1
-#        
+        try:
+        
+            if self.A1.x==self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.A1.collision+=1
+            if self.B1.x==self.A1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.B1.collision+=1
+            if self.C1.x==self.A1.x or self.B1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.C1.collision+=1
+            if self.D1.x==self.A1.x or self.B1.x or self.C1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.D1.collision+=1
+            if self.E1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.E1.collision+=1
+            if self.F1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.G1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.F1.collision+=1
+            if self.G1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.H1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.G1.collision+=1
+            if self.H1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.I1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.H1.collision+=1
+            if self.I1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.I1.collision+=1
+            if self.J1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.I1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.J1.collision+=1
+            if self.K1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.K1.collision+=1
+            if self.L1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.L1.collision+=1
+            if self.M1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.M1.collision+=1
+            if self.N1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.N1.collision+=1
+            if self.O1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.O1.collision+=1
+            if self.P1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.P1.collision+=1
+            if self.Q1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.Q1.collision+=1
+            if self.R1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.R1.collision+=1
+            if self.S1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.T1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.S1.collision+=1
+            if self.T1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.U1.x or self.V1.x or self.W1.x:
+                self.T1.collision+=1
+            if self.U1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.V1.x or self.W1.x:
+                self.U1.collision+=1
+            if self.V1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.W1.x:
+                self.V1.collision+=1
+            if self.W1.x==self.A1.x or self.B1.x or self.C1.x or self.D1.x or self.E1.x or self.F1.x or self.G1.x or self.H1.x or self.J1.x or self.K1.x or self.L1.x or self.M1.x or self.N1.x or self.O1.x or self.P1.x or self.Q1.x or self.R1.x or self.S1.x or self.T1.x or self.U1.x or self.V1.x:
+                self.W1.collision+=1
+        except AttributeError:
+            pass
                 
     def Vslf(self):
         if self.A1!=0:
@@ -77419,30 +78804,7 @@ class Box():
         self.species=0
         self.procucts=[]
         self.reactants=[]
-    def collisions(self):
-        import random
-        ##1
-        if self.M1!=0:
-            if self.M0.x==self.M1.x:
-                self.collisions+=1
-                if random.random()<0.5:
-                    self.M0.x.update(x=self.M0.x.get('x')+1)
-                    self.M1.x.update(x=self.M1.x.get('x')-1)
-                    self.M0.x.update(y=self.M0.x.get('y')+1)
-                    self.M1.x.update(y=self.M1.x.get('y')-1)
-                    self.M0.x.update(z=self.M0.x.get('z')+1)
-                    self.M1.x.update(z=self.M1.x.get('z')-1)
-                elif random.random()>0.5:
-                    self.M0.x.update(x=self.M0.x.get('x')-1)
-                    self.M1.x.update(x=self.M1.x.get('x')+1)
-                    self.M0.x.update(y=self.M0.x.get('y')-1)
-                    self.M1.x.update(y=self.M1.x.get('y')+1)
-                    self.M0.x.update(z=self.M0.x.get('z')-1)
-                    self.M1.x.update(z=self.M1.x.get('z')+1)
-                        
-##2
-                    ##
-            
+    
                 
     def Es(self):
         self.emptyspace+=self.volume-(self.mv*av)
@@ -85706,8 +87068,4013 @@ class Box():
             ksp=(C**c)*(C1**c1)*(C2**c2)*(C3**c3)*(C4**c4)*(C5**c5)*(C6**c6)*(C7**c7)*(C8**c8)*(C9**c9)*(C10**c10)*(C11**c11)*(C12**c12)*(C13**c13)*(C14**c14)*(C15**c15)*(C16**c16)*(C17**c17)*(C18**c18)*(C19**c19)*(C20**c20)*(C21**c21)*(C22**c22)*(C23**c23)*(C24**c24)*(C25**c25)*(C26**c26)*(C27**c28)*(D26**d26)*(D25**d25)*(D24**d24)*(D23**d23)*(D22**d22)*(D21**d21)*(D20**d20)*(D19**d19)*(D18**d18)*(D17**d17)*(D16**d16)*(D15**d15)*(D14**d14)*(D13**d13)*(D12**d12)*(D11**d11)*(D10**d10)*(D9**d9)*(D8**d8)*(D7**d7)*(D6**d6)*(D5**d5)*(D4**d4)*(D3**d3)*(D2**d2)*(D1**d1)*(D**d)/(A**a)*(A1**a1)*(A2**a2)*(A3**a3)*(A4**a4)*(A5**a5)*(A6**a6)*(A7**a7)*(A8**a8)*(A9**a9)*(A10**a10)*(A11**a11)*(A12**a12)*(A13**a13)*(A14**a14)*(A15**a15)*(A16**a16)*(A17**a17)*(A18**a18)*(A19**a19)*(A20**a20)*(A21**a21)*(A22**a22)*(A23**a23)*(A24**a24)*(A25**a25)*(A26**a26)*(A27**a27)*(B26**b26)*(B25**b25)*(B24**b24)*(B23**b23)*(B22**b22)*(B21**b21)*(B20**b20)*(B19**b19)*(B18**b18)*(B17**b17)*(B16**b16)*(B15**b15)*(B14**b14)*(B13**b13)*(B12**b12)*(B11**b11)*(B10**b10)*(B9**b9)*(B8**b8)*(B7**b7)*(B6**b6)*(B5**b5)*(B4**b4)*(B3**b3)*(B2**b2)*(B1**b1)*(B**b)
         
 
-        
+    def setself(self):
+        if self.M0 !=0:
+            a=self.M0.amnt
+            self.M0.number+=a
+            self.M0.set()
+        if self.M1 !=0:
+            a=self.M1.amnt
+            self.M1.number+=a
+            self.M1.set()
+        if self.M2 !=0:
+            a=self.M2.amnt
+            self.M2.number+=a
+            self.M2.set()
+        if self.M3 !=0:
+            a=self.M3.amnt
+            self.M3.number+=a
+            self.M3.set()
+        if self.M4 !=0:
+            a=self.M4.amnt
+            self.M4.number+=a
+            self.M4.set()
+        if self.M5 !=0:
+            a=self.M5.amnt
+            self.M5.number+=a
+            self.M5.set()
+        if self.M6 !=0:
+            a=self.M6.amnt
+            self.M6.number+=a
+            self.M6.set()
+        if self.M7 !=0:
+            a=self.M7.amnt
+            self.M7.number+=a
+            self.M7.set()
+        if self.M8 !=0:
+            a=self.M8.amnt
+            self.M8.number+=a
+            self.M8.set()
+        if self.M9 !=0:
+            a=self.M9.amnt
+            self.M9.number+=a
+            self.M9.set()
+        if self.M10 !=0:
+            a=self.M10.amnt
+            self.M10.number+=a
+            self.M10.set()
+        if self.M11 !=0:
+            a=self.M11.amnt
+            self.M11.number+=a
+            self.M11.set()
+        if self.M12 !=0:
+            a=self.M12.amnt
+            self.M12.number+=a
+            self.M12.set()
+        if self.M13 !=0:
+            a=self.M13.amnt
+            self.M13.number+=a
+            self.M13.set()
+        if self.M14 !=0:
+            a=self.M14.amnt
+            self.M14.number+=a
+            self.M14.set()
+        if self.M15 !=0:
+            a=self.M15.amnt
+            self.M15.number+=a
+            self.M15.set()
+        if self.M16 !=0:
+            a=self.M16.amnt
+            self.M16.number+=a
+            self.M16.set()
+        if self.M17 !=0:
+            a=self.M17.amnt
+            self.M17.number+=a
+            self.M17.set()
+        if self.M18 !=0:
+            a=self.M18.amnt
+            self.M18.number+=a
+            self.M18.set()
+        if self.M19 !=0:
+            a=self.M19.amnt
+            self.M19.number+=a
+            self.M19.set()
+        if self.M20 !=0:
+            a=self.M20.amnt
+            self.M20.number+=a
+            self.M20.set()
+        if self.M21 !=0:
+            a=self.M21.amnt
+            self.M21.number+=a
+            self.M21.set()
+        if self.M22 !=0:
+            a=self.M22.amnt
+            self.M22.number+=a
+            self.M22.set()
+        if self.M23 !=0:
+            a=self.M23.amnt
+            self.M23.number+=a
+            self.M23.set()
+        if self.M24 !=0:
+            a=self.M24.amnt
+            self.M24.number+=a
+            self.M24.set()
+        if self.M25 !=0:
+            a=self.M25.amnt
+            self.M25.number+=a
+            self.M25.set()
+        if self.M26 !=0:
+            a=self.M26.amnt
+            self.M26.number+=a
+            self.M26.set()
+        if self.M27 !=0:
+            a=self.M27.amnt
+            self.M27.number+=a
+            self.M27.set()
+        if self.M28 !=0:
+            a=self.M28.amnt
+            self.M28.number+=a
+            self.M28.set()
+        if self.M29 !=0:
+            a=self.M29.amnt
+            self.M29.number+=a
+            self.M29.set()
+        if self.M30 !=0:
+            a=self.M30.amnt
+            self.M30.number+=a
+            self.M30.set()
+        if self.M31 !=0:
+            a=self.M31.amnt
+            self.M31.number+=a
+            self.M31.set()
+        if self.M32 !=0:
+            a=self.M32.amnt
+            self.M32.number+=a
+            self.M32.set()
+        if self.M33 !=0:
+            a=self.M33.amnt
+            self.M33.number+=a
+            self.M33.set()
+        if self.M34 !=0:
+            a=self.M34.amnt
+            self.M34.number+=a
+            self.M34.set()
+        if self.M35 !=0:
+            a=self.M35.amnt
+            self.M35.number+=a
+            self.M35.set()
+        if self.M36 !=0:
+            a=self.M36.amnt
+            self.M36.number+=a
+            self.M36.set()
+        if self.M37 !=0:
+            a=self.M37.amnt
+            self.M37.number+=a
+            self.M37.set()
+        if self.M38 !=0:
+            a=self.M38.amnt
+            self.M38.number+=a
+            self.M38.set()
+        if self.M39 !=0:
+            a=self.M39.amnt
+            self.M39.number+=a
+            self.M39.set()
+        if self.M40 !=0:
+            a=self.M40.amnt
+            self.M40.number+=a
+            self.M40.set()
+        if self.M41 !=0:
+            a=self.M41.amnt
+            self.M41.number+=a
+            self.M41.set()
+        if self.M42 !=0:
+            a=self.M42.amnt
+            self.M42.number+=a
+            self.M42.set()
+        if self.M43 !=0:
+            a=self.M43.amnt
+            self.M43.number+=a
+            self.M43.set()
+        if self.M44 !=0:
+            a=self.M44.amnt
+            self.M44.number+=a
+            self.M44.set()
+        if self.M45 !=0:
+            a=self.M45.amnt
+            self.M45.number+=a
+            self.M45.set()
+        if self.M46 !=0:
+            a=self.M46.amnt
+            self.M46.number+=a
+            self.M46.set()
+        if self.M47 !=0:
+            a=self.M47.amnt
+            self.M47.number+=a
+            self.M47.set()
+        if self.M48 !=0:
+            a=self.M48.amnt
+            self.M48.number+=a
+            self.M48.set()
+        if self.M49 !=0:
+            a=self.M49.amnt
+            self.M49.number+=a
+            self.M49.set()
+        if self.M50 !=0:
+            a=self.M50.amnt
+            self.M50.number+=a
+            self.M50.set()
+        if self.M51 !=0:
+            a=self.M51.amnt
+            self.M51.number+=a
+            self.M51.set()
+        if self.M52 !=0:
+            a=self.M52.amnt
+            self.M52.number+=a
+            self.M52.set()
+        if self.M53 !=0:
+            a=self.M53.amnt
+            self.M53.number+=a
+            self.M53.set()
+        if self.M54 !=0:
+            a=self.M54.amnt
+            self.M54.number+=a
+            self.M54.set()
+        if self.M55 !=0:
+            a=self.M55.amnt
+            self.M55.number+=a
+            self.M55.set()
+        if self.M56 !=0:
+            a=self.M56.amnt
+            self.M56.number+=a
+            self.M56.set()
+        if self.M57 !=0:
+            a=self.M57.amnt
+            self.M57.number+=a
+            self.M57.set()
+        if self.M58 !=0:
+            a=self.M58.amnt
+            self.M58.number+=a
+            self.M58.set()
+        if self.M59 !=0:
+            a=self.M59.amnt
+            self.M59.number+=a
+            self.M59.set()
+        if self.M60 !=0:
+            a=self.M60.amnt
+            self.M60.number+=a
+            self.M60.set()
+        if self.M61 !=0:
+            a=self.M61.amnt
+            self.M61.number+=a
+            self.M61.set()
+        if self.M62 !=0:
+            a=self.M62.amnt
+            self.M62.number+=a
+            self.M62.set()
+        if self.M63 !=0:
+            a=self.M63.amnt
+            self.M63.number+=a
+            self.M63.set()
+        if self.M64 !=0:
+            a=self.M64.amnt
+            self.M64.number+=a
+            self.M64.set()
+        if self.M65 !=0:
+            a=self.M65.amnt
+            self.M65.number+=a
+            self.M65.set()
+        if self.M66 !=0:
+            a=self.M66.amnt
+            self.M66.number+=a
+            self.M66.set()
+        if self.M67 !=0:
+            a=self.M67.amnt
+            self.M67.number+=a
+            self.M67.set()
+        if self.M68 !=0:
+            a=self.M68.amnt
+            self.M68.number+=a
+            self.M68.set()
+        if self.M69 !=0:
+            a=self.M69.amnt
+            self.M69.number+=a
+            self.M69.set()
+        if self.M70 !=0:
+            a=self.M70.amnt
+            self.M70.number+=a
+            self.M70.set()
+        if self.M71 !=0:
+            a=self.M71.amnt
+            self.M71.number+=a
+            self.M71.set()
+        if self.M72 !=0:
+            a=self.M72.amnt
+            self.M72.number+=a
+            self.M72.set()
+        if self.M73 !=0:
+            a=self.M73.amnt
+            self.M73.number+=a
+            self.M73.set()
+        if self.M74 !=0:
+            a=self.M74.amnt
+            self.M74.number+=a
+            self.M74.set()
+        if self.M75 !=0:
+            a=self.M75.amnt
+            self.M75.number+=a
+            self.M75.set()
+        if self.M76 !=0:
+            a=self.M76.amnt
+            self.M76.number+=a
+            self.M76.set()
+        if self.M77 !=0:
+            a=self.M77.amnt
+            self.M77.number+=a
+            self.M77.set()
+        if self.M78 !=0:
+            a=self.M78.amnt
+            self.M78.number+=a
+            self.M78.set()
+        if self.M79 !=0:
+            a=self.M79.amnt
+            self.M79.number+=a
+            self.M79.set()
+        if self.M80 !=0:
+            a=self.M80.amnt
+            self.M80.number+=a
+            self.M80.set()
+        if self.M81 !=0:
+            a=self.M81.amnt
+            self.M81.number+=a
+            self.M81.set()
+        if self.M82 !=0:
+            a=self.M82.amnt
+            self.M82.number+=a
+            self.M82.set()
+        if self.M83 !=0:
+            a=self.M83.amnt
+            self.M83.number+=a
+            self.M83.set()
+        if self.M84 !=0:
+            a=self.M84.amnt
+            self.M84.number+=a
+            self.M84.set()
+        if self.M85 !=0:
+            a=self.M85.amnt
+            self.M85.number+=a
+            self.M85.set()
+        if self.M86 !=0:
+            a=self.M86.amnt
+            self.M86.number+=a
+            self.M86.set()
+        if self.M87 !=0:
+            a=self.M87.amnt
+            self.M87.number+=a
+            self.M87.set()
+        if self.M88 !=0:
+            a=self.M88.amnt
+            self.M88.number+=a
+            self.M88.set()
+        if self.M89 !=0:
+            a=self.M89.amnt
+            self.M89.number+=a
+            self.M89.set()
+        if self.M90 !=0:
+            a=self.M90.amnt
+            self.M90.number+=a
+            self.M90.set()
+        if self.M91 !=0:
+            a=self.M91.amnt
+            self.M91.number+=a
+            self.M91.set()
+        if self.M92 !=0:
+            a=self.M92.amnt
+            self.M92.number+=a
+            self.M92.set()
+        if self.M93 !=0:
+            a=self.M93.amnt
+            self.M93.number+=a
+            self.M93.set()
+        if self.M94 !=0:
+            a=self.M94.amnt
+            self.M94.number+=a
+            self.M94.set()
+        if self.M95 !=0:
+            a=self.M95.amnt
+            self.M95.number+=a
+            self.M95.set()
+        if self.M96 !=0:
+            a=self.M96.amnt
+            self.M96.number+=a
+            self.M96.set()
+        if self.M97 !=0:
+            a=self.M97.amnt
+            self.M97.number+=a
+            self.M97.set()
+        if self.M98 !=0:
+            a=self.M98.amnt
+            self.M98.number+=a
+            self.M98.set()
+        if self.M99 !=0:
+            a=self.M99.amnt
+            self.M99.number+=a
+            self.M99.set()
+        if self.M100 !=0:
+            a=self.M100.amnt
+            self.M100.number+=a
+            self.M100.set()
+        if self.M101 !=0:
+            a=self.M101.amnt
+            self.M101.number+=a
+            self.M101.set()
+        if self.M102 !=0:
+            a=self.M102.amnt
+            self.M102.number+=a
+            self.M102.set()
+        if self.M103 !=0:
+            a=self.M103.amnt
+            self.M103.number+=a
+            self.M103.set()
+        if self.M104 !=0:
+            a=self.M104.amnt
+            self.M104.number+=a
+            self.M104.set()
+        if self.M105 !=0:
+            a=self.M105.amnt
+            self.M105.number+=a
+            self.M105.set()
+        if self.M106 !=0:
+            a=self.M106.amnt
+            self.M106.number+=a
+            self.M106.set()
+        if self.M107 !=0:
+            a=self.M107.amnt
+            self.M107.number+=a
+            self.M107.set()
+        if self.M108 !=0:
+            a=self.M108.amnt
+            self.M108.number+=a
+            self.M108.set()
+        if self.M109 !=0:
+            a=self.M109.amnt
+            self.M109.number+=a
+            self.M109.set()
+        if self.M110 !=0:
+            a=self.M110.amnt
+            self.M110.number+=a
+            self.M110.set()
+        if self.M111 !=0:
+            a=self.M111.amnt
+            self.M111.number+=a
+            self.M111.set()
+        if self.M112 !=0:
+            a=self.M112.amnt
+            self.M112.number+=a
+            self.M112.set()
+        if self.M113 !=0:
+            a=self.M113.amnt
+            self.M113.number+=a
+            self.M113.set()
+        if self.M114 !=0:
+            a=self.M114.amnt
+            self.M114.number+=a
+            self.M114.set()
+        if self.M115 !=0:
+            a=self.M115.amnt
+            self.M115.number+=a
+            self.M115.set()
+        if self.M116 !=0:
+            a=self.M116.amnt
+            self.M116.number+=a
+            self.M116.set()
+        if self.M117 !=0:
+            a=self.M117.amnt
+            self.M117.number+=a
+            self.M117.set()
+        if self.M118 !=0:
+            a=self.M118.amnt
+            self.M118.number+=a
+            self.M118.set()
+        if self.M119 !=0:
+            a=self.M119.amnt
+            self.M119.number+=a
+            self.M119.set()
+        if self.M120 !=0:
+            a=self.M120.amnt
+            self.M120.number+=a
+            self.M120.set()
+        if self.M121 !=0:
+            a=self.M121.amnt
+            self.M121.number+=a
+            self.M121.set()
+        if self.M122 !=0:
+            a=self.M122.amnt
+            self.M122.number+=a
+            self.M122.set()
+        if self.M123 !=0:
+            a=self.M123.amnt
+            self.M123.number+=a
+            self.M123.set()
+        if self.M124 !=0:
+            a=self.M124.amnt
+            self.M124.number+=a
+            self.M124.set()
+        if self.M125 !=0:
+            a=self.M125.amnt
+            self.M125.number+=a
+            self.M125.set()
+        if self.M126 !=0:
+            a=self.M126.amnt
+            self.M126.number+=a
+            self.M126.set()
+        if self.M127 !=0:
+            a=self.M127.amnt
+            self.M127.number+=a
+            self.M127.set()
+        if self.M128 !=0:
+            a=self.M128.amnt
+            self.M128.number+=a
+            self.M128.set()
+        if self.M129 !=0:
+            a=self.M129.amnt
+            self.M129.number+=a
+            self.M129.set()
+        if self.M130 !=0:
+            a=self.M130.amnt
+            self.M130.number+=a
+            self.M130.set()
+        if self.M131 !=0:
+            a=self.M131.amnt
+            self.M131.number+=a
+            self.M131.set()
+        if self.M132 !=0:
+            a=self.M132.amnt
+            self.M132.number+=a
+            self.M132.set()
+        if self.M133 !=0:
+            a=self.M133.amnt
+            self.M133.number+=a
+            self.M133.set()
+        if self.M134 !=0:
+            a=self.M134.amnt
+            self.M134.number+=a
+            self.M134.set()
+        if self.M135 !=0:
+            a=self.M135.amnt
+            self.M135.number+=a
+            self.M135.set()
+        if self.M136 !=0:
+            a=self.M136.amnt
+            self.M136.number+=a
+            self.M136.set()
+        if self.M137 !=0:
+            a=self.M137.amnt
+            self.M137.number+=a
+            self.M137.set()
+        if self.M138 !=0:
+            a=self.M138.amnt
+            self.M138.number+=a
+            self.M138.set()
+        if self.M139 !=0:
+            a=self.M139.amnt
+            self.M139.number+=a
+            self.M139.set()
+        if self.M140 !=0:
+            a=self.M140.amnt
+            self.M140.number+=a
+            self.M140.set()
+        if self.M141 !=0:
+            a=self.M141.amnt
+            self.M141.number+=a
+            self.M141.set()
+        if self.M142 !=0:
+            a=self.M142.amnt
+            self.M142.number+=a
+            self.M142.set()
+        if self.M143 !=0:
+            a=self.M143.amnt
+            self.M143.number+=a
+            self.M143.set()
+        if self.M144 !=0:
+            a=self.M144.amnt
+            self.M144.number+=a
+            self.M144.set()
+        if self.M145 !=0:
+            a=self.M145.amnt
+            self.M145.number+=a
+            self.M145.set()
+        if self.M146 !=0:
+            a=self.M146.amnt
+            self.M146.number+=a
+            self.M146.set()
+        if self.M147 !=0:
+            a=self.M147.amnt
+            self.M147.number+=a
+            self.M147.set()
+        if self.M148 !=0:
+            a=self.M148.amnt
+            self.M148.number+=a
+            self.M148.set()
+        if self.M149 !=0:
+            a=self.M149.amnt
+            self.M149.number+=a
+            self.M149.set()
+        if self.M150 !=0:
+            a=self.M150.amnt
+            self.M150.number+=a
+            self.M150.set()
+        if self.M151 !=0:
+            a=self.M151.amnt
+            self.M151.number+=a
+            self.M151.set()
+        if self.M152 !=0:
+            a=self.M152.amnt
+            self.M152.number+=a
+            self.M152.set()
+        if self.M153 !=0:
+            a=self.M153.amnt
+            self.M153.number+=a
+            self.M153.set()
+        if self.M154 !=0:
+            a=self.M154.amnt
+            self.M154.number+=a
+            self.M154.set()
+        if self.M155 !=0:
+            a=self.M155.amnt
+            self.M155.number+=a
+            self.M155.set()
+        if self.M156 !=0:
+            a=self.M156.amnt
+            self.M156.number+=a
+            self.M156.set()
+        if self.M157 !=0:
+            a=self.M157.amnt
+            self.M157.number+=a
+            self.M157.set()
+        if self.M158 !=0:
+            a=self.M158.amnt
+            self.M158.number+=a
+            self.M158.set()
+        if self.M159 !=0:
+            a=self.M159.amnt
+            self.M159.number+=a
+            self.M159.set()
+        if self.M160 !=0:
+            a=self.M160.amnt
+            self.M160.number+=a
+            self.M160.set()
+        if self.M161 !=0:
+            a=self.M161.amnt
+            self.M161.number+=a
+            self.M161.set()
+        if self.M162 !=0:
+            a=self.M162.amnt
+            self.M162.number+=a
+            self.M162.set()
+        if self.M163 !=0:
+            a=self.M163.amnt
+            self.M163.number+=a
+            self.M163.set()
+        if self.M164 !=0:
+            a=self.M164.amnt
+            self.M164.number+=a
+            self.M164.set()
+        if self.M165 !=0:
+            a=self.M165.amnt
+            self.M165.number+=a
+            self.M165.set()
+        if self.M166 !=0:
+            a=self.M166.amnt
+            self.M166.number+=a
+            self.M166.set()
+        if self.M167 !=0:
+            a=self.M167.amnt
+            self.M167.number+=a
+            self.M167.set()
+        if self.M168 !=0:
+            a=self.M168.amnt
+            self.M168.number+=a
+            self.M168.set()
+        if self.M169 !=0:
+            a=self.M169.amnt
+            self.M169.number+=a
+            self.M169.set()
+        if self.M170 !=0:
+            a=self.M170.amnt
+            self.M170.number+=a
+            self.M170.set()
+        if self.M171 !=0:
+            a=self.M171.amnt
+            self.M171.number+=a
+            self.M171.set()
+        if self.M172 !=0:
+            a=self.M172.amnt
+            self.M172.number+=a
+            self.M172.set()
+        if self.M173 !=0:
+            a=self.M173.amnt
+            self.M173.number+=a
+            self.M173.set()
+        if self.M174 !=0:
+            a=self.M174.amnt
+            self.M174.number+=a
+            self.M174.set()
+        if self.M175 !=0:
+            a=self.M175.amnt
+            self.M175.number+=a
+            self.M175.set()
+        if self.M176 !=0:
+            a=self.M176.amnt
+            self.M176.number+=a
+            self.M176.set()
+        if self.M177 !=0:
+            a=self.M177.amnt
+            self.M177.number+=a
+            self.M177.set()
+        if self.M178 !=0:
+            a=self.M178.amnt
+            self.M178.number+=a
+            self.M178.set()
+        if self.M179 !=0:
+            a=self.M179.amnt
+            self.M179.number+=a
+            self.M179.set()
+        if self.M180 !=0:
+            a=self.M180.amnt
+            self.M180.number+=a
+            self.M180.set()
+        if self.M181 !=0:
+            a=self.M181.amnt
+            self.M181.number+=a
+            self.M181.set()
+        if self.M182 !=0:
+            a=self.M182.amnt
+            self.M182.number+=a
+            self.M182.set()
+        if self.M183 !=0:
+            a=self.M183.amnt
+            self.M183.number+=a
+            self.M183.set()
+        if self.M184 !=0:
+            a=self.M184.amnt
+            self.M184.number+=a
+            self.M184.set()
+        if self.M185 !=0:
+            a=self.M185.amnt
+            self.M185.number+=a
+            self.M185.set()
+        if self.M186 !=0:
+            a=self.M186.amnt
+            self.M186.number+=a
+            self.M186.set()
+        if self.M187 !=0:
+            a=self.M187.amnt
+            self.M187.number+=a
+            self.M187.set()
+        if self.M188 !=0:
+            a=self.M188.amnt
+            self.M188.number+=a
+            self.M188.set()
+        if self.M189 !=0:
+            a=self.M189.amnt
+            self.M189.number+=a
+            self.M189.set()
+        if self.M190 !=0:
+            a=self.M190.amnt
+            self.M190.number+=a
+            self.M190.set()
+        if self.M191 !=0:
+            a=self.M191.amnt
+            self.M191.number+=a
+            self.M191.set()
+        if self.M192 !=0:
+            a=self.M192.amnt
+            self.M192.number+=a
+            self.M192.set()
+        if self.M193 !=0:
+            a=self.M193.amnt
+            self.M193.number+=a
+            self.M193.set()
+        if self.M194 !=0:
+            a=self.M194.amnt
+            self.M194.number+=a
+            self.M194.set()
+        if self.M195 !=0:
+            a=self.M195.amnt
+            self.M195.number+=a
+            self.M195.set()
+        if self.M196 !=0:
+            a=self.M196.amnt
+            self.M196.number+=a
+            self.M196.set()
+        if self.M197 !=0:
+            a=self.M197.amnt
+            self.M197.number+=a
+            self.M197.set()
+        if self.M198 !=0:
+            a=self.M198.amnt
+            self.M198.number+=a
+            self.M198.set()
+        if self.M199 !=0:
+            a=self.M199.amnt
+            self.M199.number+=a
+            self.M199.set()
+        if self.M200 !=0:
+            a=self.M200.amnt
+            self.M200.number+=a
+            self.M200.set()
+        if self.M201 !=0:
+            a=self.M201.amnt
+            self.M201.number+=a
+            self.M201.set()
+        if self.M202 !=0:
+            a=self.M202.amnt
+            self.M202.number+=a
+            self.M202.set()
+        if self.M203 !=0:
+            a=self.M203.amnt
+            self.M203.number+=a
+            self.M203.set()
+        if self.M204 !=0:
+            a=self.M204.amnt
+            self.M204.number+=a
+            self.M204.set()
+        if self.M205 !=0:
+            a=self.M205.amnt
+            self.M205.number+=a
+            self.M205.set()
+        if self.M206 !=0:
+            a=self.M206.amnt
+            self.M206.number+=a
+            self.M206.set()
+        if self.M207 !=0:
+            a=self.M207.amnt
+            self.M207.number+=a
+            self.M207.set()
+        if self.M208 !=0:
+            a=self.M208.amnt
+            self.M208.number+=a
+            self.M208.set()
+        if self.M209 !=0:
+            a=self.M209.amnt
+            self.M209.number+=a
+            self.M209.set()
+        if self.M210 !=0:
+            a=self.M210.amnt
+            self.M210.number+=a
+            self.M210.set()
+        if self.M211 !=0:
+            a=self.M211.amnt
+            self.M211.number+=a
+            self.M211.set()
+        if self.M212 !=0:
+            a=self.M212.amnt
+            self.M212.number+=a
+            self.M212.set()
+        if self.M213 !=0:
+            a=self.M213.amnt
+            self.M213.number+=a
+            self.M213.set()
+        if self.M214 !=0:
+            a=self.M214.amnt
+            self.M214.number+=a
+            self.M214.set()
+        if self.M215 !=0:
+            a=self.M215.amnt
+            self.M215.number+=a
+            self.M215.set()
+        if self.M216 !=0:
+            a=self.M216.amnt
+            self.M216.number+=a
+            self.M216.set()
+        if self.M217 !=0:
+            a=self.M217.amnt
+            self.M217.number+=a
+            self.M217.set()
+        if self.M218 !=0:
+            a=self.M218.amnt
+            self.M218.number+=a
+            self.M218.set()
+        if self.M219 !=0:
+            a=self.M219.amnt
+            self.M219.number+=a
+            self.M219.set()
+        if self.M220 !=0:
+            a=self.M220.amnt
+            self.M220.number+=a
+            self.M220.set()
+        if self.M221 !=0:
+            a=self.M221.amnt
+            self.M221.number+=a
+            self.M221.set()
+        if self.M222 !=0:
+            a=self.M222.amnt
+            self.M222.number+=a
+            self.M222.set()
+        if self.M223 !=0:
+            a=self.M223.amnt
+            self.M223.number+=a
+            self.M223.set()
+        if self.M224 !=0:
+            a=self.M224.amnt
+            self.M224.number+=a
+            self.M224.set()
+        if self.M225 !=0:
+            a=self.M225.amnt
+            self.M225.number+=a
+            self.M225.set()
+        if self.M226 !=0:
+            a=self.M226.amnt
+            self.M226.number+=a
+            self.M226.set()
+        if self.M227 !=0:
+            a=self.M227.amnt
+            self.M227.number+=a
+            self.M227.set()
+        if self.M228 !=0:
+            a=self.M228.amnt
+            self.M228.number+=a
+            self.M228.set()
+        if self.M229 !=0:
+            a=self.M229.amnt
+            self.M229.number+=a
+            self.M229.set()
+        if self.M230 !=0:
+            a=self.M230.amnt
+            self.M230.number+=a
+            self.M230.set()
+        if self.M231 !=0:
+            a=self.M231.amnt
+            self.M231.number+=a
+            self.M231.set()
+        if self.M232 !=0:
+            a=self.M232.amnt
+            self.M232.number+=a
+            self.M232.set()
+        if self.M233 !=0:
+            a=self.M233.amnt
+            self.M233.number+=a
+            self.M233.set()
+        if self.M234 !=0:
+            a=self.M234.amnt
+            self.M234.number+=a
+            self.M234.set()
+        if self.M235 !=0:
+            a=self.M235.amnt
+            self.M235.number+=a
+            self.M235.set()
+        if self.M236 !=0:
+            a=self.M236.amnt
+            self.M236.number+=a
+            self.M236.set()
+        if self.M237 !=0:
+            a=self.M237.amnt
+            self.M237.number+=a
+            self.M237.set()
+        if self.M238 !=0:
+            a=self.M238.amnt
+            self.M238.number+=a
+            self.M238.set()
+        if self.M239 !=0:
+            a=self.M239.amnt
+            self.M239.number+=a
+            self.M239.set()
+        if self.M240 !=0:
+            a=self.M240.amnt
+            self.M240.number+=a
+            self.M240.set()
+        if self.M241 !=0:
+            a=self.M241.amnt
+            self.M241.number+=a
+            self.M241.set()
+        if self.M242 !=0:
+            a=self.M242.amnt
+            self.M242.number+=a
+            self.M242.set()
+        if self.M243 !=0:
+            a=self.M243.amnt
+            self.M243.number+=a
+            self.M243.set()
+        if self.M244 !=0:
+            a=self.M244.amnt
+            self.M244.number+=a
+            self.M244.set()
+        if self.M245 !=0:
+            a=self.M245.amnt
+            self.M245.number+=a
+            self.M245.set()
+        if self.M246 !=0:
+            a=self.M246.amnt
+            self.M246.number+=a
+            self.M246.set()
+        if self.M247 !=0:
+            a=self.M247.amnt
+            self.M247.number+=a
+            self.M247.set()
+        if self.M248 !=0:
+            a=self.M248.amnt
+            self.M248.number+=a
+            self.M248.set()
+        if self.M249 !=0:
+            a=self.M249.amnt
+            self.M249.number+=a
+            self.M249.set()
+        if self.M250 !=0:
+            a=self.M250.amnt
+            self.M250.number+=a
+            self.M250.set()
+        if self.M251 !=0:
+            a=self.M251.amnt
+            self.M251.number+=a
+            self.M251.set()
+        if self.M252 !=0:
+            a=self.M252.amnt
+            self.M252.number+=a
+            self.M252.set()
+        if self.M253 !=0:
+            a=self.M253.amnt
+            self.M253.number+=a
+            self.M253.set()
+        if self.M254 !=0:
+            a=self.M254.amnt
+            self.M254.number+=a
+            self.M254.set()
+        if self.M255 !=0:
+            a=self.M255.amnt
+            self.M255.number+=a
+            self.M255.set()
+        if self.M256 !=0:
+            a=self.M256.amnt
+            self.M256.number+=a
+            self.M256.set()
+        if self.M257 !=0:
+            a=self.M257.amnt
+            self.M257.number+=a
+            self.M257.set()
+        if self.M258 !=0:
+            a=self.M258.amnt
+            self.M258.number+=a
+            self.M258.set()
+        if self.M259 !=0:
+            a=self.M259.amnt
+            self.M259.number+=a
+            self.M259.set()
+        if self.M260 !=0:
+            a=self.M260.amnt
+            self.M260.number+=a
+            self.M260.set()
+        if self.M261 !=0:
+            a=self.M261.amnt
+            self.M261.number+=a
+            self.M261.set()
+        if self.M262 !=0:
+            a=self.M262.amnt
+            self.M262.number+=a
+            self.M262.set()
+        if self.M263 !=0:
+            a=self.M263.amnt
+            self.M263.number+=a
+            self.M263.set()
+        if self.M264 !=0:
+            a=self.M264.amnt
+            self.M264.number+=a
+            self.M264.set()
+        if self.M265 !=0:
+            a=self.M265.amnt
+            self.M265.number+=a
+            self.M265.set()
+        if self.M266 !=0:
+            a=self.M266.amnt
+            self.M266.number+=a
+            self.M266.set()
+        if self.M267 !=0:
+            a=self.M267.amnt
+            self.M267.number+=a
+            self.M267.set()
+        if self.M268 !=0:
+            a=self.M268.amnt
+            self.M268.number+=a
+            self.M268.set()
+        if self.M269 !=0:
+            a=self.M269.amnt
+            self.M269.number+=a
+            self.M269.set()
+        if self.M270 !=0:
+            a=self.M270.amnt
+            self.M270.number+=a
+            self.M270.set()
+        if self.M271 !=0:
+            a=self.M271.amnt
+            self.M271.number+=a
+            self.M271.set()
+        if self.M272 !=0:
+            a=self.M272.amnt
+            self.M272.number+=a
+            self.M272.set()
+        if self.M273 !=0:
+            a=self.M273.amnt
+            self.M273.number+=a
+            self.M273.set()
+        if self.M274 !=0:
+            a=self.M274.amnt
+            self.M274.number+=a
+            self.M274.set()
+        if self.M275 !=0:
+            a=self.M275.amnt
+            self.M275.number+=a
+            self.M275.set()
+        if self.M276 !=0:
+            a=self.M276.amnt
+            self.M276.number+=a
+            self.M276.set()
+        if self.M277 !=0:
+            a=self.M277.amnt
+            self.M277.number+=a
+            self.M277.set()
+        if self.M278 !=0:
+            a=self.M278.amnt
+            self.M278.number+=a
+            self.M278.set()
+        if self.M279 !=0:
+            a=self.M279.amnt
+            self.M279.number+=a
+            self.M279.set()
+        if self.M280 !=0:
+            a=self.M280.amnt
+            self.M280.number+=a
+            self.M280.set()
+        if self.M281 !=0:
+            a=self.M281.amnt
+            self.M281.number+=a
+            self.M281.set()
+        if self.M282 !=0:
+            a=self.M282.amnt
+            self.M282.number+=a
+            self.M282.set()
+        if self.M283 !=0:
+            a=self.M283.amnt
+            self.M283.number+=a
+            self.M283.set()
+        if self.M284 !=0:
+            a=self.M284.amnt
+            self.M284.number+=a
+            self.M284.set()
+        if self.M285 !=0:
+            a=self.M285.amnt
+            self.M285.number+=a
+            self.M285.set()
+        if self.M286 !=0:
+            a=self.M286.amnt
+            self.M286.number+=a
+            self.M286.set()
+        if self.M287 !=0:
+            a=self.M287.amnt
+            self.M287.number+=a
+            self.M287.set()
+        if self.M288 !=0:
+            a=self.M288.amnt
+            self.M288.number+=a
+            self.M288.set()
+        if self.M289 !=0:
+            a=self.M289.amnt
+            self.M289.number+=a
+            self.M289.set()
+        if self.M290 !=0:
+            a=self.M290.amnt
+            self.M290.number+=a
+            self.M290.set()
+        if self.M291 !=0:
+            a=self.M291.amnt
+            self.M291.number+=a
+            self.M291.set()
+        if self.M292 !=0:
+            a=self.M292.amnt
+            self.M292.number+=a
+            self.M292.set()
+        if self.M293 !=0:
+            a=self.M293.amnt
+            self.M293.number+=a
+            self.M293.set()
+        if self.M294 !=0:
+            a=self.M294.amnt
+            self.M294.number+=a
+            self.M294.set()
+        if self.M295 !=0:
+            a=self.M295.amnt
+            self.M295.number+=a
+            self.M295.set()
+        if self.M296 !=0:
+            a=self.M296.amnt
+            self.M296.number+=a
+            self.M296.set()
+        if self.M297 !=0:
+            a=self.M297.amnt
+            self.M297.number+=a
+            self.M297.set()
+        if self.M298 !=0:
+            a=self.M298.amnt
+            self.M298.number+=a
+            self.M298.set()
+        if self.M299 !=0:
+            a=self.M299.amnt
+            self.M299.number+=a
+            self.M299.set()
+        if self.M300 !=0:
+            a=self.M300.amnt
+            self.M300.number+=a
+            self.M300.set()
+        if self.M301 !=0:
+            a=self.M301.amnt
+            self.M301.number+=a
+            self.M301.set()
+        if self.M302 !=0:
+            a=self.M302.amnt
+            self.M302.number+=a
+            self.M302.set()
+        if self.M303 !=0:
+            a=self.M303.amnt
+            self.M303.number+=a
+            self.M303.set()
+        if self.M304 !=0:
+            a=self.M304.amnt
+            self.M304.number+=a
+            self.M304.set()
+        if self.M305 !=0:
+            a=self.M305.amnt
+            self.M305.number+=a
+            self.M305.set()
+        if self.M306 !=0:
+            a=self.M306.amnt
+            self.M306.number+=a
+            self.M306.set()
+        if self.M307 !=0:
+            a=self.M307.amnt
+            self.M307.number+=a
+            self.M307.set()
+        if self.M308 !=0:
+            a=self.M308.amnt
+            self.M308.number+=a
+            self.M308.set()
+        if self.M309 !=0:
+            a=self.M309.amnt
+            self.M309.number+=a
+            self.M309.set()
+        if self.M310 !=0:
+            a=self.M310.amnt
+            self.M310.number+=a
+            self.M310.set()
+        if self.M311 !=0:
+            a=self.M311.amnt
+            self.M311.number+=a
+            self.M311.set()
+        if self.M312 !=0:
+            a=self.M312.amnt
+            self.M312.number+=a
+            self.M312.set()
+        if self.M313 !=0:
+            a=self.M313.amnt
+            self.M313.number+=a
+            self.M313.set()
+        if self.M314 !=0:
+            a=self.M314.amnt
+            self.M314.number+=a
+            self.M314.set()
+        if self.M315 !=0:
+            a=self.M315.amnt
+            self.M315.number+=a
+            self.M315.set()
+        if self.M316 !=0:
+            a=self.M316.amnt
+            self.M316.number+=a
+            self.M316.set()
+        if self.M317 !=0:
+            a=self.M317.amnt
+            self.M317.number+=a
+            self.M317.set()
+        if self.M318 !=0:
+            a=self.M318.amnt
+            self.M318.number+=a
+            self.M318.set()
+        if self.M319 !=0:
+            a=self.M319.amnt
+            self.M319.number+=a
+            self.M319.set()
+        if self.M320 !=0:
+            a=self.M320.amnt
+            self.M320.number+=a
+            self.M320.set()
+        if self.M321 !=0:
+            a=self.M321.amnt
+            self.M321.number+=a
+            self.M321.set()
+        if self.M322 !=0:
+            a=self.M322.amnt
+            self.M322.number+=a
+            self.M322.set()
+        if self.M323 !=0:
+            a=self.M323.amnt
+            self.M323.number+=a
+            self.M323.set()
+        if self.M324 !=0:
+            a=self.M324.amnt
+            self.M324.number+=a
+            self.M324.set()
+        if self.M325 !=0:
+            a=self.M325.amnt
+            self.M325.number+=a
+            self.M325.set()
+        if self.M326 !=0:
+            a=self.M326.amnt
+            self.M326.number+=a
+            self.M326.set()
+        if self.M327 !=0:
+            a=self.M327.amnt
+            self.M327.number+=a
+            self.M327.set()
+        if self.M328 !=0:
+            a=self.M328.amnt
+            self.M328.number+=a
+            self.M328.set()
+        if self.M329 !=0:
+            a=self.M329.amnt
+            self.M329.number+=a
+            self.M329.set()
+        if self.M330 !=0:
+            a=self.M330.amnt
+            self.M330.number+=a
+            self.M330.set()
+        if self.M331 !=0:
+            a=self.M331.amnt
+            self.M331.number+=a
+            self.M331.set()
+        if self.M332 !=0:
+            a=self.M332.amnt
+            self.M332.number+=a
+            self.M332.set()
+        if self.M333 !=0:
+            a=self.M333.amnt
+            self.M333.number+=a
+            self.M333.set()
+        if self.M334 !=0:
+            a=self.M334.amnt
+            self.M334.number+=a
+            self.M334.set()
+        if self.M335 !=0:
+            a=self.M335.amnt
+            self.M335.number+=a
+            self.M335.set()
+        if self.M336 !=0:
+            a=self.M336.amnt
+            self.M336.number+=a
+            self.M336.set()
+        if self.M337 !=0:
+            a=self.M337.amnt
+            self.M337.number+=a
+            self.M337.set()
+        if self.M338 !=0:
+            a=self.M338.amnt
+            self.M338.number+=a
+            self.M338.set()
+        if self.M339 !=0:
+            a=self.M339.amnt
+            self.M339.number+=a
+            self.M339.set()
+        if self.M340 !=0:
+            a=self.M340.amnt
+            self.M340.number+=a
+            self.M340.set()
+        if self.M341 !=0:
+            a=self.M341.amnt
+            self.M341.number+=a
+            self.M341.set()
+        if self.M342 !=0:
+            a=self.M342.amnt
+            self.M342.number+=a
+            self.M342.set()
+        if self.M343 !=0:
+            a=self.M343.amnt
+            self.M343.number+=a
+            self.M343.set()
+        if self.M344 !=0:
+            a=self.M344.amnt
+            self.M344.number+=a
+            self.M344.set()
+        if self.M345 !=0:
+            a=self.M345.amnt
+            self.M345.number+=a
+            self.M345.set()
+        if self.M346 !=0:
+            a=self.M346.amnt
+            self.M346.number+=a
+            self.M346.set()
+        if self.M347 !=0:
+            a=self.M347.amnt
+            self.M347.number+=a
+            self.M347.set()
+        if self.M348 !=0:
+            a=self.M348.amnt
+            self.M348.number+=a
+            self.M348.set()
+        if self.M349 !=0:
+            a=self.M349.amnt
+            self.M349.number+=a
+            self.M349.set()
+        if self.M350 !=0:
+            a=self.M350.amnt
+            self.M350.number+=a
+            self.M350.set()
+        if self.M351 !=0:
+            a=self.M351.amnt
+            self.M351.number+=a
+            self.M351.set()
+        if self.M352 !=0:
+            a=self.M352.amnt
+            self.M352.number+=a
+            self.M352.set()
+        if self.M353 !=0:
+            a=self.M353.amnt
+            self.M353.number+=a
+            self.M353.set()
+        if self.M354 !=0:
+            a=self.M354.amnt
+            self.M354.number+=a
+            self.M354.set()
+        if self.M355 !=0:
+            a=self.M355.amnt
+            self.M355.number+=a
+            self.M355.set()
+        if self.M356 !=0:
+            a=self.M356.amnt
+            self.M356.number+=a
+            self.M356.set()
+        if self.M357 !=0:
+            a=self.M357.amnt
+            self.M357.number+=a
+            self.M357.set()
+        if self.M358 !=0:
+            a=self.M358.amnt
+            self.M358.number+=a
+            self.M358.set()
+        if self.M359 !=0:
+            a=self.M359.amnt
+            self.M359.number+=a
+            self.M359.set()
+        if self.M360 !=0:
+            a=self.M360.amnt
+            self.M360.number+=a
+            self.M360.set()
+        if self.M361 !=0:
+            a=self.M361.amnt
+            self.M361.number+=a
+            self.M361.set()
+        if self.M362 !=0:
+            a=self.M362.amnt
+            self.M362.number+=a
+            self.M362.set()
+        if self.M363 !=0:
+            a=self.M363.amnt
+            self.M363.number+=a
+            self.M363.set()
+        if self.M364 !=0:
+            a=self.M364.amnt
+            self.M364.number+=a
+            self.M364.set()
+        if self.M365 !=0:
+            a=self.M365.amnt
+            self.M365.number+=a
+            self.M365.set()
+        if self.M366 !=0:
+            a=self.M366.amnt
+            self.M366.number+=a
+            self.M366.set()
+        if self.M367 !=0:
+            a=self.M367.amnt
+            self.M367.number+=a
+            self.M367.set()
+        if self.M368 !=0:
+            a=self.M368.amnt
+            self.M368.number+=a
+            self.M368.set()
+        if self.M369 !=0:
+            a=self.M369.amnt
+            self.M369.number+=a
+            self.M369.set()
+        if self.M370 !=0:
+            a=self.M370.amnt
+            self.M370.number+=a
+            self.M370.set()
+        if self.M371 !=0:
+            a=self.M371.amnt
+            self.M371.number+=a
+            self.M371.set()
+        if self.M372 !=0:
+            a=self.M372.amnt
+            self.M372.number+=a
+            self.M372.set()
+        if self.M373 !=0:
+            a=self.M373.amnt
+            self.M373.number+=a
+            self.M373.set()
+        if self.M374 !=0:
+            a=self.M374.amnt
+            self.M374.number+=a
+            self.M374.set()
+        if self.M375 !=0:
+            a=self.M375.amnt
+            self.M375.number+=a
+            self.M375.set()
+        if self.M376 !=0:
+            a=self.M376.amnt
+            self.M376.number+=a
+            self.M376.set()
+        if self.M377 !=0:
+            a=self.M377.amnt
+            self.M377.number+=a
+            self.M377.set()
+        if self.M378 !=0:
+            a=self.M378.amnt
+            self.M378.number+=a
+            self.M378.set()
+        if self.M379 !=0:
+            a=self.M379.amnt
+            self.M379.number+=a
+            self.M379.set()
+        if self.M380 !=0:
+            a=self.M380.amnt
+            self.M380.number+=a
+            self.M380.set()
+        if self.M381 !=0:
+            a=self.M381.amnt
+            self.M381.number+=a
+            self.M381.set()
+        if self.M382 !=0:
+            a=self.M382.amnt
+            self.M382.number+=a
+            self.M382.set()
+        if self.M383 !=0:
+            a=self.M383.amnt
+            self.M383.number+=a
+            self.M383.set()
+        if self.M384 !=0:
+            a=self.M384.amnt
+            self.M384.number+=a
+            self.M384.set()
+        if self.M385 !=0:
+            a=self.M385.amnt
+            self.M385.number+=a
+            self.M385.set()
+        if self.M386 !=0:
+            a=self.M386.amnt
+            self.M386.number+=a
+            self.M386.set()
+        if self.M387 !=0:
+            a=self.M387.amnt
+            self.M387.number+=a
+            self.M387.set()
+        if self.M388 !=0:
+            a=self.M388.amnt
+            self.M388.number+=a
+            self.M388.set()
+        if self.M389 !=0:
+            a=self.M389.amnt
+            self.M389.number+=a
+            self.M389.set()
+        if self.M390 !=0:
+            a=self.M390.amnt
+            self.M390.number+=a
+            self.M390.set()
+        if self.M391 !=0:
+            a=self.M391.amnt
+            self.M391.number+=a
+            self.M391.set()
+        if self.M392 !=0:
+            a=self.M392.amnt
+            self.M392.number+=a
+            self.M392.set()
+        if self.M393 !=0:
+            a=self.M393.amnt
+            self.M393.number+=a
+            self.M393.set()
+        if self.M394 !=0:
+            a=self.M394.amnt
+            self.M394.number+=a
+            self.M394.set()
+        if self.M395 !=0:
+            a=self.M395.amnt
+            self.M395.number+=a
+            self.M395.set()
+        if self.M396 !=0:
+            a=self.M396.amnt
+            self.M396.number+=a
+            self.M396.set()
+        if self.M397 !=0:
+            a=self.M397.amnt
+            self.M397.number+=a
+            self.M397.set()
+        if self.M398 !=0:
+            a=self.M398.amnt
+            self.M398.number+=a
+            self.M398.set()
+        if self.M399 !=0:
+            a=self.M399.amnt
+            self.M399.number+=a
+            self.M399.set()
+        if self.M400 !=0:
+            a=self.M400.amnt
+            self.M400.number+=a
+            self.M400.set()
+        if self.M401 !=0:
+            a=self.M401.amnt
+            self.M401.number+=a
+            self.M401.set()
+        if self.M402 !=0:
+            a=self.M402.amnt
+            self.M402.number+=a
+            self.M402.set()
+        if self.M403 !=0:
+            a=self.M403.amnt
+            self.M403.number+=a
+            self.M403.set()
+        if self.M404 !=0:
+            a=self.M404.amnt
+            self.M404.number+=a
+            self.M404.set()
+        if self.M405 !=0:
+            a=self.M405.amnt
+            self.M405.number+=a
+            self.M405.set()
+        if self.M406 !=0:
+            a=self.M406.amnt
+            self.M406.number+=a
+            self.M406.set()
+        if self.M407 !=0:
+            a=self.M407.amnt
+            self.M407.number+=a
+            self.M407.set()
+        if self.M408 !=0:
+            a=self.M408.amnt
+            self.M408.number+=a
+            self.M408.set()
+        if self.M409 !=0:
+            a=self.M409.amnt
+            self.M409.number+=a
+            self.M409.set()
+        if self.M410 !=0:
+            a=self.M410.amnt
+            self.M410.number+=a
+            self.M410.set()
+        if self.M411 !=0:
+            a=self.M411.amnt
+            self.M411.number+=a
+            self.M411.set()
+        if self.M412 !=0:
+            a=self.M412.amnt
+            self.M412.number+=a
+            self.M412.set()
+        if self.M413 !=0:
+            a=self.M413.amnt
+            self.M413.number+=a
+            self.M413.set()
+        if self.M414 !=0:
+            a=self.M414.amnt
+            self.M414.number+=a
+            self.M414.set()
+        if self.M415 !=0:
+            a=self.M415.amnt
+            self.M415.number+=a
+            self.M415.set()
+        if self.M416 !=0:
+            a=self.M416.amnt
+            self.M416.number+=a
+            self.M416.set()
+        if self.M417 !=0:
+            a=self.M417.amnt
+            self.M417.number+=a
+            self.M417.set()
+        if self.M418 !=0:
+            a=self.M418.amnt
+            self.M418.number+=a
+            self.M418.set()
+        if self.M419 !=0:
+            a=self.M419.amnt
+            self.M419.number+=a
+            self.M419.set()
+        if self.M420 !=0:
+            a=self.M420.amnt
+            self.M420.number+=a
+            self.M420.set()
+        if self.M421 !=0:
+            a=self.M421.amnt
+            self.M421.number+=a
+            self.M421.set()
+        if self.M422 !=0:
+            a=self.M422.amnt
+            self.M422.number+=a
+            self.M422.set()
+        if self.M423 !=0:
+            a=self.M423.amnt
+            self.M423.number+=a
+            self.M423.set()
+        if self.M424 !=0:
+            a=self.M424.amnt
+            self.M424.number+=a
+            self.M424.set()
+        if self.M425 !=0:
+            a=self.M425.amnt
+            self.M425.number+=a
+            self.M425.set()
+        if self.M426 !=0:
+            a=self.M426.amnt
+            self.M426.number+=a
+            self.M426.set()
+        if self.M427 !=0:
+            a=self.M427.amnt
+            self.M427.number+=a
+            self.M427.set()
+        if self.M428 !=0:
+            a=self.M428.amnt
+            self.M428.number+=a
+            self.M428.set()
+        if self.M429 !=0:
+            a=self.M429.amnt
+            self.M429.number+=a
+            self.M429.set()
+        if self.M430 !=0:
+            a=self.M430.amnt
+            self.M430.number+=a
+            self.M430.set()
+        if self.M431 !=0:
+            a=self.M431.amnt
+            self.M431.number+=a
+            self.M431.set()
+        if self.M432 !=0:
+            a=self.M432.amnt
+            self.M432.number+=a
+            self.M432.set()
+        if self.M433 !=0:
+            a=self.M433.amnt
+            self.M433.number+=a
+            self.M433.set()
+        if self.M434 !=0:
+            a=self.M434.amnt
+            self.M434.number+=a
+            self.M434.set()
+        if self.M435 !=0:
+            a=self.M435.amnt
+            self.M435.number+=a
+            self.M435.set()
+        if self.M436 !=0:
+            a=self.M436.amnt
+            self.M436.number+=a
+            self.M436.set()
+        if self.M437 !=0:
+            a=self.M437.amnt
+            self.M437.number+=a
+            self.M437.set()
+        if self.M438 !=0:
+            a=self.M438.amnt
+            self.M438.number+=a
+            self.M438.set()
+        if self.M439 !=0:
+            a=self.M439.amnt
+            self.M439.number+=a
+            self.M439.set()
+        if self.M440 !=0:
+            a=self.M440.amnt
+            self.M440.number+=a
+            self.M440.set()
+        if self.M441 !=0:
+            a=self.M441.amnt
+            self.M441.number+=a
+            self.M441.set()
+        if self.M442 !=0:
+            a=self.M442.amnt
+            self.M442.number+=a
+            self.M442.set()
+        if self.M443 !=0:
+            a=self.M443.amnt
+            self.M443.number+=a
+            self.M443.set()
+        if self.M444 !=0:
+            a=self.M444.amnt
+            self.M444.number+=a
+            self.M444.set()
+        if self.M445 !=0:
+            a=self.M445.amnt
+            self.M445.number+=a
+            self.M445.set()
+        if self.M446 !=0:
+            a=self.M446.amnt
+            self.M446.number+=a
+            self.M446.set()
+        if self.M447 !=0:
+            a=self.M447.amnt
+            self.M447.number+=a
+            self.M447.set()
+        if self.M448 !=0:
+            a=self.M448.amnt
+            self.M448.number+=a
+            self.M448.set()
+        if self.M449 !=0:
+            a=self.M449.amnt
+            self.M449.number+=a
+            self.M449.set()
+        if self.M450 !=0:
+            a=self.M450.amnt
+            self.M450.number+=a
+            self.M450.set()
+        if self.M451 !=0:
+            a=self.M451.amnt
+            self.M451.number+=a
+            self.M451.set()
+        if self.M452 !=0:
+            a=self.M452.amnt
+            self.M452.number+=a
+            self.M452.set()
+        if self.M453 !=0:
+            a=self.M453.amnt
+            self.M453.number+=a
+            self.M453.set()
+        if self.M454 !=0:
+            a=self.M454.amnt
+            self.M454.number+=a
+            self.M454.set()
+        if self.M455 !=0:
+            a=self.M455.amnt
+            self.M455.number+=a
+            self.M455.set()
+        if self.M456 !=0:
+            a=self.M456.amnt
+            self.M456.number+=a
+            self.M456.set()
+        if self.M457 !=0:
+            a=self.M457.amnt
+            self.M457.number+=a
+            self.M457.set()
+        if self.M458 !=0:
+            a=self.M458.amnt
+            self.M458.number+=a
+            self.M458.set()
+        if self.M459 !=0:
+            a=self.M459.amnt
+            self.M459.number+=a
+            self.M459.set()
+        if self.M460 !=0:
+            a=self.M460.amnt
+            self.M460.number+=a
+            self.M460.set()
+        if self.M461 !=0:
+            a=self.M461.amnt
+            self.M461.number+=a
+            self.M461.set()
+        if self.M462 !=0:
+            a=self.M462.amnt
+            self.M462.number+=a
+            self.M462.set()
+        if self.M463 !=0:
+            a=self.M463.amnt
+            self.M463.number+=a
+            self.M463.set()
+        if self.M464 !=0:
+            a=self.M464.amnt
+            self.M464.number+=a
+            self.M464.set()
+        if self.M465 !=0:
+            a=self.M465.amnt
+            self.M465.number+=a
+            self.M465.set()
+        if self.M466 !=0:
+            a=self.M466.amnt
+            self.M466.number+=a
+            self.M466.set()
+        if self.M467 !=0:
+            a=self.M467.amnt
+            self.M467.number+=a
+            self.M467.set()
+        if self.M468 !=0:
+            a=self.M468.amnt
+            self.M468.number+=a
+            self.M468.set()
+        if self.M469 !=0:
+            a=self.M469.amnt
+            self.M469.number+=a
+            self.M469.set()
+        if self.M470 !=0:
+            a=self.M470.amnt
+            self.M470.number+=a
+            self.M470.set()
+        if self.M471 !=0:
+            a=self.M471.amnt
+            self.M471.number+=a
+            self.M471.set()
+        if self.M472 !=0:
+            a=self.M472.amnt
+            self.M472.number+=a
+            self.M472.set()
+        if self.M473 !=0:
+            a=self.M473.amnt
+            self.M473.number+=a
+            self.M473.set()
+        if self.M474 !=0:
+            a=self.M474.amnt
+            self.M474.number+=a
+            self.M474.set()
+        if self.M475 !=0:
+            a=self.M475.amnt
+            self.M475.number+=a
+            self.M475.set()
+        if self.M476 !=0:
+            a=self.M476.amnt
+            self.M476.number+=a
+            self.M476.set()
+        if self.M477 !=0:
+            a=self.M477.amnt
+            self.M477.number+=a
+            self.M477.set()
+        if self.M478 !=0:
+            a=self.M478.amnt
+            self.M478.number+=a
+            self.M478.set()
+        if self.M479 !=0:
+            a=self.M479.amnt
+            self.M479.number+=a
+            self.M479.set()
+        if self.M480 !=0:
+            a=self.M480.amnt
+            self.M480.number+=a
+            self.M480.set()
+        if self.M481 !=0:
+            a=self.M481.amnt
+            self.M481.number+=a
+            self.M481.set()
+        if self.M482 !=0:
+            a=self.M482.amnt
+            self.M482.number+=a
+            self.M482.set()
+        if self.M483 !=0:
+            a=self.M483.amnt
+            self.M483.number+=a
+            self.M483.set()
+        if self.M484 !=0:
+            a=self.M484.amnt
+            self.M484.number+=a
+            self.M484.set()
+        if self.M485 !=0:
+            a=self.M485.amnt
+            self.M485.number+=a
+            self.M485.set()
+        if self.M486 !=0:
+            a=self.M486.amnt
+            self.M486.number+=a
+            self.M486.set()
+        if self.M487 !=0:
+            a=self.M487.amnt
+            self.M487.number+=a
+            self.M487.set()
+        if self.M488 !=0:
+            a=self.M488.amnt
+            self.M488.number+=a
+            self.M488.set()
+        if self.M489 !=0:
+            a=self.M489.amnt
+            self.M489.number+=a
+            self.M489.set()
+        if self.M490 !=0:
+            a=self.M490.amnt
+            self.M490.number+=a
+            self.M490.set()
+        if self.M491 !=0:
+            a=self.M491.amnt
+            self.M491.number+=a
+            self.M491.set()
+        if self.M492 !=0:
+            a=self.M492.amnt
+            self.M492.number+=a
+            self.M492.set()
+        if self.M493 !=0:
+            a=self.M493.amnt
+            self.M493.number+=a
+            self.M493.set()
+        if self.M494 !=0:
+            a=self.M494.amnt
+            self.M494.number+=a
+            self.M494.set()
+        if self.M495 !=0:
+            a=self.M495.amnt
+            self.M495.number+=a
+            self.M495.set()
+        if self.M496 !=0:
+            a=self.M496.amnt
+            self.M496.number+=a
+            self.M496.set()
+        if self.M497 !=0:
+            a=self.M497.amnt
+            self.M497.number+=a
+            self.M497.set()
+        if self.M498 !=0:
+            a=self.M498.amnt
+            self.M498.number+=a
+            self.M498.set()
+        if self.M499 !=0:
+            a=self.M499.amnt
+            self.M499.number+=a
+            self.M499.set()
+        if self.M500 !=0:
+            a=self.M500.amnt
+            self.M500.number+=a
+            self.M500.set()
+        if self.M501 !=0:
+            a=self.M501.amnt
+            self.M501.number+=a
+            self.M501.set()
+        if self.M502 !=0:
+            a=self.M502.amnt
+            self.M502.number+=a
+            self.M502.set()
+        if self.M503 !=0:
+            a=self.M503.amnt
+            self.M503.number+=a
+            self.M503.set()
+        if self.M504 !=0:
+            a=self.M504.amnt
+            self.M504.number+=a
+            self.M504.set()
+        if self.M505 !=0:
+            a=self.M505.amnt
+            self.M505.number+=a
+            self.M505.set()
+        if self.M506 !=0:
+            a=self.M506.amnt
+            self.M506.number+=a
+            self.M506.set()
+        if self.M507 !=0:
+            a=self.M507.amnt
+            self.M507.number+=a
+            self.M507.set()
+        if self.M508 !=0:
+            a=self.M508.amnt
+            self.M508.number+=a
+            self.M508.set()
+        if self.M509 !=0:
+            a=self.M509.amnt
+            self.M509.number+=a
+            self.M509.set()
+        if self.M510 !=0:
+            a=self.M510.amnt
+            self.M510.number+=a
+            self.M510.set()
+        if self.M511 !=0:
+            a=self.M511.amnt
+            self.M511.number+=a
+            self.M511.set()
+        if self.M512 !=0:
+            a=self.M512.amnt
+            self.M512.number+=a
+            self.M512.set()
+        if self.M513 !=0:
+            a=self.M513.amnt
+            self.M513.number+=a
+            self.M513.set()
+        if self.M514 !=0:
+            a=self.M514.amnt
+            self.M514.number+=a
+            self.M514.set()
+        if self.M515 !=0:
+            a=self.M515.amnt
+            self.M515.number+=a
+            self.M515.set()
+        if self.M516 !=0:
+            a=self.M516.amnt
+            self.M516.number+=a
+            self.M516.set()
+        if self.M517 !=0:
+            a=self.M517.amnt
+            self.M517.number+=a
+            self.M517.set()
+        if self.M518 !=0:
+            a=self.M518.amnt
+            self.M518.number+=a
+            self.M518.set()
+        if self.M519 !=0:
+            a=self.M519.amnt
+            self.M519.number+=a
+            self.M519.set()
+        if self.M520 !=0:
+            a=self.M520.amnt
+            self.M520.number+=a
+            self.M520.set()
+        if self.M521 !=0:
+            a=self.M521.amnt
+            self.M521.number+=a
+            self.M521.set()
+        if self.M522 !=0:
+            a=self.M522.amnt
+            self.M522.number+=a
+            self.M522.set()
+        if self.M523 !=0:
+            a=self.M523.amnt
+            self.M523.number+=a
+            self.M523.set()
+        if self.M524 !=0:
+            a=self.M524.amnt
+            self.M524.number+=a
+            self.M524.set()
+        if self.M525 !=0:
+            a=self.M525.amnt
+            self.M525.number+=a
+            self.M525.set()
+        if self.M526 !=0:
+            a=self.M526.amnt
+            self.M526.number+=a
+            self.M526.set()
+        if self.M527 !=0:
+            a=self.M527.amnt
+            self.M527.number+=a
+            self.M527.set()
+        if self.M528 !=0:
+            a=self.M528.amnt
+            self.M528.number+=a
+            self.M528.set()
+        if self.M529 !=0:
+            a=self.M529.amnt
+            self.M529.number+=a
+            self.M529.set()
+        if self.M530 !=0:
+            a=self.M530.amnt
+            self.M530.number+=a
+            self.M530.set()
+        if self.M531 !=0:
+            a=self.M531.amnt
+            self.M531.number+=a
+            self.M531.set()
+        if self.M532 !=0:
+            a=self.M532.amnt
+            self.M532.number+=a
+            self.M532.set()
+        if self.M533 !=0:
+            a=self.M533.amnt
+            self.M533.number+=a
+            self.M533.set()
+        if self.M534 !=0:
+            a=self.M534.amnt
+            self.M534.number+=a
+            self.M534.set()
+        if self.M535 !=0:
+            a=self.M535.amnt
+            self.M535.number+=a
+            self.M535.set()
+        if self.M536 !=0:
+            a=self.M536.amnt
+            self.M536.number+=a
+            self.M536.set()
+        if self.M537 !=0:
+            a=self.M537.amnt
+            self.M537.number+=a
+            self.M537.set()
+        if self.M538 !=0:
+            a=self.M538.amnt
+            self.M538.number+=a
+            self.M538.set()
+        if self.M539 !=0:
+            a=self.M539.amnt
+            self.M539.number+=a
+            self.M539.set()
+        if self.M540 !=0:
+            a=self.M540.amnt
+            self.M540.number+=a
+            self.M540.set()
+        if self.M541 !=0:
+            a=self.M541.amnt
+            self.M541.number+=a
+            self.M541.set()
+        if self.M542 !=0:
+            a=self.M542.amnt
+            self.M542.number+=a
+            self.M542.set()
+        if self.M543 !=0:
+            a=self.M543.amnt
+            self.M543.number+=a
+            self.M543.set()
+        if self.M544 !=0:
+            a=self.M544.amnt
+            self.M544.number+=a
+            self.M544.set()
+        if self.M545 !=0:
+            a=self.M545.amnt
+            self.M545.number+=a
+            self.M545.set()
+        if self.M546 !=0:
+            a=self.M546.amnt
+            self.M546.number+=a
+            self.M546.set()
+        if self.M547 !=0:
+            a=self.M547.amnt
+            self.M547.number+=a
+            self.M547.set()
+        if self.M548 !=0:
+            a=self.M548.amnt
+            self.M548.number+=a
+            self.M548.set()
+        if self.M549 !=0:
+            a=self.M549.amnt
+            self.M549.number+=a
+            self.M549.set()
+        if self.M550 !=0:
+            a=self.M550.amnt
+            self.M550.number+=a
+            self.M550.set()
+        if self.M551 !=0:
+            a=self.M551.amnt
+            self.M551.number+=a
+            self.M551.set()
+        if self.M552 !=0:
+            a=self.M552.amnt
+            self.M552.number+=a
+            self.M552.set()
+        if self.M553 !=0:
+            a=self.M553.amnt
+            self.M553.number+=a
+            self.M553.set()
+        if self.M554 !=0:
+            a=self.M554.amnt
+            self.M554.number+=a
+            self.M554.set()
+        if self.M555 !=0:
+            a=self.M555.amnt
+            self.M555.number+=a
+            self.M555.set()
+        if self.M556 !=0:
+            a=self.M556.amnt
+            self.M556.number+=a
+            self.M556.set()
+        if self.M557 !=0:
+            a=self.M557.amnt
+            self.M557.number+=a
+            self.M557.set()
+        if self.M558 !=0:
+            a=self.M558.amnt
+            self.M558.number+=a
+            self.M558.set()
+        if self.M559 !=0:
+            a=self.M559.amnt
+            self.M559.number+=a
+            self.M559.set()
+        if self.M560 !=0:
+            a=self.M560.amnt
+            self.M560.number+=a
+            self.M560.set()
+        if self.M561 !=0:
+            a=self.M561.amnt
+            self.M561.number+=a
+            self.M561.set()
+        if self.M562 !=0:
+            a=self.M562.amnt
+            self.M562.number+=a
+            self.M562.set()
+        if self.M563 !=0:
+            a=self.M563.amnt
+            self.M563.number+=a
+            self.M563.set()
+        if self.M564 !=0:
+            a=self.M564.amnt
+            self.M564.number+=a
+            self.M564.set()
+        if self.M565 !=0:
+            a=self.M565.amnt
+            self.M565.number+=a
+            self.M565.set()
+        if self.M566 !=0:
+            a=self.M566.amnt
+            self.M566.number+=a
+            self.M566.set()
+        if self.M567 !=0:
+            a=self.M567.amnt
+            self.M567.number+=a
+            self.M567.set()
+        if self.M568 !=0:
+            a=self.M568.amnt
+            self.M568.number+=a
+            self.M568.set()
+        if self.M569 !=0:
+            a=self.M569.amnt
+            self.M569.number+=a
+            self.M569.set()
+        if self.M570 !=0:
+            a=self.M570.amnt
+            self.M570.number+=a
+            self.M570.set()
+        if self.M571 !=0:
+            a=self.M571.amnt
+            self.M571.number+=a
+            self.M571.set()
+        if self.M572 !=0:
+            a=self.M572.amnt
+            self.M572.number+=a
+            self.M572.set()
+        if self.M573 !=0:
+            a=self.M573.amnt
+            self.M573.number+=a
+            self.M573.set()
+        if self.M574 !=0:
+            a=self.M574.amnt
+            self.M574.number+=a
+            self.M574.set()
+        if self.M575 !=0:
+            a=self.M575.amnt
+            self.M575.number+=a
+            self.M575.set()
+        if self.M576 !=0:
+            a=self.M576.amnt
+            self.M576.number+=a
+            self.M576.set()
+        if self.M577 !=0:
+            a=self.M577.amnt
+            self.M577.number+=a
+            self.M577.set()
+        if self.M578 !=0:
+            a=self.M578.amnt
+            self.M578.number+=a
+            self.M578.set()
+        if self.M579 !=0:
+            a=self.M579.amnt
+            self.M579.number+=a
+            self.M579.set()
+        if self.M580 !=0:
+            a=self.M580.amnt
+            self.M580.number+=a
+            self.M580.set()
+        if self.M581 !=0:
+            a=self.M581.amnt
+            self.M581.number+=a
+            self.M581.set()
+        if self.M582 !=0:
+            a=self.M582.amnt
+            self.M582.number+=a
+            self.M582.set()
+        if self.M583 !=0:
+            a=self.M583.amnt
+            self.M583.number+=a
+            self.M583.set()
+        if self.M584 !=0:
+            a=self.M584.amnt
+            self.M584.number+=a
+            self.M584.set()
+        if self.M585 !=0:
+            a=self.M585.amnt
+            self.M585.number+=a
+            self.M585.set()
+        if self.M586 !=0:
+            a=self.M586.amnt
+            self.M586.number+=a
+            self.M586.set()
+        if self.M587 !=0:
+            a=self.M587.amnt
+            self.M587.number+=a
+            self.M587.set()
+        if self.M588 !=0:
+            a=self.M588.amnt
+            self.M588.number+=a
+            self.M588.set()
+        if self.M589 !=0:
+            a=self.M589.amnt
+            self.M589.number+=a
+            self.M589.set()
+        if self.M590 !=0:
+            a=self.M590.amnt
+            self.M590.number+=a
+            self.M590.set()
+        if self.M591 !=0:
+            a=self.M591.amnt
+            self.M591.number+=a
+            self.M591.set()
+        if self.M592 !=0:
+            a=self.M592.amnt
+            self.M592.number+=a
+            self.M592.set()
+        if self.M593 !=0:
+            a=self.M593.amnt
+            self.M593.number+=a
+            self.M593.set()
+        if self.M594 !=0:
+            a=self.M594.amnt
+            self.M594.number+=a
+            self.M594.set()
+        if self.M595 !=0:
+            a=self.M595.amnt
+            self.M595.number+=a
+            self.M595.set()
+        if self.M596 !=0:
+            a=self.M596.amnt
+            self.M596.number+=a
+            self.M596.set()
+        if self.M597 !=0:
+            a=self.M597.amnt
+            self.M597.number+=a
+            self.M597.set()
+        if self.M598 !=0:
+            a=self.M598.amnt
+            self.M598.number+=a
+            self.M598.set()
+        if self.M599 !=0:
+            a=self.M599.amnt
+            self.M599.number+=a
+            self.M599.set()
+        if self.M600 !=0:
+            a=self.M600.amnt
+            self.M600.number+=a
+            self.M600.set()
+        if self.M601 !=0:
+            a=self.M601.amnt
+            self.M601.number+=a
+            self.M601.set()
+        if self.M602 !=0:
+            a=self.M602.amnt
+            self.M602.number+=a
+            self.M602.set()
+        if self.M603 !=0:
+            a=self.M603.amnt
+            self.M603.number+=a
+            self.M603.set()
+        if self.M604 !=0:
+            a=self.M604.amnt
+            self.M604.number+=a
+            self.M604.set()
+        if self.M605 !=0:
+            a=self.M605.amnt
+            self.M605.number+=a
+            self.M605.set()
+        if self.M606 !=0:
+            a=self.M606.amnt
+            self.M606.number+=a
+            self.M606.set()
+        if self.M607 !=0:
+            a=self.M607.amnt
+            self.M607.number+=a
+            self.M607.set()
+        if self.M608 !=0:
+            a=self.M608.amnt
+            self.M608.number+=a
+            self.M608.set()
+        if self.M609 !=0:
+            a=self.M609.amnt
+            self.M609.number+=a
+            self.M609.set()
+        if self.M610 !=0:
+            a=self.M610.amnt
+            self.M610.number+=a
+            self.M610.set()
+        if self.M611 !=0:
+            a=self.M611.amnt
+            self.M611.number+=a
+            self.M611.set()
+        if self.M612 !=0:
+            a=self.M612.amnt
+            self.M612.number+=a
+            self.M612.set()
+        if self.M613 !=0:
+            a=self.M613.amnt
+            self.M613.number+=a
+            self.M613.set()
+        if self.M614 !=0:
+            a=self.M614.amnt
+            self.M614.number+=a
+            self.M614.set()
+        if self.M615 !=0:
+            a=self.M615.amnt
+            self.M615.number+=a
+            self.M615.set()
+        if self.M616 !=0:
+            a=self.M616.amnt
+            self.M616.number+=a
+            self.M616.set()
+        if self.M617 !=0:
+            a=self.M617.amnt
+            self.M617.number+=a
+            self.M617.set()
+        if self.M618 !=0:
+            a=self.M618.amnt
+            self.M618.number+=a
+            self.M618.set()
+        if self.M619 !=0:
+            a=self.M619.amnt
+            self.M619.number+=a
+            self.M619.set()
+        if self.M620 !=0:
+            a=self.M620.amnt
+            self.M620.number+=a
+            self.M620.set()
+        if self.M621 !=0:
+            a=self.M621.amnt
+            self.M621.number+=a
+            self.M621.set()
+        if self.M622 !=0:
+            a=self.M622.amnt
+            self.M622.number+=a
+            self.M622.set()
+        if self.M623 !=0:
+            a=self.M623.amnt
+            self.M623.number+=a
+            self.M623.set()
+        if self.M624 !=0:
+            a=self.M624.amnt
+            self.M624.number+=a
+            self.M624.set()
+        if self.M625 !=0:
+            a=self.M625.amnt
+            self.M625.number+=a
+            self.M625.set()
+        if self.M626 !=0:
+            a=self.M626.amnt
+            self.M626.number+=a
+            self.M626.set()
+        if self.M627 !=0:
+            a=self.M627.amnt
+            self.M627.number+=a
+            self.M627.set()
+        if self.M628 !=0:
+            a=self.M628.amnt
+            self.M628.number+=a
+            self.M628.set()
+        if self.M629 !=0:
+            a=self.M629.amnt
+            self.M629.number+=a
+            self.M629.set()
+        if self.M630 !=0:
+            a=self.M630.amnt
+            self.M630.number+=a
+            self.M630.set()
+        if self.M631 !=0:
+            a=self.M631.amnt
+            self.M631.number+=a
+            self.M631.set()
+        if self.M632 !=0:
+            a=self.M632.amnt
+            self.M632.number+=a
+            self.M632.set()
+        if self.M633 !=0:
+            a=self.M633.amnt
+            self.M633.number+=a
+            self.M633.set()
+        if self.M634 !=0:
+            a=self.M634.amnt
+            self.M634.number+=a
+            self.M634.set()
+        if self.M635 !=0:
+            a=self.M635.amnt
+            self.M635.number+=a
+            self.M635.set()
+        if self.M636 !=0:
+            a=self.M636.amnt
+            self.M636.number+=a
+            self.M636.set()
+        if self.M637 !=0:
+            a=self.M637.amnt
+            self.M637.number+=a
+            self.M637.set()
+        if self.M638 !=0:
+            a=self.M638.amnt
+            self.M638.number+=a
+            self.M638.set()
+        if self.M639 !=0:
+            a=self.M639.amnt
+            self.M639.number+=a
+            self.M639.set()
+        if self.M640 !=0:
+            a=self.M640.amnt
+            self.M640.number+=a
+            self.M640.set()
+        if self.M641 !=0:
+            a=self.M641.amnt
+            self.M641.number+=a
+            self.M641.set()
+        if self.M642 !=0:
+            a=self.M642.amnt
+            self.M642.number+=a
+            self.M642.set()
+        if self.M643 !=0:
+            a=self.M643.amnt
+            self.M643.number+=a
+            self.M643.set()
+        if self.M644 !=0:
+            a=self.M644.amnt
+            self.M644.number+=a
+            self.M644.set()
+        if self.M645 !=0:
+            a=self.M645.amnt
+            self.M645.number+=a
+            self.M645.set()
+        if self.M646 !=0:
+            a=self.M646.amnt
+            self.M646.number+=a
+            self.M646.set()
+        if self.M647 !=0:
+            a=self.M647.amnt
+            self.M647.number+=a
+            self.M647.set()
+        if self.M648 !=0:
+            a=self.M648.amnt
+            self.M648.number+=a
+            self.M648.set()
+        if self.M649 !=0:
+            a=self.M649.amnt
+            self.M649.number+=a
+            self.M649.set()
+        if self.M650 !=0:
+            a=self.M650.amnt
+            self.M650.number+=a
+            self.M650.set()
+        if self.M651 !=0:
+            a=self.M651.amnt
+            self.M651.number+=a
+            self.M651.set()
+        if self.M652 !=0:
+            a=self.M652.amnt
+            self.M652.number+=a
+            self.M652.set()
+        if self.M653 !=0:
+            a=self.M653.amnt
+            self.M653.number+=a
+            self.M653.set()
+        if self.M654 !=0:
+            a=self.M654.amnt
+            self.M654.number+=a
+            self.M654.set()
+        if self.M655 !=0:
+            a=self.M655.amnt
+            self.M655.number+=a
+            self.M655.set()
+        if self.M656 !=0:
+            a=self.M656.amnt
+            self.M656.number+=a
+            self.M656.set()
+        if self.M657 !=0:
+            a=self.M657.amnt
+            self.M657.number+=a
+            self.M657.set()
+        if self.M658 !=0:
+            a=self.M658.amnt
+            self.M658.number+=a
+            self.M658.set()
+        if self.M659 !=0:
+            a=self.M659.amnt
+            self.M659.number+=a
+            self.M659.set()
+        if self.M660 !=0:
+            a=self.M660.amnt
+            self.M660.number+=a
+            self.M660.set()
+        if self.M661 !=0:
+            a=self.M661.amnt
+            self.M661.number+=a
+            self.M661.set()
+        if self.M662 !=0:
+            a=self.M662.amnt
+            self.M662.number+=a
+            self.M662.set()
+        if self.M663 !=0:
+            a=self.M663.amnt
+            self.M663.number+=a
+            self.M663.set()
+        if self.M664 !=0:
+            a=self.M664.amnt
+            self.M664.number+=a
+            self.M664.set()
+        if self.M665 !=0:
+            a=self.M665.amnt
+            self.M665.number+=a
+            self.M665.set()
+        if self.M666 !=0:
+            a=self.M666.amnt
+            self.M666.number+=a
+            self.M666.set()
+        if self.M667 !=0:
+            a=self.M667.amnt
+            self.M667.number+=a
+            self.M667.set()
+        if self.M668 !=0:
+            a=self.M668.amnt
+            self.M668.number+=a
+            self.M668.set()
+        if self.M669 !=0:
+            a=self.M669.amnt
+            self.M669.number+=a
+            self.M669.set()
+        if self.M670 !=0:
+            a=self.M670.amnt
+            self.M670.number+=a
+            self.M670.set()
+        if self.M671 !=0:
+            a=self.M671.amnt
+            self.M671.number+=a
+            self.M671.set()
+        if self.M672 !=0:
+            a=self.M672.amnt
+            self.M672.number+=a
+            self.M672.set()
+        if self.M673 !=0:
+            a=self.M673.amnt
+            self.M673.number+=a
+            self.M673.set()
+        if self.M674 !=0:
+            a=self.M674.amnt
+            self.M674.number+=a
+            self.M674.set()
+        if self.M675 !=0:
+            a=self.M675.amnt
+            self.M675.number+=a
+            self.M675.set()
+        if self.M676 !=0:
+            a=self.M676.amnt
+            self.M676.number+=a
+            self.M676.set()
+        if self.M677 !=0:
+            a=self.M677.amnt
+            self.M677.number+=a
+            self.M677.set()
+        if self.M678 !=0:
+            a=self.M678.amnt
+            self.M678.number+=a
+            self.M678.set()
+        if self.M679 !=0:
+            a=self.M679.amnt
+            self.M679.number+=a
+            self.M679.set()
+        if self.M680 !=0:
+            a=self.M680.amnt
+            self.M680.number+=a
+            self.M680.set()
+        if self.M681 !=0:
+            a=self.M681.amnt
+            self.M681.number+=a
+            self.M681.set()
+        if self.M682 !=0:
+            a=self.M682.amnt
+            self.M682.number+=a
+            self.M682.set()
+        if self.M683 !=0:
+            a=self.M683.amnt
+            self.M683.number+=a
+            self.M683.set()
+        if self.M684 !=0:
+            a=self.M684.amnt
+            self.M684.number+=a
+            self.M684.set()
+        if self.M685 !=0:
+            a=self.M685.amnt
+            self.M685.number+=a
+            self.M685.set()
+        if self.M686 !=0:
+            a=self.M686.amnt
+            self.M686.number+=a
+            self.M686.set()
+        if self.M687 !=0:
+            a=self.M687.amnt
+            self.M687.number+=a
+            self.M687.set()
+        if self.M688 !=0:
+            a=self.M688.amnt
+            self.M688.number+=a
+            self.M688.set()
+        if self.M689 !=0:
+            a=self.M689.amnt
+            self.M689.number+=a
+            self.M689.set()
+        if self.M690 !=0:
+            a=self.M690.amnt
+            self.M690.number+=a
+            self.M690.set()
+        if self.M691 !=0:
+            a=self.M691.amnt
+            self.M691.number+=a
+            self.M691.set()
+        if self.M692 !=0:
+            a=self.M692.amnt
+            self.M692.number+=a
+            self.M692.set()
+        if self.M693 !=0:
+            a=self.M693.amnt
+            self.M693.number+=a
+            self.M693.set()
+        if self.M694 !=0:
+            a=self.M694.amnt
+            self.M694.number+=a
+            self.M694.set()
+        if self.M695 !=0:
+            a=self.M695.amnt
+            self.M695.number+=a
+            self.M695.set()
+        if self.M696 !=0:
+            a=self.M696.amnt
+            self.M696.number+=a
+            self.M696.set()
+        if self.M697 !=0:
+            a=self.M697.amnt
+            self.M697.number+=a
+            self.M697.set()
+        if self.M698 !=0:
+            a=self.M698.amnt
+            self.M698.number+=a
+            self.M698.set()
+        if self.M699 !=0:
+            a=self.M699.amnt
+            self.M699.number+=a
+            self.M699.set()
+        if self.M700 !=0:
+            a=self.M700.amnt
+            self.M700.number+=a
+            self.M700.set()
+        if self.M701 !=0:
+            a=self.M701.amnt
+            self.M701.number+=a
+            self.M701.set()
+        if self.M702 !=0:
+            a=self.M702.amnt
+            self.M702.number+=a
+            self.M702.set()
+        if self.M703 !=0:
+            a=self.M703.amnt
+            self.M703.number+=a
+            self.M703.set()
+        if self.M704 !=0:
+            a=self.M704.amnt
+            self.M704.number+=a
+            self.M704.set()
+        if self.M705 !=0:
+            a=self.M705.amnt
+            self.M705.number+=a
+            self.M705.set()
+        if self.M706 !=0:
+            a=self.M706.amnt
+            self.M706.number+=a
+            self.M706.set()
+        if self.M707 !=0:
+            a=self.M707.amnt
+            self.M707.number+=a
+            self.M707.set()
+        if self.M708 !=0:
+            a=self.M708.amnt
+            self.M708.number+=a
+            self.M708.set()
+        if self.M709 !=0:
+            a=self.M709.amnt
+            self.M709.number+=a
+            self.M709.set()
+        if self.M710 !=0:
+            a=self.M710.amnt
+            self.M710.number+=a
+            self.M710.set()
+        if self.M711 !=0:
+            a=self.M711.amnt
+            self.M711.number+=a
+            self.M711.set()
+        if self.M712 !=0:
+            a=self.M712.amnt
+            self.M712.number+=a
+            self.M712.set()
+        if self.M713 !=0:
+            a=self.M713.amnt
+            self.M713.number+=a
+            self.M713.set()
+        if self.M714 !=0:
+            a=self.M714.amnt
+            self.M714.number+=a
+            self.M714.set()
+        if self.M715 !=0:
+            a=self.M715.amnt
+            self.M715.number+=a
+            self.M715.set()
+        if self.M716 !=0:
+            a=self.M716.amnt
+            self.M716.number+=a
+            self.M716.set()
+        if self.M717 !=0:
+            a=self.M717.amnt
+            self.M717.number+=a
+            self.M717.set()
+        if self.M718 !=0:
+            a=self.M718.amnt
+            self.M718.number+=a
+            self.M718.set()
+        if self.M719 !=0:
+            a=self.M719.amnt
+            self.M719.number+=a
+            self.M719.set()
+        if self.M720 !=0:
+            a=self.M720.amnt
+            self.M720.number+=a
+            self.M720.set()
+        if self.M721 !=0:
+            a=self.M721.amnt
+            self.M721.number+=a
+            self.M721.set()
+        if self.M722 !=0:
+            a=self.M722.amnt
+            self.M722.number+=a
+            self.M722.set()
+        if self.M723 !=0:
+            a=self.M723.amnt
+            self.M723.number+=a
+            self.M723.set()
+        if self.M724 !=0:
+            a=self.M724.amnt
+            self.M724.number+=a
+            self.M724.set()
+        if self.M725 !=0:
+            a=self.M725.amnt
+            self.M725.number+=a
+            self.M725.set()
+        if self.M726 !=0:
+            a=self.M726.amnt
+            self.M726.number+=a
+            self.M726.set()
+        if self.M727 !=0:
+            a=self.M727.amnt
+            self.M727.number+=a
+            self.M727.set()
+        if self.M728 !=0:
+            a=self.M728.amnt
+            self.M728.number+=a
+            self.M728.set()
+        if self.M729 !=0:
+            a=self.M729.amnt
+            self.M729.number+=a
+            self.M729.set()
+        if self.M730 !=0:
+            a=self.M730.amnt
+            self.M730.number+=a
+            self.M730.set()
+        if self.M731 !=0:
+            a=self.M731.amnt
+            self.M731.number+=a
+            self.M731.set()
+        if self.M732 !=0:
+            a=self.M732.amnt
+            self.M732.number+=a
+            self.M732.set()
+        if self.M733 !=0:
+            a=self.M733.amnt
+            self.M733.number+=a
+            self.M733.set()
+        if self.M734 !=0:
+            a=self.M734.amnt
+            self.M734.number+=a
+            self.M734.set()
+        if self.M735 !=0:
+            a=self.M735.amnt
+            self.M735.number+=a
+            self.M735.set()
+        if self.M736 !=0:
+            a=self.M736.amnt
+            self.M736.number+=a
+            self.M736.set()
+        if self.M737 !=0:
+            a=self.M737.amnt
+            self.M737.number+=a
+            self.M737.set()
+        if self.M738 !=0:
+            a=self.M738.amnt
+            self.M738.number+=a
+            self.M738.set()
+        if self.M739 !=0:
+            a=self.M739.amnt
+            self.M739.number+=a
+            self.M739.set()
+        if self.M740 !=0:
+            a=self.M740.amnt
+            self.M740.number+=a
+            self.M740.set()
+        if self.M741 !=0:
+            a=self.M741.amnt
+            self.M741.number+=a
+            self.M741.set()
+        if self.M742 !=0:
+            a=self.M742.amnt
+            self.M742.number+=a
+            self.M742.set()
+        if self.M743 !=0:
+            a=self.M743.amnt
+            self.M743.number+=a
+            self.M743.set()
+        if self.M744 !=0:
+            a=self.M744.amnt
+            self.M744.number+=a
+            self.M744.set()
+        if self.M745 !=0:
+            a=self.M745.amnt
+            self.M745.number+=a
+            self.M745.set()
+        if self.M746 !=0:
+            a=self.M746.amnt
+            self.M746.number+=a
+            self.M746.set()
+        if self.M747 !=0:
+            a=self.M747.amnt
+            self.M747.number+=a
+            self.M747.set()
+        if self.M748 !=0:
+            a=self.M748.amnt
+            self.M748.number+=a
+            self.M748.set()
+        if self.M749 !=0:
+            a=self.M749.amnt
+            self.M749.number+=a
+            self.M749.set()
+        if self.M750 !=0:
+            a=self.M750.amnt
+            self.M750.number+=a
+            self.M750.set()
+        if self.M751 !=0:
+            a=self.M751.amnt
+            self.M751.number+=a
+            self.M751.set()
+        if self.M752 !=0:
+            a=self.M752.amnt
+            self.M752.number+=a
+            self.M752.set()
+        if self.M753 !=0:
+            a=self.M753.amnt
+            self.M753.number+=a
+            self.M753.set()
+        if self.M754 !=0:
+            a=self.M754.amnt
+            self.M754.number+=a
+            self.M754.set()
+        if self.M755 !=0:
+            a=self.M755.amnt
+            self.M755.number+=a
+            self.M755.set()
+        if self.M756 !=0:
+            a=self.M756.amnt
+            self.M756.number+=a
+            self.M756.set()
+        if self.M757 !=0:
+            a=self.M757.amnt
+            self.M757.number+=a
+            self.M757.set()
+        if self.M758 !=0:
+            a=self.M758.amnt
+            self.M758.number+=a
+            self.M758.set()
+        if self.M759 !=0:
+            a=self.M759.amnt
+            self.M759.number+=a
+            self.M759.set()
+        if self.M760 !=0:
+            a=self.M760.amnt
+            self.M760.number+=a
+            self.M760.set()
+        if self.M761 !=0:
+            a=self.M761.amnt
+            self.M761.number+=a
+            self.M761.set()
+        if self.M762 !=0:
+            a=self.M762.amnt
+            self.M762.number+=a
+            self.M762.set()
+        if self.M763 !=0:
+            a=self.M763.amnt
+            self.M763.number+=a
+            self.M763.set()
+        if self.M764 !=0:
+            a=self.M764.amnt
+            self.M764.number+=a
+            self.M764.set()
+        if self.M765 !=0:
+            a=self.M765.amnt
+            self.M765.number+=a
+            self.M765.set()
+        if self.M766 !=0:
+            a=self.M766.amnt
+            self.M766.number+=a
+            self.M766.set()
+        if self.M767 !=0:
+            a=self.M767.amnt
+            self.M767.number+=a
+            self.M767.set()
+        if self.M768 !=0:
+            a=self.M768.amnt
+            self.M768.number+=a
+            self.M768.set()
+        if self.M769 !=0:
+            a=self.M769.amnt
+            self.M769.number+=a
+            self.M769.set()
+        if self.M770 !=0:
+            a=self.M770.amnt
+            self.M770.number+=a
+            self.M770.set()
+        if self.M771 !=0:
+            a=self.M771.amnt
+            self.M771.number+=a
+            self.M771.set()
+        if self.M772 !=0:
+            a=self.M772.amnt
+            self.M772.number+=a
+            self.M772.set()
+        if self.M773 !=0:
+            a=self.M773.amnt
+            self.M773.number+=a
+            self.M773.set()
+        if self.M774 !=0:
+            a=self.M774.amnt
+            self.M774.number+=a
+            self.M774.set()
+        if self.M775 !=0:
+            a=self.M775.amnt
+            self.M775.number+=a
+            self.M775.set()
+        if self.M776 !=0:
+            a=self.M776.amnt
+            self.M776.number+=a
+            self.M776.set()
+        if self.M777 !=0:
+            a=self.M777.amnt
+            self.M777.number+=a
+            self.M777.set()
+        if self.M778 !=0:
+            a=self.M778.amnt
+            self.M778.number+=a
+            self.M778.set()
+        if self.M779 !=0:
+            a=self.M779.amnt
+            self.M779.number+=a
+            self.M779.set()
+        if self.M780 !=0:
+            a=self.M780.amnt
+            self.M780.number+=a
+            self.M780.set()
+        if self.M781 !=0:
+            a=self.M781.amnt
+            self.M781.number+=a
+            self.M781.set()
+        if self.M782 !=0:
+            a=self.M782.amnt
+            self.M782.number+=a
+            self.M782.set()
+        if self.M783 !=0:
+            a=self.M783.amnt
+            self.M783.number+=a
+            self.M783.set()
+        if self.M784 !=0:
+            a=self.M784.amnt
+            self.M784.number+=a
+            self.M784.set()
+        if self.M785 !=0:
+            a=self.M785.amnt
+            self.M785.number+=a
+            self.M785.set()
+        if self.M786 !=0:
+            a=self.M786.amnt
+            self.M786.number+=a
+            self.M786.set()
+        if self.M787 !=0:
+            a=self.M787.amnt
+            self.M787.number+=a
+            self.M787.set()
+        if self.M788 !=0:
+            a=self.M788.amnt
+            self.M788.number+=a
+            self.M788.set()
+        if self.M789 !=0:
+            a=self.M789.amnt
+            self.M789.number+=a
+            self.M789.set()
+        if self.M790 !=0:
+            a=self.M790.amnt
+            self.M790.number+=a
+            self.M790.set()
+        if self.M791 !=0:
+            a=self.M791.amnt
+            self.M791.number+=a
+            self.M791.set()
+        if self.M792 !=0:
+            a=self.M792.amnt
+            self.M792.number+=a
+            self.M792.set()
+        if self.M793 !=0:
+            a=self.M793.amnt
+            self.M793.number+=a
+            self.M793.set()
+        if self.M794 !=0:
+            a=self.M794.amnt
+            self.M794.number+=a
+            self.M794.set()
+        if self.M795 !=0:
+            a=self.M795.amnt
+            self.M795.number+=a
+            self.M795.set()
+        if self.M796 !=0:
+            a=self.M796.amnt
+            self.M796.number+=a
+            self.M796.set()
+        if self.M797 !=0:
+            a=self.M797.amnt
+            self.M797.number+=a
+            self.M797.set()
+        if self.M798 !=0:
+            a=self.M798.amnt
+            self.M798.number+=a
+            self.M798.set()
+        if self.M799 !=0:
+            a=self.M799.amnt
+            self.M799.number+=a
+            self.M799.set()
+        if self.M800 !=0:
+            a=self.M800.amnt
+            self.M800.number+=a
+            self.M800.set()
+        if self.M801 !=0:
+            a=self.M801.amnt
+            self.M801.number+=a
+            self.M801.set()
+        if self.M802 !=0:
+            a=self.M802.amnt
+            self.M802.number+=a
+            self.M802.set()
+        if self.M803 !=0:
+            a=self.M803.amnt
+            self.M803.number+=a
+            self.M803.set()
+        if self.M804 !=0:
+            a=self.M804.amnt
+            self.M804.number+=a
+            self.M804.set()
+        if self.M805 !=0:
+            a=self.M805.amnt
+            self.M805.number+=a
+            self.M805.set()
+        if self.M806 !=0:
+            a=self.M806.amnt
+            self.M806.number+=a
+            self.M806.set()
+        if self.M807 !=0:
+            a=self.M807.amnt
+            self.M807.number+=a
+            self.M807.set()
+        if self.M808 !=0:
+            a=self.M808.amnt
+            self.M808.number+=a
+            self.M808.set()
+        if self.M809 !=0:
+            a=self.M809.amnt
+            self.M809.number+=a
+            self.M809.set()
+        if self.M810 !=0:
+            a=self.M810.amnt
+            self.M810.number+=a
+            self.M810.set()
+        if self.M811 !=0:
+            a=self.M811.amnt
+            self.M811.number+=a
+            self.M811.set()
+        if self.M812 !=0:
+            a=self.M812.amnt
+            self.M812.number+=a
+            self.M812.set()
+        if self.M813 !=0:
+            a=self.M813.amnt
+            self.M813.number+=a
+            self.M813.set()
+        if self.M814 !=0:
+            a=self.M814.amnt
+            self.M814.number+=a
+            self.M814.set()
+        if self.M815 !=0:
+            a=self.M815.amnt
+            self.M815.number+=a
+            self.M815.set()
+        if self.M816 !=0:
+            a=self.M816.amnt
+            self.M816.number+=a
+            self.M816.set()
+        if self.M817 !=0:
+            a=self.M817.amnt
+            self.M817.number+=a
+            self.M817.set()
+        if self.M818 !=0:
+            a=self.M818.amnt
+            self.M818.number+=a
+            self.M818.set()
+        if self.M819 !=0:
+            a=self.M819.amnt
+            self.M819.number+=a
+            self.M819.set()
+        if self.M820 !=0:
+            a=self.M820.amnt
+            self.M820.number+=a
+            self.M820.set()
+        if self.M821 !=0:
+            a=self.M821.amnt
+            self.M821.number+=a
+            self.M821.set()
+        if self.M822 !=0:
+            a=self.M822.amnt
+            self.M822.number+=a
+            self.M822.set()
+        if self.M823 !=0:
+            a=self.M823.amnt
+            self.M823.number+=a
+            self.M823.set()
+        if self.M824 !=0:
+            a=self.M824.amnt
+            self.M824.number+=a
+            self.M824.set()
+        if self.M825 !=0:
+            a=self.M825.amnt
+            self.M825.number+=a
+            self.M825.set()
+        if self.M826 !=0:
+            a=self.M826.amnt
+            self.M826.number+=a
+            self.M826.set()
+        if self.M827 !=0:
+            a=self.M827.amnt
+            self.M827.number+=a
+            self.M827.set()
+        if self.M828 !=0:
+            a=self.M828.amnt
+            self.M828.number+=a
+            self.M828.set()
+        if self.M829 !=0:
+            a=self.M829.amnt
+            self.M829.number+=a
+            self.M829.set()
+        if self.M830 !=0:
+            a=self.M830.amnt
+            self.M830.number+=a
+            self.M830.set()
+        if self.M831 !=0:
+            a=self.M831.amnt
+            self.M831.number+=a
+            self.M831.set()
+        if self.M832 !=0:
+            a=self.M832.amnt
+            self.M832.number+=a
+            self.M832.set()
+        if self.M833 !=0:
+            a=self.M833.amnt
+            self.M833.number+=a
+            self.M833.set()
+        if self.M834 !=0:
+            a=self.M834.amnt
+            self.M834.number+=a
+            self.M834.set()
+        if self.M835 !=0:
+            a=self.M835.amnt
+            self.M835.number+=a
+            self.M835.set()
+        if self.M836 !=0:
+            a=self.M836.amnt
+            self.M836.number+=a
+            self.M836.set()
+        if self.M837 !=0:
+            a=self.M837.amnt
+            self.M837.number+=a
+            self.M837.set()
+        if self.M838 !=0:
+            a=self.M838.amnt
+            self.M838.number+=a
+            self.M838.set()
+        if self.M839 !=0:
+            a=self.M839.amnt
+            self.M839.number+=a
+            self.M839.set()
+        if self.M840 !=0:
+            a=self.M840.amnt
+            self.M840.number+=a
+            self.M840.set()
+        if self.M841 !=0:
+            a=self.M841.amnt
+            self.M841.number+=a
+            self.M841.set()
+        if self.M842 !=0:
+            a=self.M842.amnt
+            self.M842.number+=a
+            self.M842.set()
+        if self.M843 !=0:
+            a=self.M843.amnt
+            self.M843.number+=a
+            self.M843.set()
+        if self.M844 !=0:
+            a=self.M844.amnt
+            self.M844.number+=a
+            self.M844.set()
+        if self.M845 !=0:
+            a=self.M845.amnt
+            self.M845.number+=a
+            self.M845.set()
+        if self.M846 !=0:
+            a=self.M846.amnt
+            self.M846.number+=a
+            self.M846.set()
+        if self.M847 !=0:
+            a=self.M847.amnt
+            self.M847.number+=a
+            self.M847.set()
+        if self.M848 !=0:
+            a=self.M848.amnt
+            self.M848.number+=a
+            self.M848.set()
+        if self.M849 !=0:
+            a=self.M849.amnt
+            self.M849.number+=a
+            self.M849.set()
+        if self.M850 !=0:
+            a=self.M850.amnt
+            self.M850.number+=a
+            self.M850.set()
+        if self.M851 !=0:
+            a=self.M851.amnt
+            self.M851.number+=a
+            self.M851.set()
+        if self.M852 !=0:
+            a=self.M852.amnt
+            self.M852.number+=a
+            self.M852.set()
+        if self.M853 !=0:
+            a=self.M853.amnt
+            self.M853.number+=a
+            self.M853.set()
+        if self.M854 !=0:
+            a=self.M854.amnt
+            self.M854.number+=a
+            self.M854.set()
+        if self.M855 !=0:
+            a=self.M855.amnt
+            self.M855.number+=a
+            self.M855.set()
+        if self.M856 !=0:
+            a=self.M856.amnt
+            self.M856.number+=a
+            self.M856.set()
+        if self.M857 !=0:
+            a=self.M857.amnt
+            self.M857.number+=a
+            self.M857.set()
+        if self.M858 !=0:
+            a=self.M858.amnt
+            self.M858.number+=a
+            self.M858.set()
+        if self.M859 !=0:
+            a=self.M859.amnt
+            self.M859.number+=a
+            self.M859.set()
+        if self.M860 !=0:
+            a=self.M860.amnt
+            self.M860.number+=a
+            self.M860.set()
+        if self.M861 !=0:
+            a=self.M861.amnt
+            self.M861.number+=a
+            self.M861.set()
+        if self.M862 !=0:
+            a=self.M862.amnt
+            self.M862.number+=a
+            self.M862.set()
+        if self.M863 !=0:
+            a=self.M863.amnt
+            self.M863.number+=a
+            self.M863.set()
+        if self.M864 !=0:
+            a=self.M864.amnt
+            self.M864.number+=a
+            self.M864.set()
+        if self.M865 !=0:
+            a=self.M865.amnt
+            self.M865.number+=a
+            self.M865.set()
+        if self.M866 !=0:
+            a=self.M866.amnt
+            self.M866.number+=a
+            self.M866.set()
+        if self.M867 !=0:
+            a=self.M867.amnt
+            self.M867.number+=a
+            self.M867.set()
+        if self.M868 !=0:
+            a=self.M868.amnt
+            self.M868.number+=a
+            self.M868.set()
+        if self.M869 !=0:
+            a=self.M869.amnt
+            self.M869.number+=a
+            self.M869.set()
+        if self.M870 !=0:
+            a=self.M870.amnt
+            self.M870.number+=a
+            self.M870.set()
+        if self.M871 !=0:
+            a=self.M871.amnt
+            self.M871.number+=a
+            self.M871.set()
+        if self.M872 !=0:
+            a=self.M872.amnt
+            self.M872.number+=a
+            self.M872.set()
+        if self.M873 !=0:
+            a=self.M873.amnt
+            self.M873.number+=a
+            self.M873.set()
+        if self.M874 !=0:
+            a=self.M874.amnt
+            self.M874.number+=a
+            self.M874.set()
+        if self.M875 !=0:
+            a=self.M875.amnt
+            self.M875.number+=a
+            self.M875.set()
+        if self.M876 !=0:
+            a=self.M876.amnt
+            self.M876.number+=a
+            self.M876.set()
+        if self.M877 !=0:
+            a=self.M877.amnt
+            self.M877.number+=a
+            self.M877.set()
+        if self.M878 !=0:
+            a=self.M878.amnt
+            self.M878.number+=a
+            self.M878.set()
+        if self.M879 !=0:
+            a=self.M879.amnt
+            self.M879.number+=a
+            self.M879.set()
+        if self.M880 !=0:
+            a=self.M880.amnt
+            self.M880.number+=a
+            self.M880.set()
+        if self.M881 !=0:
+            a=self.M881.amnt
+            self.M881.number+=a
+            self.M881.set()
+        if self.M882 !=0:
+            a=self.M882.amnt
+            self.M882.number+=a
+            self.M882.set()
+        if self.M883 !=0:
+            a=self.M883.amnt
+            self.M883.number+=a
+            self.M883.set()
+        if self.M884 !=0:
+            a=self.M884.amnt
+            self.M884.number+=a
+            self.M884.set()
+        if self.M885 !=0:
+            a=self.M885.amnt
+            self.M885.number+=a
+            self.M885.set()
+        if self.M886 !=0:
+            a=self.M886.amnt
+            self.M886.number+=a
+            self.M886.set()
+        if self.M887 !=0:
+            a=self.M887.amnt
+            self.M887.number+=a
+            self.M887.set()
+        if self.M888 !=0:
+            a=self.M888.amnt
+            self.M888.number+=a
+            self.M888.set()
+        if self.M889 !=0:
+            a=self.M889.amnt
+            self.M889.number+=a
+            self.M889.set()
+        if self.M890 !=0:
+            a=self.M890.amnt
+            self.M890.number+=a
+            self.M890.set()
+        if self.M891 !=0:
+            a=self.M891.amnt
+            self.M891.number+=a
+            self.M891.set()
+        if self.M892 !=0:
+            a=self.M892.amnt
+            self.M892.number+=a
+            self.M892.set()
+        if self.M893 !=0:
+            a=self.M893.amnt
+            self.M893.number+=a
+            self.M893.set()
+        if self.M894 !=0:
+            a=self.M894.amnt
+            self.M894.number+=a
+            self.M894.set()
+        if self.M895 !=0:
+            a=self.M895.amnt
+            self.M895.number+=a
+            self.M895.set()
+        if self.M896 !=0:
+            a=self.M896.amnt
+            self.M896.number+=a
+            self.M896.set()
+        if self.M897 !=0:
+            a=self.M897.amnt
+            self.M897.number+=a
+            self.M897.set()
+        if self.M898 !=0:
+            a=self.M898.amnt
+            self.M898.number+=a
+            self.M898.set()
+        if self.M899 !=0:
+            a=self.M899.amnt
+            self.M899.number+=a
+            self.M899.set()
+        if self.M900 !=0:
+            a=self.M900.amnt
+            self.M900.number+=a
+            self.M900.set()
+        if self.M901 !=0:
+            a=self.M901.amnt
+            self.M901.number+=a
+            self.M901.set()
+        if self.M902 !=0:
+            a=self.M902.amnt
+            self.M902.number+=a
+            self.M902.set()
+        if self.M903 !=0:
+            a=self.M903.amnt
+            self.M903.number+=a
+            self.M903.set()
+        if self.M904 !=0:
+            a=self.M904.amnt
+            self.M904.number+=a
+            self.M904.set()
+        if self.M905 !=0:
+            a=self.M905.amnt
+            self.M905.number+=a
+            self.M905.set()
+        if self.M906 !=0:
+            a=self.M906.amnt
+            self.M906.number+=a
+            self.M906.set()
+        if self.M907 !=0:
+            a=self.M907.amnt
+            self.M907.number+=a
+            self.M907.set()
+        if self.M908 !=0:
+            a=self.M908.amnt
+            self.M908.number+=a
+            self.M908.set()
+        if self.M909 !=0:
+            a=self.M909.amnt
+            self.M909.number+=a
+            self.M909.set()
+        if self.M910 !=0:
+            a=self.M910.amnt
+            self.M910.number+=a
+            self.M910.set()
+        if self.M911 !=0:
+            a=self.M911.amnt
+            self.M911.number+=a
+            self.M911.set()
+        if self.M912 !=0:
+            a=self.M912.amnt
+            self.M912.number+=a
+            self.M912.set()
+        if self.M913 !=0:
+            a=self.M913.amnt
+            self.M913.number+=a
+            self.M913.set()
+        if self.M914 !=0:
+            a=self.M914.amnt
+            self.M914.number+=a
+            self.M914.set()
+        if self.M915 !=0:
+            a=self.M915.amnt
+            self.M915.number+=a
+            self.M915.set()
+        if self.M916 !=0:
+            a=self.M916.amnt
+            self.M916.number+=a
+            self.M916.set()
+        if self.M917 !=0:
+            a=self.M917.amnt
+            self.M917.number+=a
+            self.M917.set()
+        if self.M918 !=0:
+            a=self.M918.amnt
+            self.M918.number+=a
+            self.M918.set()
+        if self.M919 !=0:
+            a=self.M919.amnt
+            self.M919.number+=a
+            self.M919.set()
+        if self.M920 !=0:
+            a=self.M920.amnt
+            self.M920.number+=a
+            self.M920.set()
+        if self.M921 !=0:
+            a=self.M921.amnt
+            self.M921.number+=a
+            self.M921.set()
+        if self.M922 !=0:
+            a=self.M922.amnt
+            self.M922.number+=a
+            self.M922.set()
+        if self.M923 !=0:
+            a=self.M923.amnt
+            self.M923.number+=a
+            self.M923.set()
+        if self.M924 !=0:
+            a=self.M924.amnt
+            self.M924.number+=a
+            self.M924.set()
+        if self.M925 !=0:
+            a=self.M925.amnt
+            self.M925.number+=a
+            self.M925.set()
+        if self.M926 !=0:
+            a=self.M926.amnt
+            self.M926.number+=a
+            self.M926.set()
+        if self.M927 !=0:
+            a=self.M927.amnt
+            self.M927.number+=a
+            self.M927.set()
+        if self.M928 !=0:
+            a=self.M928.amnt
+            self.M928.number+=a
+            self.M928.set()
+        if self.M929 !=0:
+            a=self.M929.amnt
+            self.M929.number+=a
+            self.M929.set()
+        if self.M930 !=0:
+            a=self.M930.amnt
+            self.M930.number+=a
+            self.M930.set()
+        if self.M931 !=0:
+            a=self.M931.amnt
+            self.M931.number+=a
+            self.M931.set()
+        if self.M932 !=0:
+            a=self.M932.amnt
+            self.M932.number+=a
+            self.M932.set()
+        if self.M933 !=0:
+            a=self.M933.amnt
+            self.M933.number+=a
+            self.M933.set()
+        if self.M934 !=0:
+            a=self.M934.amnt
+            self.M934.number+=a
+            self.M934.set()
+        if self.M935 !=0:
+            a=self.M935.amnt
+            self.M935.number+=a
+            self.M935.set()
+        if self.M936 !=0:
+            a=self.M936.amnt
+            self.M936.number+=a
+            self.M936.set()
+        if self.M937 !=0:
+            a=self.M937.amnt
+            self.M937.number+=a
+            self.M937.set()
+        if self.M938 !=0:
+            a=self.M938.amnt
+            self.M938.number+=a
+            self.M938.set()
+        if self.M939 !=0:
+            a=self.M939.amnt
+            self.M939.number+=a
+            self.M939.set()
+        if self.M940 !=0:
+            a=self.M940.amnt
+            self.M940.number+=a
+            self.M940.set()
+        if self.M941 !=0:
+            a=self.M941.amnt
+            self.M941.number+=a
+            self.M941.set()
+        if self.M942 !=0:
+            a=self.M942.amnt
+            self.M942.number+=a
+            self.M942.set()
+        if self.M943 !=0:
+            a=self.M943.amnt
+            self.M943.number+=a
+            self.M943.set()
+        if self.M944 !=0:
+            a=self.M944.amnt
+            self.M944.number+=a
+            self.M944.set()
+        if self.M945 !=0:
+            a=self.M945.amnt
+            self.M945.number+=a
+            self.M945.set()
+        if self.M946 !=0:
+            a=self.M946.amnt
+            self.M946.number+=a
+            self.M946.set()
+        if self.M947 !=0:
+            a=self.M947.amnt
+            self.M947.number+=a
+            self.M947.set()
+        if self.M948 !=0:
+            a=self.M948.amnt
+            self.M948.number+=a
+            self.M948.set()
+        if self.M949 !=0:
+            a=self.M949.amnt
+            self.M949.number+=a
+            self.M949.set()
+        if self.M950 !=0:
+            a=self.M950.amnt
+            self.M950.number+=a
+            self.M950.set()
+        if self.M951 !=0:
+            a=self.M951.amnt
+            self.M951.number+=a
+            self.M951.set()
+        if self.M952 !=0:
+            a=self.M952.amnt
+            self.M952.number+=a
+            self.M952.set()
+        if self.M953 !=0:
+            a=self.M953.amnt
+            self.M953.number+=a
+            self.M953.set()
+        if self.M954 !=0:
+            a=self.M954.amnt
+            self.M954.number+=a
+            self.M954.set()
+        if self.M955 !=0:
+            a=self.M955.amnt
+            self.M955.number+=a
+            self.M955.set()
+        if self.M956 !=0:
+            a=self.M956.amnt
+            self.M956.number+=a
+            self.M956.set()
+        if self.M957 !=0:
+            a=self.M957.amnt
+            self.M957.number+=a
+            self.M957.set()
+        if self.M958 !=0:
+            a=self.M958.amnt
+            self.M958.number+=a
+            self.M958.set()
+        if self.M959 !=0:
+            a=self.M959.amnt
+            self.M959.number+=a
+            self.M959.set()
+        if self.M960 !=0:
+            a=self.M960.amnt
+            self.M960.number+=a
+            self.M960.set()
+        if self.M961 !=0:
+            a=self.M961.amnt
+            self.M961.number+=a
+            self.M961.set()
+        if self.M962 !=0:
+            a=self.M962.amnt
+            self.M962.number+=a
+            self.M962.set()
+        if self.M963 !=0:
+            a=self.M963.amnt
+            self.M963.number+=a
+            self.M963.set()
+        if self.M964 !=0:
+            a=self.M964.amnt
+            self.M964.number+=a
+            self.M964.set()
+        if self.M965 !=0:
+            a=self.M965.amnt
+            self.M965.number+=a
+            self.M965.set()
+        if self.M966 !=0:
+            a=self.M966.amnt
+            self.M966.number+=a
+            self.M966.set()
+        if self.M967 !=0:
+            a=self.M967.amnt
+            self.M967.number+=a
+            self.M967.set()
+        if self.M968 !=0:
+            a=self.M968.amnt
+            self.M968.number+=a
+            self.M968.set()
+        if self.M969 !=0:
+            a=self.M969.amnt
+            self.M969.number+=a
+            self.M969.set()
+        if self.M970 !=0:
+            a=self.M970.amnt
+            self.M970.number+=a
+            self.M970.set()
+        if self.M971 !=0:
+            a=self.M971.amnt
+            self.M971.number+=a
+            self.M971.set()
+        if self.M972 !=0:
+            a=self.M972.amnt
+            self.M972.number+=a
+            self.M972.set()
+        if self.M973 !=0:
+            a=self.M973.amnt
+            self.M973.number+=a
+            self.M973.set()
+        if self.M974 !=0:
+            a=self.M974.amnt
+            self.M974.number+=a
+            self.M974.set()
+        if self.M975 !=0:
+            a=self.M975.amnt
+            self.M975.number+=a
+            self.M975.set()
+        if self.M976 !=0:
+            a=self.M976.amnt
+            self.M976.number+=a
+            self.M976.set()
+        if self.M977 !=0:
+            a=self.M977.amnt
+            self.M977.number+=a
+            self.M977.set()
+        if self.M978 !=0:
+            a=self.M978.amnt
+            self.M978.number+=a
+            self.M978.set()
+        if self.M979 !=0:
+            a=self.M979.amnt
+            self.M979.number+=a
+            self.M979.set()
+        if self.M980 !=0:
+            a=self.M980.amnt
+            self.M980.number+=a
+            self.M980.set()
+        if self.M981 !=0:
+            a=self.M981.amnt
+            self.M981.number+=a
+            self.M981.set()
+        if self.M982 !=0:
+            a=self.M982.amnt
+            self.M982.number+=a
+            self.M982.set()
+        if self.M983 !=0:
+            a=self.M983.amnt
+            self.M983.number+=a
+            self.M983.set()
+        if self.M984 !=0:
+            a=self.M984.amnt
+            self.M984.number+=a
+            self.M984.set()
+        if self.M985 !=0:
+            a=self.M985.amnt
+            self.M985.number+=a
+            self.M985.set()
+        if self.M986 !=0:
+            a=self.M986.amnt
+            self.M986.number+=a
+            self.M986.set()
+        if self.M987 !=0:
+            a=self.M987.amnt
+            self.M987.number+=a
+            self.M987.set()
+        if self.M988 !=0:
+            a=self.M988.amnt
+            self.M988.number+=a
+            self.M988.set()
+        if self.M989 !=0:
+            a=self.M989.amnt
+            self.M989.number+=a
+            self.M989.set()
+        if self.M990 !=0:
+            a=self.M990.amnt
+            self.M990.number+=a
+            self.M990.set()
+        if self.M991 !=0:
+            a=self.M991.amnt
+            self.M991.number+=a
+            self.M991.set()
+        if self.M992 !=0:
+            a=self.M992.amnt
+            self.M992.number+=a
+            self.M992.set()
+        if self.M993 !=0:
+            a=self.M993.amnt
+            self.M993.number+=a
+            self.M993.set()
+        if self.M994 !=0:
+            a=self.M994.amnt
+            self.M994.number+=a
+            self.M994.set()
+        if self.M995 !=0:
+            a=self.M995.amnt
+            self.M995.number+=a
+            self.M995.set()
+        if self.M996 !=0:
+            a=self.M996.amnt
+            self.M996.number+=a
+            self.M996.set()
+        if self.M997 !=0:
+            a=self.M997.amnt
+            self.M997.number+=a
+            self.M997.set()
+        if self.M998 !=0:
+            a=self.M998.amnt
+            self.M998.number+=a
+            self.M998.set()
+        if self.M999 !=0:
+            a=self.M999.amnt
+            self.M999.number+=a
+            self.M999.set()
+        if self.M1000 !=0:
+            a=self.M1000.amnt
+            self.M1000.number+=a
+            self.M1000.set()
 
+        
 def see():
     x0 = hA()
     x1 = heA()
@@ -85729,7 +91096,7 @@ def see():
     x17 = arA()
     x18 = kA()
     x19 = caA()
-    x20 = seA()
+    x20 = scA()
     x21 = tiA()
     x22 = vA()
     x23 = crA()
@@ -85821,117 +91188,117 @@ def see():
     x109 = dsA()
     x110 = rgA()
     x111 = cnA()
-    print (x0.e(), '1')
-    print (x1.e() ,'2')
-    print (x2.e() ,'3')
-    print (x3.e(), '4')
-    print (x4.e(), '5')
-    print (x5.e(), '6')
-    print (x6.e(), '7')
-    print (x7.e(), '8')
-    print (x8.e(), '9')
-    print (x9.e(), '10')
-    print (x10.e(), '11')
-    print (x11.e() ,'12')
-    print (x12.e() ,'13')
-    print (x13.e(), '14')
-    print (x14.e(), '15')
-    print (x15.e(), '16')
-    print (x16.e(), '17')
-    print (x17.e(), '18')
-    print (x18.e(), '19')
-    print (x19.e(), '20')
-    print (x20.e(), '21')
-    print (x21.e(), '22')
-    print (x22.e(), '23')
-    print (x23.e(), '24')
-    print (x24.e(), '25')
-    print (x25.e(), '26')
-    print (x26.e(), '27')
-    print (x27.e(), '28')
-    print (x28.e(), '29')
-    print (x29.e(), '30')
-    print (x30.e(), '31')
-    print (x31.e(), '32')
-    print (x32.e(), '33')
-    print (x33.e(), '34')
-    print (x34.e() ,'35')
-    print (x35.e() ,'36')
-    print (x36.e(), '37')
-    print (x37.e(), '38')
-    print (x38.e(), '39')
-    print (x39.e() ,'40')
-    print (x40.e() ,'41')
-    print (x41.e() ,'42')
-    print (x42.e() ,'43')
-    print (x43.e() ,'44')
-    print (x44.e() ,'45')
-    print (x45.e() ,'46')
-    print (x46.e() ,'47')
-    print (x47.e() ,'48')
-    print (x48.e() ,'49')
-    print (x49.e() ,'50')
-    print (x50.e() ,'51')
-    print (x51.e() ,'52')
-    print (x52.e() ,'53')
-    print (x53.e() ,'54')
-    print (x54.e() ,'55')
-    print (x55.e() ,'56')
-    print (x56.e() ,'57')
-    print (x57.e() ,'58')
-    print (x58.e() ,'59')
-    print (x59.e() ,'60')
-    print (x60.e() ,'61')
-    print (x61.e() ,'62')
-    print (x62.e() ,'63')
-    print (x63.e() ,'64')
-    print (x64.e() ,'65')
-    print (x65.e() ,'66')
-    print (x66.e() ,'67')
-    print (x67.e() ,'68')
-    print (x68.e() ,'69')
-    print (x69.e() ,'70')
-    print (x70.e() ,'71')
-    print (x71.e() ,'72')
-    print (x72.e() ,'73')
-    print (x73.e() ,'74')
-    print (x74.e() ,'75')
-    print (x75.e() ,'76')
-    print (x76.e(), '77')
-    print (x77.e(), '78')
-    print (x78.e(), '79')
-    print (x79.e(), '80')
-    print (x80.e(), '81')
-    print (x81.e(), '82')
-    print (x82.e(), '83')
-    print( x83.e(), '84')
-    print( x84.e(), '85')
-    print (x85.e(), '86')
-    print (x86.e(), '87')
-    print (x87.e(), '88')
-    print (x88.e(), '89')
-    print (x89.e(), '90')
-    print (x90.e(), '91')
-    print( x91.e(), '92')
-    print (x92.e(), '93')
-    print(x93.e(), '94')
-    print (x94.e(), '95')
-    print (x95.e(), '96')
-    print (x96.e(), '97')
-    print (x97.e(), '98')
-    print (x98.e() ,'99')
-    print (x99.e(), '100')
-    print (x100.e(), '101')
-    print (x101.e(), '102')
-    print (x102.e(), '103')
-    print (x103.e() ,'104')
-    print (x104.e() ,'105')
-    print (x105.e() ,'106')
-    print (x106.e() ,'107')
-    print (x107.e() ,'108')
-    print (x108.e() ,'109')
-    print( x109.e() ,'110')
-    print (x110.e() ,'111')
-    print (x111.e() ,'112')
+    print (x0.e(), '1 h')
+    print (x1.e() ,'2 he')
+    print (x2.e() ,'3 li')
+    print (x3.e(), '4 be')
+    print (x4.e(), '5 b')
+    print (x5.e(), '6 c')
+    print (x6.e(), '7 n')
+    print (x7.e(), '8 o')
+    print (x8.e(), '9 f')
+    print (x9.e(), '10 ne')
+    print (x10.e(), '11 na')
+    print (x11.e() ,'12 mg')
+    print (x12.e() ,'13 al')
+    print (x13.e(), '14 si')
+    print (x14.e(), '15 p')
+    print (x15.e(), '16 s')
+    print (x16.e(), '17 cl')
+    print (x17.e(), '18 ar')
+    print (x18.e(), '19 k')
+    print (x19.e(), '20 ca')
+    print (x20.e(), '21 sc')
+    print (x21.e(), '22 ti')
+    print (x22.e(), '23 v')
+    print (x23.e(), '24 cr')
+    print (x24.e(), '25 mn')
+    print (x25.e(), '26 fe')
+    print (x26.e(), '27 co')
+    print (x27.e(), '28 ni')
+    print (x28.e(), '29 cu')
+    print (x29.e(), '30 zn')
+    print (x30.e(), '31 ga')
+    print (x31.e(), '32 ge')
+    print (x32.e(), '33 ars')
+    print (x33.e(), '34 se')
+    print (x34.e() ,'35 br')
+    print (x35.e() ,'36 kr')
+    print (x36.e(), '37 rb')
+    print (x37.e(), '38 sr')
+    print (x38.e(), '39 y')
+    print (x39.e() ,'40 zr')
+    print (x40.e() ,'41 nb')
+    print (x41.e() ,'42 mo')
+    print (x42.e() ,'43 tc')
+    print (x43.e() ,'44 ru')
+    print (x44.e() ,'45 rh')
+    print (x45.e() ,'46 pd')
+    print (x46.e() ,'47 ag')
+    print (x47.e() ,'48 cd')
+    print (x48.e() ,'49 ind')
+    print (x49.e() ,'50 sn')
+    print (x50.e() ,'51 sb')
+    print (x51.e() ,'52 te')
+    print (x52.e() ,'53 i')
+    print (x53.e() ,'54 xe')
+    print (x54.e() ,'55 cs')
+    print (x55.e() ,'56 ba')
+    print (x56.e() ,'57 la')
+    print (x57.e() ,'58 ce')
+    print (x58.e() ,'59 pr')
+    print (x59.e() ,'60 nd')
+    print (x60.e() ,'61 pm')
+    print (x61.e() ,'62 sm')
+    print (x62.e() ,'63 eu')
+    print (x63.e() ,'64 gd')
+    print (x64.e() ,'65 tb')
+    print (x65.e() ,'66 dy')
+    print (x66.e() ,'67 ho')
+    print (x67.e() ,'68 er')
+    print (x68.e() ,'69 tm')
+    print (x69.e() ,'70 yb')
+    print (x70.e() ,'71 lu')
+    print (x71.e() ,'72 hf')
+    print (x72.e() ,'73 ta')
+    print (x73.e() ,'74 w')
+    print (x74.e() ,'75 re')
+    print (x75.e() ,'76 os')
+    print (x76.e(), '77 ir')
+    print (x77.e(), '78 pt')
+    print (x78.e(), '79 au')
+    print (x79.e(), '80 hg')
+    print (x80.e(), '81 tl')
+    print (x81.e(), '82 pb')
+    print (x82.e(), '83 bi')
+    print( x83.e(), '84 po')
+    print( x84.e(), '85 at')
+    print (x85.e(), '86 rn')
+    print (x86.e(), '87 fr')
+    print (x87.e(), '88 ra')
+    print (x88.e(), '89 ac')
+    print (x89.e(), '90 th')
+    print (x90.e(), '91 pa')
+    print( x91.e(), '92 u')
+    print (x92.e(), '93 np')
+    print(x93.e(), '94 pu')
+    print (x94.e(), '95 am')
+    print (x95.e(), '96 cm')
+    print (x96.e(), '97 bk')
+    print (x97.e(), '98 cf')
+    print (x98.e() ,'99 es')
+    print (x99.e(), '100 fm')
+    print (x100.e(), '101 md')
+    print (x101.e(), '102 no')
+    print (x102.e(), '103 lr')
+    print (x103.e() ,'104 rf')
+    print (x104.e() ,'105 db')
+    print (x105.e() ,'106 sg')
+    print (x106.e() ,'107 bh')
+    print (x107.e() ,'108 hs')
+    print (x108.e() ,'109 mt')
+    print( x109.e() ,'110 ds')
+    print (x110.e() ,'111 rg')
+    print (x111.e() ,'112 cn')
 
        
